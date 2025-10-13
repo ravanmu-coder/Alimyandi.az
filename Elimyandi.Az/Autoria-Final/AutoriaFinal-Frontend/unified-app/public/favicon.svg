@@ -1,0 +1,19 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#1E88FF"/>
+  
+  <!-- Icon: Stylized gavel with hand element -->
+  <g id="icon">
+    <!-- Gavel handle -->
+    <rect x="12" y="10" width="2" height="12" fill="white" rx="1"/>
+    <!-- Gavel head -->
+    <rect x="10" y="8" width="6" height="5" fill="#7C3AED" rx="1"/>
+    <!-- Hand element (stylized) -->
+    <path d="M15 9C15 7 16 5 18 5C20 5 21 7 21 9V11C21 13 20 15 18 15C16 15 15 13 15 11V9Z" fill="#F6C85F"/>
+    <!-- Auction ticket element -->
+    <rect x="17" y="12" width="4" height="3" fill="white" rx="0.5"/>
+    <rect x="17.5" y="12.5" width="3" height="0.5" fill="#1E88FF"/>
+    <rect x="17.5" y="13.5" width="3" height="0.5" fill="#1E88FF"/>
+  </g>
+</svg>
+

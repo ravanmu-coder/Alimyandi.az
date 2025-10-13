@@ -1,0 +1,361 @@
+[2025-09-17 16:52:55 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 18:20:06 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 18:20:36 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-17 18:20:36 INF] Fetching all Auction records
+[2025-09-17 18:20:36 INF] Retrieved 0 Auction records
+[2025-09-17 18:20:36 INF] All auctions retrieved by Anonymous at "2025-09-17T14:20:36.6659244Z"
+[2025-09-17 18:24:05 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 18:24:44 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 18:27:01 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 18:29:32 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 18:30:39 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 18:30:59 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 18:31:18 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-17 18:31:53 ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: No authentication handler is registered for the scheme 'İstifadəçi identifikasiyası tapılmadı'. The registered schemes are: Identity.Application, Identity.External, Identity.TwoFactorRememberMe, Identity.TwoFactorUserId, Bearer. Did you forget to call AddAuthentication().Add[SomeAuthHandler]("İstifadəçi identifikasiyası tapılmadı",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ForbidAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Mvc.ForbidResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-17 18:31:53 ERR] Exception occurred: No authentication handler is registered for the scheme 'İstifadəçi identifikasiyası tapılmadı'. The registered schemes are: Identity.Application, Identity.External, Identity.TwoFactorRememberMe, Identity.TwoFactorUserId, Bearer. Did you forget to call AddAuthentication().Add[SomeAuthHandler]("İstifadəçi identifikasiyası tapılmadı",...)?
+System.InvalidOperationException: No authentication handler is registered for the scheme 'İstifadəçi identifikasiyası tapılmadı'. The registered schemes are: Identity.Application, Identity.External, Identity.TwoFactorRememberMe, Identity.TwoFactorUserId, Bearer. Did you forget to call AddAuthentication().Add[SomeAuthHandler]("İstifadəçi identifikasiyası tapılmadı",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ForbidAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Mvc.ForbidResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-17 18:52:44 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 18:53:08 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-17 18:53:08 INF] Fetching all Auction records
+[2025-09-17 18:53:08 INF] Retrieved 0 Auction records
+[2025-09-17 18:53:08 INF] All auctions retrieved by Anonymous at "2025-09-17T14:53:08.9020427Z"
+[2025-09-17 18:53:09 INF] Fetching all Auction records
+[2025-09-17 18:53:09 INF] Retrieved 0 Auction records
+[2025-09-17 18:53:09 INF] All auctions retrieved by Anonymous at "2025-09-17T14:53:09.8030355Z"
+[2025-09-17 18:53:09 INF] User connected: Qbbp5wEROzcywoRa-2SLVA
+[2025-09-17 18:53:40 INF] Fetching all Auction records
+[2025-09-17 18:53:40 INF] Retrieved 0 Auction records
+[2025-09-17 18:53:40 INF] All auctions retrieved by Anonymous at "2025-09-17T14:53:40.0888245Z"
+[2025-09-17 18:54:10 INF] Fetching all Auction records
+[2025-09-17 18:54:10 INF] Retrieved 0 Auction records
+[2025-09-17 18:54:10 INF] All auctions retrieved by Anonymous at "2025-09-17T14:54:10.1077400Z"
+[2025-09-17 18:54:39 INF] Fetching all Auction records
+[2025-09-17 18:54:39 INF] Retrieved 0 Auction records
+[2025-09-17 18:54:39 INF] All auctions retrieved by Anonymous at "2025-09-17T14:54:39.7152754Z"
+[2025-09-17 18:55:05 INF] Fetching all Location records
+[2025-09-17 18:55:05 INF] Retrieved 1 Location records
+[2025-09-17 18:55:10 INF] Fetching all Auction records
+[2025-09-17 18:55:10 INF] Retrieved 0 Auction records
+[2025-09-17 18:55:10 INF] All auctions retrieved by Anonymous at "2025-09-17T14:55:10.0952040Z"
+[2025-09-17 18:55:39 INF] Fetching all Auction records
+[2025-09-17 18:55:39 INF] Retrieved 0 Auction records
+[2025-09-17 18:55:39 INF] All auctions retrieved by Anonymous at "2025-09-17T14:55:39.7119837Z"
+[2025-09-17 18:56:09 INF] Fetching all Auction records
+[2025-09-17 18:56:09 INF] Retrieved 0 Auction records
+[2025-09-17 18:56:09 INF] All auctions retrieved by Anonymous at "2025-09-17T14:56:09.7026957Z"
+[2025-09-17 18:56:40 INF] Fetching all Auction records
+[2025-09-17 18:56:40 INF] Retrieved 0 Auction records
+[2025-09-17 18:56:40 INF] All auctions retrieved by Anonymous at "2025-09-17T14:56:40.0854194Z"
+[2025-09-17 18:57:10 INF] Fetching all Auction records
+[2025-09-17 18:57:10 INF] Retrieved 0 Auction records
+[2025-09-17 18:57:10 INF] All auctions retrieved by Anonymous at "2025-09-17T14:57:10.0928394Z"
+[2025-09-17 18:58:13 INF] Fetching all Auction records
+[2025-09-17 18:58:14 INF] Retrieved 0 Auction records
+[2025-09-17 18:58:14 INF] All auctions retrieved by Anonymous at "2025-09-17T14:58:14.0102404Z"
+[2025-09-17 18:58:24 INF] Fetching all Auction records
+[2025-09-17 18:58:24 INF] Retrieved 0 Auction records
+[2025-09-17 18:58:24 INF] All auctions retrieved by Anonymous at "2025-09-17T14:58:24.0789188Z"
+[2025-09-17 18:58:26 INF] Fetching all Auction records
+[2025-09-17 18:58:26 INF] Retrieved 0 Auction records
+[2025-09-17 18:58:26 INF] All auctions retrieved by Anonymous at "2025-09-17T14:58:26.5441056Z"
+[2025-09-17 18:58:27 INF] Fetching all Auction records
+[2025-09-17 18:58:27 INF] Retrieved 0 Auction records
+[2025-09-17 18:58:27 INF] All auctions retrieved by Anonymous at "2025-09-17T14:58:27.2963499Z"
+[2025-09-17 18:58:28 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2025-09-17 18:58:30 INF] Fetching all Auction records
+[2025-09-17 18:58:30 INF] Retrieved 0 Auction records
+[2025-09-17 18:58:30 INF] All auctions retrieved by Anonymous at "2025-09-17T14:58:30.0279701Z"
+[2025-09-17 18:58:30 INF] Fetching all Auction records
+[2025-09-17 18:58:30 INF] Retrieved 0 Auction records
+[2025-09-17 18:58:30 INF] All auctions retrieved by Anonymous at "2025-09-17T14:58:30.2397515Z"
+[2025-09-17 18:58:30 INF] Fetching all Auction records
+[2025-09-17 18:58:30 INF] Retrieved 0 Auction records
+[2025-09-17 18:58:30 INF] All auctions retrieved by Anonymous at "2025-09-17T14:58:30.4001339Z"
+[2025-09-17 18:58:30 INF] Fetching all Auction records
+[2025-09-17 18:58:30 INF] Retrieved 0 Auction records
+[2025-09-17 18:58:30 INF] All auctions retrieved by Anonymous at "2025-09-17T14:58:30.5794529Z"
+[2025-09-17 18:58:32 INF] Fetching all Auction records
+[2025-09-17 18:58:32 INF] Retrieved 0 Auction records
+[2025-09-17 18:58:32 INF] All auctions retrieved by Anonymous at "2025-09-17T14:58:32.9804177Z"
+[2025-09-17 18:58:39 INF] Fetching all Auction records
+[2025-09-17 18:58:39 INF] Retrieved 0 Auction records
+[2025-09-17 18:58:39 INF] All auctions retrieved by Anonymous at "2025-09-17T14:58:39.7001926Z"
+[2025-09-17 18:59:10 INF] Fetching all Auction records
+[2025-09-17 18:59:10 INF] Retrieved 0 Auction records
+[2025-09-17 18:59:10 INF] All auctions retrieved by Anonymous at "2025-09-17T14:59:10.0802989Z"
+[2025-09-17 18:59:40 INF] Fetching all Auction records
+[2025-09-17 18:59:40 INF] Retrieved 0 Auction records
+[2025-09-17 18:59:40 INF] All auctions retrieved by Anonymous at "2025-09-17T14:59:40.0882698Z"
+[2025-09-17 19:00:10 INF] Fetching all Auction records
+[2025-09-17 19:00:10 INF] Retrieved 0 Auction records
+[2025-09-17 19:00:10 INF] All auctions retrieved by Anonymous at "2025-09-17T15:00:10.0872797Z"
+[2025-09-17 19:00:40 INF] Fetching all Auction records
+[2025-09-17 19:00:40 INF] Retrieved 0 Auction records
+[2025-09-17 19:00:40 INF] All auctions retrieved by Anonymous at "2025-09-17T15:00:40.0952897Z"
+[2025-09-17 19:01:13 INF] Client disconnected: Qbbp5wEROzcywoRa-2SLVA, Reason: No reason
+[2025-09-17 19:01:13 INF] Fetching all Auction records
+[2025-09-17 19:01:13 INF] Retrieved 0 Auction records
+[2025-09-17 19:01:13 INF] All auctions retrieved by Anonymous at "2025-09-17T15:01:13.8993820Z"
+[2025-09-17 19:01:13 INF] User connected: 1GKscP72EEsYJfOnmgu37g
+[2025-09-17 19:01:19 INF] Fetching all Auction records
+[2025-09-17 19:01:19 INF] Retrieved 0 Auction records
+[2025-09-17 19:01:19 INF] All auctions retrieved by Anonymous at "2025-09-17T15:01:19.6063065Z"
+[2025-09-17 19:01:19 INF] User connected: E9SnmWfdtwHZ_LkRvxX_mg
+[2025-09-17 19:01:54 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 19:02:07 INF] User connected: hi7_jvY117vkJx2K904K3Q
+[2025-09-17 19:02:07 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-17 19:02:07 INF] Fetching all Auction records
+[2025-09-17 19:02:07 INF] Retrieved 0 Auction records
+[2025-09-17 19:02:07 INF] All auctions retrieved by Anonymous at "2025-09-17T15:02:07.6142159Z"
+[2025-09-17 19:02:10 INF] Fetching all Auction records
+[2025-09-17 19:02:10 INF] Retrieved 0 Auction records
+[2025-09-17 19:02:10 INF] All auctions retrieved by Anonymous at "2025-09-17T15:02:10.7639193Z"
+[2025-09-17 19:02:12 INF] Fetching all Auction records
+[2025-09-17 19:02:12 INF] Retrieved 0 Auction records
+[2025-09-17 19:02:12 INF] All auctions retrieved by Anonymous at "2025-09-17T15:02:12.6682705Z"
+[2025-09-17 19:02:13 INF] User connected: l07cabRq6lp_FAcHPKkhnw
+[2025-09-17 19:02:14 INF] Fetching all Auction records
+[2025-09-17 19:02:14 INF] Retrieved 0 Auction records
+[2025-09-17 19:02:14 INF] All auctions retrieved by Anonymous at "2025-09-17T15:02:14.0872293Z"
+[2025-09-17 19:02:37 INF] Fetching all Auction records
+[2025-09-17 19:02:37 INF] Retrieved 0 Auction records
+[2025-09-17 19:02:37 INF] All auctions retrieved by Anonymous at "2025-09-17T15:02:37.1202129Z"
+[2025-09-17 19:02:44 INF] Fetching all Auction records
+[2025-09-17 19:02:44 INF] Retrieved 0 Auction records
+[2025-09-17 19:02:44 INF] All auctions retrieved by Anonymous at "2025-09-17T15:02:44.0849351Z"
+[2025-09-17 19:03:04 ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: No authentication handler is registered for the scheme 'İstifadəçi identifikasiyası tapılmadı'. The registered schemes are: Identity.Application, Identity.External, Identity.TwoFactorRememberMe, Identity.TwoFactorUserId, Bearer. Did you forget to call AddAuthentication().Add[SomeAuthHandler]("İstifadəçi identifikasiyası tapılmadı",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ForbidAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Mvc.ForbidResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-17 19:03:04 ERR] Exception occurred: No authentication handler is registered for the scheme 'İstifadəçi identifikasiyası tapılmadı'. The registered schemes are: Identity.Application, Identity.External, Identity.TwoFactorRememberMe, Identity.TwoFactorUserId, Bearer. Did you forget to call AddAuthentication().Add[SomeAuthHandler]("İstifadəçi identifikasiyası tapılmadı",...)?
+System.InvalidOperationException: No authentication handler is registered for the scheme 'İstifadəçi identifikasiyası tapılmadı'. The registered schemes are: Identity.Application, Identity.External, Identity.TwoFactorRememberMe, Identity.TwoFactorUserId, Bearer. Did you forget to call AddAuthentication().Add[SomeAuthHandler]("İstifadəçi identifikasiyası tapılmadı",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ForbidAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Mvc.ForbidResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-17 19:03:07 INF] Fetching all Auction records
+[2025-09-17 19:03:07 INF] Retrieved 0 Auction records
+[2025-09-17 19:03:07 INF] All auctions retrieved by Anonymous at "2025-09-17T15:03:07.1094026Z"
+[2025-09-17 19:03:14 INF] Fetching all Auction records
+[2025-09-17 19:03:14 INF] Retrieved 0 Auction records
+[2025-09-17 19:03:14 INF] All auctions retrieved by Anonymous at "2025-09-17T15:03:14.0866777Z"
+[2025-09-17 19:03:37 INF] Fetching all Auction records
+[2025-09-17 19:03:37 INF] Retrieved 0 Auction records
+[2025-09-17 19:03:37 INF] All auctions retrieved by Anonymous at "2025-09-17T15:03:37.1116740Z"
+[2025-09-17 19:04:08 INF] Fetching all Auction records
+[2025-09-17 19:04:08 INF] Retrieved 0 Auction records
+[2025-09-17 19:04:08 INF] All auctions retrieved by Anonymous at "2025-09-17T15:04:08.0879618Z"
+[2025-09-17 19:04:37 INF] Fetching all Auction records
+[2025-09-17 19:04:37 INF] Retrieved 0 Auction records
+[2025-09-17 19:04:37 INF] All auctions retrieved by Anonymous at "2025-09-17T15:04:37.0862018Z"
+[2025-09-17 19:05:37 INF] Fetching all Auction records
+[2025-09-17 19:05:37 INF] Retrieved 0 Auction records
+[2025-09-17 19:05:37 INF] All auctions retrieved by Anonymous at "2025-09-17T15:05:37.0996190Z"
+[2025-09-17 19:05:37 INF] Fetching all Auction records
+[2025-09-17 19:05:37 INF] Retrieved 0 Auction records
+[2025-09-17 19:05:37 INF] All auctions retrieved by Anonymous at "2025-09-17T15:05:37.1118805Z"
+[2025-09-17 19:06:37 INF] Fetching all Auction records
+[2025-09-17 19:06:37 INF] Retrieved 0 Auction records
+[2025-09-17 19:06:37 INF] All auctions retrieved by Anonymous at "2025-09-17T15:06:37.0971694Z"
+[2025-09-17 19:06:37 INF] Fetching all Auction records
+[2025-09-17 19:06:37 INF] Retrieved 0 Auction records
+[2025-09-17 19:06:37 INF] All auctions retrieved by Anonymous at "2025-09-17T15:06:37.1125530Z"
+[2025-09-17 19:07:37 INF] Fetching all Auction records
+[2025-09-17 19:07:37 INF] Retrieved 0 Auction records
+[2025-09-17 19:07:37 INF] All auctions retrieved by Anonymous at "2025-09-17T15:07:37.0981608Z"
+[2025-09-17 19:07:37 INF] Fetching all Auction records
+[2025-09-17 19:07:37 INF] Retrieved 0 Auction records
+[2025-09-17 19:07:37 INF] All auctions retrieved by Anonymous at "2025-09-17T15:07:37.1595150Z"
+[2025-09-17 19:22:37 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 19:22:39 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-17 19:22:39 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-17 19:22:39 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-17 19:22:39 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-17 19:22:39 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-17 19:22:39 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-17 19:22:57 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 19:22:58 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-17 19:22:58 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-17 19:22:58 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-17 19:22:58 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-17 19:22:58 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-17 19:22:58 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-17 19:23:24 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 19:23:25 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-17 19:23:25 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-17 19:23:25 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-17 19:23:25 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-17 19:23:25 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-17 19:23:25 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-17 19:23:37 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-17 19:23:37 INF] Fetching all Auction records
+[2025-09-17 19:23:37 INF] Retrieved 0 Auction records
+[2025-09-17 19:23:37 INF] All auctions retrieved by Anonymous at "2025-09-17T15:23:37.3681563Z"
+[2025-09-17 19:23:50 INF] Fetching all Auction records
+[2025-09-17 19:23:50 INF] Retrieved 0 Auction records
+[2025-09-17 19:23:50 INF] All auctions retrieved by Anonymous at "2025-09-17T15:23:50.3906424Z"
+[2025-09-17 19:23:53 INF] Fetching all Auction records
+[2025-09-17 19:23:53 INF] Retrieved 0 Auction records
+[2025-09-17 19:23:53 INF] All auctions retrieved by Anonymous at "2025-09-17T15:23:53.4342542Z"
+[2025-09-17 19:23:53 INF] User connected: wWtyZ5YmiPng2WCa9V4v4w
+[2025-09-17 19:24:23 INF] Fetching all Auction records
+[2025-09-17 19:24:23 INF] Retrieved 0 Auction records
+[2025-09-17 19:24:23 INF] All auctions retrieved by Anonymous at "2025-09-17T15:24:23.4008336Z"
+[2025-09-17 19:24:53 INF] Fetching all Auction records
+[2025-09-17 19:24:53 INF] Retrieved 0 Auction records
+[2025-09-17 19:24:53 INF] All auctions retrieved by Anonymous at "2025-09-17T15:24:53.4202311Z"
+[2025-09-17 19:25:23 INF] Fetching all Auction records
+[2025-09-17 19:25:23 INF] Retrieved 0 Auction records
+[2025-09-17 19:25:23 INF] All auctions retrieved by Anonymous at "2025-09-17T15:25:23.3880027Z"
+[2025-09-17 19:25:47 INF] Creating auction: Test Auction #1 scheduled for "2025-09-18T12:26:00.0000000Z" by user "9f8bbe66-5499-4790-8e3e-011a4cbda67d"
+[2025-09-17 19:25:47 INF] AUCTION CREATED: "80cbc891-6169-4233-84a5-8c1201e8cece" - Test Auction #1 by user "9f8bbe66-5499-4790-8e3e-011a4cbda67d" at "2025-09-17T15:25:47.2607791Z"
+[2025-09-17 19:25:47 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2025-09-17 19:25:47 INF] AUCTION CREATED: "80cbc891-6169-4233-84a5-8c1201e8cece" - Test Auction #1 by ravanmu-coder (ID: "9f8bbe66-5499-4790-8e3e-011a4cbda67d") at "2025-09-17T15:25:47.3842082Z"
+[2025-09-17 19:25:47 INF] Fetching all Auction records
+[2025-09-17 19:25:47 INF] Retrieved 1 Auction records
+[2025-09-17 19:25:47 INF] All auctions retrieved by Anonymous at "2025-09-17T15:25:47.3996997Z"
+[2025-09-17 19:25:47 INF] Fetching all Auction records
+[2025-09-17 19:25:47 INF] Retrieved 1 Auction records
+[2025-09-17 19:25:47 INF] All auctions retrieved by Anonymous at "2025-09-17T15:25:47.4424420Z"
+[2025-09-17 19:25:53 INF] Fetching all Auction records
+[2025-09-17 19:25:53 INF] Retrieved 1 Auction records
+[2025-09-17 19:25:53 INF] All auctions retrieved by Anonymous at "2025-09-17T15:25:53.3933123Z"
+[2025-09-17 19:26:02 INF] Fetching all Auction records
+[2025-09-17 19:26:02 INF] Retrieved 1 Auction records
+[2025-09-17 19:26:02 INF] All auctions retrieved by Anonymous at "2025-09-17T15:26:02.1626122Z"
+[2025-09-17 19:26:23 INF] Fetching all Auction records
+[2025-09-17 19:26:23 INF] Retrieved 1 Auction records
+[2025-09-17 19:26:23 INF] All auctions retrieved by Anonymous at "2025-09-17T15:26:23.4181584Z"
+[2025-09-17 19:26:49 INF] Fetching Auction with ID "80cbc891-6169-4233-84a5-8c1201e8cece"
+[2025-09-17 19:26:49 INF] Auction with ID "80cbc891-6169-4233-84a5-8c1201e8cece" retrieved successfully
+[2025-09-17 19:26:53 INF] Fetching all Auction records
+[2025-09-17 19:26:53 INF] Retrieved 1 Auction records
+[2025-09-17 19:26:53 INF] All auctions retrieved by Anonymous at "2025-09-17T15:26:53.3952953Z"
+[2025-09-17 19:27:23 INF] Fetching all Auction records
+[2025-09-17 19:27:23 INF] Retrieved 1 Auction records
+[2025-09-17 19:27:23 INF] All auctions retrieved by Anonymous at "2025-09-17T15:27:23.3966470Z"
+[2025-09-17 19:27:54 INF] Fetching all Auction records
+[2025-09-17 19:27:54 INF] Retrieved 1 Auction records
+[2025-09-17 19:27:54 INF] All auctions retrieved by Anonymous at "2025-09-17T15:27:54.0835259Z"
+[2025-09-17 19:28:24 INF] Fetching all Auction records
+[2025-09-17 19:28:24 INF] Retrieved 1 Auction records
+[2025-09-17 19:28:24 INF] All auctions retrieved by Anonymous at "2025-09-17T15:28:24.0897517Z"
+[2025-09-17 19:28:53 INF] Fetching all Auction records
+[2025-09-17 19:28:53 INF] Retrieved 1 Auction records
+[2025-09-17 19:28:53 INF] All auctions retrieved by Anonymous at "2025-09-17T15:28:53.3949581Z"
+[2025-09-17 19:29:14 INF] Client disconnected: wWtyZ5YmiPng2WCa9V4v4w, Reason: No reason
+[2025-09-17 19:29:26 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 19:29:27 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-17 19:29:27 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-17 19:29:27 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-17 19:29:27 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-17 19:29:27 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-17 19:29:27 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-17 23:04:33 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 23:04:34 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-17 23:04:34 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-17 23:04:34 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-17 23:04:34 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-17 23:04:34 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-17 23:04:34 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-17 23:04:50 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-17 23:04:50 INF] Fetching all Auction records
+[2025-09-17 23:04:50 INF] Retrieved 1 Auction records
+[2025-09-17 23:04:50 INF] All auctions retrieved by Anonymous at "2025-09-17T19:04:50.7424927Z"
+[2025-09-17 23:05:23 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 23:05:24 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-17 23:05:24 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-17 23:05:24 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-17 23:05:24 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-17 23:05:24 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-17 23:05:24 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-17 23:05:50 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-17 23:05:50 INF] Fetching all Auction records
+[2025-09-17 23:05:50 INF] Retrieved 1 Auction records
+[2025-09-17 23:05:50 INF] All auctions retrieved by Anonymous at "2025-09-17T19:05:50.5228552Z"
+[2025-09-17 23:06:20 INF] Fetching all Auction records
+[2025-09-17 23:06:20 INF] Retrieved 1 Auction records
+[2025-09-17 23:06:20 INF] All auctions retrieved by Anonymous at "2025-09-17T19:06:20.3430295Z"
+[2025-09-17 23:06:32 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 23:06:33 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-17 23:06:33 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-17 23:06:33 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-17 23:06:33 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-17 23:06:33 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-17 23:06:33 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-17 23:10:19 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 23:10:20 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-17 23:10:20 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-17 23:10:20 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-17 23:10:20 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-17 23:10:20 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-17 23:10:20 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-17 23:10:35 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-17 23:10:35 INF] Fetching all Auction records
+[2025-09-17 23:10:35 INF] Retrieved 1 Auction records
+[2025-09-17 23:10:35 INF] All auctions retrieved by Anonymous at "2025-09-17T19:10:35.6748309Z"
+[2025-09-17 23:11:23 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 23:11:24 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 23:11:25 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-17 23:11:25 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-17 23:11:25 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-17 23:11:25 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-17 23:11:25 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-17 23:11:25 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-17 23:11:31 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 23:11:31 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.

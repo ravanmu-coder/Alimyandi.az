@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "AutoriaFinal.API\\AutoriaFinal.API.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

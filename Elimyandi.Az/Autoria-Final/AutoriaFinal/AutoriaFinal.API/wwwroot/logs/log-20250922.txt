@@ -1,0 +1,637 @@
+[2025-09-22 12:05:42 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-22 12:05:47 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-22 12:05:47 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-22 12:05:47 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-22 12:05:47 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-22 12:05:47 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-22 12:05:47 INF] 🔓 CORS: Enabled for all origins (Development)
+[2025-09-22 12:05:47 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-22 12:07:55 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-22 12:07:55 INF] Client connected: Hy-4CLsuecXkr-K9QQoRHg, User: "004589d7-10ff-4cf0-a0bf-5938d961b904"
+[2025-09-22 12:12:55 INF] Client disconnected: Hy-4CLsuecXkr-K9QQoRHg, User: "004589d7-10ff-4cf0-a0bf-5938d961b904", Reason: Normal disconnect
+[2025-09-22 12:14:03 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-22 12:14:04 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-22 12:14:04 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-22 12:14:04 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-22 12:14:04 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-22 12:14:04 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-22 12:14:04 INF] 🔓 CORS: Enabled for all origins (Development)
+[2025-09-22 12:14:04 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-22 12:50:03 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-22 12:50:03 WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+[2025-09-22 12:51:26 INF] Fetching all Auction records
+[2025-09-22 12:51:26 INF] Retrieved 4 Auction records
+[2025-09-22 12:51:26 INF] All auctions retrieved by Anonymous at "2025-09-22T08:51:26.4556981Z"
+[2025-09-22 12:51:26 INF] Fetching all Auction records
+[2025-09-22 12:51:26 INF] Retrieved 4 Auction records
+[2025-09-22 12:51:26 INF] All auctions retrieved by Anonymous at "2025-09-22T08:51:26.5004257Z"
+[2025-09-22 12:51:29 INF] Getting cars for auction: "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 12:51:29 INF] Fetching Auction with ID "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 12:51:29 INF] 🔍 Getting all cars for auction: "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 12:51:29 INF] Auction with ID "40d3c3bc-ddc5-4d4b-8abb-4848995d953b" retrieved successfully
+[2025-09-22 12:51:29 INF] Fetching Auction with ID "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 12:51:29 INF] ✅ Retrieved 0 cars for auction "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 12:51:29 INF] Auction with ID "40d3c3bc-ddc5-4d4b-8abb-4848995d953b" retrieved successfully
+[2025-09-22 12:51:29 INF] Getting cars for auction: "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 12:51:29 INF] 🔍 Getting all cars for auction: "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 12:51:29 INF] ✅ Retrieved 0 cars for auction "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 12:51:32 INF] Fetching all Auction records
+[2025-09-22 12:51:32 INF] Retrieved 4 Auction records
+[2025-09-22 12:51:32 INF] All auctions retrieved by Anonymous at "2025-09-22T08:51:32.8634888Z"
+[2025-09-22 12:51:32 INF] Fetching all Auction records
+[2025-09-22 12:51:32 INF] Retrieved 4 Auction records
+[2025-09-22 12:51:32 INF] All auctions retrieved by Anonymous at "2025-09-22T08:51:32.8932215Z"
+[2025-09-22 12:51:42 INF] 👤 Getting user bids: User "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:42 INF] ✅ Found 0 bids for user "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:42 INF] 👤 Getting user bids: User "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:42 INF] ✅ Found 0 bids for user "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:53 INF] 👤 Getting user bids: User "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:53 INF] ✅ Found 0 bids for user "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:53 INF] 👤 Getting user bids: User "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:53 INF] ✅ Found 0 bids for user "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:59 INF] 👤 Getting user bids: User "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:59 INF] ✅ Found 0 bids for user "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:59 INF] 👤 Getting user bids: User "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:51:59 INF] ✅ Found 0 bids for user "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:52:22 INF] 👤 Getting user bids: User "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:52:22 INF] ✅ Found 0 bids for user "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:52:22 INF] 👤 Getting user bids: User "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 12:52:22 INF] ✅ Found 0 bids for user "b198cbb2-120a-482c-bae4-45546b2e5bf6"
+[2025-09-22 13:05:06 ERR] An unhandled exception has occurred while executing the request.
+AutoriaFinal.Application.Exceptions.UnauthorizedException: Invalid email or password
+   at AutoriaFinal.Application.Services.Identity.AuthService.LoginAsync(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.Application\Services\Identity\AuthService.cs:line 84
+   at AutoriaFinal.API.Controllers.Identity.AuthController.Login(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.API\Controllers\Identity\AuthController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-22 13:05:06 ERR] Exception occurred: Invalid email or password
+AutoriaFinal.Application.Exceptions.UnauthorizedException: Invalid email or password
+   at AutoriaFinal.Application.Services.Identity.AuthService.LoginAsync(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.Application\Services\Identity\AuthService.cs:line 84
+   at AutoriaFinal.API.Controllers.Identity.AuthController.Login(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.API\Controllers\Identity\AuthController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-22 13:06:27 ERR] An unhandled exception has occurred while executing the request.
+AutoriaFinal.Application.Exceptions.BadRequestException: Failed to create the user: Username 'Ravan Umudov' is invalid, can only contain letters or digits.
+   at AutoriaFinal.Application.Services.Identity.AuthService.RegisterAsync(RegisterDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.Application\Services\Identity\AuthService.cs:line 56
+   at AutoriaFinal.API.Controllers.Identity.AuthController.Register(RegisterDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.API\Controllers\Identity\AuthController.cs:line 27
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-22 13:06:27 ERR] Exception occurred: Failed to create the user: Username 'Ravan Umudov' is invalid, can only contain letters or digits.
+AutoriaFinal.Application.Exceptions.BadRequestException: Failed to create the user: Username 'Ravan Umudov' is invalid, can only contain letters or digits.
+   at AutoriaFinal.Application.Services.Identity.AuthService.RegisterAsync(RegisterDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.Application\Services\Identity\AuthService.cs:line 56
+   at AutoriaFinal.API.Controllers.Identity.AuthController.Register(RegisterDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.API\Controllers\Identity\AuthController.cs:line 27
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-22 13:07:03 ERR] An unhandled exception has occurred while executing the request.
+AutoriaFinal.Application.Exceptions.BadRequestException: Email is not confirmed yet
+   at AutoriaFinal.Application.Services.Identity.AuthService.LoginAsync(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.Application\Services\Identity\AuthService.cs:line 89
+   at AutoriaFinal.API.Controllers.Identity.AuthController.Login(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.API\Controllers\Identity\AuthController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-22 13:07:03 ERR] Exception occurred: Email is not confirmed yet
+AutoriaFinal.Application.Exceptions.BadRequestException: Email is not confirmed yet
+   at AutoriaFinal.Application.Services.Identity.AuthService.LoginAsync(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.Application\Services\Identity\AuthService.cs:line 89
+   at AutoriaFinal.API.Controllers.Identity.AuthController.Login(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.API\Controllers\Identity\AuthController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-22 13:07:11 ERR] An unhandled exception has occurred while executing the request.
+AutoriaFinal.Application.Exceptions.UnauthorizedException: Invalid email or password
+   at AutoriaFinal.Application.Services.Identity.AuthService.LoginAsync(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.Application\Services\Identity\AuthService.cs:line 84
+   at AutoriaFinal.API.Controllers.Identity.AuthController.Login(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.API\Controllers\Identity\AuthController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-22 13:07:11 ERR] Exception occurred: Invalid email or password
+AutoriaFinal.Application.Exceptions.UnauthorizedException: Invalid email or password
+   at AutoriaFinal.Application.Services.Identity.AuthService.LoginAsync(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.Application\Services\Identity\AuthService.cs:line 84
+   at AutoriaFinal.API.Controllers.Identity.AuthController.Login(LoginDto dto) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.API\Controllers\Identity\AuthController.cs:line 39
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+[2025-09-22 13:07:44 INF] Fetching all Auction records
+[2025-09-22 13:07:44 INF] Retrieved 4 Auction records
+[2025-09-22 13:07:44 INF] All auctions retrieved by Anonymous at "2025-09-22T09:07:44.3471816Z"
+[2025-09-22 13:07:44 INF] Fetching all Auction records
+[2025-09-22 13:07:44 INF] Retrieved 4 Auction records
+[2025-09-22 13:07:44 INF] All auctions retrieved by Anonymous at "2025-09-22T09:07:44.3589520Z"
+[2025-09-22 13:07:50 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:07:50 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:07:50 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:07:50 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:08:00 INF] Fetching all Auction records
+[2025-09-22 13:08:00 INF] Retrieved 4 Auction records
+[2025-09-22 13:08:00 INF] All auctions retrieved by Anonymous at "2025-09-22T09:08:00.5913717Z"
+[2025-09-22 13:08:00 INF] Fetching all Auction records
+[2025-09-22 13:08:00 INF] Retrieved 4 Auction records
+[2025-09-22 13:08:00 INF] All auctions retrieved by Anonymous at "2025-09-22T09:08:00.5977278Z"
+[2025-09-22 13:10:09 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:10:09 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:10:09 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:10:09 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:10:18 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:10:18 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:10:18 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:10:18 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:11:32 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:11:32 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:11:32 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:11:32 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:19:50 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:19:50 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:19:50 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:19:50 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:22:16 INF] Fetching all Auction records
+[2025-09-22 13:22:16 INF] Retrieved 4 Auction records
+[2025-09-22 13:22:16 INF] All auctions retrieved by Anonymous at "2025-09-22T09:22:16.0553487Z"
+[2025-09-22 13:22:16 INF] Fetching all Auction records
+[2025-09-22 13:22:16 INF] Retrieved 4 Auction records
+[2025-09-22 13:22:16 INF] All auctions retrieved by Anonymous at "2025-09-22T09:22:16.0626786Z"
+[2025-09-22 13:22:18 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:22:19 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:22:19 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:22:19 INF] ✅ Found 0 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:22:36 INF] Fetching all Auction records
+[2025-09-22 13:22:36 INF] Retrieved 4 Auction records
+[2025-09-22 13:22:36 INF] All auctions retrieved by Anonymous at "2025-09-22T09:22:36.4100082Z"
+[2025-09-22 13:22:36 INF] Fetching all Auction records
+[2025-09-22 13:22:36 INF] Retrieved 4 Auction records
+[2025-09-22 13:22:36 INF] All auctions retrieved by Anonymous at "2025-09-22T09:22:36.4197936Z"
+[2025-09-22 13:22:38 INF] Fetching all Auction records
+[2025-09-22 13:22:38 INF] Retrieved 4 Auction records
+[2025-09-22 13:22:38 INF] All auctions retrieved by Anonymous at "2025-09-22T09:22:38.7570025Z"
+[2025-09-22 13:22:40 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:22:40 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:22:40 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:22:40 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:22:40 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:22:40 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:22:40 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:22:40 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:22:40 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:22:40 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:22:43 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:22:43 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:22:43 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:22:43 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:22:43 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:22:43 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:22:48 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:22:49 INF] Bid validation completed: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: false, Errors: 3
+[2025-09-22 13:22:53 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:22:56 INF] Bid validation completed: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: false, Errors: 2
+[2025-09-22 13:22:58 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:22:58 INF] Bid validation completed: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: false, Errors: 2
+[2025-09-22 13:23:01 INF] Bid validation completed: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: true, Errors: 0
+[2025-09-22 13:23:01 INF] 💰 Placing bid: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Car "b449cf22-3ef5-446a-8200-72135c466469", Amount $2100, Type: "PreBid"
+[2025-09-22 13:23:01 INF] Bid validation completed: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: true, Errors: 0
+[2025-09-22 13:23:01 INF] 🏁 Placing pre-bid: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Amount $2100
+[2025-09-22 13:23:02 INF] ✅ Pre-bid placed: "fb7adf58-8f00-45ee-84ed-7c249937f958" - $2100 for LOT123
+[2025-09-22 13:23:02 INF] Pre-bid placed via API: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Amount 2100
+[2025-09-22 13:23:02 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:23:02 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:23:02 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:07 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:12 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:17 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:22 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:27 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:32 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:37 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:42 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:47 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:52 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:57 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:23:58 INF] Bid validation completed: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: true, Errors: 0
+[2025-09-22 13:23:58 INF] 💰 Placing bid: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Car "b449cf22-3ef5-446a-8200-72135c466469", Amount $2200, Type: "PreBid"
+[2025-09-22 13:23:58 INF] Bid validation completed: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: true, Errors: 0
+[2025-09-22 13:23:58 INF] 🏁 Placing pre-bid: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Amount $2200
+[2025-09-22 13:23:58 INF] ✅ Pre-bid placed: "e060b682-72bf-4600-997f-8c4dca1ab55a" - $2200 for LOT123
+[2025-09-22 13:23:58 INF] Pre-bid placed via API: User "e6a4574b-3087-436d-9128-cbd7cfbeed62", Amount 2200
+[2025-09-22 13:23:58 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:23:58 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:23:58 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:24:03 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:24:08 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:24:13 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:24:19 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:24:23 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:25:42 INF] Fetching all Auction records
+[2025-09-22 13:25:42 INF] Retrieved 4 Auction records
+[2025-09-22 13:25:42 INF] All auctions retrieved by Anonymous at "2025-09-22T09:25:42.6111706Z"
+[2025-09-22 13:25:42 INF] Fetching all Auction records
+[2025-09-22 13:25:42 INF] Retrieved 4 Auction records
+[2025-09-22 13:25:42 INF] All auctions retrieved by Anonymous at "2025-09-22T09:25:42.6174101Z"
+[2025-09-22 13:25:45 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:25:45 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:25:45 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:25:45 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:25:45 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:25:45 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:25:45 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:25:45 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:25:45 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:25:45 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:25:48 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:25:48 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:25:48 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:25:48 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:25:48 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:25:48 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:25:53 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:25:58 INF] Bid validation completed: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: false, Errors: 1
+[2025-09-22 13:25:58 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:26:03 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:26:08 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:26:13 INF] Bid validation completed: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: false, Errors: 1
+[2025-09-22 13:26:13 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:26:14 INF] Bid validation completed: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: false, Errors: 1
+[2025-09-22 13:26:15 INF] Bid validation completed: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: true, Errors: 0
+[2025-09-22 13:26:15 INF] 💰 Placing bid: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7", Car "b449cf22-3ef5-446a-8200-72135c466469", Amount $2000, Type: "PreBid"
+[2025-09-22 13:26:15 INF] Bid validation completed: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7", Car "b449cf22-3ef5-446a-8200-72135c466469", Valid: true, Errors: 0
+[2025-09-22 13:26:15 INF] 🏁 Placing pre-bid: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7", Amount $2000
+[2025-09-22 13:26:15 INF] ✅ Pre-bid placed: "3ffff5d4-fb13-4fe0-99e4-d058e4c7030e" - $2000 for LOT123
+[2025-09-22 13:26:15 INF] Pre-bid placed via API: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7", Amount 2000
+[2025-09-22 13:26:15 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:26:15 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:26:15 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:26:20 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:26:25 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:26:32 INF] Fetching all Auction records
+[2025-09-22 13:26:32 INF] Retrieved 4 Auction records
+[2025-09-22 13:26:32 INF] All auctions retrieved by Anonymous at "2025-09-22T09:26:32.8359441Z"
+[2025-09-22 13:26:32 INF] Fetching all Auction records
+[2025-09-22 13:26:32 INF] Retrieved 4 Auction records
+[2025-09-22 13:26:32 INF] All auctions retrieved by Anonymous at "2025-09-22T09:26:32.8455625Z"
+[2025-09-22 13:26:35 INF] Fetching all Auction records
+[2025-09-22 13:26:35 INF] Retrieved 4 Auction records
+[2025-09-22 13:26:35 INF] All auctions retrieved by Anonymous at "2025-09-22T09:26:35.0386338Z"
+[2025-09-22 13:26:36 INF] Fetching all Auction records
+[2025-09-22 13:26:36 INF] Retrieved 4 Auction records
+[2025-09-22 13:26:36 INF] All auctions retrieved by Anonymous at "2025-09-22T09:26:36.4080587Z"
+[2025-09-22 13:26:37 INF] Fetching all Auction records
+[2025-09-22 13:26:37 INF] Retrieved 4 Auction records
+[2025-09-22 13:26:37 INF] All auctions retrieved by Anonymous at "2025-09-22T09:26:37.1686028Z"
+[2025-09-22 13:26:42 INF] Fetching all Auction records
+[2025-09-22 13:26:42 INF] Retrieved 4 Auction records
+[2025-09-22 13:26:42 INF] All auctions retrieved by Anonymous at "2025-09-22T09:26:42.4018922Z"
+[2025-09-22 13:26:42 INF] Fetching all Auction records
+[2025-09-22 13:26:42 INF] Retrieved 4 Auction records
+[2025-09-22 13:26:42 INF] All auctions retrieved by Anonymous at "2025-09-22T09:26:42.4076282Z"
+[2025-09-22 13:26:44 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:26:44 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:26:44 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:26:44 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:40:19 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:40:19 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:40:19 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:40:19 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:40:41 INF] Fetching all Auction records
+[2025-09-22 13:40:41 INF] Retrieved 4 Auction records
+[2025-09-22 13:40:41 INF] All auctions retrieved by Anonymous at "2025-09-22T09:40:41.3769541Z"
+[2025-09-22 13:40:41 INF] Fetching all Auction records
+[2025-09-22 13:40:41 INF] Retrieved 4 Auction records
+[2025-09-22 13:40:41 INF] All auctions retrieved by Anonymous at "2025-09-22T09:40:41.3857153Z"
+[2025-09-22 13:40:42 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:40:42 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:40:42 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:40:42 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:40:42 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:40:42 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:40:42 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:40:42 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:40:42 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:40:42 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:40:43 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:40:43 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:40:44 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:40:44 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:40:44 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:40:44 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:40:49 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:40:49 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:40:49 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:40:49 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:40:49 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:41:00 INF] Fetching all Auction records
+[2025-09-22 13:41:00 INF] Retrieved 4 Auction records
+[2025-09-22 13:41:00 INF] All auctions retrieved by Anonymous at "2025-09-22T09:41:00.9225967Z"
+[2025-09-22 13:41:00 INF] Fetching all Auction records
+[2025-09-22 13:41:00 INF] Retrieved 4 Auction records
+[2025-09-22 13:41:00 INF] All auctions retrieved by Anonymous at "2025-09-22T09:41:00.9306832Z"
+[2025-09-22 13:41:02 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:41:02 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:41:02 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:41:02 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:41:02 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:41:02 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:41:02 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:41:02 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:41:02 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:41:02 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:41:04 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:41:04 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:41:04 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:41:04 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:41:04 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:04 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:09 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:15 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:19 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:24 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:29 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:35 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:39 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:45 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:50 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:41:54 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:42:00 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:42:05 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:42:10 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:42:15 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:42:20 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:42:25 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:43:13 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:44:14 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:45:14 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:46:14 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:47:14 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:48:13 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:49:14 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:50:14 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:51:14 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:52:14 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:53:14 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:54:13 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:55:14 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:01 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:04 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:10 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:15 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:19 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:25 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:30 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:34 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:56:34 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:56:34 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:56:34 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 13:56:34 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:39 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:41 INF] Fetching all Auction records
+[2025-09-22 13:56:41 INF] Retrieved 4 Auction records
+[2025-09-22 13:56:41 INF] All auctions retrieved by Anonymous at "2025-09-22T09:56:41.4478200Z"
+[2025-09-22 13:56:41 INF] Fetching all Auction records
+[2025-09-22 13:56:41 INF] Retrieved 4 Auction records
+[2025-09-22 13:56:41 INF] All auctions retrieved by Anonymous at "2025-09-22T09:56:41.4634586Z"
+[2025-09-22 13:56:45 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:50 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:50 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:56:50 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:56:51 INF] Getting auction car details by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:56:51 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:51 INF] 🔍 Getting auction car by ID: "b449cf22-3ef5-446a-8200-72135c466469"
+[2025-09-22 13:56:51 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:56 INF] 🕐 Getting recent bids: Car "b449cf22-3ef5-446a-8200-72135c466469", Count 10
+[2025-09-22 13:56:58 INF] Fetching all Auction records
+[2025-09-22 13:56:58 INF] Retrieved 4 Auction records
+[2025-09-22 13:56:58 INF] All auctions retrieved by Anonymous at "2025-09-22T09:56:58.6613119Z"
+[2025-09-22 13:56:58 INF] Fetching all Auction records
+[2025-09-22 13:56:58 INF] Retrieved 4 Auction records
+[2025-09-22 13:56:58 INF] All auctions retrieved by Anonymous at "2025-09-22T09:56:58.6969555Z"
+[2025-09-22 13:57:01 INF] Fetching all Auction records
+[2025-09-22 13:57:01 INF] Retrieved 4 Auction records
+[2025-09-22 13:57:01 INF] All auctions retrieved by Anonymous at "2025-09-22T09:57:01.4628291Z"
+[2025-09-22 13:57:02 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:57:02 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:57:02 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:57:02 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:57:02 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:57:02 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:57:02 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:57:02 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:57:02 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:57:02 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:57:25 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:57:26 INF] ✅ Found 2 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:57:26 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:57:26 INF] ✅ Found 2 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:57:37 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:57:37 INF] ✅ Found 2 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:57:37 INF] 👤 Getting user bids: User "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:57:37 INF] ✅ Found 2 bids for user "e6a4574b-3087-436d-9128-cbd7cfbeed62"
+[2025-09-22 13:58:11 INF] Fetching all Auction records
+[2025-09-22 13:58:11 INF] Retrieved 4 Auction records
+[2025-09-22 13:58:11 INF] All auctions retrieved by Anonymous at "2025-09-22T09:58:11.1227535Z"
+[2025-09-22 13:58:11 INF] Fetching all Auction records
+[2025-09-22 13:58:11 INF] Retrieved 4 Auction records
+[2025-09-22 13:58:11 INF] All auctions retrieved by Anonymous at "2025-09-22T09:58:11.1583659Z"
+[2025-09-22 13:58:12 INF] Fetching Auction with ID "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 13:58:12 INF] Getting cars for auction: "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 13:58:12 INF] Auction with ID "40d3c3bc-ddc5-4d4b-8abb-4848995d953b" retrieved successfully
+[2025-09-22 13:58:12 INF] 🔍 Getting all cars for auction: "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 13:58:12 INF] Fetching Auction with ID "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 13:58:12 INF] Auction with ID "40d3c3bc-ddc5-4d4b-8abb-4848995d953b" retrieved successfully
+[2025-09-22 13:58:12 INF] ✅ Retrieved 0 cars for auction "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 13:58:12 INF] Getting cars for auction: "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 13:58:12 INF] 🔍 Getting all cars for auction: "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 13:58:12 INF] ✅ Retrieved 0 cars for auction "40d3c3bc-ddc5-4d4b-8abb-4848995d953b"
+[2025-09-22 13:58:15 INF] Fetching all Auction records
+[2025-09-22 13:58:15 INF] Retrieved 4 Auction records
+[2025-09-22 13:58:15 INF] All auctions retrieved by Anonymous at "2025-09-22T09:58:15.0434631Z"
+[2025-09-22 13:58:15 INF] Fetching all Auction records
+[2025-09-22 13:58:15 INF] Retrieved 4 Auction records
+[2025-09-22 13:58:15 INF] All auctions retrieved by Anonymous at "2025-09-22T09:58:15.0624213Z"
+[2025-09-22 13:58:16 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:58:16 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:58:16 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:58:16 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:58:16 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:58:16 INF] Fetching Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:58:16 INF] Getting cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:58:16 INF] 🔍 Getting all cars for auction: "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 13:58:16 INF] Auction with ID "112dc0a3-16e1-46d1-a704-d9dce2db0112" retrieved successfully
+[2025-09-22 13:58:16 INF] ✅ Retrieved 1 cars for auction "112dc0a3-16e1-46d1-a704-d9dce2db0112"
+[2025-09-22 14:01:45 INF] Fetching all Auction records
+[2025-09-22 14:01:45 INF] Retrieved 4 Auction records
+[2025-09-22 14:01:45 INF] All auctions retrieved by Anonymous at "2025-09-22T10:01:45.4755709Z"
+[2025-09-22 14:01:45 INF] Fetching all Auction records
+[2025-09-22 14:01:45 INF] Retrieved 4 Auction records
+[2025-09-22 14:01:45 INF] All auctions retrieved by Anonymous at "2025-09-22T10:01:45.5096525Z"
+[2025-09-22 14:01:48 INF] Fetching all Auction records
+[2025-09-22 14:01:48 INF] Retrieved 4 Auction records
+[2025-09-22 14:01:48 INF] All auctions retrieved by Anonymous at "2025-09-22T10:01:48.9231549Z"
+[2025-09-22 14:01:50 INF] Fetching all Auction records
+[2025-09-22 14:01:50 INF] Retrieved 4 Auction records
+[2025-09-22 14:01:50 INF] All auctions retrieved by Anonymous at "2025-09-22T10:01:50.5206293Z"
+[2025-09-22 14:01:52 INF] Fetching all Auction records
+[2025-09-22 14:01:52 INF] Retrieved 4 Auction records
+[2025-09-22 14:01:52 INF] All auctions retrieved by Anonymous at "2025-09-22T10:01:52.6476840Z"
+[2025-09-22 14:01:57 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:01:57 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:01:57 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:01:57 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:02:01 INF] Fetching all Auction records
+[2025-09-22 14:02:01 INF] Retrieved 4 Auction records
+[2025-09-22 14:02:01 INF] All auctions retrieved by Anonymous at "2025-09-22T10:02:01.2149599Z"
+[2025-09-22 14:02:01 INF] Fetching all Auction records
+[2025-09-22 14:02:01 INF] Retrieved 4 Auction records
+[2025-09-22 14:02:01 INF] All auctions retrieved by Anonymous at "2025-09-22T10:02:01.2262925Z"
+[2025-09-22 14:11:43 INF] Fetching all Auction records
+[2025-09-22 14:11:43 INF] Retrieved 4 Auction records
+[2025-09-22 14:11:43 INF] All auctions retrieved by Anonymous at "2025-09-22T10:11:43.5107525Z"
+[2025-09-22 14:11:43 INF] Fetching all Auction records
+[2025-09-22 14:11:43 INF] Retrieved 4 Auction records
+[2025-09-22 14:11:43 INF] All auctions retrieved by Anonymous at "2025-09-22T10:11:43.5380759Z"
+[2025-09-22 14:17:10 INF] Fetching all Auction records
+[2025-09-22 14:17:10 INF] Retrieved 4 Auction records
+[2025-09-22 14:17:10 INF] All auctions retrieved by Anonymous at "2025-09-22T10:17:10.2912050Z"
+[2025-09-22 14:17:10 INF] Fetching all Auction records
+[2025-09-22 14:17:10 INF] Retrieved 4 Auction records
+[2025-09-22 14:17:10 INF] All auctions retrieved by Anonymous at "2025-09-22T10:17:10.3286171Z"
+[2025-09-22 14:17:12 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:17:12 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:17:12 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:17:12 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:17:24 INF] Fetching all Auction records
+[2025-09-22 14:17:24 INF] Retrieved 4 Auction records
+[2025-09-22 14:17:24 INF] All auctions retrieved by Anonymous at "2025-09-22T10:17:24.8733036Z"
+[2025-09-22 14:17:24 INF] Fetching all Auction records
+[2025-09-22 14:17:24 INF] Retrieved 4 Auction records
+[2025-09-22 14:17:24 INF] All auctions retrieved by Anonymous at "2025-09-22T10:17:24.9076953Z"
+[2025-09-22 14:17:28 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:17:28 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:17:28 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:17:28 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:17:39 INF] Fetching all Auction records
+[2025-09-22 14:17:39 INF] Retrieved 4 Auction records
+[2025-09-22 14:17:39 INF] All auctions retrieved by Anonymous at "2025-09-22T10:17:39.5994083Z"
+[2025-09-22 14:17:39 INF] Fetching all Auction records
+[2025-09-22 14:17:39 INF] Retrieved 4 Auction records
+[2025-09-22 14:17:39 INF] All auctions retrieved by Anonymous at "2025-09-22T10:17:39.6325403Z"
+[2025-09-22 14:17:43 INF] Fetching all Auction records
+[2025-09-22 14:17:43 INF] Retrieved 4 Auction records
+[2025-09-22 14:17:43 INF] All auctions retrieved by Anonymous at "2025-09-22T10:17:43.5401674Z"
+[2025-09-22 14:17:44 INF] Fetching all Auction records
+[2025-09-22 14:17:44 INF] Retrieved 4 Auction records
+[2025-09-22 14:17:44 INF] All auctions retrieved by Anonymous at "2025-09-22T10:17:44.4217988Z"
+[2025-09-22 14:17:45 INF] Fetching all Auction records
+[2025-09-22 14:17:45 INF] Retrieved 4 Auction records
+[2025-09-22 14:17:45 INF] All auctions retrieved by Anonymous at "2025-09-22T10:17:45.1832774Z"
+[2025-09-22 14:18:04 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:18:04 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:18:04 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:18:04 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:18:13 INF] Fetching all Auction records
+[2025-09-22 14:18:13 INF] Retrieved 4 Auction records
+[2025-09-22 14:18:13 INF] All auctions retrieved by Anonymous at "2025-09-22T10:18:13.9904978Z"
+[2025-09-22 14:18:14 INF] Fetching all Auction records
+[2025-09-22 14:18:14 INF] Retrieved 4 Auction records
+[2025-09-22 14:18:14 INF] All auctions retrieved by Anonymous at "2025-09-22T10:18:14.0245785Z"
+[2025-09-22 14:20:03 INF] Fetching all Auction records
+[2025-09-22 14:20:03 INF] Retrieved 4 Auction records
+[2025-09-22 14:20:03 INF] All auctions retrieved by Anonymous at "2025-09-22T10:20:03.2169922Z"
+[2025-09-22 14:20:03 INF] Fetching all Auction records
+[2025-09-22 14:20:03 INF] Retrieved 4 Auction records
+[2025-09-22 14:20:03 INF] All auctions retrieved by Anonymous at "2025-09-22T10:20:03.2458893Z"
+[2025-09-22 14:20:05 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:20:05 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:20:05 INF] 👤 Getting user bids: User "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:20:05 INF] ✅ Found 1 bids for user "597b4d42-f4d7-40b2-9fbd-7fe264d7eec7"
+[2025-09-22 14:20:08 INF] Fetching all Auction records
+[2025-09-22 14:20:08 INF] Retrieved 4 Auction records
+[2025-09-22 14:20:08 INF] All auctions retrieved by Anonymous at "2025-09-22T10:20:08.5027517Z"
+[2025-09-22 14:20:08 INF] Fetching all Auction records
+[2025-09-22 14:20:08 INF] Retrieved 4 Auction records
+[2025-09-22 14:20:08 INF] All auctions retrieved by Anonymous at "2025-09-22T10:20:08.5394964Z"

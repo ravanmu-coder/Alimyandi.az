@@ -1,0 +1,12 @@
+[2025-09-17 23:11:31 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+[2025-09-17 23:11:32 INF] 🎯 === AUTORIA AUCTION API STARTED ===
+[2025-09-17 23:11:32 INF] 🌐 Swagger UI: https://localhost:7249
+[2025-09-17 23:11:32 INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+[2025-09-17 23:11:32 INF] 💚 Health Check: https://localhost:7249/health
+[2025-09-17 23:11:32 INF] 📊 API Info: https://localhost:7249/api/info
+[2025-09-17 23:11:32 INF] 👨‍💻 Developer: ravanmu-coder
+[2025-09-17 23:11:35 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-17 23:11:35 INF] Fetching all Auction records
+[2025-09-17 23:11:35 INF] Retrieved 1 Auction records
+[2025-09-17 23:11:35 INF] All auctions retrieved by Anonymous at "2025-09-17T19:11:35.6338937Z"
+[2025-09-17 23:11:46 WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.

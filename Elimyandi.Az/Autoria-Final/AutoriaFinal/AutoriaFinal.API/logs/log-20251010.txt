@@ -1,0 +1,615 @@
+2025-10-10 17:30:31.200 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-10-10 17:30:32.171 +04:00 [INF] 🚀 AuctionSchedulerService STARTED - User: ravanmu-coder - Time: 2025-10-06 15:13:52
+2025-10-10 17:30:32.178 +04:00 [INF] ⚙️  Configuration: PollInterval=1s, BatchSize=3, LotTimer=true, CatchUp=true
+2025-10-10 17:30:32.560 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-10-10 17:30:32.566 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-10-10 17:30:32.570 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-10-10 17:30:32.573 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-10-10 17:30:32.575 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-10-10 17:30:32.582 +04:00 [INF] 🔓 CORS: Enabled for all origins (Development)
+2025-10-10 17:30:32.585 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-10-10 17:30:34.427 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/swagger/index.html - null null
+2025-10-10 17:30:34.857 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/swagger/index.html - 404 0 null 433.5414ms
+2025-10-10 17:30:34.871 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/swagger/index.html, Response status code: 404
+2025-10-10 17:30:35.176 +04:00 [INF] 🔄 Starting catch-up process... - User: ravanmu-coder
+2025-10-10 17:30:35.892 +04:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-10-10 17:30:35.940 +04:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-10-10 17:30:36.096 +04:00 [INF] ✅ Catch-up completed: Ready=0, Started=0, Ended=0, CarConditions=0 | Duration=906ms - User: ravanmu-coder
+2025-10-10 17:30:36.110 +04:00 [INF] ✅ Catch-up process completed - User: ravanmu-coder
+2025-10-10 17:30:36.162 +04:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-10-10 17:30:41.436 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/index.html - null null
+2025-10-10 17:30:41.600 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/index.html - 200 null text/html;charset=utf-8 166.3505ms
+2025-10-10 17:30:41.616 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-10 17:30:41.637 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/_vs/browserLink - null null
+2025-10-10 17:30:41.652 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/_framework/aspnetcore-browser-refresh.js - 200 16517 application/javascript; charset=utf-8 36.0678ms
+2025-10-10 17:30:41.790 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/_vs/browserLink - 200 null text/javascript; charset=UTF-8 152.3649ms
+2025-10-10 17:30:41.943 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/swagger/v1/swagger.json - null null
+2025-10-10 17:30:42.465 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 521.3869ms
+2025-10-10 17:31:05.647 +04:00 [INF] ⚡ Cycle #30: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=8ms - User: ravanmu-coder
+2025-10-10 17:31:36.357 +04:00 [INF] ⚡ Cycle #60: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=111ms - User: ravanmu-coder
+2025-10-10 17:32:07.304 +04:00 [INF] ⚡ Cycle #90: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=133ms - User: ravanmu-coder
+2025-10-10 17:32:38.838 +04:00 [INF] ⚡ Cycle #120: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=11ms - User: ravanmu-coder
+2025-10-10 17:32:50.995 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-10-10 17:32:51.022 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 26.5175ms
+2025-10-10 17:32:51.037 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 54
+2025-10-10 17:32:51.122 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:32:51.192 +04:00 [INF] 🔑 Login request received for: ravanmu@code.edu.az
+2025-10-10 17:32:51.209 +04:00 [INF] 🔑 Login attempt for email: ravanmu@code.edu.az
+2025-10-10 17:32:51.758 +04:00 [INF] Generating JWT token for user: 3a841c8e-6c0a-4d9c-81fd-089755361d83 (ravanmu@code.edu.az)
+2025-10-10 17:32:51.842 +04:00 [INF] JWT token generated successfully for user 3a841c8e-6c0a-4d9c-81fd-089755361d83 - JTI: 3b57f9ee-2d4c-49fd-ac20-c465a3baf69c, Claims: 14, Expires: "2025-10-11T13:32:51.7513191Z"
+2025-10-10 17:32:52.262 +04:00 [INF] ✅ LOGIN SUCCESS: 3a841c8e-6c0a-4d9c-81fd-089755361d83 (ravanmu@code.edu.az) with roles: [Seller] at "2025-10-10T13:32:52.2619738Z"
+2025-10-10 17:32:52.289 +04:00 [INF] ✅ Login successful for: ravanmu@code.edu.az
+2025-10-10 17:32:52.393 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - null null
+2025-10-10 17:32:52.397 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 1359.7846ms
+2025-10-10 17:32:52.412 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - 204 null null 19.0007ms
+2025-10-10 17:32:52.418 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/profile - application/json null
+2025-10-10 17:32:52.589 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:32:52.633 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/profile - 200 null application/json; charset=utf-8 214.4913ms
+2025-10-10 17:32:52.710 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-10-10 17:32:52.711 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car - null null
+2025-10-10 17:32:52.711 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - null null
+2025-10-10 17:32:52.722 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 11.7072ms
+2025-10-10 17:32:52.730 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-10-10 17:32:52.740 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car - 204 null null 28.9741ms
+2025-10-10 17:32:52.743 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car - application/json null
+2025-10-10 17:32:52.747 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - 204 null null 36.2571ms
+2025-10-10 17:32:52.751 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Bid/my-bids - application/json null
+2025-10-10 17:32:52.817 +04:00 [INF] Fetching all Car records
+2025-10-10 17:32:52.831 +04:00 [INF] 👤 MY BIDS REQUEST: User "3a841c8e-6c0a-4d9c-81fd-089755361d83" (Ravanmuu) at 2025-10-10 13:32:52
+2025-10-10 17:32:52.851 +04:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-10-10 17:32:53.001 +04:00 [INF] Live auctions requested by Ravanmuu - Found 0 live auctions
+2025-10-10 17:32:53.023 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 293.2678ms
+2025-10-10 17:32:53.097 +04:00 [INF] Retrieved 17 Car records
+2025-10-10 17:32:53.262 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car - 200 null application/json; charset=utf-8 518.9768ms
+2025-10-10 17:32:53.472 +04:00 [INF] User bids retrieved for "3a841c8e-6c0a-4d9c-81fd-089755361d83" (Ravanmuu) - Found 8 bids
+2025-10-10 17:32:53.518 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Bid/my-bids - 200 null application/json; charset=utf-8 766.9676ms
+2025-10-10 17:33:10.105 +04:00 [INF] ⚡ Cycle #150: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=12ms - User: ravanmu-coder
+2025-10-10 17:33:40.734 +04:00 [INF] ⚡ Cycle #180: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=36ms - User: ravanmu-coder
+2025-10-10 17:33:42.079 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Valuation/estimate - null null
+2025-10-10 17:33:42.098 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Valuation/estimate - 204 null null 15.5729ms
+2025-10-10 17:33:42.102 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Valuation/estimate - application/json 150
+2025-10-10 17:33:53.754 +04:00 [INF] GenerativeLanguage API success (ms:11512) ResponseLen:1136
+2025-10-10 17:33:53.835 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Valuation/estimate - 200 null application/json; charset=utf-8 11732.6845ms
+2025-10-10 17:34:11.669 +04:00 [INF] ⚡ Cycle #210: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=177ms - User: ravanmu-coder
+2025-10-10 17:34:42.577 +04:00 [INF] ⚡ Cycle #240: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=9ms - User: ravanmu-coder
+2025-10-10 17:34:58.869 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Location - null null
+2025-10-10 17:34:58.935 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Location - 204 null null 65.2179ms
+2025-10-10 17:34:58.965 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Location - application/json null
+2025-10-10 17:34:59.071 +04:00 [INF] Fetching all Location records
+2025-10-10 17:34:59.279 +04:00 [INF] Retrieved 1 Location records
+2025-10-10 17:34:59.359 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Location - 200 null application/json; charset=utf-8 393.6543ms
+2025-10-10 17:35:02.180 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/my - null null
+2025-10-10 17:35:02.229 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/my - 204 null null 48.6366ms
+2025-10-10 17:35:02.269 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/my - application/json null
+2025-10-10 17:35:02.422 +04:00 [INF] HTTP GET /api/car/mine. TraceId=0HNG804O23DUJ:0000000D, Owner=3a841c8e-6c0a-4d9c-81fd-089755361d83
+2025-10-10 17:35:02.450 +04:00 [INF] Fetching cars for owner 3a841c8e-6c0a-4d9c-81fd-089755361d83
+2025-10-10 17:35:02.612 +04:00 [INF] Returning 15 cars for owner. Owner=3a841c8e-6c0a-4d9c-81fd-089755361d83, TraceId=0HNG804O23DUJ:0000000D
+2025-10-10 17:35:02.625 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/my - 200 null application/json; charset=utf-8 356.4949ms
+2025-10-10 17:35:02.712 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Location - application/json null
+2025-10-10 17:35:02.737 +04:00 [INF] Fetching all Location records
+2025-10-10 17:35:02.748 +04:00 [INF] Retrieved 1 Location records
+2025-10-10 17:35:02.754 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Location - 200 null application/json; charset=utf-8 41.9666ms
+2025-10-10 17:35:02.771 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/baa0ada5-e97f-4433-a63c-24b1d96647ec - null null
+2025-10-10 17:35:02.771 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7 - null null
+2025-10-10 17:35:02.780 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4 - null null
+2025-10-10 17:35:02.781 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/ef4a72e5-2d99-4890-ae83-629bf99fea8d - null null
+2025-10-10 17:35:02.781 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/6a1a4250-30fc-481c-bae0-3d77a9c0bc59 - null null
+2025-10-10 17:35:02.781 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/5fe537e8-6f76-402c-b15b-5de1a43c11cf - null null
+2025-10-10 17:35:02.782 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/41f776aa-c2ec-44de-b6de-793913cc0867 - null null
+2025-10-10 17:35:02.782 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/df177010-a14c-4b5a-95fe-8ba929e460aa - null null
+2025-10-10 17:35:02.783 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/055ef9ed-6093-424f-b062-9d12a8ba512b - null null
+2025-10-10 17:35:02.783 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/fcc4cf80-027e-4612-b14b-cf7ff9e62699 - null null
+2025-10-10 17:35:02.783 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/65597684-33bd-4db9-a6ba-ab6c54a2cc32 - null null
+2025-10-10 17:35:02.783 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/6fd84b3a-33d8-4b42-83ef-d117da2c7113 - null null
+2025-10-10 17:35:02.794 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/baa0ada5-e97f-4433-a63c-24b1d96647ec - 204 null null 23.3029ms
+2025-10-10 17:35:02.805 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7 - 204 null null 34.3981ms
+2025-10-10 17:35:02.829 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4 - 204 null null 48.9598ms
+2025-10-10 17:35:02.845 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/ef4a72e5-2d99-4890-ae83-629bf99fea8d - 204 null null 64.4583ms
+2025-10-10 17:35:02.854 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/6a1a4250-30fc-481c-bae0-3d77a9c0bc59 - 204 null null 72.9017ms
+2025-10-10 17:35:02.866 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/5fe537e8-6f76-402c-b15b-5de1a43c11cf - 204 null null 84.5338ms
+2025-10-10 17:35:02.878 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/41f776aa-c2ec-44de-b6de-793913cc0867 - 204 null null 95.2251ms
+2025-10-10 17:35:02.890 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/df177010-a14c-4b5a-95fe-8ba929e460aa - 204 null null 107.7181ms
+2025-10-10 17:35:02.901 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/055ef9ed-6093-424f-b062-9d12a8ba512b - 204 null null 117.9738ms
+2025-10-10 17:35:02.913 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/fcc4cf80-027e-4612-b14b-cf7ff9e62699 - 204 null null 129.5028ms
+2025-10-10 17:35:02.923 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/65597684-33bd-4db9-a6ba-ab6c54a2cc32 - 204 null null 140.1034ms
+2025-10-10 17:35:02.935 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/6fd84b3a-33d8-4b42-83ef-d117da2c7113 - 204 null null 151.7519ms
+2025-10-10 17:35:02.946 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/990ebac7-f50b-45cb-b4a0-d3aad817de52 - null null
+2025-10-10 17:35:02.959 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/7b63d52b-dddf-4ecb-a931-f610f95c1d59 - null null
+2025-10-10 17:35:02.975 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/2df869c7-92d2-4789-b5c0-fd7796bdc8cb - null null
+2025-10-10 17:35:03.004 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/baa0ada5-e97f-4433-a63c-24b1d96647ec - application/json null
+2025-10-10 17:35:03.012 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4 - application/json null
+2025-10-10 17:35:03.029 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7 - application/json null
+2025-10-10 17:35:03.041 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/ef4a72e5-2d99-4890-ae83-629bf99fea8d - application/json null
+2025-10-10 17:35:03.059 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/6a1a4250-30fc-481c-bae0-3d77a9c0bc59 - application/json null
+2025-10-10 17:35:03.073 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/41f776aa-c2ec-44de-b6de-793913cc0867 - application/json null
+2025-10-10 17:35:03.085 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/df177010-a14c-4b5a-95fe-8ba929e460aa - application/json null
+2025-10-10 17:35:03.107 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/5fe537e8-6f76-402c-b15b-5de1a43c11cf - application/json null
+2025-10-10 17:35:03.120 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/055ef9ed-6093-424f-b062-9d12a8ba512b - application/json null
+2025-10-10 17:35:03.132 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/990ebac7-f50b-45cb-b4a0-d3aad817de52 - 204 null null 185.4243ms
+2025-10-10 17:35:03.145 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/7b63d52b-dddf-4ecb-a931-f610f95c1d59 - 204 null null 185.7106ms
+2025-10-10 17:35:03.154 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/2df869c7-92d2-4789-b5c0-fd7796bdc8cb - 204 null null 179.6904ms
+2025-10-10 17:35:03.205 +04:00 [INF] Fetching Car with ID "baa0ada5-e97f-4433-a63c-24b1d96647ec"
+2025-10-10 17:35:03.288 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/fcc4cf80-027e-4612-b14b-cf7ff9e62699 - application/json null
+2025-10-10 17:35:03.205 +04:00 [INF] Fetching Car with ID "97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4"
+2025-10-10 17:35:03.215 +04:00 [INF] Fetching Car with ID "ef4a72e5-2d99-4890-ae83-629bf99fea8d"
+2025-10-10 17:35:03.223 +04:00 [INF] Fetching Car with ID "6a1a4250-30fc-481c-bae0-3d77a9c0bc59"
+2025-10-10 17:35:03.233 +04:00 [INF] Fetching Car with ID "41f776aa-c2ec-44de-b6de-793913cc0867"
+2025-10-10 17:35:03.244 +04:00 [INF] Fetching Car with ID "df177010-a14c-4b5a-95fe-8ba929e460aa"
+2025-10-10 17:35:03.253 +04:00 [INF] Fetching Car with ID "5fe537e8-6f76-402c-b15b-5de1a43c11cf"
+2025-10-10 17:35:03.264 +04:00 [INF] Fetching Car with ID "055ef9ed-6093-424f-b062-9d12a8ba512b"
+2025-10-10 17:35:03.273 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/6fd84b3a-33d8-4b42-83ef-d117da2c7113 - application/json null
+2025-10-10 17:35:03.205 +04:00 [INF] Fetching Car with ID "ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7"
+2025-10-10 17:35:03.303 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/65597684-33bd-4db9-a6ba-ab6c54a2cc32 - application/json null
+2025-10-10 17:35:03.336 +04:00 [INF] Fetching Car with ID "fcc4cf80-027e-4612-b14b-cf7ff9e62699"
+2025-10-10 17:35:03.348 +04:00 [INF] Car with ID "baa0ada5-e97f-4433-a63c-24b1d96647ec" retrieved successfully
+2025-10-10 17:35:03.348 +04:00 [INF] Car with ID "97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4" retrieved successfully
+2025-10-10 17:35:03.350 +04:00 [INF] Car with ID "ef4a72e5-2d99-4890-ae83-629bf99fea8d" retrieved successfully
+2025-10-10 17:35:03.352 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/2df869c7-92d2-4789-b5c0-fd7796bdc8cb - application/json null
+2025-10-10 17:35:03.355 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/990ebac7-f50b-45cb-b4a0-d3aad817de52 - application/json null
+2025-10-10 17:35:03.362 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/7b63d52b-dddf-4ecb-a931-f610f95c1d59 - application/json null
+2025-10-10 17:35:03.366 +04:00 [INF] Car with ID "6a1a4250-30fc-481c-bae0-3d77a9c0bc59" retrieved successfully
+2025-10-10 17:35:03.370 +04:00 [INF] Car with ID "41f776aa-c2ec-44de-b6de-793913cc0867" retrieved successfully
+2025-10-10 17:35:03.372 +04:00 [INF] Car with ID "df177010-a14c-4b5a-95fe-8ba929e460aa" retrieved successfully
+2025-10-10 17:35:03.376 +04:00 [INF] Car with ID "055ef9ed-6093-424f-b062-9d12a8ba512b" retrieved successfully
+2025-10-10 17:35:03.383 +04:00 [INF] Car with ID "5fe537e8-6f76-402c-b15b-5de1a43c11cf" retrieved successfully
+2025-10-10 17:35:03.385 +04:00 [INF] Fetching Car with ID "6fd84b3a-33d8-4b42-83ef-d117da2c7113"
+2025-10-10 17:35:03.388 +04:00 [INF] Car with ID "ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7" retrieved successfully
+2025-10-10 17:35:03.401 +04:00 [INF] Fetching Car with ID "65597684-33bd-4db9-a6ba-ab6c54a2cc32"
+2025-10-10 17:35:03.413 +04:00 [INF] Car with ID "fcc4cf80-027e-4612-b14b-cf7ff9e62699" retrieved successfully
+2025-10-10 17:35:03.434 +04:00 [INF] Fetching Car with ID "2df869c7-92d2-4789-b5c0-fd7796bdc8cb"
+2025-10-10 17:35:03.443 +04:00 [INF] Fetching Car with ID "990ebac7-f50b-45cb-b4a0-d3aad817de52"
+2025-10-10 17:35:03.452 +04:00 [INF] Fetching Car with ID "7b63d52b-dddf-4ecb-a931-f610f95c1d59"
+2025-10-10 17:35:03.470 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/6a1a4250-30fc-481c-bae0-3d77a9c0bc59 - 200 null application/json; charset=utf-8 411.0157ms
+2025-10-10 17:35:03.470 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4 - 200 null application/json; charset=utf-8 457.8584ms
+2025-10-10 17:35:03.470 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/df177010-a14c-4b5a-95fe-8ba929e460aa - 200 null application/json; charset=utf-8 385.6863ms
+2025-10-10 17:35:03.470 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/baa0ada5-e97f-4433-a63c-24b1d96647ec - 200 null application/json; charset=utf-8 466.0377ms
+2025-10-10 17:35:03.470 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/41f776aa-c2ec-44de-b6de-793913cc0867 - 200 null application/json; charset=utf-8 397.0542ms
+2025-10-10 17:35:03.470 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/ef4a72e5-2d99-4890-ae83-629bf99fea8d - 200 null application/json; charset=utf-8 429.3242ms
+2025-10-10 17:35:03.470 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/5fe537e8-6f76-402c-b15b-5de1a43c11cf - 200 null application/json; charset=utf-8 363.381ms
+2025-10-10 17:35:03.471 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/055ef9ed-6093-424f-b062-9d12a8ba512b - 200 null application/json; charset=utf-8 350.6805ms
+2025-10-10 17:35:03.477 +04:00 [INF] Car with ID "6fd84b3a-33d8-4b42-83ef-d117da2c7113" retrieved successfully
+2025-10-10 17:35:03.480 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7 - 200 null application/json; charset=utf-8 450.8653ms
+2025-10-10 17:35:03.484 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile/3a841c8e-6c0a-4d9c-81fd-089755361d83 - null null
+2025-10-10 17:35:03.485 +04:00 [INF] Car with ID "65597684-33bd-4db9-a6ba-ab6c54a2cc32" retrieved successfully
+2025-10-10 17:35:03.497 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/fcc4cf80-027e-4612-b14b-cf7ff9e62699 - 200 null application/json; charset=utf-8 208.7883ms
+2025-10-10 17:35:03.502 +04:00 [INF] Car with ID "2df869c7-92d2-4789-b5c0-fd7796bdc8cb" retrieved successfully
+2025-10-10 17:35:03.629 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile/3a841c8e-6c0a-4d9c-81fd-089755361d83 - 204 null null 145.0318ms
+2025-10-10 17:35:03.510 +04:00 [INF] Car with ID "7b63d52b-dddf-4ecb-a931-f610f95c1d59" retrieved successfully
+2025-10-10 17:35:03.607 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/6fd84b3a-33d8-4b42-83ef-d117da2c7113 - 200 null application/json; charset=utf-8 334.1933ms
+2025-10-10 17:35:03.505 +04:00 [INF] Car with ID "990ebac7-f50b-45cb-b4a0-d3aad817de52" retrieved successfully
+2025-10-10 17:35:03.636 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/profile/3a841c8e-6c0a-4d9c-81fd-089755361d83 - application/json null
+2025-10-10 17:35:03.636 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/65597684-33bd-4db9-a6ba-ab6c54a2cc32 - 200 null application/json; charset=utf-8 333.3821ms
+2025-10-10 17:35:03.653 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/2df869c7-92d2-4789-b5c0-fd7796bdc8cb - 200 null application/json; charset=utf-8 301.0642ms
+2025-10-10 17:35:03.670 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/7b63d52b-dddf-4ecb-a931-f610f95c1d59 - 200 null application/json; charset=utf-8 308.3004ms
+2025-10-10 17:35:03.692 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/990ebac7-f50b-45cb-b4a0-d3aad817de52 - 200 null application/json; charset=utf-8 336.3321ms
+2025-10-10 17:35:03.703 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/profile/3a841c8e-6c0a-4d9c-81fd-089755361d83 - 404 0 null 67.4118ms
+2025-10-10 17:35:03.768 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auth/profile/3a841c8e-6c0a-4d9c-81fd-089755361d83, Response status code: 404
+2025-10-10 17:35:03.892 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/fcc4cf80-027e-4612-b14b-cf7ff9e62699 - application/json null
+2025-10-10 17:35:03.898 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/7b63d52b-dddf-4ecb-a931-f610f95c1d59 - application/json null
+2025-10-10 17:35:03.899 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/baa0ada5-e97f-4433-a63c-24b1d96647ec - application/json null
+2025-10-10 17:35:03.901 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/6fd84b3a-33d8-4b42-83ef-d117da2c7113 - application/json null
+2025-10-10 17:35:03.902 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/5fe537e8-6f76-402c-b15b-5de1a43c11cf - application/json null
+2025-10-10 17:35:03.903 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/ef4a72e5-2d99-4890-ae83-629bf99fea8d - application/json null
+2025-10-10 17:35:03.906 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/6a1a4250-30fc-481c-bae0-3d77a9c0bc59 - application/json null
+2025-10-10 17:35:03.906 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7 - application/json null
+2025-10-10 17:35:03.907 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/055ef9ed-6093-424f-b062-9d12a8ba512b - application/json null
+2025-10-10 17:35:03.910 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/41f776aa-c2ec-44de-b6de-793913cc0867 - application/json null
+2025-10-10 17:35:03.910 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/df177010-a14c-4b5a-95fe-8ba929e460aa - application/json null
+2025-10-10 17:35:03.910 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4 - application/json null
+2025-10-10 17:35:03.910 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/65597684-33bd-4db9-a6ba-ab6c54a2cc32 - application/json null
+2025-10-10 17:35:03.912 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/990ebac7-f50b-45cb-b4a0-d3aad817de52 - application/json null
+2025-10-10 17:35:03.913 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/2df869c7-92d2-4789-b5c0-fd7796bdc8cb - application/json null
+2025-10-10 17:35:03.928 +04:00 [INF] Fetching Car with ID "fcc4cf80-027e-4612-b14b-cf7ff9e62699"
+2025-10-10 17:35:03.969 +04:00 [INF] Fetching Car with ID "7b63d52b-dddf-4ecb-a931-f610f95c1d59"
+2025-10-10 17:35:03.994 +04:00 [INF] Fetching Car with ID "baa0ada5-e97f-4433-a63c-24b1d96647ec"
+2025-10-10 17:35:04.022 +04:00 [INF] Fetching Car with ID "6fd84b3a-33d8-4b42-83ef-d117da2c7113"
+2025-10-10 17:35:04.048 +04:00 [INF] Fetching Car with ID "5fe537e8-6f76-402c-b15b-5de1a43c11cf"
+2025-10-10 17:35:04.069 +04:00 [INF] Fetching Car with ID "ef4a72e5-2d99-4890-ae83-629bf99fea8d"
+2025-10-10 17:35:04.089 +04:00 [INF] Fetching Car with ID "6a1a4250-30fc-481c-bae0-3d77a9c0bc59"
+2025-10-10 17:35:04.108 +04:00 [INF] Fetching Car with ID "ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7"
+2025-10-10 17:35:04.126 +04:00 [INF] Fetching Car with ID "055ef9ed-6093-424f-b062-9d12a8ba512b"
+2025-10-10 17:35:04.148 +04:00 [INF] Fetching Car with ID "41f776aa-c2ec-44de-b6de-793913cc0867"
+2025-10-10 17:35:04.168 +04:00 [INF] Fetching Car with ID "df177010-a14c-4b5a-95fe-8ba929e460aa"
+2025-10-10 17:35:04.182 +04:00 [INF] Fetching Car with ID "97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4"
+2025-10-10 17:35:04.210 +04:00 [INF] Fetching Car with ID "65597684-33bd-4db9-a6ba-ab6c54a2cc32"
+2025-10-10 17:35:04.234 +04:00 [INF] Fetching Car with ID "990ebac7-f50b-45cb-b4a0-d3aad817de52"
+2025-10-10 17:35:04.262 +04:00 [INF] Fetching Car with ID "2df869c7-92d2-4789-b5c0-fd7796bdc8cb"
+2025-10-10 17:35:04.279 +04:00 [INF] Car with ID "fcc4cf80-027e-4612-b14b-cf7ff9e62699" retrieved successfully
+2025-10-10 17:35:04.431 +04:00 [INF] Car with ID "df177010-a14c-4b5a-95fe-8ba929e460aa" retrieved successfully
+2025-10-10 17:35:04.316 +04:00 [INF] Car with ID "7b63d52b-dddf-4ecb-a931-f610f95c1d59" retrieved successfully
+2025-10-10 17:35:04.333 +04:00 [INF] Car with ID "baa0ada5-e97f-4433-a63c-24b1d96647ec" retrieved successfully
+2025-10-10 17:35:04.345 +04:00 [INF] Car with ID "6fd84b3a-33d8-4b42-83ef-d117da2c7113" retrieved successfully
+2025-10-10 17:35:04.355 +04:00 [INF] Car with ID "5fe537e8-6f76-402c-b15b-5de1a43c11cf" retrieved successfully
+2025-10-10 17:35:04.367 +04:00 [INF] Car with ID "ef4a72e5-2d99-4890-ae83-629bf99fea8d" retrieved successfully
+2025-10-10 17:35:04.382 +04:00 [INF] Car with ID "6a1a4250-30fc-481c-bae0-3d77a9c0bc59" retrieved successfully
+2025-10-10 17:35:04.394 +04:00 [INF] Car with ID "ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7" retrieved successfully
+2025-10-10 17:35:04.407 +04:00 [INF] Car with ID "055ef9ed-6093-424f-b062-9d12a8ba512b" retrieved successfully
+2025-10-10 17:35:04.417 +04:00 [INF] Car with ID "41f776aa-c2ec-44de-b6de-793913cc0867" retrieved successfully
+2025-10-10 17:35:04.510 +04:00 [INF] Car with ID "65597684-33bd-4db9-a6ba-ab6c54a2cc32" retrieved successfully
+2025-10-10 17:35:04.535 +04:00 [INF] Car with ID "990ebac7-f50b-45cb-b4a0-d3aad817de52" retrieved successfully
+2025-10-10 17:35:04.546 +04:00 [INF] Car with ID "2df869c7-92d2-4789-b5c0-fd7796bdc8cb" retrieved successfully
+2025-10-10 17:35:04.562 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/fcc4cf80-027e-4612-b14b-cf7ff9e62699 - 200 null application/json; charset=utf-8 670.4541ms
+2025-10-10 17:35:04.447 +04:00 [INF] Car with ID "97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4" retrieved successfully
+2025-10-10 17:35:04.625 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/df177010-a14c-4b5a-95fe-8ba929e460aa - 200 null application/json; charset=utf-8 714.5363ms
+2025-10-10 17:35:04.658 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/7b63d52b-dddf-4ecb-a931-f610f95c1d59 - 200 null application/json; charset=utf-8 759.8256ms
+2025-10-10 17:35:04.702 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/111d9510eb6f4b1fbf76.jpg - null null
+2025-10-10 17:35:04.730 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/baa0ada5-e97f-4433-a63c-24b1d96647ec - 200 null application/json; charset=utf-8 830.7423ms
+2025-10-10 17:35:04.765 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/6fd84b3a-33d8-4b42-83ef-d117da2c7113 - 200 null application/json; charset=utf-8 863.3866ms
+2025-10-10 17:35:04.788 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/5fe537e8-6f76-402c-b15b-5de1a43c11cf - 200 null application/json; charset=utf-8 885.2179ms
+2025-10-10 17:35:04.803 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/ef4a72e5-2d99-4890-ae83-629bf99fea8d - 200 null application/json; charset=utf-8 899.6058ms
+2025-10-10 17:35:04.836 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/6fea60cd176e4c61ba63.jpg - null null
+2025-10-10 17:35:04.837 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/27e7fd91e6b9495381f6.png - null null
+2025-10-10 17:35:04.846 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/fce781a505ba4ca5b554.png - null null
+2025-10-10 17:35:04.881 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/6a1a4250-30fc-481c-bae0-3d77a9c0bc59 - 200 null application/json; charset=utf-8 975.2761ms
+2025-10-10 17:35:04.939 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7 - 200 null application/json; charset=utf-8 1032.7697ms
+2025-10-10 17:35:04.957 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/055ef9ed-6093-424f-b062-9d12a8ba512b - 200 null application/json; charset=utf-8 1050.1051ms
+2025-10-10 17:35:04.986 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/41f776aa-c2ec-44de-b6de-793913cc0867 - 200 null application/json; charset=utf-8 1076.2626ms
+2025-10-10 17:35:05.000 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/01224f7c2f9149ce93b1.jpeg - null null
+2025-10-10 17:35:05.003 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/fbfc38632fdc42f2b860.png - null null
+2025-10-10 17:35:05.015 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/15eac6754c9540bab0bd.png - null null
+2025-10-10 17:35:05.037 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/65597684-33bd-4db9-a6ba-ab6c54a2cc32 - 200 null application/json; charset=utf-8 1126.826ms
+2025-10-10 17:35:05.058 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/990ebac7-f50b-45cb-b4a0-d3aad817de52 - 200 null application/json; charset=utf-8 1146.3309ms
+2025-10-10 17:35:05.093 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/2df869c7-92d2-4789-b5c0-fd7796bdc8cb - 200 null application/json; charset=utf-8 1180.435ms
+2025-10-10 17:35:05.105 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/1b64475bebd64c408c56.png - null null
+2025-10-10 17:35:05.106 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/328763af0d02415c94a2.png - null null
+2025-10-10 17:35:05.117 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/27ae430313b14bebb7f8.png - null null
+2025-10-10 17:35:05.187 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4 - 200 null application/json; charset=utf-8 1276.0462ms
+2025-10-10 17:35:05.315 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/111d9510eb6f4b1fbf76.jpg - 304 null image/jpeg 612.924ms
+2025-10-10 17:35:05.347 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/f8285a594f3f416fa412.png - null null
+2025-10-10 17:35:05.427 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/6fea60cd176e4c61ba63.jpg - 304 null image/jpeg 591.197ms
+2025-10-10 17:35:05.435 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/27e7fd91e6b9495381f6.png - 304 null image/png 598.2648ms
+2025-10-10 17:35:05.452 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/fce781a505ba4ca5b554.png - 304 null image/png 606.4877ms
+2025-10-10 17:35:05.539 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/01224f7c2f9149ce93b1.jpeg - 304 null image/jpeg 538.6636ms
+2025-10-10 17:35:05.555 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/fbfc38632fdc42f2b860.png - 404 0 null 552.4199ms
+2025-10-10 17:35:05.570 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/15eac6754c9540bab0bd.png - 304 null image/png 555.3738ms
+2025-10-10 17:35:05.653 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/1b64475bebd64c408c56.png - 404 0 null 548.3289ms
+2025-10-10 17:35:05.673 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/328763af0d02415c94a2.png - 304 null image/png 566.4446ms
+2025-10-10 17:35:05.690 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/27ae430313b14bebb7f8.png - 304 null image/png 572.4704ms
+2025-10-10 17:35:05.744 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/f8285a594f3f416fa412.png - 304 null image/png 396.991ms
+2025-10-10 17:35:05.963 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/images/cars/fbfc38632fdc42f2b860.png, Response status code: 404
+2025-10-10 17:35:06.031 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/images/cars/1b64475bebd64c408c56.png, Response status code: 404
+2025-10-10 17:35:07.716 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/placeholder-car.jpg - null null
+2025-10-10 17:35:07.749 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/placeholder-car.jpg - 404 0 null 32.2604ms
+2025-10-10 17:35:07.798 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/images/cars/placeholder-car.jpg, Response status code: 404
+2025-10-10 17:35:09.425 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/fcc4cf80-027e-4612-b14b-cf7ff9e62699 - null null
+2025-10-10 17:35:09.445 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/fcc4cf80-027e-4612-b14b-cf7ff9e62699 - 204 null null 20.0166ms
+2025-10-10 17:35:09.451 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/fcc4cf80-027e-4612-b14b-cf7ff9e62699 - application/json null
+2025-10-10 17:35:09.494 +04:00 [INF] Fetching Car with ID "fcc4cf80-027e-4612-b14b-cf7ff9e62699"
+2025-10-10 17:35:09.500 +04:00 [INF] Car with ID "fcc4cf80-027e-4612-b14b-cf7ff9e62699" retrieved successfully
+2025-10-10 17:35:09.505 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/fcc4cf80-027e-4612-b14b-cf7ff9e62699 - 200 null application/json; charset=utf-8 54.1231ms
+2025-10-10 17:35:09.576 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/561fa39d405c45229cbb.jpg - null null
+2025-10-10 17:35:09.577 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/81f6eb053b4e457087f0.jpg - null null
+2025-10-10 17:35:09.595 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/561fa39d405c45229cbb.jpg - 304 null image/jpeg 19.3289ms
+2025-10-10 17:35:09.621 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/81f6eb053b4e457087f0.jpg - 304 null image/jpeg 43.6281ms
+2025-10-10 17:35:15.084 +04:00 [INF] ⚡ Cycle #270: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=210ms - User: ravanmu-coder
+2025-10-10 17:35:24.526 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction - null null
+2025-10-10 17:35:24.526 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Location - null null
+2025-10-10 17:35:24.571 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Location - 204 null null 44.2328ms
+2025-10-10 17:35:24.561 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction - application/json null
+2025-10-10 17:35:24.542 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction - 204 null null 16.2341ms
+2025-10-10 17:35:24.598 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Location - application/json null
+2025-10-10 17:35:24.643 +04:00 [INF] Fetching all Auction records
+2025-10-10 17:35:24.671 +04:00 [INF] Fetching all Location records
+2025-10-10 17:35:24.689 +04:00 [INF] Retrieved 1 Location records
+2025-10-10 17:35:24.703 +04:00 [INF] Retrieved 1 Auction records
+2025-10-10 17:35:24.706 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Location - 200 null application/json; charset=utf-8 108.1994ms
+2025-10-10 17:35:24.743 +04:00 [INF] All auctions retrieved by Ravanmuu at "2025-10-10T13:35:24.7438109Z"
+2025-10-10 17:35:24.767 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction - 200 null application/json; charset=utf-8 206.7766ms
+2025-10-10 17:35:26.004 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car - null null
+2025-10-10 17:35:26.005 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Location - application/json null
+2025-10-10 17:35:26.045 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car - 204 null null 40.7551ms
+2025-10-10 17:35:26.049 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car - application/json null
+2025-10-10 17:35:26.055 +04:00 [INF] Fetching all Location records
+2025-10-10 17:35:26.103 +04:00 [INF] Fetching all Car records
+2025-10-10 17:35:26.117 +04:00 [INF] Retrieved 1 Location records
+2025-10-10 17:35:26.139 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Location - 200 null application/json; charset=utf-8 133.3811ms
+2025-10-10 17:35:26.166 +04:00 [INF] Retrieved 17 Car records
+2025-10-10 17:35:26.205 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car - 200 null application/json; charset=utf-8 156.5548ms
+2025-10-10 17:35:26.438 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/11111111-1111-1111-1111-111111111111 - null null
+2025-10-10 17:35:26.457 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/baa0ada5-e97f-4433-a63c-24b1d96647ec - null null
+2025-10-10 17:35:26.461 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/2cc6c4b0-3c84-4c74-9400-26e33fdf0383 - null null
+2025-10-10 17:35:26.462 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7 - null null
+2025-10-10 17:35:26.463 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/6a1a4250-30fc-481c-bae0-3d77a9c0bc59 - null null
+2025-10-10 17:35:26.468 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/5fe537e8-6f76-402c-b15b-5de1a43c11cf - null null
+2025-10-10 17:35:26.469 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4 - null null
+2025-10-10 17:35:26.475 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/ef4a72e5-2d99-4890-ae83-629bf99fea8d - null null
+2025-10-10 17:35:26.476 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/41f776aa-c2ec-44de-b6de-793913cc0867 - null null
+2025-10-10 17:35:26.477 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/df177010-a14c-4b5a-95fe-8ba929e460aa - null null
+2025-10-10 17:35:26.478 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/055ef9ed-6093-424f-b062-9d12a8ba512b - null null
+2025-10-10 17:35:26.478 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car/65597684-33bd-4db9-a6ba-ab6c54a2cc32 - null null
+2025-10-10 17:35:26.493 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/11111111-1111-1111-1111-111111111111 - 204 null null 54.1993ms
+2025-10-10 17:35:26.506 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/baa0ada5-e97f-4433-a63c-24b1d96647ec - 204 null null 49.6757ms
+2025-10-10 17:35:26.532 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/2cc6c4b0-3c84-4c74-9400-26e33fdf0383 - 204 null null 70.2781ms
+2025-10-10 17:35:26.543 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7 - 204 null null 81.4971ms
+2025-10-10 17:35:26.557 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/6a1a4250-30fc-481c-bae0-3d77a9c0bc59 - 204 null null 94.5356ms
+2025-10-10 17:35:26.568 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/5fe537e8-6f76-402c-b15b-5de1a43c11cf - 204 null null 99.3376ms
+2025-10-10 17:35:26.593 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4 - 204 null null 124.3197ms
+2025-10-10 17:35:26.605 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/ef4a72e5-2d99-4890-ae83-629bf99fea8d - 204 null null 130.0071ms
+2025-10-10 17:35:26.626 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/41f776aa-c2ec-44de-b6de-793913cc0867 - 204 null null 150.0135ms
+2025-10-10 17:35:26.643 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/df177010-a14c-4b5a-95fe-8ba929e460aa - 204 null null 166.5095ms
+2025-10-10 17:35:26.668 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/055ef9ed-6093-424f-b062-9d12a8ba512b - 204 null null 190.0639ms
+2025-10-10 17:35:26.678 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car/65597684-33bd-4db9-a6ba-ab6c54a2cc32 - 204 null null 200.6957ms
+2025-10-10 17:35:26.741 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/baa0ada5-e97f-4433-a63c-24b1d96647ec - application/json null
+2025-10-10 17:35:26.741 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/11111111-1111-1111-1111-111111111111 - application/json null
+2025-10-10 17:35:26.769 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/2cc6c4b0-3c84-4c74-9400-26e33fdf0383 - application/json null
+2025-10-10 17:35:26.795 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7 - application/json null
+2025-10-10 17:35:26.818 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/6a1a4250-30fc-481c-bae0-3d77a9c0bc59 - application/json null
+2025-10-10 17:35:26.839 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/5fe537e8-6f76-402c-b15b-5de1a43c11cf - application/json null
+2025-10-10 17:35:26.866 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4 - application/json null
+2025-10-10 17:35:26.888 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/ef4a72e5-2d99-4890-ae83-629bf99fea8d - application/json null
+2025-10-10 17:35:26.908 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/41f776aa-c2ec-44de-b6de-793913cc0867 - application/json null
+2025-10-10 17:35:26.937 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/df177010-a14c-4b5a-95fe-8ba929e460aa - application/json null
+2025-10-10 17:35:26.961 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/055ef9ed-6093-424f-b062-9d12a8ba512b - application/json null
+2025-10-10 17:35:26.979 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car/65597684-33bd-4db9-a6ba-ab6c54a2cc32 - application/json null
+2025-10-10 17:35:27.197 +04:00 [INF] Fetching Car with ID "ef4a72e5-2d99-4890-ae83-629bf99fea8d"
+2025-10-10 17:35:27.038 +04:00 [INF] Fetching Car with ID "11111111-1111-1111-1111-111111111111"
+2025-10-10 17:35:27.056 +04:00 [INF] Fetching Car with ID "2cc6c4b0-3c84-4c74-9400-26e33fdf0383"
+2025-10-10 17:35:27.078 +04:00 [INF] Fetching Car with ID "ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7"
+2025-10-10 17:35:27.118 +04:00 [INF] Fetching Car with ID "6a1a4250-30fc-481c-bae0-3d77a9c0bc59"
+2025-10-10 17:35:27.151 +04:00 [INF] Fetching Car with ID "5fe537e8-6f76-402c-b15b-5de1a43c11cf"
+2025-10-10 17:35:27.171 +04:00 [INF] Fetching Car with ID "97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4"
+2025-10-10 17:35:27.012 +04:00 [INF] Fetching Car with ID "baa0ada5-e97f-4433-a63c-24b1d96647ec"
+2025-10-10 17:35:27.217 +04:00 [INF] Fetching Car with ID "41f776aa-c2ec-44de-b6de-793913cc0867"
+2025-10-10 17:35:27.251 +04:00 [INF] Fetching Car with ID "df177010-a14c-4b5a-95fe-8ba929e460aa"
+2025-10-10 17:35:27.267 +04:00 [INF] Fetching Car with ID "055ef9ed-6093-424f-b062-9d12a8ba512b"
+2025-10-10 17:35:27.286 +04:00 [INF] Fetching Car with ID "65597684-33bd-4db9-a6ba-ab6c54a2cc32"
+2025-10-10 17:35:27.321 +04:00 [INF] Car with ID "ef4a72e5-2d99-4890-ae83-629bf99fea8d" retrieved successfully
+2025-10-10 17:35:27.331 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car - application/json null
+2025-10-10 17:35:27.341 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction - application/json null
+2025-10-10 17:35:27.355 +04:00 [INF] Car with ID "11111111-1111-1111-1111-111111111111" retrieved successfully
+2025-10-10 17:35:27.369 +04:00 [INF] Car with ID "2cc6c4b0-3c84-4c74-9400-26e33fdf0383" retrieved successfully
+2025-10-10 17:35:27.380 +04:00 [INF] Car with ID "ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7" retrieved successfully
+2025-10-10 17:35:27.394 +04:00 [INF] Car with ID "6a1a4250-30fc-481c-bae0-3d77a9c0bc59" retrieved successfully
+2025-10-10 17:35:27.405 +04:00 [INF] Car with ID "5fe537e8-6f76-402c-b15b-5de1a43c11cf" retrieved successfully
+2025-10-10 17:35:27.419 +04:00 [INF] Car with ID "97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4" retrieved successfully
+2025-10-10 17:35:27.434 +04:00 [INF] Car with ID "baa0ada5-e97f-4433-a63c-24b1d96647ec" retrieved successfully
+2025-10-10 17:35:27.445 +04:00 [INF] Car with ID "41f776aa-c2ec-44de-b6de-793913cc0867" retrieved successfully
+2025-10-10 17:35:27.476 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/ef4a72e5-2d99-4890-ae83-629bf99fea8d - 200 null application/json; charset=utf-8 588.7585ms
+2025-10-10 17:35:27.480 +04:00 [INF] Car with ID "df177010-a14c-4b5a-95fe-8ba929e460aa" retrieved successfully
+2025-10-10 17:35:27.482 +04:00 [INF] Car with ID "055ef9ed-6093-424f-b062-9d12a8ba512b" retrieved successfully
+2025-10-10 17:35:27.484 +04:00 [INF] Car with ID "65597684-33bd-4db9-a6ba-ab6c54a2cc32" retrieved successfully
+2025-10-10 17:35:27.544 +04:00 [INF] Fetching all Auction records
+2025-10-10 17:35:27.555 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/11111111-1111-1111-1111-111111111111 - 200 null application/json; charset=utf-8 813.9953ms
+2025-10-10 17:35:27.568 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/2cc6c4b0-3c84-4c74-9400-26e33fdf0383 - 200 null application/json; charset=utf-8 799.1198ms
+2025-10-10 17:35:27.579 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/ad01941e-b06f-4d82-a7af-3a9b0e5fc9a7 - 200 null application/json; charset=utf-8 783.5934ms
+2025-10-10 17:35:27.596 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/6a1a4250-30fc-481c-bae0-3d77a9c0bc59 - 200 null application/json; charset=utf-8 777.7881ms
+2025-10-10 17:35:27.630 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/5fe537e8-6f76-402c-b15b-5de1a43c11cf - 200 null application/json; charset=utf-8 791.7256ms
+2025-10-10 17:35:27.517 +04:00 [INF] Fetching all Car records
+2025-10-10 17:35:27.651 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/97698ff9-ec1c-4ad6-ac31-3f9c6a7b82b4 - 200 null application/json; charset=utf-8 785.4096ms
+2025-10-10 17:35:27.786 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/65597684-33bd-4db9-a6ba-ab6c54a2cc32 - 200 null application/json; charset=utf-8 807.0408ms
+2025-10-10 17:35:27.669 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/baa0ada5-e97f-4433-a63c-24b1d96647ec - 200 null application/json; charset=utf-8 928.4352ms
+2025-10-10 17:35:27.686 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/41f776aa-c2ec-44de-b6de-793913cc0867 - 200 null application/json; charset=utf-8 778.3061ms
+2025-10-10 17:35:27.753 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/df177010-a14c-4b5a-95fe-8ba929e460aa - 200 null application/json; charset=utf-8 815.9427ms
+2025-10-10 17:35:27.774 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car/055ef9ed-6093-424f-b062-9d12a8ba512b - 200 null application/json; charset=utf-8 812.3525ms
+2025-10-10 17:35:27.813 +04:00 [INF] Retrieved 1 Auction records
+2025-10-10 17:35:27.988 +04:00 [INF] Retrieved 17 Car records
+2025-10-10 17:35:28.164 +04:00 [INF] All auctions retrieved by Ravanmuu at "2025-10-10T13:35:28.1642540Z"
+2025-10-10 17:35:28.182 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car - 200 null application/json; charset=utf-8 850.2686ms
+2025-10-10 17:35:28.191 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction - 200 null application/json; charset=utf-8 849.4676ms
+2025-10-10 17:35:28.340 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Location - application/json null
+2025-10-10 17:35:28.384 +04:00 [INF] Fetching all Location records
+2025-10-10 17:35:28.420 +04:00 [INF] Retrieved 1 Location records
+2025-10-10 17:35:28.440 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Location - 200 null application/json; charset=utf-8 100.0777ms
+2025-10-10 17:35:35.201 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - null null
+2025-10-10 17:35:35.201 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-10-10 17:35:35.201 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car - null null
+2025-10-10 17:35:35.230 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - 204 null null 28.826ms
+2025-10-10 17:35:35.233 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Bid/my-bids - application/json null
+2025-10-10 17:35:35.250 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 48.9068ms
+2025-10-10 17:35:35.258 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-10-10 17:35:35.277 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car - 204 null null 75.1841ms
+2025-10-10 17:35:35.281 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car - application/json null
+2025-10-10 17:35:35.334 +04:00 [INF] 👤 MY BIDS REQUEST: User "3a841c8e-6c0a-4d9c-81fd-089755361d83" (Ravanmuu) at 2025-10-10 13:35:35
+2025-10-10 17:35:35.385 +04:00 [INF] Fetching all Car records
+2025-10-10 17:35:35.402 +04:00 [INF] Retrieved 17 Car records
+2025-10-10 17:35:35.416 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car - 200 null application/json; charset=utf-8 134.8384ms
+2025-10-10 17:35:35.454 +04:00 [INF] User bids retrieved for "3a841c8e-6c0a-4d9c-81fd-089755361d83" (Ravanmuu) - Found 8 bids
+2025-10-10 17:35:35.458 +04:00 [INF] Live auctions requested by Ravanmuu - Found 0 live auctions
+2025-10-10 17:35:35.467 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Bid/my-bids - 200 null application/json; charset=utf-8 233.2917ms
+2025-10-10 17:35:35.471 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 213.4459ms
+2025-10-10 17:35:47.336 +04:00 [INF] ⚡ Cycle #300: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=25ms - User: ravanmu-coder
+2025-10-10 17:35:49.850 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-10-10 17:35:49.873 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 22.7055ms
+2025-10-10 17:35:49.877 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 51
+2025-10-10 17:35:49.954 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:35:49.964 +04:00 [INF] 🔑 Login request received for: admin@autoria.az
+2025-10-10 17:35:49.969 +04:00 [INF] 🔑 Login attempt for email: admin@autoria.az
+2025-10-10 17:35:50.262 +04:00 [INF] Generating JWT token for user: 19455fea-c128-4337-bcb0-2d6e33c8b471 (admin@autoria.az)
+2025-10-10 17:35:50.268 +04:00 [INF] JWT token generated successfully for user 19455fea-c128-4337-bcb0-2d6e33c8b471 - JTI: d4f25ade-46a7-417b-b9dc-2ab19b280d96, Claims: 15, Expires: "2025-10-11T13:35:50.2620485Z"
+2025-10-10 17:35:50.307 +04:00 [INF] ✅ LOGIN SUCCESS: 19455fea-c128-4337-bcb0-2d6e33c8b471 (admin@autoria.az) with roles: [Admin, Member] at "2025-10-10T13:35:50.3070951Z"
+2025-10-10 17:35:50.315 +04:00 [INF] ✅ Login successful for: admin@autoria.az
+2025-10-10 17:35:50.319 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 441.9367ms
+2025-10-10 17:35:50.331 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - null null
+2025-10-10 17:35:50.354 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - 204 null null 22.8285ms
+2025-10-10 17:35:50.360 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/profile - application/json null
+2025-10-10 17:35:50.394 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:35:50.415 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/profile - 200 null application/json; charset=utf-8 55.5113ms
+2025-10-10 17:35:50.459 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car - null null
+2025-10-10 17:35:50.459 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-10-10 17:35:50.459 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - null null
+2025-10-10 17:35:50.475 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car - 204 null null 16.0483ms
+2025-10-10 17:35:50.482 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car - application/json null
+2025-10-10 17:35:50.490 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 30.9757ms
+2025-10-10 17:35:50.495 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-10-10 17:35:50.500 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - 204 null null 40.921ms
+2025-10-10 17:35:50.502 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Bid/my-bids - application/json null
+2025-10-10 17:35:50.534 +04:00 [INF] Fetching all Car records
+2025-10-10 17:35:50.590 +04:00 [INF] Live auctions requested by admin - Found 0 live auctions
+2025-10-10 17:35:50.621 +04:00 [INF] 👤 MY BIDS REQUEST: User "19455fea-c128-4337-bcb0-2d6e33c8b471" (admin) at 2025-10-10 13:35:50
+2025-10-10 17:35:50.628 +04:00 [INF] Retrieved 17 Car records
+2025-10-10 17:35:50.629 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 133.3582ms
+2025-10-10 17:35:50.644 +04:00 [INF] User bids retrieved for "19455fea-c128-4337-bcb0-2d6e33c8b471" (admin) - Found 0 bids
+2025-10-10 17:35:50.650 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car - 200 null application/json; charset=utf-8 167.8596ms
+2025-10-10 17:35:50.672 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Bid/my-bids - 200 null application/json; charset=utf-8 169.3112ms
+2025-10-10 17:36:11.423 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/dashboard - null null
+2025-10-10 17:36:11.426 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/statistics/users - null null
+2025-10-10 17:36:11.427 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/system/health - null null
+2025-10-10 17:36:11.427 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/activities/recent - null null
+2025-10-10 17:36:11.431 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/dashboard - null null
+2025-10-10 17:36:11.432 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/statistics/users - null null
+2025-10-10 17:36:11.434 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/activities/recent - null null
+2025-10-10 17:36:11.435 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/system/health - null null
+2025-10-10 17:36:11.460 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/dashboard - 204 null null 37.1543ms
+2025-10-10 17:36:11.463 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/dashboard - application/json null
+2025-10-10 17:36:11.476 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/statistics/users - 204 null null 50.6544ms
+2025-10-10 17:36:11.481 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/statistics/users - application/json null
+2025-10-10 17:36:11.492 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/system/health - 204 null null 64.9528ms
+2025-10-10 17:36:11.495 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/system/health - application/json null
+2025-10-10 17:36:11.502 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/activities/recent - 204 null null 75.3538ms
+2025-10-10 17:36:11.505 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/activities/recent - application/json null
+2025-10-10 17:36:11.518 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/dashboard - 204 null null 86.7244ms
+2025-10-10 17:36:11.529 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/statistics/users - 204 null null 96.4659ms
+2025-10-10 17:36:11.540 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/activities/recent - 204 null null 105.8253ms
+2025-10-10 17:36:11.551 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/system/health - 204 null null 116.3469ms
+2025-10-10 17:36:11.586 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:11.617 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:11.637 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:11.656 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:11.702 +04:00 [INF] Dashboard request initiated - AdminUserId: "19455fea-c128-4337-bcb0-2d6e33c8b471"
+2025-10-10 17:36:11.704 +04:00 [INF] User statistics request - FromDate: null, ToDate: null
+2025-10-10 17:36:11.709 +04:00 [INF] System health check request initiated
+2025-10-10 17:36:11.713 +04:00 [INF] Recent activities request - Limit: 50
+2025-10-10 17:36:11.725 +04:00 [INF] Dashboard generation initiated
+2025-10-10 17:36:11.725 +04:00 [INF] User statistics request initiated - FromDate: null, ToDate: null
+2025-10-10 17:36:11.729 +04:00 [INF] System health check initiated
+2025-10-10 17:36:11.734 +04:00 [INF] Recent activities request initiated - Limit: 50
+2025-10-10 17:36:11.746 +04:00 [INF] System health check completed
+2025-10-10 17:36:11.749 +04:00 [INF] Recent activities retrieved - Count: 0
+2025-10-10 17:36:11.778 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/activities/recent - 200 null application/json; charset=utf-8 273.2184ms
+2025-10-10 17:36:11.781 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/activities/recent - application/json null
+2025-10-10 17:36:11.789 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/system/health - 200 null application/json; charset=utf-8 293.2473ms
+2025-10-10 17:36:11.794 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/system/health - application/json null
+2025-10-10 17:36:11.811 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:11.831 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:11.835 +04:00 [INF] Recent activities request - Limit: 50
+2025-10-10 17:36:11.843 +04:00 [INF] System health check request initiated
+2025-10-10 17:36:11.847 +04:00 [INF] Recent activities request initiated - Limit: 50
+2025-10-10 17:36:11.850 +04:00 [INF] System health check initiated
+2025-10-10 17:36:11.853 +04:00 [INF] Recent activities retrieved - Count: 0
+2025-10-10 17:36:11.858 +04:00 [INF] System health check completed
+2025-10-10 17:36:11.862 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/activities/recent - 200 null application/json; charset=utf-8 80.9439ms
+2025-10-10 17:36:11.867 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/system/health - 200 null application/json; charset=utf-8 72.8055ms
+2025-10-10 17:36:11.903 +04:00 [INF] User statistics retrieved successfully
+2025-10-10 17:36:11.904 +04:00 [INF] Dashboard generated successfully - Duration: 179ms
+2025-10-10 17:36:11.912 +04:00 [INF] Dashboard request completed - AdminUserId: "19455fea-c128-4337-bcb0-2d6e33c8b471"
+2025-10-10 17:36:11.923 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/statistics/users - 200 null application/json; charset=utf-8 441.6407ms
+2025-10-10 17:36:11.928 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/statistics/users - application/json null
+2025-10-10 17:36:11.944 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:11.946 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/dashboard - 200 null application/json; charset=utf-8 482.6988ms
+2025-10-10 17:36:11.948 +04:00 [INF] User statistics request - FromDate: null, ToDate: null
+2025-10-10 17:36:11.949 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/dashboard - application/json null
+2025-10-10 17:36:11.964 +04:00 [INF] User statistics request initiated - FromDate: null, ToDate: null
+2025-10-10 17:36:11.974 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:11.984 +04:00 [INF] Dashboard request initiated - AdminUserId: "19455fea-c128-4337-bcb0-2d6e33c8b471"
+2025-10-10 17:36:11.987 +04:00 [INF] User statistics retrieved successfully
+2025-10-10 17:36:11.989 +04:00 [INF] Dashboard generation initiated
+2025-10-10 17:36:11.996 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/statistics/users - 200 null application/json; charset=utf-8 67.9039ms
+2025-10-10 17:36:12.011 +04:00 [INF] Dashboard generated successfully - Duration: 22ms
+2025-10-10 17:36:12.018 +04:00 [INF] Dashboard request completed - AdminUserId: "19455fea-c128-4337-bcb0-2d6e33c8b471"
+2025-10-10 17:36:12.023 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/dashboard - 200 null application/json; charset=utf-8 74.2284ms
+2025-10-10 17:36:17.697 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car - null null
+2025-10-10 17:36:17.697 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car - null null
+2025-10-10 17:36:17.706 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car - 204 null null 9.287ms
+2025-10-10 17:36:17.710 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car - application/json null
+2025-10-10 17:36:17.711 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car - 204 null null 14.3024ms
+2025-10-10 17:36:17.746 +04:00 [INF] Fetching all Car records
+2025-10-10 17:36:17.778 +04:00 [INF] Retrieved 17 Car records
+2025-10-10 17:36:17.791 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car - 200 null application/json; charset=utf-8 81.1475ms
+2025-10-10 17:36:17.795 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car - application/json null
+2025-10-10 17:36:17.828 +04:00 [INF] Fetching all Car records
+2025-10-10 17:36:17.836 +04:00 [INF] Retrieved 17 Car records
+2025-10-10 17:36:17.836 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/1b64475bebd64c408c56.png - null null
+2025-10-10 17:36:17.836 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/fbfc38632fdc42f2b860.png - null null
+2025-10-10 17:36:17.838 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/images/cars/8bb64ed4c83a474a9853.png - null null
+2025-10-10 17:36:17.850 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car - 200 null application/json; charset=utf-8 55.3392ms
+2025-10-10 17:36:17.870 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/1b64475bebd64c408c56.png - 404 0 null 34.6097ms
+2025-10-10 17:36:17.892 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/fbfc38632fdc42f2b860.png - 404 0 null 56.5392ms
+2025-10-10 17:36:17.912 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/images/cars/8bb64ed4c83a474a9853.png - 304 null image/png 74.1991ms
+2025-10-10 17:36:17.959 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/images/cars/1b64475bebd64c408c56.png, Response status code: 404
+2025-10-10 17:36:17.983 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/images/cars/fbfc38632fdc42f2b860.png, Response status code: 404
+2025-10-10 17:36:18.235 +04:00 [INF] ⚡ Cycle #330: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=13ms - User: ravanmu-coder
+2025-10-10 17:36:28.820 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/dashboard - null null
+2025-10-10 17:36:28.819 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/dashboard - null null
+2025-10-10 17:36:28.819 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/system/health - null null
+2025-10-10 17:36:28.819 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/activities/recent - null null
+2025-10-10 17:36:28.819 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/statistics/users - null null
+2025-10-10 17:36:28.820 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/system/health - null null
+2025-10-10 17:36:28.820 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/activities/recent - null null
+2025-10-10 17:36:28.820 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Admin/statistics/users - null null
+2025-10-10 17:36:28.839 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/dashboard - 204 null null 18.8405ms
+2025-10-10 17:36:28.842 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/dashboard - application/json null
+2025-10-10 17:36:28.860 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/dashboard - 204 null null 40.245ms
+2025-10-10 17:36:28.879 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/system/health - 204 null null 59.561ms
+2025-10-10 17:36:28.882 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/system/health - application/json null
+2025-10-10 17:36:28.897 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/activities/recent - 204 null null 78.0091ms
+2025-10-10 17:36:28.900 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/activities/recent - application/json null
+2025-10-10 17:36:28.915 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/statistics/users - 204 null null 95.3097ms
+2025-10-10 17:36:28.917 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/statistics/users - application/json null
+2025-10-10 17:36:28.937 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/system/health - 204 null null 116.9088ms
+2025-10-10 17:36:28.952 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/activities/recent - 204 null null 131.7299ms
+2025-10-10 17:36:29.017 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:28.982 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Admin/statistics/users - 204 null null 162.2965ms
+2025-10-10 17:36:29.086 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:29.110 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:29.065 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:29.137 +04:00 [INF] Dashboard request initiated - AdminUserId: "19455fea-c128-4337-bcb0-2d6e33c8b471"
+2025-10-10 17:36:29.153 +04:00 [INF] Recent activities request - Limit: 50
+2025-10-10 17:36:29.158 +04:00 [INF] User statistics request - FromDate: null, ToDate: null
+2025-10-10 17:36:29.161 +04:00 [INF] System health check request initiated
+2025-10-10 17:36:29.164 +04:00 [INF] Dashboard generation initiated
+2025-10-10 17:36:29.169 +04:00 [INF] Recent activities request initiated - Limit: 50
+2025-10-10 17:36:29.176 +04:00 [INF] User statistics request initiated - FromDate: null, ToDate: null
+2025-10-10 17:36:29.178 +04:00 [INF] System health check initiated
+2025-10-10 17:36:29.186 +04:00 [INF] Recent activities retrieved - Count: 0
+2025-10-10 17:36:29.196 +04:00 [INF] System health check completed
+2025-10-10 17:36:29.201 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/activities/recent - 200 null application/json; charset=utf-8 300.0989ms
+2025-10-10 17:36:29.204 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/system/health - 200 null application/json; charset=utf-8 321.8351ms
+2025-10-10 17:36:29.204 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/activities/recent - application/json null
+2025-10-10 17:36:29.210 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/system/health - application/json null
+2025-10-10 17:36:29.221 +04:00 [INF] User statistics retrieved successfully
+2025-10-10 17:36:29.224 +04:00 [INF] Dashboard generated successfully - Duration: 60ms
+2025-10-10 17:36:29.249 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:29.259 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:29.265 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/statistics/users - application/json null
+2025-10-10 17:36:29.266 +04:00 [INF] Dashboard request completed - AdminUserId: "19455fea-c128-4337-bcb0-2d6e33c8b471"
+2025-10-10 17:36:29.268 +04:00 [INF] Recent activities request - Limit: 50
+2025-10-10 17:36:29.262 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/statistics/users - 200 null application/json; charset=utf-8 344.7832ms
+2025-10-10 17:36:29.274 +04:00 [INF] System health check request initiated
+2025-10-10 17:36:29.284 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:29.286 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/dashboard - 200 null application/json; charset=utf-8 444.3287ms
+2025-10-10 17:36:29.291 +04:00 [INF] Recent activities request initiated - Limit: 50
+2025-10-10 17:36:29.291 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Admin/dashboard - application/json null
+2025-10-10 17:36:29.303 +04:00 [INF] System health check initiated
+2025-10-10 17:36:29.312 +04:00 [INF] User statistics request - FromDate: null, ToDate: null
+2025-10-10 17:36:29.332 +04:00 [INF] Recent activities retrieved - Count: 0
+2025-10-10 17:36:29.345 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-10-10 17:36:29.347 +04:00 [INF] System health check completed
+2025-10-10 17:36:29.362 +04:00 [INF] Dashboard request initiated - AdminUserId: "19455fea-c128-4337-bcb0-2d6e33c8b471"
+2025-10-10 17:36:29.352 +04:00 [INF] User statistics request initiated - FromDate: null, ToDate: null
+2025-10-10 17:36:29.358 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/activities/recent - 200 null application/json; charset=utf-8 154.1659ms
+2025-10-10 17:36:29.367 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/system/health - 200 null application/json; charset=utf-8 156.7644ms
+2025-10-10 17:36:29.376 +04:00 [INF] Dashboard generation initiated
+2025-10-10 17:36:29.387 +04:00 [INF] User statistics retrieved successfully
+2025-10-10 17:36:29.410 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/statistics/users - 200 null application/json; charset=utf-8 145.4701ms
+2025-10-10 17:36:29.416 +04:00 [INF] Dashboard generated successfully - Duration: 39ms
+2025-10-10 17:36:29.426 +04:00 [INF] Dashboard request completed - AdminUserId: "19455fea-c128-4337-bcb0-2d6e33c8b471"
+2025-10-10 17:36:29.431 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Admin/dashboard - 200 null application/json; charset=utf-8 139.9409ms
+2025-10-10 17:36:32.048 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Car - null null
+2025-10-10 17:36:32.048 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-10-10 17:36:32.048 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - null null
+2025-10-10 17:36:32.085 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Car - application/json null
+2025-10-10 17:36:32.115 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-10-10 17:36:32.079 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Car - 204 null null 30.5323ms
+2025-10-10 17:36:32.137 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Bid/my-bids - application/json null
+2025-10-10 17:36:32.111 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 63.0527ms
+2025-10-10 17:36:32.134 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - 204 null null 86.041ms
+2025-10-10 17:36:32.160 +04:00 [INF] Fetching all Car records
+2025-10-10 17:36:32.239 +04:00 [INF] Live auctions requested by admin - Found 0 live auctions
+2025-10-10 17:36:32.239 +04:00 [INF] 👤 MY BIDS REQUEST: User "19455fea-c128-4337-bcb0-2d6e33c8b471" (admin) at 2025-10-10 13:36:32
+2025-10-10 17:36:32.330 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 215.0824ms
+2025-10-10 17:36:32.334 +04:00 [INF] Retrieved 17 Car records
+2025-10-10 17:36:32.379 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Car - 200 null application/json; charset=utf-8 294.1632ms
+2025-10-10 17:36:32.393 +04:00 [INF] User bids retrieved for "19455fea-c128-4337-bcb0-2d6e33c8b471" (admin) - Found 0 bids
+2025-10-10 17:36:32.399 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Bid/my-bids - 200 null application/json; charset=utf-8 261.724ms
+2025-10-10 17:36:50.895 +04:00 [INF] ⚡ Cycle #360: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=210ms - User: ravanmu-coder
+2025-10-10 17:37:22.572 +04:00 [INF] ⚡ Cycle #390: Ready=0, Start=0, End=0, Cars=0, Conditions=0 | Duration=22ms - User: ravanmu-coder

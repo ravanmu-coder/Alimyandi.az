@@ -1,0 +1,876 @@
+2025-09-26 19:05:45.291 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-26 19:05:48.601 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-26 19:05:48.617 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-26 19:05:48.621 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-26 19:05:48.625 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-26 19:05:48.639 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-26 19:05:48.644 +04:00 [INF] 🔓 CORS: Enabled for all origins (Development)
+2025-09-26 19:05:48.649 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-26 19:05:52.403 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/swagger/index.html - null null
+2025-09-26 19:05:53.182 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/swagger/index.html - 404 0 null 797.9361ms
+2025-09-26 19:05:53.224 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/swagger/index.html, Response status code: 404
+2025-09-26 19:06:05.437 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/index.html - null null
+2025-09-26 19:06:05.825 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-26 19:06:05.826 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/_vs/browserLink - null null
+2025-09-26 19:06:05.832 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/index.html - 200 null text/html;charset=utf-8 400.5612ms
+2025-09-26 19:06:05.864 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/_framework/aspnetcore-browser-refresh.js - 200 16517 application/javascript; charset=utf-8 38.9404ms
+2025-09-26 19:06:06.072 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/_vs/browserLink - 200 null text/javascript; charset=UTF-8 246.0585ms
+2025-09-26 19:06:06.234 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/swagger/v1/swagger.json - null null
+2025-09-26 19:06:06.655 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 422.2889ms
+2025-09-26 19:06:52.811 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - null null
+2025-09-26 19:06:52.878 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - 204 null null 66.6803ms
+2025-09-26 19:06:52.886 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/register - application/json 251
+2025-09-26 19:06:53.386 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:06:53.636 +04:00 [INF] 🚀 Registration request received for: ravanmu@code.edu.az
+2025-09-26 19:06:53.665 +04:00 [INF] 🚀 Registration attempt for email: ravanmu@code.edu.az with role: Seller
+2025-09-26 19:06:55.383 +04:00 [INF] 🔐 Generating custom email confirmation token for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f
+2025-09-26 19:06:58.406 +04:00 [INF] ✅ Email confirmation sent to: ravanmu@code.edu.az
+2025-09-26 19:06:58.413 +04:00 [INF] ✅ User registered successfully: 2ead7030-61e1-4a70-8362-f98937fc5b6f (ravanmu@code.edu.az) with role: Seller
+2025-09-26 19:06:58.432 +04:00 [INF] ✅ Registration successful for: ravanmu@code.edu.az with role: Seller
+2025-09-26 19:06:58.516 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/register - 200 null application/json; charset=utf-8 5630.5314ms
+2025-09-26 19:07:12.909 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=2ead7030-61e1-4a70-8362-f98937fc5b6f&token=MTc1ODg5OTIxNTpqZlRFUk1pdWRKWHd2QXEyd1VMWjZ2UHBZcjZKQ1ZZMlNtVTZIQ2pnQXU0PTozNjQzMUFFRTEzQTIzQTFF&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - null null
+2025-09-26 19:07:13.070 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:07:13.126 +04:00 [INF] 📧 Email confirmation attempt for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f
+2025-09-26 19:07:13.223 +04:00 [INF] 📧 Email confirmation attempt for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f
+2025-09-26 19:07:13.332 +04:00 [INF] 🔍 Validating custom email confirmation token for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f
+2025-09-26 19:07:13.342 +04:00 [INF] ✅ Email confirmation token validation successful
+2025-09-26 19:07:13.397 +04:00 [INF] ✅ Email confirmed successfully for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f
+2025-09-26 19:07:13.467 +04:00 [INF] ✅ Email confirmed successfully for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f
+2025-09-26 19:07:13.504 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=2ead7030-61e1-4a70-8362-f98937fc5b6f&token=MTc1ODg5OTIxNTpqZlRFUk1pdWRKWHd2QXEyd1VMWjZ2UHBZcjZKQ1ZZMlNtVTZIQ2pnQXU0PTozNjQzMUFFRTEzQTIzQTFF&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - 302 0 null 596.0838ms
+2025-09-26 19:07:25.800 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-09-26 19:07:25.818 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 18.5264ms
+2025-09-26 19:07:25.826 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 53
+2025-09-26 19:07:25.922 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:07:25.949 +04:00 [INF] 🔑 Login request received for: ravanmu@code.edu.az
+2025-09-26 19:07:25.970 +04:00 [INF] 🔑 Login attempt for email: ravanmu@code.edu.az
+2025-09-26 19:07:26.330 +04:00 [INF] Generating JWT token for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f (ravanmu@code.edu.az)
+2025-09-26 19:07:26.370 +04:00 [INF] JWT token generated successfully for user 2ead7030-61e1-4a70-8362-f98937fc5b6f - JTI: b5207a1b-9eab-4878-921c-42460d25a334, Claims: 14, Expires: "2025-09-27T15:07:26.3229106Z"
+2025-09-26 19:07:26.402 +04:00 [INF] ✅ LOGIN SUCCESS: 2ead7030-61e1-4a70-8362-f98937fc5b6f (ravanmu@code.edu.az) with roles: [Seller] at "2025-09-26T15:07:26.4022090Z"
+2025-09-26 19:07:26.418 +04:00 [INF] ✅ Login successful for: ravanmu@code.edu.az
+2025-09-26 19:07:26.437 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 612.2241ms
+2025-09-26 19:07:26.519 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:07:26.520 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:07:26.526 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:07:26.581 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 61.8613ms
+2025-09-26 19:07:26.639 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 113.3727ms
+2025-09-26 19:07:26.519 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:07:26.560 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 40.9918ms
+2025-09-26 19:07:26.571 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:07:26.729 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 210.5984ms
+2025-09-26 19:07:26.616 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:07:26.832 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 263.3155ms
+2025-09-26 19:07:26.846 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:07:26.955 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 112.7182ms
+2025-09-26 19:07:27.884 +04:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-26 19:07:28.145 +04:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-26 19:07:28.259 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 1644.1087ms
+2025-09-26 19:07:28.265 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:07:28.303 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 38.3547ms
+2025-09-26 19:07:30.426 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - null null
+2025-09-26 19:07:30.432 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - null null
+2025-09-26 19:07:30.464 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar - application/json null
+2025-09-26 19:07:30.476 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - 204 null null 47.0115ms
+2025-09-26 19:07:30.455 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - 204 null null 29.6869ms
+2025-09-26 19:07:30.518 +04:00 [INF] Getting all auction cars - Page: 1, Size: 20
+2025-09-26 19:07:30.570 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:07:30.705 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:07:30.832 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar - 200 null application/json; charset=utf-8 368.3357ms
+2025-09-26 19:07:30.861 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar - application/json null
+2025-09-26 19:07:30.966 +04:00 [INF] Getting all auction cars - Page: 1, Size: 20
+2025-09-26 19:07:30.985 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:07:31.033 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:07:31.065 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar - 200 null application/json; charset=utf-8 209.82ms
+2025-09-26 19:07:33.587 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - null null
+2025-09-26 19:07:33.588 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - null null
+2025-09-26 19:07:33.646 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - 204 null null 57.4128ms
+2025-09-26 19:07:33.639 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/today - application/json null
+2025-09-26 19:07:33.615 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - 204 null null 27.4566ms
+2025-09-26 19:07:33.588 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - null null
+2025-09-26 19:07:33.726 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/today - 404 0 null 87.3551ms
+2025-09-26 19:07:33.736 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/today - application/json null
+2025-09-26 19:07:33.800 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auction/today, Response status code: 404
+2025-09-26 19:07:33.770 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - 204 null null 182.277ms
+2025-09-26 19:07:33.795 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - application/json null
+2025-09-26 19:07:33.829 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/today - 404 0 null 94.8981ms
+2025-09-26 19:07:33.958 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auction/today, Response status code: 404
+2025-09-26 19:07:33.589 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - null null
+2025-09-26 19:07:34.029 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - 204 null null 441.1824ms
+2025-09-26 19:07:34.131 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - 400 null application/problem+json; charset=utf-8 337.169ms
+2025-09-26 19:07:34.136 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - application/json null
+2025-09-26 19:07:34.179 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - 400 null application/problem+json; charset=utf-8 43.079ms
+2025-09-26 19:07:38.840 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - null null
+2025-09-26 19:07:38.840 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - null null
+2025-09-26 19:07:38.916 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Bid/my-bids - application/json null
+2025-09-26 19:07:38.938 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - 204 null null 99.1275ms
+2025-09-26 19:07:38.885 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - 204 null null 44.9723ms
+2025-09-26 19:07:39.026 +04:00 [INF] 👤 Getting user bids: User "2ead7030-61e1-4a70-8362-f98937fc5b6f"
+2025-09-26 19:07:39.301 +04:00 [INF] ✅ Found 0 bids for user "2ead7030-61e1-4a70-8362-f98937fc5b6f"
+2025-09-26 19:07:39.370 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Bid/my-bids - 200 null application/json; charset=utf-8 454.7266ms
+2025-09-26 19:07:39.384 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Bid/my-bids - application/json null
+2025-09-26 19:07:39.451 +04:00 [INF] 👤 Getting user bids: User "2ead7030-61e1-4a70-8362-f98937fc5b6f"
+2025-09-26 19:07:39.477 +04:00 [INF] ✅ Found 0 bids for user "2ead7030-61e1-4a70-8362-f98937fc5b6f"
+2025-09-26 19:07:39.485 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Bid/my-bids - 200 null application/json; charset=utf-8 101.5139ms
+2025-09-26 19:07:45.227 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:07:45.229 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:07:45.262 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:07:45.253 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 25.1737ms
+2025-09-26 19:07:45.274 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 45.4317ms
+2025-09-26 19:07:45.299 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 40.1221ms
+2025-09-26 19:07:45.305 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:07:45.227 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:07:45.229 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:07:45.380 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 74.6922ms
+2025-09-26 19:07:45.422 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 194.054ms
+2025-09-26 19:07:45.440 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:07:45.454 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 225.8931ms
+2025-09-26 19:07:45.550 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 112.4149ms
+2025-09-26 19:07:45.555 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:07:45.638 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 83.3672ms
+2025-09-26 19:08:19.986 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/join - null null
+2025-09-26 19:08:19.993 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/join - null null
+2025-09-26 19:08:19.994 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/join - null null
+2025-09-26 19:08:20.153 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/join - application/json null
+2025-09-26 19:08:20.102 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/join - 204 null null 110.2955ms
+2025-09-26 19:08:20.237 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/join - 400 null application/problem+json; charset=utf-8 84.4496ms
+2025-09-26 19:08:20.203 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/join - 204 null null 208.8544ms
+2025-09-26 19:08:20.048 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/join - 204 null null 61.9923ms
+2025-09-26 19:08:20.063 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/join - application/json null
+2025-09-26 19:08:19.993 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/join - null null
+2025-09-26 19:08:20.347 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/join - application/json null
+2025-09-26 19:08:20.336 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/join - 404 0 null 272.7669ms
+2025-09-26 19:08:20.361 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/join - 204 null null 368.4868ms
+2025-09-26 19:08:20.379 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/join - application/json null
+2025-09-26 19:08:20.390 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/join - 404 0 null 42.44ms
+2025-09-26 19:08:20.451 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/join - 400 null application/problem+json; charset=utf-8 71.6994ms
+2025-09-26 19:08:20.466 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auction/join, Response status code: 404
+2025-09-26 19:08:20.412 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auction/join, Response status code: 404
+2025-09-26 19:08:56.682 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - null null
+2025-09-26 19:08:56.691 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - null null
+2025-09-26 19:08:56.732 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/today - application/json null
+2025-09-26 19:08:56.755 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - 204 null null 64.6909ms
+2025-09-26 19:08:56.768 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - application/json null
+2025-09-26 19:08:56.780 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/today - 404 0 null 48.2346ms
+2025-09-26 19:08:56.716 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - 204 null null 33.1456ms
+2025-09-26 19:08:56.851 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - 400 null application/problem+json; charset=utf-8 84.5803ms
+2025-09-26 19:08:56.868 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auction/today, Response status code: 404
+2025-09-26 19:08:59.337 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:08:59.345 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:08:59.371 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 33.816ms
+2025-09-26 19:08:59.386 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 46.7174ms
+2025-09-26 19:08:59.411 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:08:59.342 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:08:59.346 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:08:59.485 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 74.5289ms
+2025-09-26 19:08:59.518 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:08:59.501 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 159.742ms
+2025-09-26 19:08:59.383 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:08:59.529 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 189.65ms
+2025-09-26 19:08:59.645 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 128.8006ms
+2025-09-26 19:08:59.901 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:08:59.896 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 513.5678ms
+2025-09-26 19:08:59.947 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 46.9181ms
+2025-09-26 19:12:03.975 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-09-26 19:12:03.991 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 16.2898ms
+2025-09-26 19:12:03.996 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 53
+2025-09-26 19:12:04.005 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:12:04.009 +04:00 [INF] 🔑 Login request received for: ravanmu@code.edu.az
+2025-09-26 19:12:04.013 +04:00 [INF] 🔑 Login attempt for email: ravanmu@code.edu.az
+2025-09-26 19:12:04.134 +04:00 [INF] Generating JWT token for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f (ravanmu@code.edu.az)
+2025-09-26 19:12:04.138 +04:00 [INF] JWT token generated successfully for user 2ead7030-61e1-4a70-8362-f98937fc5b6f - JTI: 769318a1-af1b-4bcc-b2dd-e501183e868b, Claims: 14, Expires: "2025-09-27T15:12:04.1340582Z"
+2025-09-26 19:12:04.167 +04:00 [INF] ✅ LOGIN SUCCESS: 2ead7030-61e1-4a70-8362-f98937fc5b6f (ravanmu@code.edu.az) with roles: [Seller] at "2025-09-26T15:12:04.1675110Z"
+2025-09-26 19:12:04.174 +04:00 [INF] ✅ Login successful for: ravanmu@code.edu.az
+2025-09-26 19:12:04.179 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 183.6795ms
+2025-09-26 19:12:04.206 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:12:04.207 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:12:04.220 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 15.3578ms
+2025-09-26 19:12:04.234 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 27.5469ms
+2025-09-26 19:12:04.206 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:12:04.207 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:12:04.226 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:12:04.257 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 51.1692ms
+2025-09-26 19:12:04.262 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 54.8344ms
+2025-09-26 19:12:04.260 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:12:04.281 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 21.5138ms
+2025-09-26 19:12:04.287 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:12:04.296 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 8.7176ms
+2025-09-26 19:12:04.296 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 69.7096ms
+2025-09-26 19:12:04.297 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:12:04.320 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 23.1189ms
+2025-09-26 19:12:32.929 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-26 19:12:33.476 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-26 19:12:33.477 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-26 19:12:33.479 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-26 19:12:33.480 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-26 19:12:33.481 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-26 19:12:33.482 +04:00 [INF] 🔓 CORS: Enabled for all origins (Development)
+2025-09-26 19:12:33.483 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-26 19:12:34.022 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/swagger/index.html - null null
+2025-09-26 19:12:34.142 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/swagger/index.html - 404 0 null 121.1156ms
+2025-09-26 19:12:34.153 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/swagger/index.html, Response status code: 404
+2025-09-26 19:12:54.073 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - null null
+2025-09-26 19:12:54.073 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - null null
+2025-09-26 19:12:54.085 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - 204 null null 13.3943ms
+2025-09-26 19:12:54.086 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - 204 null null 14.4097ms
+2025-09-26 19:12:54.089 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar - application/json null
+2025-09-26 19:12:54.540 +04:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-26 19:12:54.568 +04:00 [INF] Getting all auction cars - Page: 1, Size: 20
+2025-09-26 19:12:54.577 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:12:54.639 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:12:54.736 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar - application/json null
+2025-09-26 19:12:54.743 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar - 200 null application/json; charset=utf-8 653.6707ms
+2025-09-26 19:12:54.779 +04:00 [INF] Getting all auction cars - Page: 1, Size: 20
+2025-09-26 19:12:54.785 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:12:54.794 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:12:54.803 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar - 200 null application/json; charset=utf-8 66.7957ms
+2025-09-26 19:12:58.887 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar?page=1&pageSize=12 - null null
+2025-09-26 19:12:58.897 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar?page=1&pageSize=12 - 204 null null 9.0991ms
+2025-09-26 19:12:58.901 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar?page=1&pageSize=12 - application/json null
+2025-09-26 19:12:58.929 +04:00 [INF] Getting all auction cars - Page: 1, Size: 12
+2025-09-26 19:12:58.934 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:12:58.940 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:12:58.945 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar?page=1&pageSize=12 - 200 null application/json; charset=utf-8 44.0176ms
+2025-09-26 19:13:03.631 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - null null
+2025-09-26 19:13:03.631 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - null null
+2025-09-26 19:13:03.638 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - 204 null null 7.5116ms
+2025-09-26 19:13:03.642 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Bid/my-bids - application/json null
+2025-09-26 19:13:03.645 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Bid/my-bids - 204 null null 13.7242ms
+2025-09-26 19:13:03.684 +04:00 [INF] 👤 Getting user bids: User "2ead7030-61e1-4a70-8362-f98937fc5b6f"
+2025-09-26 19:13:03.817 +04:00 [INF] ✅ Found 0 bids for user "2ead7030-61e1-4a70-8362-f98937fc5b6f"
+2025-09-26 19:13:03.837 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Bid/my-bids - 200 null application/json; charset=utf-8 194.8525ms
+2025-09-26 19:13:03.839 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Bid/my-bids - application/json null
+2025-09-26 19:13:03.857 +04:00 [INF] 👤 Getting user bids: User "2ead7030-61e1-4a70-8362-f98937fc5b6f"
+2025-09-26 19:13:03.866 +04:00 [INF] ✅ Found 0 bids for user "2ead7030-61e1-4a70-8362-f98937fc5b6f"
+2025-09-26 19:13:03.870 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Bid/my-bids - 200 null application/json; charset=utf-8 31.1332ms
+2025-09-26 19:13:08.090 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - null null
+2025-09-26 19:13:08.090 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - null null
+2025-09-26 19:13:08.091 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - null null
+2025-09-26 19:13:08.091 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - null null
+2025-09-26 19:13:08.102 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - 204 null null 11.85ms
+2025-09-26 19:13:08.108 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/today - application/json null
+2025-09-26 19:13:08.109 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - 204 null null 19.6297ms
+2025-09-26 19:13:08.113 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - application/json null
+2025-09-26 19:13:08.115 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - 204 null null 24.6015ms
+2025-09-26 19:13:08.121 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - 204 null null 29.7935ms
+2025-09-26 19:13:08.135 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/today - 404 0 null 26.1717ms
+2025-09-26 19:13:08.138 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/today - application/json null
+2025-09-26 19:13:08.162 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auction/today, Response status code: 404
+2025-09-26 19:13:08.170 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/today - 404 0 null 31.7934ms
+2025-09-26 19:13:08.178 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auction/today, Response status code: 404
+2025-09-26 19:13:08.187 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - 400 null application/problem+json; charset=utf-8 74.134ms
+2025-09-26 19:13:08.189 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - application/json null
+2025-09-26 19:13:08.205 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - 400 null application/problem+json; charset=utf-8 15.7013ms
+2025-09-26 19:14:01.165 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:14:01.165 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:14:01.166 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:14:01.166 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:14:01.170 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 4.9012ms
+2025-09-26 19:14:01.174 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 8.6889ms
+2025-09-26 19:14:01.177 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:14:01.178 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:14:01.180 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 13.9395ms
+2025-09-26 19:14:01.185 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 18.0236ms
+2025-09-26 19:14:01.219 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 41.4782ms
+2025-09-26 19:14:01.220 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:14:01.234 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 14.1399ms
+2025-09-26 19:14:01.277 +04:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-26 19:14:01.323 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 144.9683ms
+2025-09-26 19:14:01.324 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:14:01.342 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 17.3793ms
+2025-09-26 19:14:02.906 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - null null
+2025-09-26 19:14:02.906 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - null null
+2025-09-26 19:14:02.916 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - 204 null null 10.2356ms
+2025-09-26 19:14:02.920 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar - application/json null
+2025-09-26 19:14:02.920 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - 204 null null 14.205ms
+2025-09-26 19:14:02.931 +04:00 [INF] Getting all auction cars - Page: 1, Size: 20
+2025-09-26 19:14:02.935 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:14:02.943 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:14:02.949 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar - 200 null application/json; charset=utf-8 28.5655ms
+2025-09-26 19:14:02.951 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar - application/json null
+2025-09-26 19:14:02.963 +04:00 [INF] Getting all auction cars - Page: 1, Size: 20
+2025-09-26 19:14:02.966 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:14:02.969 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:14:02.974 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar - 200 null application/json; charset=utf-8 23.2889ms
+2025-09-26 19:14:05.980 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:14:05.980 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:14:05.987 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 7.4404ms
+2025-09-26 19:14:05.992 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:14:06.016 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 35.9287ms
+2025-09-26 19:14:06.024 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:14:06.025 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 32.6988ms
+2025-09-26 19:14:06.047 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 22.7052ms
+2025-09-26 19:15:50.586 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - null null
+2025-09-26 19:15:50.591 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - 204 null null 5.8582ms
+2025-09-26 19:15:50.596 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/logout - application/json 0
+2025-09-26 19:15:50.622 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:15:50.627 +04:00 [INF] 🚪 Logout request for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f
+2025-09-26 19:15:50.631 +04:00 [INF] 🚪 Logout requested for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f
+2025-09-26 19:15:50.713 +04:00 [INF] ✅ User logged out successfully: 2ead7030-61e1-4a70-8362-f98937fc5b6f, Revoked tokens: 0
+2025-09-26 19:15:50.721 +04:00 [INF] ✅ Logout successful for user: 2ead7030-61e1-4a70-8362-f98937fc5b6f
+2025-09-26 19:15:50.734 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/logout - 200 null application/json; charset=utf-8 137.7915ms
+2025-09-26 19:16:27.047 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - null null
+2025-09-26 19:16:27.052 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - 204 null null 4.5534ms
+2025-09-26 19:16:27.056 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/register - application/json 251
+2025-09-26 19:16:27.075 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:16:27.106 +04:00 [INF] 🚀 Registration request received for: umudova1985@gmail.com
+2025-09-26 19:16:27.116 +04:00 [INF] 🚀 Registration attempt for email: umudova1985@gmail.com with role: Member
+2025-09-26 19:16:27.551 +04:00 [INF] 🔐 Generating custom email confirmation token for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:16:29.603 +04:00 [INF] ✅ Email confirmation sent to: umudova1985@gmail.com
+2025-09-26 19:16:29.607 +04:00 [INF] ✅ User registered successfully: 04e33a8d-1250-41c7-a637-a04bb506aaa5 (umudova1985@gmail.com) with role: Member
+2025-09-26 19:16:29.612 +04:00 [INF] ✅ Registration successful for: umudova1985@gmail.com with role: Member
+2025-09-26 19:16:29.617 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/register - 200 null application/json; charset=utf-8 2561.2708ms
+2025-09-26 19:16:42.414 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=04e33a8d-1250-41c7-a637-a04bb506aaa5&token=MTc1ODg5OTc4NzoxK2x4ZEtWb2hyMTFtTnZsczg1TFRVMWdMYWxNYThPSzJONE04RjJSc2dnPTpFOUYzNjI3MkQ5RjQ4NkFD&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - null null
+2025-09-26 19:16:42.443 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:16:42.448 +04:00 [INF] 📧 Email confirmation attempt for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:16:42.455 +04:00 [INF] 📧 Email confirmation attempt for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:16:42.468 +04:00 [INF] 🔍 Validating custom email confirmation token for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:16:42.470 +04:00 [INF] ✅ Email confirmation token validation successful
+2025-09-26 19:16:42.492 +04:00 [INF] ✅ Email confirmed successfully for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:16:42.494 +04:00 [INF] ✅ Email confirmed successfully for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:16:42.498 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=04e33a8d-1250-41c7-a637-a04bb506aaa5&token=MTc1ODg5OTc4NzoxK2x4ZEtWb2hyMTFtTnZsczg1TFRVMWdMYWxNYThPSzJONE04RjJSc2dnPTpFOUYzNjI3MkQ5RjQ4NkFD&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - 302 0 null 84.2272ms
+2025-09-26 19:17:48.370 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-09-26 19:17:48.376 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 6.0656ms
+2025-09-26 19:17:48.385 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 55
+2025-09-26 19:17:48.396 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:17:48.404 +04:00 [INF] 🔑 Login request received for: umudova1985@gmail.com
+2025-09-26 19:17:48.413 +04:00 [INF] 🔑 Login attempt for email: umudova1985@gmail.com
+2025-09-26 19:17:48.564 +04:00 [INF] Generating JWT token for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5 (umudova1985@gmail.com)
+2025-09-26 19:17:48.584 +04:00 [INF] JWT token generated successfully for user 04e33a8d-1250-41c7-a637-a04bb506aaa5 - JTI: fb89e6e1-4ef3-49e2-ba79-f5bbab093426, Claims: 14, Expires: "2025-09-27T15:17:48.5605003Z"
+2025-09-26 19:17:48.611 +04:00 [INF] ✅ LOGIN SUCCESS: 04e33a8d-1250-41c7-a637-a04bb506aaa5 (umudova1985@gmail.com) with roles: [Member] at "2025-09-26T15:17:48.6111362Z"
+2025-09-26 19:17:48.617 +04:00 [INF] ✅ Login successful for: umudova1985@gmail.com
+2025-09-26 19:17:48.627 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 241.7271ms
+2025-09-26 19:17:48.653 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:17:48.656 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:17:48.660 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:17:48.660 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:17:48.668 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 15.0122ms
+2025-09-26 19:17:48.687 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 27.2402ms
+2025-09-26 19:17:48.675 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 19.5242ms
+2025-09-26 19:17:48.683 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 23.0305ms
+2025-09-26 19:17:48.686 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:17:48.673 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:17:48.711 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 24.8243ms
+2025-09-26 19:17:48.712 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:17:48.723 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 10.8574ms
+2025-09-26 19:17:48.737 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 64.5012ms
+2025-09-26 19:17:48.738 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:17:48.753 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 14.7939ms
+2025-09-26 19:19:03.484 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/confirmemail?userId=test123&token=abc123 - null null
+2025-09-26 19:19:03.487 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/confirmemail?userId=test123&token=abc123 - null null
+2025-09-26 19:19:03.542 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/confirmemail?userId=test123&token=abc123 - 204 null null 58.187ms
+2025-09-26 19:19:03.545 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/confirmemail?userId=test123&token=abc123 - application/json null
+2025-09-26 19:19:03.546 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/confirmemail?userId=test123&token=abc123 - 204 null null 59.206ms
+2025-09-26 19:19:03.561 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:19:03.574 +04:00 [INF] 📧 Email confirmation attempt for user: test123
+2025-09-26 19:19:03.579 +04:00 [INF] 📧 Email confirmation attempt for user: test123
+2025-09-26 19:19:03.599 +04:00 [WRN] ❌ Email confirmation failed: User not found - test123
+2025-09-26 19:19:03.601 +04:00 [ERR] ❌ Email confirmation error for user: test123
+AutoriaFinal.Application.Exceptions.BadRequestException: İstifadəçi tapılmadı: test123
+   at AutoriaFinal.Application.Services.Identity.AuthService.ConfirmEmailAsync(String userId, String token) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.Application\Services\Identity\AuthService.cs:line 282
+   at AutoriaFinal.API.Controllers.Identity.AuthController.ConfirmEmail(String userId, String token, String redirect) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.API\Controllers\Identity\AuthController.cs:line 115
+2025-09-26 19:19:03.632 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/confirmemail?userId=test123&token=abc123 - 400 null application/json; charset=utf-8 86.4646ms
+2025-09-26 19:19:03.633 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/confirmemail?userId=test123&token=abc123 - application/json null
+2025-09-26 19:19:03.648 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:19:03.651 +04:00 [INF] 📧 Email confirmation attempt for user: test123
+2025-09-26 19:19:03.653 +04:00 [INF] 📧 Email confirmation attempt for user: test123
+2025-09-26 19:19:03.664 +04:00 [WRN] ❌ Email confirmation failed: User not found - test123
+2025-09-26 19:19:03.666 +04:00 [ERR] ❌ Email confirmation error for user: test123
+AutoriaFinal.Application.Exceptions.BadRequestException: İstifadəçi tapılmadı: test123
+   at AutoriaFinal.Application.Services.Identity.AuthService.ConfirmEmailAsync(String userId, String token) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.Application\Services\Identity\AuthService.cs:line 282
+   at AutoriaFinal.API.Controllers.Identity.AuthController.ConfirmEmail(String userId, String token, String redirect) in C:\Users\Ravan\Desktop\AutoriaFinalProject\Autoria-Final\AutoriaFinal\AutoriaFinal.API\Controllers\Identity\AuthController.cs:line 115
+2025-09-26 19:19:03.670 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/confirmemail?userId=test123&token=abc123 - 400 null application/json; charset=utf-8 36.297ms
+2025-09-26 19:20:27.306 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - null null
+2025-09-26 19:20:27.312 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - 204 null null 5.8627ms
+2025-09-26 19:20:27.315 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/logout - application/json 0
+2025-09-26 19:20:27.322 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:20:27.324 +04:00 [INF] 🚪 Logout request for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:20:27.327 +04:00 [INF] 🚪 Logout requested for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:20:27.337 +04:00 [INF] Revoked 1 tokens for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:20:27.344 +04:00 [INF] ✅ User logged out successfully: 04e33a8d-1250-41c7-a637-a04bb506aaa5, Revoked tokens: 1
+2025-09-26 19:20:27.348 +04:00 [INF] ✅ Logout successful for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:20:27.351 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/logout - 200 null application/json; charset=utf-8 36.3544ms
+2025-09-26 19:21:05.456 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - null null
+2025-09-26 19:21:05.459 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - 204 null null 3.4463ms
+2025-09-26 19:21:05.463 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/register - application/json 249
+2025-09-26 19:21:05.468 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:21:05.472 +04:00 [INF] 🚀 Registration request received for: ravanmu@code.edu.az
+2025-09-26 19:21:05.474 +04:00 [INF] 🚀 Registration attempt for email: ravanmu@code.edu.az with role: Seller
+2025-09-26 19:21:05.635 +04:00 [INF] 🔐 Generating custom email confirmation token for user: 20c9c21f-2b0f-4dfa-b1db-727a60f63327
+2025-09-26 19:21:07.437 +04:00 [INF] ✅ Email confirmation sent to: ravanmu@code.edu.az
+2025-09-26 19:21:07.443 +04:00 [INF] ✅ User registered successfully: 20c9c21f-2b0f-4dfa-b1db-727a60f63327 (ravanmu@code.edu.az) with role: Seller
+2025-09-26 19:21:07.448 +04:00 [INF] ✅ Registration successful for: ravanmu@code.edu.az with role: Seller
+2025-09-26 19:21:07.452 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/register - 200 null application/json; charset=utf-8 1989.3461ms
+2025-09-26 19:21:18.424 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=20c9c21f-2b0f-4dfa-b1db-727a60f63327&token=MTc1ODkwMDA2NTpTZTEySzNWWDZGb293VDZNRlJhVTZSa0p0UDM5U2EyWi92UEdPK0Q5eU1jPTpDN0Y4OUYxRjJDNTIyRUE5&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - null null
+2025-09-26 19:21:18.434 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:21:18.435 +04:00 [INF] 📧 Email confirmation attempt for user: 20c9c21f-2b0f-4dfa-b1db-727a60f63327
+2025-09-26 19:21:18.436 +04:00 [INF] 📧 Email confirmation attempt for user: 20c9c21f-2b0f-4dfa-b1db-727a60f63327
+2025-09-26 19:21:18.439 +04:00 [INF] 🔍 Validating custom email confirmation token for user: 20c9c21f-2b0f-4dfa-b1db-727a60f63327
+2025-09-26 19:21:18.441 +04:00 [INF] ✅ Email confirmation token validation successful
+2025-09-26 19:21:18.458 +04:00 [INF] ✅ Email confirmed successfully for user: 20c9c21f-2b0f-4dfa-b1db-727a60f63327
+2025-09-26 19:21:18.462 +04:00 [INF] ✅ Email confirmed successfully for user: 20c9c21f-2b0f-4dfa-b1db-727a60f63327
+2025-09-26 19:21:18.464 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=20c9c21f-2b0f-4dfa-b1db-727a60f63327&token=MTc1ODkwMDA2NTpTZTEySzNWWDZGb293VDZNRlJhVTZSa0p0UDM5U2EyWi92UEdPK0Q5eU1jPTpDN0Y4OUYxRjJDNTIyRUE5&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - 302 0 null 39.605ms
+2025-09-26 19:21:28.622 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-09-26 19:21:28.626 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 4.7154ms
+2025-09-26 19:21:28.630 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 53
+2025-09-26 19:21:28.639 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:21:28.641 +04:00 [INF] 🔑 Login request received for: ravanmu@code.edu.az
+2025-09-26 19:21:28.643 +04:00 [INF] 🔑 Login attempt for email: ravanmu@code.edu.az
+2025-09-26 19:21:28.745 +04:00 [INF] Generating JWT token for user: 20c9c21f-2b0f-4dfa-b1db-727a60f63327 (ravanmu@code.edu.az)
+2025-09-26 19:21:28.751 +04:00 [INF] JWT token generated successfully for user 20c9c21f-2b0f-4dfa-b1db-727a60f63327 - JTI: c27f42ba-43bf-475a-8bf2-3538b0a128fe, Claims: 14, Expires: "2025-09-27T15:21:28.7458799Z"
+2025-09-26 19:21:28.776 +04:00 [INF] ✅ LOGIN SUCCESS: 20c9c21f-2b0f-4dfa-b1db-727a60f63327 (ravanmu@code.edu.az) with roles: [Seller] at "2025-09-26T15:21:28.7769053Z"
+2025-09-26 19:21:28.782 +04:00 [INF] ✅ Login successful for: ravanmu@code.edu.az
+2025-09-26 19:21:28.784 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 154.723ms
+2025-09-26 19:21:28.799 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:21:28.801 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:21:28.801 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:21:28.801 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:21:28.805 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 5.4375ms
+2025-09-26 19:21:28.812 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:21:28.813 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 12.1812ms
+2025-09-26 19:21:28.818 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:21:28.820 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 18.8856ms
+2025-09-26 19:21:28.824 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 22.8978ms
+2025-09-26 19:21:28.843 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 24.6111ms
+2025-09-26 19:21:28.845 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:21:28.856 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 43.3924ms
+2025-09-26 19:21:28.857 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:21:28.863 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 18.4431ms
+2025-09-26 19:21:28.875 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 18.3491ms
+2025-09-26 19:21:47.595 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/ - null null
+2025-09-26 19:21:47.609 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/ - 301 0 null 14.001ms
+2025-09-26 19:21:47.612 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/index.html - null null
+2025-09-26 19:21:47.692 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/index.html - 200 null text/html;charset=utf-8 80.0466ms
+2025-09-26 19:21:47.718 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-26 19:21:47.718 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/_vs/browserLink - null null
+2025-09-26 19:21:47.729 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/_framework/aspnetcore-browser-refresh.js - 200 16517 application/javascript; charset=utf-8 11.2791ms
+2025-09-26 19:21:47.755 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/_vs/browserLink - 200 null text/javascript; charset=UTF-8 36.7073ms
+2025-09-26 19:21:47.832 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/swagger/v1/swagger.json - null null
+2025-09-26 19:21:47.951 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 119.0331ms
+2025-09-26 19:21:54.082 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/google-login - null null
+2025-09-26 19:21:54.090 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/google-login - 404 0 null 8.9157ms
+2025-09-26 19:21:54.096 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auth/google-login, Response status code: 404
+2025-09-26 19:21:54.542 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/swagger/v1/swagger.json - null null
+2025-09-26 19:21:54.652 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 109.9879ms
+2025-09-26 19:21:54.723 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/favicon.ico - null null
+2025-09-26 19:21:54.729 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/favicon.ico - 404 0 null 5.8249ms
+2025-09-26 19:21:54.735 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/favicon.ico, Response status code: 404
+2025-09-26 19:23:43.746 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:23:43.746 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:23:43.746 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:23:43.746 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:23:43.753 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 7.1788ms
+2025-09-26 19:23:43.756 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 10.3328ms
+2025-09-26 19:23:43.757 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:23:43.758 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:23:43.759 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 13.4068ms
+2025-09-26 19:23:43.762 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 16.4944ms
+2025-09-26 19:23:43.789 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 30.9026ms
+2025-09-26 19:23:43.791 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:23:43.806 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 49.5705ms
+2025-09-26 19:23:43.808 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:23:43.812 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 20.7788ms
+2025-09-26 19:23:43.827 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 19.2022ms
+2025-09-26 19:30:45.344 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - null null
+2025-09-26 19:30:45.354 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - 204 null null 10.1409ms
+2025-09-26 19:30:45.359 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/register - application/json 253
+2025-09-26 19:30:45.399 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:30:45.410 +04:00 [INF] 🚀 Registration request received for: ravanmu@code.edu.az
+2025-09-26 19:30:45.421 +04:00 [INF] 🚀 Registration attempt for email: ravanmu@code.edu.az with role: Seller
+2025-09-26 19:30:45.719 +04:00 [INF] 🔐 Generating custom email confirmation token for user: f83ef599-d37d-41bc-8320-60f6fbcfd9fe
+2025-09-26 19:30:49.239 +04:00 [INF] ✅ Email confirmation sent to: ravanmu@code.edu.az
+2025-09-26 19:30:49.245 +04:00 [INF] ✅ User registered successfully: f83ef599-d37d-41bc-8320-60f6fbcfd9fe (ravanmu@code.edu.az) with role: Seller
+2025-09-26 19:30:49.254 +04:00 [INF] ✅ Registration successful for: ravanmu@code.edu.az with role: Seller
+2025-09-26 19:30:49.259 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/register - 200 null application/json; charset=utf-8 3900.4535ms
+2025-09-26 19:31:03.024 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=f83ef599-d37d-41bc-8320-60f6fbcfd9fe&token=MTc1ODkwMDY0NTpFL2NtZ01SVysvYXIrbmhSYnVmVkRvZDRUVnZUZWNWaTF1Q2g4c2FLTlU0PTpBRkIxMTlBODc2NDVEM0RF&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - null null
+2025-09-26 19:31:03.045 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:31:03.051 +04:00 [INF] 📧 Email confirmation attempt for user: f83ef599-d37d-41bc-8320-60f6fbcfd9fe
+2025-09-26 19:31:03.057 +04:00 [INF] 📧 Email confirmation attempt for user: f83ef599-d37d-41bc-8320-60f6fbcfd9fe
+2025-09-26 19:31:03.072 +04:00 [INF] 🔍 Validating custom email confirmation token for user: f83ef599-d37d-41bc-8320-60f6fbcfd9fe
+2025-09-26 19:31:03.078 +04:00 [INF] ✅ Email confirmation token validation successful
+2025-09-26 19:31:03.115 +04:00 [INF] ✅ Email confirmed successfully for user: f83ef599-d37d-41bc-8320-60f6fbcfd9fe
+2025-09-26 19:31:03.119 +04:00 [INF] ✅ Email confirmed successfully for user: f83ef599-d37d-41bc-8320-60f6fbcfd9fe
+2025-09-26 19:31:03.123 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=f83ef599-d37d-41bc-8320-60f6fbcfd9fe&token=MTc1ODkwMDY0NTpFL2NtZ01SVysvYXIrbmhSYnVmVkRvZDRUVnZUZWNWaTF1Q2g4c2FLTlU0PTpBRkIxMTlBODc2NDVEM0RF&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - 302 0 null 98.5933ms
+2025-09-26 19:38:07.659 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - null null
+2025-09-26 19:38:07.662 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - 204 null null 2.77ms
+2025-09-26 19:38:07.664 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/register - application/json 251
+2025-09-26 19:38:07.705 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:38:07.716 +04:00 [INF] 🚀 Registration request received for: ravanmu@code.edu.az
+2025-09-26 19:38:07.727 +04:00 [INF] 🚀 Registration attempt for email: ravanmu@code.edu.az with role: Member
+2025-09-26 19:38:07.884 +04:00 [INF] 🔐 Generating custom email confirmation token for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:38:10.475 +04:00 [INF] ✅ Email confirmation sent to: ravanmu@code.edu.az
+2025-09-26 19:38:10.486 +04:00 [INF] ✅ User registered successfully: 653ed33c-1857-4425-968f-7fbaeabc130a (ravanmu@code.edu.az) with role: Member
+2025-09-26 19:38:10.503 +04:00 [INF] ✅ Registration successful for: ravanmu@code.edu.az with role: Member
+2025-09-26 19:38:10.518 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/register - 200 null application/json; charset=utf-8 2854.1646ms
+2025-09-26 19:38:25.998 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=653ed33c-1857-4425-968f-7fbaeabc130a&token=MTc1ODkwMTA4NzpjZ1FKaFdaMy84QnhYS1RmdFd0azcyeXkwVnZrSGFWUEZud0U3N1JubWpZPTowMzdFNzE1NDc4NjE4QTU3&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - null null
+2025-09-26 19:38:26.019 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:38:26.024 +04:00 [INF] 📧 Email confirmation attempt for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:38:26.030 +04:00 [INF] 📧 Email confirmation attempt for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:38:26.041 +04:00 [INF] 🔍 Validating custom email confirmation token for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:38:26.046 +04:00 [INF] ✅ Email confirmation token validation successful
+2025-09-26 19:38:26.064 +04:00 [INF] ✅ Email confirmed successfully for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:38:26.069 +04:00 [INF] ✅ Email confirmed successfully for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:38:26.073 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=653ed33c-1857-4425-968f-7fbaeabc130a&token=MTc1ODkwMTA4NzpjZ1FKaFdaMy84QnhYS1RmdFd0azcyeXkwVnZrSGFWUEZud0U3N1JubWpZPTowMzdFNzE1NDc4NjE4QTU3&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - 302 0 null 74.8485ms
+2025-09-26 19:39:28.429 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-09-26 19:39:28.453 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 23.8771ms
+2025-09-26 19:39:28.457 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 54
+2025-09-26 19:39:28.505 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:39:28.515 +04:00 [INF] 🔑 Login request received for: ravanmu@code.edu.az
+2025-09-26 19:39:28.527 +04:00 [INF] 🔑 Login attempt for email: ravanmu@code.edu.az
+2025-09-26 19:39:28.610 +04:00 [INF] Generating JWT token for user: 653ed33c-1857-4425-968f-7fbaeabc130a (ravanmu@code.edu.az)
+2025-09-26 19:39:28.623 +04:00 [INF] JWT token generated successfully for user 653ed33c-1857-4425-968f-7fbaeabc130a - JTI: 5757fd78-acb0-45d4-986e-f641ca2ae8e7, Claims: 14, Expires: "2025-09-27T15:39:28.6101766Z"
+2025-09-26 19:39:28.670 +04:00 [INF] ✅ LOGIN SUCCESS: 653ed33c-1857-4425-968f-7fbaeabc130a (ravanmu@code.edu.az) with roles: [Member] at "2025-09-26T15:39:28.6702405Z"
+2025-09-26 19:39:28.688 +04:00 [INF] ✅ Login successful for: ravanmu@code.edu.az
+2025-09-26 19:39:28.698 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 240.9245ms
+2025-09-26 19:39:28.704 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - null null
+2025-09-26 19:39:28.740 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - 204 null null 36.2069ms
+2025-09-26 19:39:28.747 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/profile - application/json null
+2025-09-26 19:39:28.792 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:39:28.810 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/profile - 200 null application/json; charset=utf-8 63.673ms
+2025-09-26 19:39:28.853 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:39:28.853 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:39:28.855 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:39:28.856 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:39:28.864 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 10.9338ms
+2025-09-26 19:39:28.870 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:39:28.878 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 24.5419ms
+2025-09-26 19:39:28.884 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:39:28.891 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 36.1081ms
+2025-09-26 19:39:28.912 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 56.1846ms
+2025-09-26 19:39:29.010 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:39:28.995 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:39:29.008 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 137.2012ms
+2025-09-26 19:39:28.992 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 108.4719ms
+2025-09-26 19:39:29.057 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 47.3878ms
+2025-09-26 19:39:29.067 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 71.9526ms
+2025-09-26 19:39:30.980 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - null null
+2025-09-26 19:39:31.002 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - 204 null null 21.6296ms
+2025-09-26 19:39:31.008 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/logout - application/json 0
+2025-09-26 19:39:31.050 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:39:31.060 +04:00 [INF] 🚪 Logout request for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:39:31.063 +04:00 [INF] 🚪 Logout requested for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:39:31.072 +04:00 [INF] Revoked 1 tokens for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:39:31.076 +04:00 [INF] ✅ User logged out successfully: 653ed33c-1857-4425-968f-7fbaeabc130a, Revoked tokens: 1
+2025-09-26 19:39:31.079 +04:00 [INF] ✅ Logout successful for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:39:31.087 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/logout - 200 null application/json; charset=utf-8 78.4027ms
+2025-09-26 19:39:35.355 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:39:35.355 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:39:35.355 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:39:35.355 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:39:35.392 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 37.2721ms
+2025-09-26 19:39:35.408 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:39:35.422 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 67.0086ms
+2025-09-26 19:39:35.432 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:39:35.439 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 84.1129ms
+2025-09-26 19:39:35.457 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 101.8946ms
+2025-09-26 19:39:35.543 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 111.8772ms
+2025-09-26 19:39:35.522 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 401 0 null 114.3598ms
+2025-09-26 19:39:35.528 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:39:35.551 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:39:35.643 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 401 0 null 115.1044ms
+2025-09-26 19:39:35.667 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 115.776ms
+2025-09-26 19:39:43.473 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/forgot-password - null null
+2025-09-26 19:39:43.499 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/forgot-password - 204 null null 25.4752ms
+2025-09-26 19:39:43.506 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/forgot-password - application/json 31
+2025-09-26 19:39:43.557 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:39:43.577 +04:00 [INF] 🔑 Password reset request for: ravanmu@code.edu.az
+2025-09-26 19:39:43.611 +04:00 [INF] 🔑 Password reset requested for: ravanmu@code.edu.az
+2025-09-26 19:39:43.623 +04:00 [INF] 🔐 Generating custom password reset token for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:39:43.631 +04:00 [INF] ✅ Custom token generated for ravanmu@code.edu.az: Length=80
+2025-09-26 19:39:45.820 +04:00 [INF] ✅ Password reset email sent to: ravanmu@code.edu.az
+2025-09-26 19:39:45.837 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/forgot-password - 200 null application/json; charset=utf-8 2331.013ms
+2025-09-26 19:39:58.683 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=653ed33c-1857-4425-968f-7fbaeabc130a&token=MTc1ODkwMTA4NzpjZ1FKaFdaMy84QnhYS1RmdFd0azcyeXkwVnZrSGFWUEZud0U3N1JubWpZPTowMzdFNzE1NDc4NjE4QTU3&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - null null
+2025-09-26 19:39:58.732 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:39:58.736 +04:00 [INF] 📧 Email confirmation attempt for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:39:58.741 +04:00 [INF] 📧 Email confirmation attempt for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:39:58.748 +04:00 [INF] ℹ️ Email already confirmed for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:39:58.752 +04:00 [INF] ✅ Email confirmed successfully for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:39:58.757 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=653ed33c-1857-4425-968f-7fbaeabc130a&token=MTc1ODkwMTA4NzpjZ1FKaFdaMy84QnhYS1RmdFd0azcyeXkwVnZrSGFWUEZud0U3N1JubWpZPTowMzdFNzE1NDc4NjE4QTU3&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - 302 0 null 73.1613ms
+2025-09-26 19:40:16.827 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/reset-password - null null
+2025-09-26 19:40:16.845 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/reset-password - 204 null null 18.0521ms
+2025-09-26 19:40:16.849 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/reset-password - application/json 173
+2025-09-26 19:40:16.899 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:40:16.917 +04:00 [INF] 🔄 Password reset attempt for: ravanmu@code.edu.az
+2025-09-26 19:40:16.929 +04:00 [INF] 🔄 Password reset attempt for: ravanmu@code.edu.az
+2025-09-26 19:40:16.954 +04:00 [INF] 🔍 Validating custom password reset token for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:40:16.963 +04:00 [INF] ✅ Token validation successful
+2025-09-26 19:40:17.127 +04:00 [INF] ✅ Password reset successful for: ravanmu@code.edu.az
+2025-09-26 19:40:17.156 +04:00 [INF] ✅ Password reset successful for: ravanmu@code.edu.az
+2025-09-26 19:40:17.157 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/reset-password - 200 null application/json; charset=utf-8 308.5423ms
+2025-09-26 19:40:31.980 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-09-26 19:40:31.994 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 14.6105ms
+2025-09-26 19:40:31.998 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 53
+2025-09-26 19:40:32.041 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:40:32.053 +04:00 [INF] 🔑 Login request received for: ravanmu@code.edu.az
+2025-09-26 19:40:32.060 +04:00 [INF] 🔑 Login attempt for email: ravanmu@code.edu.az
+2025-09-26 19:40:32.140 +04:00 [INF] Generating JWT token for user: 653ed33c-1857-4425-968f-7fbaeabc130a (ravanmu@code.edu.az)
+2025-09-26 19:40:32.146 +04:00 [INF] JWT token generated successfully for user 653ed33c-1857-4425-968f-7fbaeabc130a - JTI: 0ec5344d-9e7e-48e1-900a-3a927eddcfb6, Claims: 14, Expires: "2025-09-27T15:40:32.1407858Z"
+2025-09-26 19:40:32.154 +04:00 [INF] ✅ LOGIN SUCCESS: 653ed33c-1857-4425-968f-7fbaeabc130a (ravanmu@code.edu.az) with roles: [Member] at "2025-09-26T15:40:32.1542863Z"
+2025-09-26 19:40:32.156 +04:00 [INF] ✅ Login successful for: ravanmu@code.edu.az
+2025-09-26 19:40:32.157 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 159.0455ms
+2025-09-26 19:40:32.162 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - null null
+2025-09-26 19:40:32.180 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - 204 null null 18.5969ms
+2025-09-26 19:40:32.184 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/profile - application/json null
+2025-09-26 19:40:32.197 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:40:32.205 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/profile - 200 null application/json; charset=utf-8 20.633ms
+2025-09-26 19:40:32.245 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:40:32.250 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:40:32.248 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:40:32.245 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:40:32.274 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:40:32.269 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 24.6529ms
+2025-09-26 19:40:32.328 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 80.5064ms
+2025-09-26 19:40:32.336 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:40:32.354 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 109.3776ms
+2025-09-26 19:40:32.298 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 48.6509ms
+2025-09-26 19:40:32.378 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 103.8868ms
+2025-09-26 19:40:32.381 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:40:32.485 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:40:32.482 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 145.7591ms
+2025-09-26 19:40:32.555 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 174.5643ms
+2025-09-26 19:40:32.586 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 101.7478ms
+2025-09-26 19:40:37.131 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - null null
+2025-09-26 19:40:37.132 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - null null
+2025-09-26 19:40:37.132 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - null null
+2025-09-26 19:40:37.133 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - null null
+2025-09-26 19:40:37.167 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - application/json null
+2025-09-26 19:40:37.138 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - 204 null null 7.12ms
+2025-09-26 19:40:37.149 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/today - application/json null
+2025-09-26 19:40:37.160 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - 204 null null 28.4838ms
+2025-09-26 19:40:37.199 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar/auction/today - 204 null null 66.7145ms
+2025-09-26 19:40:37.227 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - 400 null application/problem+json; charset=utf-8 59.5106ms
+2025-09-26 19:40:37.281 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/today - 404 0 null 131.9675ms
+2025-09-26 19:40:37.177 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/today - 204 null null 45.0064ms
+2025-09-26 19:40:37.233 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - application/json null
+2025-09-26 19:40:37.284 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/today - application/json null
+2025-09-26 19:40:37.401 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auction/today, Response status code: 404
+2025-09-26 19:40:37.469 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/today - 404 0 null 184.2483ms
+2025-09-26 19:40:37.454 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar/auction/today - 400 null application/problem+json; charset=utf-8 221.8074ms
+2025-09-26 19:40:37.518 +04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7249/api/Auction/today, Response status code: 404
+2025-09-26 19:40:39.849 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:40:39.866 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 16.753ms
+2025-09-26 19:40:39.851 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:40:39.853 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:40:39.851 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:40:39.869 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:40:39.946 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 93.4ms
+2025-09-26 19:40:39.954 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:40:39.969 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 117.5907ms
+2025-09-26 19:40:39.923 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 71.6593ms
+2025-09-26 19:40:40.002 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:40:39.999 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 129.9742ms
+2025-09-26 19:40:40.049 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:40:40.043 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 88.9684ms
+2025-09-26 19:40:40.132 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 129.6352ms
+2025-09-26 19:40:40.177 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 128.6154ms
+2025-09-26 19:40:42.259 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - null null
+2025-09-26 19:40:42.259 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - null null
+2025-09-26 19:40:42.271 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - 204 null null 11.5044ms
+2025-09-26 19:40:42.274 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - 204 null null 14.6649ms
+2025-09-26 19:40:42.282 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar - application/json null
+2025-09-26 19:40:42.354 +04:00 [INF] Getting all auction cars - Page: 1, Size: 20
+2025-09-26 19:40:42.365 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:40:42.383 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:40:42.397 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar - 200 null application/json; charset=utf-8 115.9066ms
+2025-09-26 19:40:42.400 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar - application/json null
+2025-09-26 19:40:42.406 +04:00 [INF] Getting all auction cars - Page: 1, Size: 20
+2025-09-26 19:40:42.416 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:40:42.424 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:40:42.444 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar - 200 null application/json; charset=utf-8 44.3468ms
+2025-09-26 19:40:45.331 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar?page=1&pageSize=12 - null null
+2025-09-26 19:40:45.343 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar?page=1&pageSize=12 - 204 null null 12.1316ms
+2025-09-26 19:40:45.350 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar?page=1&pageSize=12 - application/json null
+2025-09-26 19:40:45.396 +04:00 [INF] Getting all auction cars - Page: 1, Size: 12
+2025-09-26 19:40:45.408 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:40:45.418 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:40:45.429 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar?page=1&pageSize=12 - 200 null application/json; charset=utf-8 78.9036ms
+2025-09-26 19:40:48.146 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:40:48.147 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:40:48.146 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:40:48.146 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:40:48.169 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 23.0191ms
+2025-09-26 19:40:48.184 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:40:48.189 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 42.6841ms
+2025-09-26 19:40:48.199 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:40:48.207 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 61.1625ms
+2025-09-26 19:40:48.222 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 76.2093ms
+2025-09-26 19:40:48.265 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 80.9542ms
+2025-09-26 19:40:48.270 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:40:48.294 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 94.472ms
+2025-09-26 19:40:48.298 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:40:48.351 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 81.4227ms
+2025-09-26 19:40:48.374 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 75.8188ms
+2025-09-26 19:41:26.272 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - null null
+2025-09-26 19:41:26.273 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - null null
+2025-09-26 19:41:26.287 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - 204 null null 15.7121ms
+2025-09-26 19:41:26.293 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar - application/json null
+2025-09-26 19:41:26.307 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/AuctionCar - 204 null null 34.4017ms
+2025-09-26 19:41:26.361 +04:00 [INF] Getting all auction cars - Page: 1, Size: 20
+2025-09-26 19:41:26.384 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:41:26.395 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:41:26.398 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar - 200 null application/json; charset=utf-8 105.6176ms
+2025-09-26 19:41:26.401 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/AuctionCar - application/json null
+2025-09-26 19:41:26.426 +04:00 [INF] Getting all auction cars - Page: 1, Size: 20
+2025-09-26 19:41:26.440 +04:00 [INF] Fetching all AuctionCar records
+2025-09-26 19:41:26.451 +04:00 [INF] Retrieved 0 AuctionCar records
+2025-09-26 19:41:26.462 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/AuctionCar - 200 null application/json; charset=utf-8 60.8906ms
+2025-09-26 19:49:50.576 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:49:50.626 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:49:50.723 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:49:56.273 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 5550.117ms
+2025-09-26 19:49:54.522 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 3945.6776ms
+2025-09-26 19:49:55.555 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:49:56.190 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 5564.0577ms
+2025-09-26 19:49:50.773 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:49:56.314 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:49:56.720 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 5946.2886ms
+2025-09-26 19:49:56.769 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:49:56.741 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 427.1743ms
+2025-09-26 19:49:56.815 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:49:56.800 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 1245.6977ms
+2025-09-26 19:49:56.876 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 106.4862ms
+2025-09-26 19:49:56.957 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 141.9956ms
+2025-09-26 19:50:05.642 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - null null
+2025-09-26 19:50:05.817 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - 204 null null 174.3998ms
+2025-09-26 19:50:05.823 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/logout - application/json 0
+2025-09-26 19:50:05.873 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:50:05.878 +04:00 [INF] 🚪 Logout request for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:50:05.887 +04:00 [INF] 🚪 Logout requested for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:50:05.913 +04:00 [INF] Revoked 1 tokens for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:50:05.926 +04:00 [INF] ✅ User logged out successfully: 653ed33c-1857-4425-968f-7fbaeabc130a, Revoked tokens: 1
+2025-09-26 19:50:05.941 +04:00 [INF] ✅ Logout successful for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:50:05.950 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/logout - 200 null application/json; charset=utf-8 127.5634ms
+2025-09-26 19:50:11.867 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-09-26 19:50:11.902 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 35.255ms
+2025-09-26 19:50:11.921 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 55
+2025-09-26 19:50:12.027 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:50:12.061 +04:00 [INF] 🔑 Login request received for: umudova1985@gmail.com
+2025-09-26 19:50:12.075 +04:00 [INF] 🔑 Login attempt for email: umudova1985@gmail.com
+2025-09-26 19:50:12.560 +04:00 [INF] Generating JWT token for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5 (umudova1985@gmail.com)
+2025-09-26 19:50:12.606 +04:00 [INF] JWT token generated successfully for user 04e33a8d-1250-41c7-a637-a04bb506aaa5 - JTI: 290426f1-7694-41db-8152-4dcab830fbc5, Claims: 14, Expires: "2025-09-27T15:50:12.5602404Z"
+2025-09-26 19:50:12.841 +04:00 [INF] ✅ LOGIN SUCCESS: 04e33a8d-1250-41c7-a637-a04bb506aaa5 (umudova1985@gmail.com) with roles: [Member] at "2025-09-26T15:50:12.8419104Z"
+2025-09-26 19:50:12.874 +04:00 [INF] ✅ Login successful for: umudova1985@gmail.com
+2025-09-26 19:50:12.893 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 971.2088ms
+2025-09-26 19:50:12.920 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - null null
+2025-09-26 19:50:13.060 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - 204 null null 140.1198ms
+2025-09-26 19:50:13.073 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/profile - application/json null
+2025-09-26 19:50:13.158 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:50:13.192 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/profile - 200 null application/json; charset=utf-8 118.6986ms
+2025-09-26 19:50:13.314 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:50:13.321 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:50:13.323 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:50:13.323 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:50:13.367 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:50:13.357 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 43.4421ms
+2025-09-26 19:50:13.411 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:50:13.456 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 133.049ms
+2025-09-26 19:50:13.524 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 200.7619ms
+2025-09-26 19:50:13.405 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 83.368ms
+2025-09-26 19:50:13.756 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 344.902ms
+2025-09-26 19:50:13.884 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:50:14.207 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 839.8615ms
+2025-09-26 19:50:14.222 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:50:14.658 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 774.5835ms
+2025-09-26 19:50:14.726 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 504.3146ms
+2025-09-26 19:50:18.445 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - null null
+2025-09-26 19:50:18.487 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - 204 null null 41.5044ms
+2025-09-26 19:50:18.502 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/logout - application/json 0
+2025-09-26 19:50:18.574 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:50:18.590 +04:00 [INF] 🚪 Logout request for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:50:18.607 +04:00 [INF] 🚪 Logout requested for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:50:18.660 +04:00 [INF] Revoked 1 tokens for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:50:18.674 +04:00 [INF] ✅ User logged out successfully: 04e33a8d-1250-41c7-a637-a04bb506aaa5, Revoked tokens: 1
+2025-09-26 19:50:18.688 +04:00 [INF] ✅ Logout successful for user: 04e33a8d-1250-41c7-a637-a04bb506aaa5
+2025-09-26 19:50:18.692 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/logout - 200 null application/json; charset=utf-8 190.2435ms
+2025-09-26 19:50:31.524 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-09-26 19:50:31.541 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 17.7705ms
+2025-09-26 19:50:31.549 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 53
+2025-09-26 19:50:31.587 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:50:31.593 +04:00 [INF] 🔑 Login request received for: ravanmu@code.edu.az
+2025-09-26 19:50:31.601 +04:00 [INF] 🔑 Login attempt for email: ravanmu@code.edu.az
+2025-09-26 19:50:31.875 +04:00 [INF] Generating JWT token for user: 653ed33c-1857-4425-968f-7fbaeabc130a (ravanmu@code.edu.az)
+2025-09-26 19:50:31.889 +04:00 [INF] JWT token generated successfully for user 653ed33c-1857-4425-968f-7fbaeabc130a - JTI: 45c04e8b-4013-437e-b504-0953f8f01f86, Claims: 14, Expires: "2025-09-27T15:50:31.8754770Z"
+2025-09-26 19:50:31.987 +04:00 [INF] ✅ LOGIN SUCCESS: 653ed33c-1857-4425-968f-7fbaeabc130a (ravanmu@code.edu.az) with roles: [Member] at "2025-09-26T15:50:31.9871520Z"
+2025-09-26 19:50:32.001 +04:00 [INF] ✅ Login successful for: ravanmu@code.edu.az
+2025-09-26 19:50:32.009 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 460.1282ms
+2025-09-26 19:50:32.028 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - null null
+2025-09-26 19:50:32.071 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - 204 null null 42.7391ms
+2025-09-26 19:50:32.075 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/profile - application/json null
+2025-09-26 19:50:32.112 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:50:32.196 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/profile - 200 null application/json; charset=utf-8 120.7468ms
+2025-09-26 19:50:32.302 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:50:32.302 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:50:32.304 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:50:32.304 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:50:32.334 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 32.4418ms
+2025-09-26 19:50:32.341 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:50:32.351 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 49.2481ms
+2025-09-26 19:50:32.358 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:50:32.366 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 61.7231ms
+2025-09-26 19:50:32.377 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 72.8804ms
+2025-09-26 19:50:32.743 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 385.3352ms
+2025-09-26 19:50:32.813 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:50:32.907 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 566.5127ms
+2025-09-26 19:50:32.942 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:50:33.400 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 586.8659ms
+2025-09-26 19:50:33.730 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 788.2134ms
+2025-09-26 19:50:35.390 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - null null
+2025-09-26 19:50:35.411 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/logout - 204 null null 21.1809ms
+2025-09-26 19:50:35.430 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/logout - application/json 0
+2025-09-26 19:50:35.478 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:50:35.490 +04:00 [INF] 🚪 Logout request for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:50:35.505 +04:00 [INF] 🚪 Logout requested for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:50:35.561 +04:00 [INF] Revoked 1 tokens for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:50:35.642 +04:00 [INF] ✅ User logged out successfully: 653ed33c-1857-4425-968f-7fbaeabc130a, Revoked tokens: 1
+2025-09-26 19:50:35.656 +04:00 [INF] ✅ Logout successful for user: 653ed33c-1857-4425-968f-7fbaeabc130a
+2025-09-26 19:50:35.664 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/logout - 200 null application/json; charset=utf-8 234.3238ms
+2025-09-26 19:51:32.634 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - null null
+2025-09-26 19:51:32.653 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/register - 204 null null 19.3584ms
+2025-09-26 19:51:32.660 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/register - application/json 246
+2025-09-26 19:51:32.699 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:51:32.705 +04:00 [INF] 🚀 Registration request received for: ravanmu@code.edu.az
+2025-09-26 19:51:32.717 +04:00 [INF] 🚀 Registration attempt for email: ravanmu@code.edu.az with role: Seller
+2025-09-26 19:51:33.224 +04:00 [INF] 🔐 Generating custom email confirmation token for user: 3a841c8e-6c0a-4d9c-81fd-089755361d83
+2025-09-26 19:51:35.348 +04:00 [INF] ✅ Email confirmation sent to: ravanmu@code.edu.az
+2025-09-26 19:51:35.355 +04:00 [INF] ✅ User registered successfully: 3a841c8e-6c0a-4d9c-81fd-089755361d83 (ravanmu@code.edu.az) with role: Seller
+2025-09-26 19:51:35.365 +04:00 [INF] ✅ Registration successful for: ravanmu@code.edu.az with role: Seller
+2025-09-26 19:51:35.371 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/register - 200 null application/json; charset=utf-8 2711.1226ms
+2025-09-26 19:51:55.037 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=3a841c8e-6c0a-4d9c-81fd-089755361d83&token=MTc1ODkwMTg5MzpyR2tsQ0Z4UEgwTVZrWDdZdDcyUmhwN3lIRjNZbFo2SytwNjBLRWxDNWZnPTozMTBEQzcyNjZEODU4MEJE&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - null null
+2025-09-26 19:51:55.066 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:51:55.076 +04:00 [INF] 📧 Email confirmation attempt for user: 3a841c8e-6c0a-4d9c-81fd-089755361d83
+2025-09-26 19:51:55.084 +04:00 [INF] 📧 Email confirmation attempt for user: 3a841c8e-6c0a-4d9c-81fd-089755361d83
+2025-09-26 19:51:55.117 +04:00 [INF] 🔍 Validating custom email confirmation token for user: 3a841c8e-6c0a-4d9c-81fd-089755361d83
+2025-09-26 19:51:55.140 +04:00 [INF] ✅ Email confirmation token validation successful
+2025-09-26 19:51:55.290 +04:00 [INF] ✅ Email confirmed successfully for user: 3a841c8e-6c0a-4d9c-81fd-089755361d83
+2025-09-26 19:51:55.298 +04:00 [INF] ✅ Email confirmed successfully for user: 3a841c8e-6c0a-4d9c-81fd-089755361d83
+2025-09-26 19:51:55.304 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/auth/confirmemail?userId=3a841c8e-6c0a-4d9c-81fd-089755361d83&token=MTc1ODkwMTg5MzpyR2tsQ0Z4UEgwTVZrWDdZdDcyUmhwN3lIRjNZbFo2SytwNjBLRWxDNWZnPTozMTBEQzcyNjZEODU4MEJE&redirect=http%3A%2F%2Flocalhost%3A5173%2Femail-confirmed - 302 0 null 267.6844ms
+2025-09-26 19:52:09.400 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - null null
+2025-09-26 19:52:09.430 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/login - 204 null null 29.3137ms
+2025-09-26 19:52:09.440 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7249/api/Auth/login - application/json 53
+2025-09-26 19:52:09.472 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:52:09.481 +04:00 [INF] 🔑 Login request received for: ravanmu@code.edu.az
+2025-09-26 19:52:09.487 +04:00 [INF] 🔑 Login attempt for email: ravanmu@code.edu.az
+2025-09-26 19:52:09.721 +04:00 [INF] Generating JWT token for user: 3a841c8e-6c0a-4d9c-81fd-089755361d83 (ravanmu@code.edu.az)
+2025-09-26 19:52:09.731 +04:00 [INF] JWT token generated successfully for user 3a841c8e-6c0a-4d9c-81fd-089755361d83 - JTI: 7037cd30-e557-407a-84b8-3830811f41b8, Claims: 14, Expires: "2025-09-27T15:52:09.7218052Z"
+2025-09-26 19:52:09.786 +04:00 [INF] ✅ LOGIN SUCCESS: 3a841c8e-6c0a-4d9c-81fd-089755361d83 (ravanmu@code.edu.az) with roles: [Seller] at "2025-09-26T15:52:09.7860669Z"
+2025-09-26 19:52:09.799 +04:00 [INF] ✅ Login successful for: ravanmu@code.edu.az
+2025-09-26 19:52:09.804 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7249/api/Auth/login - 200 null application/json; charset=utf-8 363.8624ms
+2025-09-26 19:52:09.819 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - null null
+2025-09-26 19:52:09.852 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auth/profile - 204 null null 32.3502ms
+2025-09-26 19:52:09.856 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auth/profile - application/json null
+2025-09-26 19:52:09.897 +04:00 [INF] TokenService initialized - Expiry: 1440 minutes
+2025-09-26 19:52:09.952 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auth/profile - 200 null application/json; charset=utf-8 95.1694ms
+2025-09-26 19:52:10.092 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:52:10.094 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:52:10.107 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - null null
+2025-09-26 19:52:10.107 +04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - null null
+2025-09-26 19:52:10.164 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 70.0304ms
+2025-09-26 19:52:10.254 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/ready-to-start - 204 null null 146.0614ms
+2025-09-26 19:52:10.149 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:52:10.204 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 96.758ms
+2025-09-26 19:52:10.141 +04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7249/api/Auction/live - 204 null null 48.8213ms
+2025-09-26 19:52:10.186 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:52:10.665 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 479.0618ms
+2025-09-26 19:52:10.684 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - application/json null
+2025-09-26 19:52:10.803 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/ready-to-start - 403 0 null 119.5654ms
+2025-09-26 19:52:11.061 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 912.1055ms
+2025-09-26 19:52:11.071 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7249/api/Auction/live - application/json null
+2025-09-26 19:52:11.367 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7249/api/Auction/live - 200 null application/json; charset=utf-8 296.1907ms

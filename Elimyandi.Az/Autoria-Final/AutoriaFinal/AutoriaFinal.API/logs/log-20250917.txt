@@ -1,0 +1,411 @@
+2025-09-17 19:22:37.411 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 19:22:39.869 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 19:22:39.880 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 19:22:39.883 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 19:22:39.887 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 19:22:39.890 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 19:22:39.893 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 19:22:57.013 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 19:22:58.621 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 19:22:58.632 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 19:22:58.637 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 19:22:58.643 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 19:22:58.649 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 19:22:58.653 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 19:23:24.956 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 19:23:25.646 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 19:23:25.649 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 19:23:25.651 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 19:23:25.654 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 19:23:25.658 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 19:23:25.661 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 19:23:37.306 +04:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-17 19:23:37.315 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:23:37.344 +04:00 [INF] Retrieved 0 Auction records
+2025-09-17 19:23:37.368 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:23:37.3681563Z"
+2025-09-17 19:23:50.364 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:23:50.379 +04:00 [INF] Retrieved 0 Auction records
+2025-09-17 19:23:50.390 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:23:50.3906424Z"
+2025-09-17 19:23:53.411 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:23:53.424 +04:00 [INF] Retrieved 0 Auction records
+2025-09-17 19:23:53.434 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:23:53.4342542Z"
+2025-09-17 19:23:53.457 +04:00 [INF] User connected: wWtyZ5YmiPng2WCa9V4v4w
+2025-09-17 19:24:23.388 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:24:23.394 +04:00 [INF] Retrieved 0 Auction records
+2025-09-17 19:24:23.400 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:24:23.4008336Z"
+2025-09-17 19:24:53.404 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:24:53.411 +04:00 [INF] Retrieved 0 Auction records
+2025-09-17 19:24:53.420 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:24:53.4202311Z"
+2025-09-17 19:25:23.383 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:25:23.386 +04:00 [INF] Retrieved 0 Auction records
+2025-09-17 19:25:23.388 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:25:23.3880027Z"
+2025-09-17 19:25:47.096 +04:00 [INF] Creating auction: Test Auction #1 scheduled for "2025-09-18T12:26:00.0000000Z" by user "9f8bbe66-5499-4790-8e3e-011a4cbda67d"
+2025-09-17 19:25:47.260 +04:00 [INF] AUCTION CREATED: "80cbc891-6169-4233-84a5-8c1201e8cece" - Test Auction #1 by user "9f8bbe66-5499-4790-8e3e-011a4cbda67d" at "2025-09-17T15:25:47.2607791Z"
+2025-09-17 19:25:47.336 +04:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-17 19:25:47.384 +04:00 [INF] AUCTION CREATED: "80cbc891-6169-4233-84a5-8c1201e8cece" - Test Auction #1 by ravanmu-coder (ID: "9f8bbe66-5499-4790-8e3e-011a4cbda67d") at "2025-09-17T15:25:47.3842082Z"
+2025-09-17 19:25:47.390 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:25:47.393 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 19:25:47.399 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:25:47.3996997Z"
+2025-09-17 19:25:47.433 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:25:47.439 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 19:25:47.442 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:25:47.4424420Z"
+2025-09-17 19:25:53.385 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:25:53.389 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 19:25:53.393 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:25:53.3933123Z"
+2025-09-17 19:26:02.156 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:26:02.159 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 19:26:02.162 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:26:02.1626122Z"
+2025-09-17 19:26:23.401 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:26:23.410 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 19:26:23.418 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:26:23.4181584Z"
+2025-09-17 19:26:49.560 +04:00 [INF] Fetching Auction with ID "80cbc891-6169-4233-84a5-8c1201e8cece"
+2025-09-17 19:26:49.568 +04:00 [INF] Auction with ID "80cbc891-6169-4233-84a5-8c1201e8cece" retrieved successfully
+2025-09-17 19:26:53.390 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:26:53.393 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 19:26:53.395 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:26:53.3952953Z"
+2025-09-17 19:27:23.393 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:27:23.395 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 19:27:23.396 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:27:23.3966470Z"
+2025-09-17 19:27:54.079 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:27:54.082 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 19:27:54.083 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:27:54.0835259Z"
+2025-09-17 19:28:24.084 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:28:24.088 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 19:28:24.089 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:28:24.0897517Z"
+2025-09-17 19:28:53.391 +04:00 [INF] Fetching all Auction records
+2025-09-17 19:28:53.393 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 19:28:53.394 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T15:28:53.3949581Z"
+2025-09-17 19:29:14.984 +04:00 [INF] Client disconnected: wWtyZ5YmiPng2WCa9V4v4w, Reason: No reason
+2025-09-17 19:29:26.890 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 19:29:27.704 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 19:29:27.710 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 19:29:27.716 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 19:29:27.718 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 19:29:27.725 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 19:29:27.730 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 23:04:33.422 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:04:34.241 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 23:04:34.275 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 23:04:34.287 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 23:04:34.288 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 23:04:34.289 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 23:04:34.289 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 23:04:50.608 +04:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-17 23:04:50.620 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:04:50.709 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 23:04:50.742 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:04:50.7424927Z"
+2025-09-17 23:05:23.229 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:05:24.093 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 23:05:24.114 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 23:05:24.117 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 23:05:24.120 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 23:05:24.123 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 23:05:24.133 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 23:05:50.436 +04:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-17 23:05:50.442 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:05:50.508 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 23:05:50.523 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:05:50.5228552Z"
+2025-09-17 23:06:20.322 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:06:20.332 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 23:06:20.343 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:06:20.3430295Z"
+2025-09-17 23:06:32.264 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:06:33.509 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 23:06:33.519 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 23:06:33.524 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 23:06:33.530 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 23:06:33.533 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 23:06:33.540 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 23:10:19.434 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:10:20.369 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 23:10:20.373 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 23:10:20.377 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 23:10:20.379 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 23:10:20.382 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 23:10:20.385 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 23:10:35.556 +04:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-17 23:10:35.571 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:10:35.649 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 23:10:35.675 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:10:35.6748309Z"
+2025-09-17 23:11:23.207 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:11:24.103 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:11:25.001 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 23:11:25.005 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 23:11:25.007 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 23:11:25.011 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 23:11:25.012 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 23:11:25.014 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 23:11:31.214 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:11:31.429 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:11:31.595 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:11:32.691 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 23:11:32.697 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 23:11:32.701 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 23:11:32.704 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 23:11:32.706 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 23:11:32.710 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 23:11:35.525 +04:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-17 23:11:35.540 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:11:35.615 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 23:11:35.634 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:11:35.6338937Z"
+2025-09-17 23:11:46.371 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:11:46.851 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:11:47.785 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 23:11:47.799 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 23:11:47.805 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 23:11:47.811 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 23:11:47.818 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 23:11:47.823 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 23:12:00.875 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:12:01.920 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 23:12:01.924 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 23:12:01.939 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 23:12:01.955 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 23:12:01.962 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 23:12:01.970 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 23:12:35.570 +04:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-17 23:12:35.576 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:12:35.639 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 23:12:35.658 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:12:35.6584612Z"
+2025-09-17 23:15:09.892 +04:00 [WRN] The 'BidType' property 'BidType' on entity type 'Bid' is configured with a database-generated default, but has no configured sentinel value. The database-generated default will always be used for inserts when the property has the value '0', since this is the CLR default for the 'BidType' type. Consider using a nullable type, using a nullable backing field, or setting the sentinel value for the property to ensure the database default is used when, and only when, appropriate. See https://aka.ms/efcore-docs-default-values for more information.
+2025-09-17 23:15:10.406 +04:00 [INF] 🎯 === AUTORIA AUCTION API STARTED ===
+2025-09-17 23:15:10.408 +04:00 [INF] 🌐 Swagger UI: https://localhost:7249
+2025-09-17 23:15:10.410 +04:00 [INF] 📡 SignalR Hub: https://localhost:7249/auctionHub
+2025-09-17 23:15:10.411 +04:00 [INF] 💚 Health Check: https://localhost:7249/health
+2025-09-17 23:15:10.412 +04:00 [INF] 📊 API Info: https://localhost:7249/api/info
+2025-09-17 23:15:10.412 +04:00 [INF] 👨‍💻 Developer: ravanmu-coder
+2025-09-17 23:15:35.508 +04:00 [WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+2025-09-17 23:15:35.517 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:15:35.611 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 23:15:35.635 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:15:35.6347828Z"
+2025-09-17 23:16:27.858 +04:00 [INF] Fetching all Location records
+2025-09-17 23:16:27.901 +04:00 [INF] Retrieved 1 Location records
+2025-09-17 23:16:35.309 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:16:35.318 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 23:16:35.322 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:16:35.3222062Z"
+2025-09-17 23:17:06.875 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:17:06.880 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 23:17:06.882 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:17:06.8827824Z"
+2025-09-17 23:17:06.936 +04:00 [INF] User connected: qY5UehDHO6NpTp2Krh6ZfQ
+2025-09-17 23:17:36.885 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:17:36.896 +04:00 [INF] Retrieved 1 Auction records
+2025-09-17 23:17:36.900 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:17:36.9006079Z"
+2025-09-17 23:18:01.840 +04:00 [INF] Creating auction: Addim1 scheduled for "2025-09-18T16:17:00.0000000Z" by user "9f8bbe66-5499-4790-8e3e-011a4cbda67d"
+2025-09-17 23:18:01.999 +04:00 [INF] AUCTION CREATED: "a368d809-51a1-4d66-866a-cebffe592221" - Addim1 by user "9f8bbe66-5499-4790-8e3e-011a4cbda67d" at "2025-09-17T19:18:01.9993371Z"
+2025-09-17 23:18:02.083 +04:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-17 23:18:02.152 +04:00 [INF] AUCTION CREATED: "a368d809-51a1-4d66-866a-cebffe592221" - Addim1 by ravanmu-coder (ID: "9f8bbe66-5499-4790-8e3e-011a4cbda67d") at "2025-09-17T19:18:02.1526807Z"
+2025-09-17 23:18:02.157 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:18:02.160 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:18:02.162 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:18:02.1621692Z"
+2025-09-17 23:18:02.189 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:18:02.192 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:18:02.194 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:18:02.1943694Z"
+2025-09-17 23:18:06.877 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:18:06.886 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:18:06.888 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:18:06.8885455Z"
+2025-09-17 23:18:37.305 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:18:37.308 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:18:37.309 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:18:37.3097832Z"
+2025-09-17 23:19:06.880 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:19:06.887 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:19:06.889 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:19:06.8896396Z"
+2025-09-17 23:19:37.304 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:19:37.311 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:19:37.315 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:19:37.3155987Z"
+2025-09-17 23:20:07.304 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:20:07.309 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:20:07.313 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:20:07.3138241Z"
+2025-09-17 23:20:37.316 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:20:37.325 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:20:37.326 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:20:37.3267207Z"
+2025-09-17 23:20:54.499 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:20:54.503 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:20:54.507 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:20:54.5073051Z"
+2025-09-17 23:21:06.891 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:21:06.896 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:21:06.901 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:21:06.9017066Z"
+2025-09-17 23:21:36.858 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:21:36.863 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:21:36.870 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:21:36.8703520Z"
+2025-09-17 23:21:36.876 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:21:36.879 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:21:36.881 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:21:36.8812271Z"
+2025-09-17 23:21:45.404 +04:00 [INF] Fetching Auction with ID "80cbc891-6169-4233-84a5-8c1201e8cece"
+2025-09-17 23:21:45.411 +04:00 [INF] Auction with ID "80cbc891-6169-4233-84a5-8c1201e8cece" retrieved successfully
+2025-09-17 23:22:06.875 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:22:06.878 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:22:06.880 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:22:06.8801138Z"
+2025-09-17 23:22:37.316 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:22:37.318 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:22:37.320 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:22:37.3201251Z"
+2025-09-17 23:23:07.315 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:23:07.319 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:23:07.321 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:23:07.3212868Z"
+2025-09-17 23:23:37.308 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:23:37.311 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:23:37.313 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:23:37.3131690Z"
+2025-09-17 23:24:07.310 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:24:07.314 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:24:07.316 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:24:07.3166161Z"
+2025-09-17 23:24:37.314 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:24:37.318 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:24:37.320 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:24:37.3202295Z"
+2025-09-17 23:25:35.308 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:25:35.312 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:25:35.313 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:25:35.3138462Z"
+2025-09-17 23:25:50.943 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:25:50.946 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:25:50.948 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:25:50.9486296Z"
+2025-09-17 23:26:06.878 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:26:06.883 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:26:06.886 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:26:06.8863526Z"
+2025-09-17 23:26:37.303 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:26:37.307 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:26:37.307 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:26:37.3079484Z"
+2025-09-17 23:27:07.316 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:27:07.319 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:27:07.332 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:27:07.3322650Z"
+2025-09-17 23:28:35.306 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:28:35.309 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:28:35.311 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:28:35.3115618Z"
+2025-09-17 23:29:35.312 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:29:35.315 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:29:35.317 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:29:35.3174875Z"
+2025-09-17 23:30:35.307 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:30:35.313 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:30:35.316 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:30:35.3161142Z"
+2025-09-17 23:31:35.314 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:31:35.318 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:31:35.320 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:31:35.3201218Z"
+2025-09-17 23:32:35.316 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:32:35.320 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:32:35.322 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:32:35.3229243Z"
+2025-09-17 23:33:35.314 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:33:35.318 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:33:35.320 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:33:35.3207103Z"
+2025-09-17 23:34:35.318 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:34:35.322 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:34:35.324 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:34:35.3241249Z"
+2025-09-17 23:35:35.312 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:35:35.314 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:35:35.316 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:35:35.3165783Z"
+2025-09-17 23:36:35.303 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:36:35.307 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:36:35.309 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:36:35.3093082Z"
+2025-09-17 23:37:35.322 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:37:35.325 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:37:35.327 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:37:35.3276513Z"
+2025-09-17 23:38:35.318 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:38:35.321 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:38:35.323 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:38:35.3231099Z"
+2025-09-17 23:39:35.316 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:39:35.320 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:39:35.321 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:39:35.3219933Z"
+2025-09-17 23:40:35.301 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:40:35.305 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:40:35.307 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:40:35.3072255Z"
+2025-09-17 23:41:35.304 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:41:35.307 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:41:35.310 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:41:35.3107058Z"
+2025-09-17 23:42:35.311 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:42:35.314 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:42:35.316 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:42:35.3163396Z"
+2025-09-17 23:43:35.311 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:43:35.314 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:43:35.316 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:43:35.3162290Z"
+2025-09-17 23:44:35.305 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:44:35.318 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:44:35.323 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:44:35.3238106Z"
+2025-09-17 23:45:35.305 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:45:35.309 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:45:35.311 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:45:35.3111814Z"
+2025-09-17 23:46:35.305 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:46:35.308 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:46:35.313 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:46:35.3138282Z"
+2025-09-17 23:47:35.323 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:47:35.326 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:47:35.328 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:47:35.3288367Z"
+2025-09-17 23:48:35.321 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:48:35.325 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:48:35.327 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:48:35.3272190Z"
+2025-09-17 23:48:38.226 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:48:38.231 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:48:38.234 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:48:38.2343578Z"
+2025-09-17 23:49:06.875 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:49:06.878 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:49:06.879 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:49:06.8797222Z"
+2025-09-17 23:49:36.875 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:49:36.878 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:49:36.882 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:49:36.8820003Z"
+2025-09-17 23:50:06.884 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:50:06.886 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:50:06.889 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:50:06.8893368Z"
+2025-09-17 23:50:36.875 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:50:36.878 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:50:36.880 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:50:36.8806219Z"
+2025-09-17 23:51:06.882 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:51:06.885 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:51:06.887 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:51:06.8872645Z"
+2025-09-17 23:51:14.009 +04:00 [INF] Fetching Auction with ID "80cbc891-6169-4233-84a5-8c1201e8cece"
+2025-09-17 23:51:14.016 +04:00 [INF] Auction with ID "80cbc891-6169-4233-84a5-8c1201e8cece" retrieved successfully
+2025-09-17 23:51:23.427 +04:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-09-17 23:51:24.979 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:51:24.982 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:51:24.984 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:51:24.9846796Z"
+2025-09-17 23:51:26.156 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:51:26.159 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:51:26.161 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:51:26.1612806Z"
+2025-09-17 23:51:36.877 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:51:36.880 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:51:36.882 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:51:36.8827036Z"
+2025-09-17 23:51:49.461 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:51:49.463 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:51:49.463 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:51:49.4639008Z"
+2025-09-17 23:51:50.472 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:51:50.475 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:51:50.476 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:51:50.4762342Z"
+2025-09-17 23:51:51.270 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:51:51.273 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:51:51.277 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:51:51.2777971Z"
+2025-09-17 23:52:02.239 +04:00 [INF] Fetching Auction with ID "80cbc891-6169-4233-84a5-8c1201e8cece"
+2025-09-17 23:52:02.242 +04:00 [INF] Auction with ID "80cbc891-6169-4233-84a5-8c1201e8cece" retrieved successfully
+2025-09-17 23:52:06.880 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:52:06.884 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:52:06.887 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:52:06.8876878Z"
+2025-09-17 23:52:37.309 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:52:37.311 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:52:37.315 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:52:37.3151810Z"
+2025-09-17 23:53:23.262 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:53:23.265 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:53:23.268 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:53:23.2681430Z"
+2025-09-17 23:53:37.311 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:53:37.316 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:53:37.320 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:53:37.3203985Z"
+2025-09-17 23:54:06.349 +04:00 [INF] Client disconnected: qY5UehDHO6NpTp2Krh6ZfQ, Reason: No reason
+2025-09-17 23:54:06.398 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:54:06.401 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:54:06.403 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:54:06.4039693Z"
+2025-09-17 23:54:06.451 +04:00 [INF] User connected: UE5tAYiPAfXV-AKXbmpHPw
+2025-09-17 23:54:37.309 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:54:37.312 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:54:37.314 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:54:37.3147958Z"
+2025-09-17 23:55:07.306 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:55:07.308 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:55:07.309 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:55:07.3096770Z"
+2025-09-17 23:55:37.304 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:55:37.307 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:55:37.310 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:55:37.3102165Z"
+2025-09-17 23:56:06.408 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:56:06.413 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:56:06.414 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:56:06.4146710Z"
+2025-09-17 23:56:37.305 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:56:37.309 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:56:37.313 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:56:37.3132670Z"
+2025-09-17 23:57:07.318 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:57:07.325 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:57:07.329 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:57:07.3297495Z"
+2025-09-17 23:58:35.321 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:58:35.326 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:58:35.328 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:58:35.3286487Z"
+2025-09-17 23:59:35.310 +04:00 [INF] Fetching all Auction records
+2025-09-17 23:59:35.313 +04:00 [INF] Retrieved 2 Auction records
+2025-09-17 23:59:35.315 +04:00 [INF] All auctions retrieved by Anonymous at "2025-09-17T19:59:35.3158576Z"

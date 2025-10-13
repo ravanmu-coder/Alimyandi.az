@@ -1,0 +1,22 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon: Stylized gavel with hand element -->
+  <g id="icon">
+    <!-- Gavel handle -->
+    <rect x="8" y="20" width="3" height="25" fill="#1E88FF" rx="1.5"/>
+    <!-- Gavel head -->
+    <rect x="5" y="15" width="9" height="8" fill="#7C3AED" rx="2"/>
+    <!-- Hand element (stylized) -->
+    <path d="M15 18C15 15 17 12 20 12C23 12 25 15 25 18V22C25 25 23 28 20 28C17 28 15 25 15 22V18Z" fill="#F6C85F"/>
+    <!-- Auction ticket element -->
+    <rect x="18" y="25" width="8" height="6" fill="#1E88FF" rx="1"/>
+    <rect x="19" y="26" width="6" height="1" fill="white"/>
+    <rect x="19" y="28" width="6" height="1" fill="white"/>
+  </g>
+  
+  <!-- Wordmark -->
+  <g id="wordmark">
+    <text x="35" y="25" font-family="Inter, sans-serif" font-size="18" font-weight="700" fill="#0B1220">Əlimyandı</text>
+    <text x="35" y="45" font-family="Inter, sans-serif" font-size="12" font-weight="400" fill="#7C3AED">.az</text>
+  </g>
+</svg>
+

@@ -1,0 +1,145 @@
+{
+  "nav": {
+    "logo": "Əlimyandı.az",
+    "search": {
+      "placeholder": "Enter Brand, Model, Damage, Color, VIN, etc.",
+      "button": "Search Inventory"
+    },
+    "register": "Register",
+    "login": "Sign In",
+    "welcome": "Welcome",
+    "logout": "Logout"
+  },
+  "role": {
+    "member": "Member Portal",
+    "seller": "Seller Portal",
+    "admin": "Admin Portal"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "howItWorks": "How It Works",
+    "inventory": "Inventory",
+    "auctions": "Auctions",
+    "bids": "Bids",
+    "payment": "Payment",
+    "addAdvertisement": "Add Advertisement",
+    "locations": "Locations",
+    "services": "Services & Support"
+  },
+  "dropdown": {
+    "vehicleFinder": "Vehicle Finder",
+    "salesList": "Sales List",
+    "todaysAuction": "Today's Auction",
+    "auctionsCalendar": "Auctions Calendar",
+    "joinAuction": "Join Auction",
+    "AllAuctions": "All Auctions",
+    "myBids": "My Bids",
+    "aboutUs": "About Us",
+    "sellYourCar": "Sell Your Car"
+  },
+  "footer": {
+    "getToKnowUs": "Get to Know Us",
+    "aboutUs": "About Us",
+    "careers": "Careers",
+    "news": "News",
+    "auctions": "Auctions",
+    "todaysAuctions": "Today's Auctions",
+    "auctionsCalendar": "Auctions Calendar",
+    "nightSales": "Night Sales",
+    "bankCars": "Bank Cars",
+    "rentalAuctions": "Rental Auctions",
+    "wholesaleAuctions": "Wholesale Auctions",
+    "featuredCars": "Featured Cars",
+    "support": "Support",
+    "helpCenter": "Help Center",
+    "glossary": "Glossary",
+    "resourceCenter": "Resource Center",
+    "licensingHelp": "Licensing Help",
+    "videos": "Videos",
+    "membershipFees": "Membership Fees",
+    "mobileApps": "Mobile Apps",
+    "newMemberGuide": "New Member Guide",
+    "contactUs": "Contact Us",
+    "copyright": "© 2024 Əlimyandı.az. All rights reserved."
+  },
+  "language": {
+    "azerbaijani": "Azərbaycan",
+    "english": "English"
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "subtitle": "Sign in to your account",
+      "email": "Email",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot your password?",
+      "signIn": "Sign In",
+      "noAccount": "Don't have an account?",
+      "register": "Register",
+      "confirmEmail": "Email verification required",
+      "confirmEmailMessage": "Please click the link sent to your email to verify your email address."
+    },
+    "register": {
+      "title": "Register",
+      "subtitle": "Create a new account",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "dateOfBirth": "Date of Birth",
+      "phone": "Phone Number",
+      "isOver18": "I confirm that I am 18 years or older",
+      "role": "Select Role",
+      "member": "Member",
+      "seller": "Seller",
+      "createAccount": "Create Account",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign In",
+      "success": {
+        "title": "Registration Successful!",
+        "message": "Confirmation Email Sent",
+        "details": "Please click the link sent to your email to verify your email address.",
+        "countdown": "You will be redirected to the login page in seconds"
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot Password?",
+      "subtitle": "Get password reset link",
+      "email": "Email",
+      "sendReset": "Send Reset Link",
+      "backToLogin": "Back to Login",
+      "success": {
+        "title": "Email Sent!",
+        "message": "Password reset link has been sent to your email address."
+      }
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "subtitle": "Enter your new password",
+      "password": "New Password",
+      "confirmPassword": "Confirm Password",
+      "resetPassword": "Reset Password",
+      "success": {
+        "title": "Password Reset!",
+        "message": "Your password has been successfully reset.",
+        "login": "Go to Login"
+      }
+    },
+    "confirmEmail": {
+      "title": "Email Verification",
+      "success": "Email successfully verified!",
+      "redirecting": "Redirecting to login page..."
+    },
+    "validation": {
+      "required": "This field is required",
+      "email": "Please enter a valid email address",
+      "password": "Password must be at least 8 characters",
+      "passwordMatch": "Passwords do not match",
+      "age": "You must be 18 years or older",
+      "phone": "Please enter a valid phone number"
+    }
+  }
+}

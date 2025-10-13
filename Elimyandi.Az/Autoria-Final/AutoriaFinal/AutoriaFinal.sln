@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoriaFinal.Domain", "AutoriaFinal.Domain\AutoriaFinal.Domain.csproj", "{34C4861C-EFFB-4513-810E-6F106160D6D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoriaFinal.Persistence", "AutoriaFinal.Persistence\AutoriaFinal.Persistence.csproj", "{353E2A87-F643-4747-9B9B-AFA76248BAA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoriaFinal.API", "AutoriaFinal.API\AutoriaFinal.API.csproj", "{122244B1-ED8C-4EE3-A358-68F678A187F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoriaFinal.Infrastructure", "AutoriaFinal.Infrastructure\AutoriaFinal.Infrastructure.csproj", "{7B0D33FE-EDB7-43A5-9592-BA793B939869}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoriaFinal.Contract", "AutoriaFinal.Contract\AutoriaFinal.Contract.csproj", "{A39749A8-7584-4878-8593-EC5AEEC61EF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoriaFinal.Application", "AutoriaFinal.Application\AutoriaFinal.Application.csproj", "{53150912-C574-418A-B34F-6BF6F8F378B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34C4861C-EFFB-4513-810E-6F106160D6D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C4861C-EFFB-4513-810E-6F106160D6D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C4861C-EFFB-4513-810E-6F106160D6D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C4861C-EFFB-4513-810E-6F106160D6D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{353E2A87-F643-4747-9B9B-AFA76248BAA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{353E2A87-F643-4747-9B9B-AFA76248BAA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{353E2A87-F643-4747-9B9B-AFA76248BAA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{353E2A87-F643-4747-9B9B-AFA76248BAA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{122244B1-ED8C-4EE3-A358-68F678A187F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{122244B1-ED8C-4EE3-A358-68F678A187F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{122244B1-ED8C-4EE3-A358-68F678A187F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{122244B1-ED8C-4EE3-A358-68F678A187F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B0D33FE-EDB7-43A5-9592-BA793B939869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B0D33FE-EDB7-43A5-9592-BA793B939869}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B0D33FE-EDB7-43A5-9592-BA793B939869}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B0D33FE-EDB7-43A5-9592-BA793B939869}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A39749A8-7584-4878-8593-EC5AEEC61EF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A39749A8-7584-4878-8593-EC5AEEC61EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A39749A8-7584-4878-8593-EC5AEEC61EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A39749A8-7584-4878-8593-EC5AEEC61EF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53150912-C574-418A-B34F-6BF6F8F378B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53150912-C574-418A-B34F-6BF6F8F378B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53150912-C574-418A-B34F-6BF6F8F378B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53150912-C574-418A-B34F-6BF6F8F378B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8B7DD945-90A6-4B0D-BF5D-96D0B5615284}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,144 @@
+{
+  "nav": {
+    "logo": "Əlimyandı.az",
+    "search": {
+      "placeholder": "Marka, Model, Zərər, Rəng, VIN və s. daxil edin",
+      "button": "Inventar axtar"
+    },
+    "register": "Qeydiyyat",
+    "login": "Daxil ol",
+    "welcome": "Xoş gəlmisiniz",
+    "logout": "Çıxış"
+  },
+  "role": {
+    "member": "Üzv Portalı",
+    "seller": "Satıcı Portalı",
+    "admin": "Admin Portalı"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "howItWorks": "Necə işləyir",
+    "inventory": "İnventar",
+    "auctions": "Hərraclar",
+    "bids": "Təkliflər",
+    "payment": "Ödəniş",
+    "addAdvertisement": "Elan əlavə et",
+    "locations": "Lokasiyalar",
+    "services": "Xidmətlər və dəstək"
+  },
+  "dropdown": {
+    "vehicleFinder": "Nəqliyyat tapıcısı",
+    "salesList": "Satış siyahısı",
+    "todaysAuction": "Bugünkü hərrac",
+    "auctionsCalendar": "Hərrac təqvimi",
+    "joinAuction": "Hərraca qoşul",
+    "AllAuctions": "Bütün Hərraclar",
+    "myBids": "Təkliflərim",
+    "aboutUs": "Haqqımızda",
+    "sellYourCar": "Avtomobilinizi satın"
+  },
+  "footer": {
+    "getToKnowUs": "Bizi tanıyın",
+    "aboutUs": "Haqqımızda",
+    "careers": "Karyera",
+    "news": "Xəbərlər",
+    "auctions": "Hərraclar",
+    "todaysAuctions": "Bugünkü hərraclar",
+    "auctionsCalendar": "Hərrac təqvimi",
+    "bankCars": "Bank avtomobilləri",
+    "rentalAuctions": "İcarə hərracları",
+    "wholesaleAuctions": "Topdan hərraclar",
+    "featuredCars": "Seçilmiş avtomobillər",
+    "support": "Dəstək",
+    "helpCenter": "Kömək mərkəzi",
+    "glossary": "Terminlər lüğəti",
+    "resourceCenter": "Resurs mərkəzi",
+    "licensingHelp": "Lisenziya köməyi",
+    "videos": "Videolar",
+    "membershipFees": "Üzv haqları",
+    "mobileApps": "Mobil tətbiqlər",
+    "newMemberGuide": "Yeni üzv bələdçisi",
+    "contactUs": "Bizimlə Əlaqə",
+    "copyright": "© 2024 Əlimyandı.az. Bütün hüquqlar qorunur."
+  },
+  "language": {
+    "azerbaijani": "Azərbaycan",
+    "english": "English"
+  },
+  "auth": {
+    "login": {
+      "title": "Daxil ol",
+      "subtitle": "Hesabınıza daxil olun",
+      "email": "Email",
+      "password": "Şifrə",
+      "rememberMe": "Məni xatırla",
+      "forgotPassword": "Şifrəni unutmusunuz?",
+      "signIn": "Daxil ol",
+      "noAccount": "Hesabınız yoxdur?",
+      "register": "Qeydiyyatdan keçin",
+      "confirmEmail": "Email təsdiqlənməsi tələb olunur",
+      "confirmEmailMessage": "Email ünvanınızı təsdiqləmək üçün göndərilən linkə klikləyin."
+    },
+    "register": {
+      "title": "Qeydiyyat",
+      "subtitle": "Yeni hesab yaradın",
+      "firstName": "Ad",
+      "lastName": "Soyad",
+      "username": "İstifadəçi adı",
+      "email": "Email",
+      "password": "Şifrə",
+      "confirmPassword": "Şifrəni təsdiqlə",
+      "dateOfBirth": "Doğum tarixi",
+      "phone": "Telefon nömrəsi",
+      "isOver18": "18 yaşdan böyük olduğumu təsdiqləyirəm",
+      "role": "Rol seçin",
+      "member": "Üzv",
+      "seller": "Satıcı",
+      "createAccount": "Hesab yarat",
+      "haveAccount": "Artıq hesabınız var?",
+      "signIn": "Daxil olun",
+      "success": {
+        "title": "Qeydiyyat uğurlu!",
+        "message": "Təsdiq emaili göndərildi",
+        "details": "Email ünvanınızı təsdiqləmək üçün göndərilən linkə klikləyin.",
+        "countdown": "Saniyə sonra login səhifəsinə yönləndiriləcəksiniz"
+      }
+    },
+    "forgotPassword": {
+      "title": "Şifrəni unutmusunuz?",
+      "subtitle": "Şifrə sıfırlama linkini alın",
+      "email": "Email",
+      "sendReset": "Sıfırlama linkini göndər",
+      "backToLogin": "Login səhifəsinə qayıt",
+      "success": {
+        "title": "Email göndərildi!",
+        "message": "Şifrə sıfırlama linki email ünvanınıza göndərildi."
+      }
+    },
+    "resetPassword": {
+      "title": "Şifrəni sıfırla",
+      "subtitle": "Yeni şifrənizi daxil edin",
+      "password": "Yeni şifrə",
+      "confirmPassword": "Şifrəni təsdiqlə",
+      "resetPassword": "Şifrəni sıfırla",
+      "success": {
+        "title": "Şifrə sıfırlandı!",
+        "message": "Şifrəniz uğurla sıfırlandı.",
+        "login": "Login səhifəsinə keç"
+      }
+    },
+    "confirmEmail": {
+      "title": "Email təsdiqlənməsi",
+      "success": "Email uğurla təsdiqləndi!",
+      "redirecting": "Login səhifəsinə yönləndirilirsiniz..."
+    },
+    "validation": {
+      "required": "Bu sahə tələb olunur",
+      "email": "Düzgün email ünvanı daxil edin",
+      "password": "Şifrə ən azı 8 simvol olmalıdır",
+      "passwordMatch": "Şifrələr uyğun gəlmir",
+      "age": "18 yaşdan böyük olmalısınız",
+      "phone": "Düzgün telefon nömrəsi daxil edin"
+    }
+  }
+}

@@ -1,0 +1,3 @@
+[2025-09-12 14:48:45 WRN] You do not have a valid license key for the Lucky Penny software AutoMapper. This is allowed for development and testing scenarios. If you are running in production you are required to have a licensed version. Please visit https://luckypennysoftware.com to obtain a valid license.
+[2025-09-12 14:48:45 INF] Fetching all Car records
+[2025-09-12 14:48:45 INF] Retrieved 4 Car records

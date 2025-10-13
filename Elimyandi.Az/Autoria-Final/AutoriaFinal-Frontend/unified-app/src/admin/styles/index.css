@@ -1,0 +1,302 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for admin panel */
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-dark-bg-primary text-dark-text-primary;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent-primary text-white hover:bg-accent-primary/90 focus:ring-accent-primary/50 transition-all duration-200 hover:shadow-lg hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-dark-bg-tertiary text-dark-text-primary border border-dark-border hover:bg-dark-bg-quaternary focus:ring-accent-primary/50 transition-all duration-200 hover:shadow-lg hover:scale-105;
+  }
+  
+  .btn-ghost {
+    @apply text-dark-text-secondary hover:bg-dark-bg-tertiary hover:text-dark-text-primary focus:ring-accent-primary/50 transition-all duration-200;
+  }
+  
+  .card {
+    @apply bg-dark-bg-tertiary rounded-lg border border-dark-border shadow-dark hover:shadow-dark-lg transition-all duration-200 hover:-translate-y-1;
+  }
+  
+  .card-premium {
+    @apply bg-dark-bg-tertiary rounded-lg border border-dark-border shadow-dark hover:shadow-dark-lg transition-all duration-200 hover:-translate-y-1;
+  }
+  
+  .input {
+    @apply w-full px-4 py-3 border border-dark-border rounded-lg bg-dark-bg-quaternary text-dark-text-primary placeholder-dark-text-muted focus:outline-none focus:ring-2 focus:ring-accent-primary/50 focus:border-accent-primary transition-all duration-200;
+  }
+  
+  .input-error {
+    @apply border-accent-error focus:ring-accent-error/50 focus:border-accent-error;
+  }
+  
+  .input-success {
+    @apply border-accent-success focus:ring-accent-success/50 focus:border-accent-success;
+  }
+  
+  .badge-success {
+    @apply bg-accent-success/10 text-accent-success border border-accent-success/20 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-danger {
+    @apply bg-accent-error/10 text-accent-error border border-accent-error/20 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-warning {
+    @apply bg-accent-warning/10 text-accent-warning border border-accent-warning/20 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-info {
+    @apply bg-accent-info/10 text-accent-info border border-accent-info/20 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-neutral {
+    @apply bg-dark-bg-quaternary text-dark-text-secondary border border-dark-border px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .skeleton {
+    @apply animate-pulse bg-dark-bg-tertiary rounded-lg;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-sm bg-dark-bg-tertiary/80 border border-dark-border/20;
+  }
+  
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50 animate-fade-in;
+  }
+  
+  .modal-content {
+    @apply bg-dark-bg-tertiary rounded-lg border border-dark-border w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-slide-up;
+  }
+  
+  .kanban-card {
+    @apply bg-dark-bg-tertiary rounded-lg border border-dark-border p-4 cursor-pointer hover:bg-dark-bg-quaternary hover:shadow-dark-lg transition-all duration-200 transform hover:-translate-y-1;
+  }
+  
+  .tab-button {
+    @apply flex items-center space-x-2 px-6 py-4 text-body-sm font-medium transition-all duration-200;
+  }
+  
+  .tab-button-active {
+    @apply text-accent-primary border-b-2 border-accent-primary;
+  }
+  
+  .tab-button-inactive {
+    @apply text-dark-text-secondary hover:text-dark-text-primary;
+  }
+  
+  .kpi-card {
+    @apply bg-dark-bg-tertiary rounded-lg border border-dark-border p-6 hover:bg-dark-bg-quaternary transition-all duration-200 group;
+  }
+  
+  .loading-skeleton {
+    @apply animate-pulse bg-dark-bg-tertiary rounded-lg;
+  }
+  
+  .error-message {
+    @apply text-body-xs text-accent-error mt-1 animate-slide-down;
+  }
+  
+  .success-message {
+    @apply text-body-xs text-accent-success mt-1 animate-slide-down;
+  }
+  
+  .loading-spinner {
+    @apply animate-spin rounded-full border-2 border-current border-t-transparent;
+  }
+  
+  .interactive-hover {
+    @apply transition-all duration-200 hover:scale-105 hover:shadow-lg;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-dark-lg hover:-translate-y-1;
+  }
+  
+  .btn-hover {
+    @apply transition-all duration-200 hover:shadow-lg hover:scale-105;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-accent-primary to-accent-secondary bg-clip-text text-transparent;
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.2s ease-out;
+  }
+  
+  .animate-slide-down {
+    animation: slideDown 0.2s ease-out;
+  }
+  
+  .animate-bounce-in {
+    animation: bounceIn 0.4s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from { 
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #374151;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6B7280;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF;
+}
+
+/* Focus styles for accessibility */
+.focus-visible:focus {
+  outline: 2px solid #10B981;
+  outline-offset: 2px;
+}
+
+/* Form validation styles */
+.form-error {
+  @apply border-accent-error focus:ring-accent-error/50 focus:border-accent-error;
+}
+
+.form-success {
+  @apply border-accent-success focus:ring-accent-success/50 focus:border-accent-success;
+}
+
+/* Modal animations */
+.modal-enter {
+  animation: modalEnter 0.3s ease-out;
+}
+
+.modal-exit {
+  animation: modalExit 0.2s ease-in;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalExit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+}
