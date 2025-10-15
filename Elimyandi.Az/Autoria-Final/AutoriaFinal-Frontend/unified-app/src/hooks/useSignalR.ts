@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import SignalRManager, { ConnectionState, SignalREvents, SignalRConfig } from '../utils/signalRManager';
 
 // Hook return type
@@ -47,10 +47,17 @@ interface UseSignalRConfig extends SignalRConfig {
 
 /**
  * React hook for SignalR connection management
- * Uses singleton SignalRManager to prevent multiple connections
+ * Creates user-specific connection instances to prevent conflicts
  */
 export const useSignalR = (config: UseSignalRConfig): UseSignalRReturn => {
-  const manager = useRef(SignalRManager.getInstance());
+  // Create a unique instance key based on user token and base URL
+  const instanceKey = useMemo(() => {
+    const token = config.token || 'anonymous';
+    const baseUrl = config.baseUrl || 'default';
+    return `${baseUrl}_${token.substring(0, 10)}`;
+  }, [config.token, config.baseUrl]);
+
+  const manager = useRef(SignalRManager.getInstance(instanceKey));
   const [connectionState, setConnectionState] = useState<ConnectionState>(ConnectionState.Disconnected);
   const [lastError, setLastError] = useState<string | undefined>();
   const [retryCount, setRetryCount] = useState(0);
@@ -94,10 +101,21 @@ export const useSignalR = (config: UseSignalRConfig): UseSignalRReturn => {
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      // Don't destroy the manager here as it's a singleton
-      // Other components might still be using it
+      // Cleanup the specific instance when component unmounts
+      if (manager.current) {
+        console.log(`Cleaning up SignalR instance: ${instanceKey}`);
+        // Disconnect but don't destroy immediately - let other components finish
+        manager.current.disconnect().catch(err => {
+          console.error('Error during cleanup disconnect:', err);
+        });
+        
+        // Destroy the instance after a delay to allow other components to cleanup
+        setTimeout(() => {
+          SignalRManager.destroyInstance(instanceKey);
+        }, 1000);
+      }
     };
-  }, []);
+  }, [instanceKey]);
 
   // Connection methods
   const connect = useCallback(async (): Promise<void> => {

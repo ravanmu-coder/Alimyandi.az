@@ -65,7 +65,8 @@ interface ConnectionInfo {
 }
 
 class SignalRManager {
-  private static instance: SignalRManager;
+  private static instances: Map<string, SignalRManager> = new Map();
+  private instanceKey: string;
   private auctionConnection: signalR.HubConnection | null = null;
   private bidConnection: signalR.HubConnection | null = null;
   private config: SignalRConfig | null = null;
@@ -83,12 +84,15 @@ class SignalRManager {
   private readonly connectionTimeout = 30000; // 30 seconds
   private readonly keepAliveIntervalMs = 15000; // 15 seconds
 
-  private constructor() {
+  private constructor(instanceKey: string) {
+    this.instanceKey = instanceKey;
     this.connectionInfo = {
       state: ConnectionState.Disconnected,
       retryCount: 0,
       isOnline: navigator.onLine
     };
+
+    console.log(`SignalR: Creating new instance for key: ${instanceKey}`);
 
     // Listen for online/offline events
     window.addEventListener('online', this.handleOnline.bind(this));
@@ -98,11 +102,24 @@ class SignalRManager {
     document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
   }
 
-  public static getInstance(): SignalRManager {
-    if (!SignalRManager.instance) {
-      SignalRManager.instance = new SignalRManager();
+  public static getInstance(instanceKey: string = 'default'): SignalRManager {
+    if (!SignalRManager.instances.has(instanceKey)) {
+      SignalRManager.instances.set(instanceKey, new SignalRManager(instanceKey));
     }
-    return SignalRManager.instance;
+    return SignalRManager.instances.get(instanceKey)!;
+  }
+
+  public static destroyInstance(instanceKey: string): void {
+    const instance = SignalRManager.instances.get(instanceKey);
+    if (instance) {
+      instance.destroy();
+      SignalRManager.instances.delete(instanceKey);
+      console.log(`SignalR: Destroyed instance for key: ${instanceKey}`);
+    }
+  }
+
+  public static getAllInstances(): Map<string, SignalRManager> {
+    return new Map(SignalRManager.instances);
   }
 
   // Configuration and initialization
@@ -145,7 +162,9 @@ class SignalRManager {
     this.updateConnectionState(ConnectionState.Connecting);
 
     try {
-      console.log('SignalR: Starting connection...');
+      console.log(`SignalR: Starting connection for instance ${this.instanceKey}...`);
+      console.log(`SignalR: Token: ${this.config.token.substring(0, 20)}...`);
+      console.log(`SignalR: Base URL: ${this.config.baseUrl}`);
       
       // Disconnect existing connections first
       await this.disconnect();
@@ -176,8 +195,27 @@ class SignalRManager {
     }
   }
 
+  public destroy(): void {
+    console.log(`SignalR: Destroying instance ${this.instanceKey}...`);
+    this.isDestroyed = true;
+    
+    // Disconnect and cleanup
+    this.disconnect().catch(err => {
+      console.error('Error during destroy disconnect:', err);
+    });
+
+    // Remove event listeners
+    window.removeEventListener('online', this.handleOnline.bind(this));
+    window.removeEventListener('offline', this.handleOffline.bind(this));
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
+
+    // Clear all subscriptions
+    this.groupSubscriptions.clear();
+    this.eventHandlers = {};
+  }
+
   public async disconnect(): Promise<void> {
-    console.log('SignalR: Disconnecting...');
+    console.log(`SignalR: Disconnecting instance ${this.instanceKey}...`);
     
     // Clear retry timeout
     if (this.retryTimeout) {
@@ -399,11 +437,14 @@ class SignalRManager {
   private async createConnections(): Promise<void> {
     if (!this.config) return;
 
+    console.log(`SignalR: Creating connections for instance ${this.instanceKey}`);
+
     const connectionOptions = {
       accessTokenFactory: () => {
         if (!this.config?.token) {
           throw new Error('No authentication token available');
         }
+        console.log(`SignalR: Providing token for ${this.instanceKey}: ${this.config.token.substring(0, 20)}...`);
         return this.config.token;
       },
       transport: this.config.transport,
@@ -411,17 +452,77 @@ class SignalRManager {
       withCredentials: false
     };
 
-    // Create auction hub connection
+    const auctionHubUrl = `${this.config.baseUrl}/auctionHub`;
+    const bidHubUrl = `${this.config.baseUrl}/bidHub`;
+
+    console.log(`SignalR: Creating AuctionHub connection to: ${auctionHubUrl}`);
+    console.log(`SignalR: Creating BidHub connection to: ${bidHubUrl}`);
+
+    // Create auction hub connection with automatic reconnect
     this.auctionConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${this.config.baseUrl}/auctionHub`, connectionOptions)
-      .configureLogging(signalR.LogLevel.Warning)
+      .withUrl(auctionHubUrl, connectionOptions)
+      .withAutomaticReconnect([0, 2000, 10000, 30000]) // Retry after 0s, 2s, 10s, 30s
+      .configureLogging(signalR.LogLevel.Information) // More verbose logging
       .build();
 
-    // Create bid hub connection  
+    // Create bid hub connection with automatic reconnect
     this.bidConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${this.config.baseUrl}/bidHub`, connectionOptions)
-      .configureLogging(signalR.LogLevel.Warning)
+      .withUrl(bidHubUrl, connectionOptions)
+      .withAutomaticReconnect([0, 2000, 10000, 30000]) // Retry after 0s, 2s, 10s, 30s
+      .configureLogging(signalR.LogLevel.Information) // More verbose logging
       .build();
+
+    // Add connection event handlers for debugging
+    this.auctionConnection.onclose((error) => {
+      console.warn(`SignalR: AuctionHub connection closed for ${this.instanceKey}:`, error);
+    });
+
+    this.bidConnection.onclose((error) => {
+      console.warn(`SignalR: BidHub connection closed for ${this.instanceKey}:`, error);
+    });
+
+    this.auctionConnection.onreconnecting((error) => {
+      console.log(`🔄 SignalR: AuctionHub reconnecting for ${this.instanceKey}:`, error);
+      this.updateConnectionState(ConnectionState.Reconnecting, error?.toString());
+    });
+
+    this.bidConnection.onreconnecting((error) => {
+      console.log(`🔄 SignalR: BidHub reconnecting for ${this.instanceKey}:`, error);
+    });
+
+    this.auctionConnection.onreconnected((connectionId) => {
+      console.log(`✅ SignalR: AuctionHub reconnected for ${this.instanceKey}:`, connectionId);
+      this.updateConnectionState(ConnectionState.Connected);
+      
+      // Re-subscribe to groups after reconnection
+      this.resubscribeToGroups();
+    });
+
+    this.bidConnection.onreconnected((connectionId) => {
+      console.log(`✅ SignalR: BidHub reconnected for ${this.instanceKey}:`, connectionId);
+      
+      // Re-subscribe to groups after reconnection
+      this.resubscribeToGroups();
+    });
+  }
+
+  // Re-subscribe to all groups after reconnection
+  private async resubscribeToGroups(): Promise<void> {
+    console.log(`🔄 Re-subscribing to groups for ${this.instanceKey}:`, Object.keys(this.groupSubscriptions));
+    
+    for (const [groupName, subscription] of Object.entries(this.groupSubscriptions)) {
+      try {
+        if (subscription.type === 'auction') {
+          await this.joinAuction(groupName);
+          console.log(`✅ Re-joined auction group: ${groupName}`);
+        } else if (subscription.type === 'auctionCar') {
+          await this.joinAuctionCar(groupName);
+          console.log(`✅ Re-joined auction car group: ${groupName}`);
+        }
+      } catch (error) {
+        console.error(`❌ Failed to re-join group ${groupName}:`, error);
+      }
+    }
   }
 
   private async startConnections(): Promise<void> {
@@ -429,16 +530,24 @@ class SignalRManager {
       throw new Error('Connections not created');
     }
 
+    console.log(`SignalR: Starting connections for instance ${this.instanceKey}...`);
+
     // Start both connections with timeout
     const startPromises = [
       Promise.race([
-        this.auctionConnection.start(),
+        this.auctionConnection.start().then(() => {
+          console.log(`SignalR: AuctionHub started successfully for ${this.instanceKey}`);
+          console.log(`SignalR: AuctionHub connectionId: ${this.auctionConnection?.connectionId}`);
+        }),
         new Promise((_, reject) => 
           setTimeout(() => reject(new Error('AuctionHub connection timeout')), this.connectionTimeout)
         )
       ]),
       Promise.race([
-        this.bidConnection.start(),
+        this.bidConnection.start().then(() => {
+          console.log(`SignalR: BidHub started successfully for ${this.instanceKey}`);
+          console.log(`SignalR: BidHub connectionId: ${this.bidConnection?.connectionId}`);
+        }),
         new Promise((_, reject) => 
           setTimeout(() => reject(new Error('BidHub connection timeout')), this.connectionTimeout)
         )
@@ -446,6 +555,7 @@ class SignalRManager {
     ];
 
     await Promise.all(startPromises);
+    console.log(`SignalR: All connections started for instance ${this.instanceKey}`);
     console.log('SignalR: Both connections started successfully');
   }
 

@@ -4809,7 +4809,7 @@
   },
   {
     "ContainingType": "AutoriaFinal.API.Program\u002B\u003C\u003Ec",
-    "Method": "\u003CMain\u003Eb__0_19",
+    "Method": "\u003CMain\u003Eb__0_17",
     "RelativePath": "api/info",
     "HttpMethod": "GET",
     "IsController": false,
@@ -4925,7 +4925,7 @@
   },
   {
     "ContainingType": "AutoriaFinal.API.Program\u002B\u003C\u003Ec__DisplayClass0_0",
-    "Method": "\u003CMain\u003Eb__18",
+    "Method": "\u003CMain\u003Eb__16",
     "RelativePath": "health",
     "HttpMethod": "GET",
     "IsController": false,

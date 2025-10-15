@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.API\\AutoriaFinal.API.csproj": {}
+    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.API\\AutoriaFinal.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.API\\AutoriaFinal.API.csproj": {
+    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.API\\AutoriaFinal.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.API\\AutoriaFinal.API.csproj",
+        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.API\\AutoriaFinal.API.csproj",
         "projectName": "AutoriaFinal.API",
-        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.API\\AutoriaFinal.API.csproj",
+        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.API\\AutoriaFinal.API.csproj",
         "packagesPath": "C:\\Users\\Ravan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.API\\obj\\",
+        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -31,20 +31,20 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\AutoriaFinal.Application.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\AutoriaFinal.Application.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\AutoriaFinal.Application.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\AutoriaFinal.Application.csproj"
               },
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj"
               },
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj"
               },
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj"
               },
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj"
               }
             }
           }
@@ -121,14 +121,14 @@
         }
       }
     },
-    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\AutoriaFinal.Application.csproj": {
+    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\AutoriaFinal.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\AutoriaFinal.Application.csproj",
+        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\AutoriaFinal.Application.csproj",
         "projectName": "AutoriaFinal.Application",
-        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\AutoriaFinal.Application.csproj",
+        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\AutoriaFinal.Application.csproj",
         "packagesPath": "C:\\Users\\Ravan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\obj\\",
+        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -148,11 +148,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj"
               },
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj"
               }
             }
           }
@@ -202,14 +202,14 @@
         }
       }
     },
-    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj": {
+    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj",
+        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj",
         "projectName": "AutoriaFinal.Contract",
-        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj",
+        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj",
         "packagesPath": "C:\\Users\\Ravan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\obj\\",
+        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -229,8 +229,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj"
               }
             }
           }
@@ -276,14 +276,14 @@
         }
       }
     },
-    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj": {
+    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj",
         "projectName": "AutoriaFinal.Domain",
-        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj",
+        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj",
         "packagesPath": "C:\\Users\\Ravan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -352,14 +352,14 @@
         }
       }
     },
-    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj": {
+    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj",
         "projectName": "AutoriaFinal.Infrastructure",
-        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\AutoriaFinal.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Ravan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -379,11 +379,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj"
               },
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj"
               }
             }
           }
@@ -436,14 +436,14 @@
         }
       }
     },
-    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj": {
+    "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj",
         "projectName": "AutoriaFinal.Persistence",
-        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj",
+        "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\AutoriaFinal.Persistence.csproj",
         "packagesPath": "C:\\Users\\Ravan\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\obj\\",
+        "outputPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -463,8 +463,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj": {
-                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj"
+              "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj": {
+                "projectPath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Domain\\AutoriaFinal.Domain.csproj"
               }
             }
           }

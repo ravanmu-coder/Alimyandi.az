@@ -16,7 +16,7 @@ namespace AutoriaFinal.Contract.Dtos.Auctions.Auction
         public int TimerSeconds { get; set; }
 
         public string? CurrentCarLotNumber { get; set; }
-        public bool IsLive { get; set; }
+        public bool IsLive => Status == "Running";
         public int ExtendedCount { get; set; }
         public int MaxCarDurationMinutes { get; set; }
         public DateTime? CurrentCarStartTime { get; set; }

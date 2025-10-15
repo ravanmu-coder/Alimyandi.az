@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6ANVl+hXirQ=",
+  "dgSpecHash": "RdiREORVqes=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj",
+  "projectFilePath": "C:\\Users\\Ravan\\Desktop\\AutotiaFinalProject\\Alimyandi.az\\Elimyandi.Az\\Autoria-Final\\AutoriaFinal\\AutoriaFinal.Contract\\AutoriaFinal.Contract.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ravan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.19\\microsoft.aspnetcore.cryptography.internal.8.0.19.nupkg.sha512",
     "C:\\Users\\Ravan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.19\\microsoft.aspnetcore.cryptography.keyderivation.8.0.19.nupkg.sha512",

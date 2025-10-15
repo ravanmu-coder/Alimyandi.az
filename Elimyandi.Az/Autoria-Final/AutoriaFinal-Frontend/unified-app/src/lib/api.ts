@@ -107,10 +107,23 @@ class ApiClient {
         throw new Error('Access denied. You do not have permission to access this resource.');
       }
 
+      // Handle 404 gracefully for auction status endpoints
+      if (response.status === 404 && url.includes('/status')) {
+        console.log('📊 API: 404 on status endpoint - auction may be inactive/completed');
+        const errorText = await response.text();
+        const error = new Error(`API Error: ${response.status} - ${errorText}`);
+        (error as any).status = 404;
+        (error as any).isStatusEndpoint = true;
+        throw error;
+      }
+
       if (!response.ok) {
         const errorText = await response.text();
         console.error(`API Error: ${response.status} - ${errorText}`);
-        throw new Error(`API Error: ${response.status} - ${errorText}`);
+        
+        const error = new Error(`API Error: ${response.status} - ${errorText}`);
+        (error as any).status = response.status;
+        throw error;
       }
 
       const contentType = response.headers.get('Content-Type');
@@ -286,8 +299,18 @@ class ApiClient {
     return this.request<any>(`/api/Auction/${id}/current-state`);
   }
 
+  async getAuctionStatus(id: string): Promise<{ activeCarId?: string; allFinished: boolean }> {
+    return this.request<{ activeCarId?: string; allFinished: boolean }>(`/api/auctions/${id}/status`);
+  }
+
   async getAuctionStatistics(id: string): Promise<any> {
-    return this.request<any>(`/api/Auction/${id}/statistics`);
+    try {
+      return await this.request<any>(`/api/Auction/${id}/statistics`);
+    } catch (error: any) {
+      // Statistics endpoint may require admin permissions
+      console.warn(`Statistics endpoint failed for auction ${id}:`, error.message);
+      return null;
+    }
   }
 
   async getAuctionsByLocation(locationId: string): Promise<AuctionGetDto[]> {

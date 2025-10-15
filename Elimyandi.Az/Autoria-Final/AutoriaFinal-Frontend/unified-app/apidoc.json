@@ -6,6 +6,1372 @@
     "version": "v1"
   },
   "paths": {
+    "/api/Admin/dashboard": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminDashboardDtoAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminDashboardDtoAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminDashboardDtoAdminResponseDto"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/statistics/users": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserStatsOverviewAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserStatsOverviewAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserStatsOverviewAdminResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/system/health": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminSystemStatsOverviewAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminSystemStatsOverviewAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminSystemStatsOverviewAdminResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/activities/recent": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminRecentActivityDtoListAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminRecentActivityDtoListAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminRecentActivityDtoListAdminResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "Page",
+            "in": "query",
+            "schema": {
+              "maximum": 2147483647,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SearchTerm",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SearchFields",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Roles",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "IsActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "EmailConfirmed",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "PhoneConfirmed",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "CreatedFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "CreatedTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "LastLoginFrom",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "LastLoginTo",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Countries",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "Cities",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "AgeFrom",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "AgeTo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "TotalSpentFrom",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "TotalSpentTo",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "FailedLoginAttemptsFrom",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FailedLoginAttemptsTo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "SortBy",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "SortDirection",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "RequiresAttention",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "IsVip",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "HasProfilePicture",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "AllowsMarketing",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "RiskLevels",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "ExportMode",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "ExportFormat",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ExportFields",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserListDtoAdminPagedResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserListDtoAdminPagedResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserListDtoAdminPagedResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/{userId}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserDetailDtoAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserDetailDtoAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserDetailDtoAdminResponseDto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminDeleteUserDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminDeleteUserDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminDeleteUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/search": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserListDtoListAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserListDtoListAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserListDtoListAdminResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/{userId}/status": {
+      "put": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminUserStatusChangeDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminUserStatusChangeDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminUserStatusChangeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/{userId}/roles": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminAssignRoleDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminAssignRoleDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminAssignRoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/{userId}/roles/{role}": {
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "role",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/{userId}/profile": {
+      "put": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserDetailDtoAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserDetailDtoAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminUserDetailDtoAdminResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/{userId}/restore": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BooleanAdminResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/bulk": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminBulkActionDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminBulkActionDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminBulkActionDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminBulkOperationResultDtoAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminBulkOperationResultDtoAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminBulkOperationResultDtoAdminResponseDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/bulk/email": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminBulkEmailDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminBulkEmailDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminBulkEmailDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminBulkOperationResultDtoAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminBulkOperationResultDtoAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminBulkOperationResultDtoAdminResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/bulk/roles": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminBulkRoleDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminBulkRoleDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminBulkRoleDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminBulkOperationResultDtoAdminResponseDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminBulkOperationResultDtoAdminResponseDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdminBulkOperationResultDtoAdminResponseDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/users/export": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminUserExportDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminUserExportDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdminUserExportDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/dashboard/export": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "Excel"
+            }
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Admin/health": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Admin/info": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Auction": {
       "get": {
         "tags": [
@@ -562,6 +1928,141 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Auction/dashboard-stats": {
+      "get": {
+        "tags": [
+          "Auction"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": { }
+              },
+              "application/json": {
+                "schema": { }
+              },
+              "text/json": {
+                "schema": { }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auction/status/{status}": {
+      "get": {
+        "tags": [
+          "Auction"
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/AuctionStatus"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionGetDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionGetDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionGetDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auction/{id}/make-ready": {
+      "post": {
+        "tags": [
+          "Auction"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionDetailDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionDetailDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionDetailDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auction/scheduler-debug": {
+      "get": {
+        "tags": [
+          "Auction"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auction/force-scheduler-run": {
+      "post": {
+        "tags": [
+          "Auction"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -1303,24 +2804,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "boolean"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
+            "description": "OK"
           },
           "404": {
             "description": "Not Found",
@@ -1421,6 +2905,26 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -1481,6 +2985,26 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -1501,6 +3025,25 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EndAuctionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EndAuctionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EndAuctionRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -1600,6 +3143,26 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -1640,6 +3203,26 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -1671,24 +3254,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "boolean"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -1760,24 +3326,30 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
-                }
-              }
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/{id}/pre-bids/requirements": {
+      "get": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -1809,24 +3381,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "boolean"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "boolean"
-                }
-              }
-            }
+            "description": "OK"
           }
         }
       }
@@ -1849,21 +3404,24 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -1946,11 +3504,77 @@
                 }
               }
             }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/api/AuctionCar/{id}/hammer": {
+    "/api/AuctionCar/{id}/reserve-met": {
+      "get": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/{id}/next-min-bid": {
+      "get": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/{id}/approve-winner": {
       "post": {
         "tags": [
           "AuctionCar"
@@ -1970,17 +3594,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SetHammerPriceRequest"
+                "$ref": "#/components/schemas/ApproveWinnerRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/SetHammerPriceRequest"
+                "$ref": "#/components/schemas/ApproveWinnerRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/SetHammerPriceRequest"
+                "$ref": "#/components/schemas/ApproveWinnerRequest"
               }
             }
           }
@@ -2025,43 +3649,23 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/AuctionCar/{id}/reserve-met": {
-      "get": {
-        "tags": [
-          "AuctionCar"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
+          },
+          "401": {
+            "description": "Unauthorized",
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/ProblemDetails"
                 }
               }
             }
@@ -2069,8 +3673,8 @@
         }
       }
     },
-    "/api/AuctionCar/{id}/next-min-bid": {
-      "get": {
+    "/api/AuctionCar/{id}/reject-winner": {
+      "post": {
         "tags": [
           "AuctionCar"
         ],
@@ -2085,26 +3689,436 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RejectWinnerRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RejectWinnerRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RejectWinnerRequest"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "number",
-                  "format": "double"
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "number",
-                  "format": "double"
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "number",
-                  "format": "double"
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/{id}/deposit-paid": {
+      "post": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepositPaidRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepositPaidRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DepositPaidRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/{id}/complete-payment": {
+      "post": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompletePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompletePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompletePaymentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/{id}/assign-lane": {
+      "post": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignLaneRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignLaneRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignLaneRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuctionCarDetailDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/lane/{laneNumber}": {
+      "get": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "laneNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "scheduleDate",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionCarGetDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionCarGetDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionCarGetDto"
+                  }
                 }
               }
             }
@@ -2134,17 +4148,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidStatsDto"
+                  "$ref": "#/components/schemas/AuctionCarStatsDto"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidStatsDto"
+                  "$ref": "#/components/schemas/AuctionCarStatsDto"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidStatsDto"
+                  "$ref": "#/components/schemas/AuctionCarStatsDto"
                 }
               }
             }
@@ -2188,6 +4202,29 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/auction/{auctionId}/sell-through-rate": {
+      "get": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "auctionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -2517,6 +4554,208 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/components/schemas/AuctionCarGetDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/auction/{auctionId}/awaiting-approval": {
+      "get": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "auctionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionCarGetDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionCarGetDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionCarGetDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/user/{userId}/won": {
+      "get": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "auctionId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionCarGetDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionCarGetDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AuctionCarGetDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/auction-status": {
+      "get": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleFinderAuctionStatusDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleFinderAuctionStatusDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleFinderAuctionStatusDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AuctionCar/auction-status/batch": {
+      "post": {
+        "tags": [
+          "AuctionCar"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleFinderAuctionStatusDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleFinderAuctionStatusDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleFinderAuctionStatusDto"
                   }
                 }
               }
@@ -3264,17 +5503,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RejectWinnerRequest"
+                "$ref": "#/components/schemas/AuctionWinnerRejectRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RejectWinnerRequest"
+                "$ref": "#/components/schemas/AuctionWinnerRejectRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RejectWinnerRequest"
+                "$ref": "#/components/schemas/AuctionWinnerRejectRequest"
               }
             }
           }
@@ -4123,6 +6362,30 @@
         }
       }
     },
+    "/api/Auth/login-google": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/google-response": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Auth/confirmemail": {
       "get": {
         "tags": [
@@ -4705,17 +6968,37 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
                 }
               }
             }
@@ -4753,17 +7036,57 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
                 }
               }
             }
@@ -4801,17 +7124,37 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
                 }
               }
             }
@@ -4837,7 +7180,163 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Bid/auction-car/{auctionCarId}/proxy-battle-status": {
+      "get": {
+        "tags": [
+          "Bid"
+        ],
+        "parameters": [
+          {
+            "name": "auctionCarId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProxyStatusResultApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProxyStatusResultApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProxyStatusResultApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Bid/auction-car/{auctionCarId}/analyze-proxy-efficiency": {
+      "post": {
+        "tags": [
+          "Bid"
+        ],
+        "parameters": [
+          {
+            "name": "auctionCarId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalyzeProxyRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalyzeProxyRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalyzeProxyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProxyEfficiencyResultApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProxyEfficiencyResultApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProxyEfficiencyResultApiResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -4864,17 +7363,37 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
                 }
               }
             }
@@ -4913,17 +7432,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidHistoryDto"
+                  "$ref": "#/components/schemas/BidHistoryDtoApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidHistoryDto"
+                  "$ref": "#/components/schemas/BidHistoryDtoApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidHistoryDto"
+                  "$ref": "#/components/schemas/BidHistoryDtoApiResponse"
                 }
               }
             }
@@ -4962,26 +7481,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BidGetDto"
-                  }
+                  "$ref": "#/components/schemas/BidGetDtoIEnumerableApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BidGetDto"
-                  }
+                  "$ref": "#/components/schemas/BidGetDtoIEnumerableApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BidGetDto"
-                  }
+                  "$ref": "#/components/schemas/BidGetDtoIEnumerableApiResponse"
                 }
               }
             }
@@ -5011,17 +7521,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidStatsDto"
+                  "$ref": "#/components/schemas/BidStatsDtoApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidStatsDto"
+                  "$ref": "#/components/schemas/BidStatsDtoApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidStatsDto"
+                  "$ref": "#/components/schemas/BidStatsDtoApiResponse"
                 }
               }
             }
@@ -5051,17 +7561,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidDetailDto"
+                  "$ref": "#/components/schemas/BidDetailDtoApiResponse"
                 }
               }
             }
@@ -5091,20 +7601,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "number",
-                  "format": "double"
+                  "$ref": "#/components/schemas/ObjectApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "number",
-                  "format": "double"
+                  "$ref": "#/components/schemas/ObjectApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "number",
-                  "format": "double"
+                  "$ref": "#/components/schemas/ObjectApiResponse"
                 }
               }
             }
@@ -5123,26 +7630,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BidGetDto"
-                  }
+                  "$ref": "#/components/schemas/BidGetDtoIEnumerableApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BidGetDto"
-                  }
+                  "$ref": "#/components/schemas/BidGetDtoIEnumerableApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BidGetDto"
-                  }
+                  "$ref": "#/components/schemas/BidGetDtoIEnumerableApiResponse"
                 }
               }
             }
@@ -5172,26 +7670,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BidDetailDto"
-                  }
+                  "$ref": "#/components/schemas/BidDetailDtoIEnumerableApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BidDetailDto"
-                  }
+                  "$ref": "#/components/schemas/BidDetailDtoIEnumerableApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/BidDetailDto"
-                  }
+                  "$ref": "#/components/schemas/BidDetailDtoIEnumerableApiResponse"
                 }
               }
             }
@@ -5221,17 +7710,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidSummaryDto"
+                  "$ref": "#/components/schemas/BidSummaryDtoApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidSummaryDto"
+                  "$ref": "#/components/schemas/BidSummaryDtoApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidSummaryDto"
+                  "$ref": "#/components/schemas/BidSummaryDtoApiResponse"
                 }
               }
             }
@@ -5269,17 +7758,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidValidationResult"
+                  "$ref": "#/components/schemas/BidValidationResultApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidValidationResult"
+                  "$ref": "#/components/schemas/BidValidationResultApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BidValidationResult"
+                  "$ref": "#/components/schemas/BidValidationResultApiResponse"
                 }
               }
             }
@@ -5309,17 +7798,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/ObjectApiResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/ObjectApiResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "boolean"
+                  "$ref": "#/components/schemas/ObjectApiResponse"
                 }
               }
             }
@@ -5353,7 +7842,24 @@
         },
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectApiResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -5378,8 +7884,19 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
+                  "CarCondition",
+                  "Currency",
+                  "DamageType",
+                  "DriveTrain",
+                  "FuelType",
+                  "LocationId",
                   "Make",
+                  "Mileage",
+                  "MileageUnit",
                   "Model",
+                  "Price",
+                  "TitleType",
+                  "Transmission",
                   "Vin",
                   "Year"
                 ],
@@ -5387,10 +7904,13 @@
                 "properties": {
                   "Vin": {
                     "maxLength": 17,
-                    "minLength": 0,
+                    "minLength": 17,
+                    "pattern": "^[A-HJ-NPR-Z0-9]{17}$",
                     "type": "string"
                   },
                   "Year": {
+                    "maximum": 2030,
+                    "minimum": 1900,
                     "type": "integer",
                     "format": "int32"
                   },
@@ -5405,10 +7925,66 @@
                     "type": "string"
                   },
                   "BodyStyle": {
+                    "maxLength": 64,
+                    "minLength": 0,
                     "type": "string"
                   },
                   "Color": {
+                    "maxLength": 64,
+                    "minLength": 0,
                     "type": "string"
+                  },
+                  "Price": {
+                    "minimum": 0.01,
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Currency": {
+                    "maxLength": 3,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Mileage": {
+                    "maximum": 2147483647,
+                    "minimum": 0,
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "MileageUnit": {
+                    "maxLength": 10,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "FuelType": {
+                    "$ref": "#/components/schemas/FuelType"
+                  },
+                  "DamageType": {
+                    "$ref": "#/components/schemas/DamageType"
+                  },
+                  "Transmission": {
+                    "$ref": "#/components/schemas/Transmission"
+                  },
+                  "DriveTrain": {
+                    "$ref": "#/components/schemas/DriveTrain"
+                  },
+                  "CarCondition": {
+                    "$ref": "#/components/schemas/CarCondition"
+                  },
+                  "TitleType": {
+                    "$ref": "#/components/schemas/TitleType"
+                  },
+                  "SecondaryDamage": {
+                    "$ref": "#/components/schemas/DamageType"
+                  },
+                  "HasKeys": {
+                    "type": "boolean"
+                  },
+                  "TitleState": {
+                    "type": "string"
+                  },
+                  "EstimatedRetailValue": {
+                    "type": "number",
+                    "format": "double"
                   },
                   "LocationId": {
                     "type": "string",
@@ -5419,6 +7995,13 @@
                     "format": "binary"
                   },
                   "ImagePath": {
+                    "type": "string"
+                  },
+                  "Video": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "VideoPath": {
                     "type": "string"
                   },
                   "OwnerId": {
@@ -5445,6 +8028,48 @@
                 "Color": {
                   "style": "form"
                 },
+                "Price": {
+                  "style": "form"
+                },
+                "Currency": {
+                  "style": "form"
+                },
+                "Mileage": {
+                  "style": "form"
+                },
+                "MileageUnit": {
+                  "style": "form"
+                },
+                "FuelType": {
+                  "style": "form"
+                },
+                "DamageType": {
+                  "style": "form"
+                },
+                "Transmission": {
+                  "style": "form"
+                },
+                "DriveTrain": {
+                  "style": "form"
+                },
+                "CarCondition": {
+                  "style": "form"
+                },
+                "TitleType": {
+                  "style": "form"
+                },
+                "SecondaryDamage": {
+                  "style": "form"
+                },
+                "HasKeys": {
+                  "style": "form"
+                },
+                "TitleState": {
+                  "style": "form"
+                },
+                "EstimatedRetailValue": {
+                  "style": "form"
+                },
                 "LocationId": {
                   "style": "form"
                 },
@@ -5452,6 +8077,12 @@
                   "style": "form"
                 },
                 "ImagePath": {
+                  "style": "form"
+                },
+                "Video": {
+                  "style": "form"
+                },
+                "VideoPath": {
                   "style": "form"
                 },
                 "OwnerId": {
@@ -5802,10 +8433,1819 @@
           }
         }
       }
+    },
+    "/api/Valuation/estimate": {
+      "post": {
+        "tags": [
+          "Valuation"
+        ],
+        "parameters": [
+          {
+            "name": "askingPrice",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleDetailsDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleDetailsDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleDetailsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AdminAlertDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "severity": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isRead": {
+            "type": "boolean"
+          },
+          "actionUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminAssignRoleDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminAuctionStatsOverview": {
+        "type": "object",
+        "properties": {
+          "totalAuctions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activeAuctions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "completedAuctions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cancelledAuctions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCars": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carsInAuction": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "soldCars": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unsoldCars": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sellThroughRate": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "averageCarPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalBids": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bidsToday": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "averageBidsPerCar": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminBulkActionDto": {
+        "required": [
+          "action",
+          "userIds"
+        ],
+        "type": "object",
+        "properties": {
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "action": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "sendNotification": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminBulkEmailDto": {
+        "type": "object",
+        "properties": {
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "subject": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminBulkOperationItemDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "errorCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "processedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminBulkOperationResultDto": {
+        "type": "object",
+        "properties": {
+          "totalRequested": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "successCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "failureCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "skippedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminBulkOperationItemDto"
+            },
+            "nullable": true
+          },
+          "processingTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "isPartialSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isCompleteSuccess": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isCompleteFailure": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "successRate": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminBulkOperationResultDtoAdminResponseDto": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AdminBulkOperationResultDto"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AdminMetadataDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminBulkRoleDto": {
+        "type": "object",
+        "properties": {
+          "userIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminChartDataDto": {
+        "type": "object",
+        "properties": {
+          "userRegistrations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminChartPointDto"
+            },
+            "nullable": true
+          },
+          "auctionActivity": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminChartPointDto"
+            },
+            "nullable": true
+          },
+          "revenue": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminChartPointDto"
+            },
+            "nullable": true
+          },
+          "bidActivity": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminChartPointDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminChartPointDto": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "label": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminDashboardDto": {
+        "type": "object",
+        "properties": {
+          "userStats": {
+            "$ref": "#/components/schemas/AdminUserStatsOverview"
+          },
+          "auctionStats": {
+            "$ref": "#/components/schemas/AdminAuctionStatsOverview"
+          },
+          "financialStats": {
+            "$ref": "#/components/schemas/AdminFinancialStatsOverview"
+          },
+          "systemStats": {
+            "$ref": "#/components/schemas/AdminSystemStatsOverview"
+          },
+          "recentActivities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminRecentActivityDto"
+            },
+            "nullable": true
+          },
+          "systemAlerts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminAlertDto"
+            },
+            "nullable": true
+          },
+          "topUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminTopUserDto"
+            },
+            "nullable": true
+          },
+          "chartData": {
+            "$ref": "#/components/schemas/AdminChartDataDto"
+          },
+          "generatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "generationTime": {
+            "type": "string",
+            "format": "date-span"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminDashboardDtoAdminResponseDto": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AdminDashboardDto"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AdminMetadataDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminDeleteUserDto": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminFinancialStatsOverview": {
+        "type": "object",
+        "properties": {
+          "totalRevenue": {
+            "type": "number",
+            "format": "double"
+          },
+          "revenueToday": {
+            "type": "number",
+            "format": "double"
+          },
+          "revenueThisWeek": {
+            "type": "number",
+            "format": "double"
+          },
+          "revenueThisMonth": {
+            "type": "number",
+            "format": "double"
+          },
+          "revenueThisYear": {
+            "type": "number",
+            "format": "double"
+          },
+          "commissionEarned": {
+            "type": "number",
+            "format": "double"
+          },
+          "pendingPayments": {
+            "type": "number",
+            "format": "double"
+          },
+          "completedPayments": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalTransactions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pendingTransactions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "failedTransactions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentSuccessRate": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "averageTransactionAmount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminMetadataDto": {
+        "type": "object",
+        "properties": {
+          "filters": {
+            "type": "object",
+            "additionalProperties": { },
+            "nullable": true
+          },
+          "sortBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "sortDirection": {
+            "type": "string",
+            "nullable": true
+          },
+          "queryExecutedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "queryDuration": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "queryHash": {
+            "type": "string",
+            "nullable": true
+          },
+          "fromCache": {
+            "type": "boolean"
+          },
+          "cacheHits": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminPaginationDto": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasNextPage": {
+            "type": "boolean"
+          },
+          "hasPreviousPage": {
+            "type": "boolean"
+          },
+          "startItem": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "endItem": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          },
+          "pageNumbers": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminRecentActivityDto": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "severity": {
+            "type": "string",
+            "nullable": true
+          },
+          "icon": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminRecentActivityDtoListAdminResponseDto": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminRecentActivityDto"
+            },
+            "nullable": true
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AdminMetadataDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminSystemStatsOverview": {
+        "type": "object",
+        "properties": {
+          "systemUptime": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalApiCalls": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "apiCallsToday": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "averageResponseTime": {
+            "type": "number",
+            "format": "double"
+          },
+          "errorCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "warningCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activeConnections": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "databaseSize": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "storageUsed": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "cpuUsage": {
+            "type": "number",
+            "format": "double"
+          },
+          "memoryUsage": {
+            "type": "number",
+            "format": "double"
+          },
+          "serverHealth": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminSystemStatsOverviewAdminResponseDto": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AdminSystemStatsOverview"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AdminMetadataDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminTopUserDto": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalSpent": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalPurchases": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalBids": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastActivity": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "category": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserActivityDto": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "action": {
+            "type": "string",
+            "nullable": true
+          },
+          "details": {
+            "type": "string",
+            "nullable": true
+          },
+          "ipAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "userAgent": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserDetailDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "age": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "profilePicture": {
+            "type": "string",
+            "nullable": true
+          },
+          "bio": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "emailConfirmed": {
+            "type": "boolean"
+          },
+          "phoneNumberConfirmed": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastLoginAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "deletedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "failedLoginAttempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastFailedLogin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "passwordChangedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "emailChangedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "securityStamp": {
+            "type": "string",
+            "nullable": true
+          },
+          "concurrencyStamp": {
+            "type": "string",
+            "nullable": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "primaryRole": {
+            "type": "string",
+            "nullable": true
+          },
+          "allowMarketing": {
+            "type": "boolean"
+          },
+          "preferredLanguage": {
+            "type": "string",
+            "nullable": true
+          },
+          "timeZone": {
+            "type": "string",
+            "nullable": true
+          },
+          "stats": {
+            "$ref": "#/components/schemas/AdminUserStatsDto"
+          },
+          "recentActivities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminUserActivityDto"
+            },
+            "nullable": true
+          },
+          "accountStatus": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "riskAssessment": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "requiresAttention": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "securityAlerts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "accountAge": {
+            "type": "string",
+            "format": "date-span",
+            "readOnly": true
+          },
+          "membershipDuration": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserDetailDtoAdminResponseDto": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AdminUserDetailDto"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AdminMetadataDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserExportDto": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "nullable": true
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "filter": {
+            "$ref": "#/components/schemas/AdminUserFilterDto"
+          },
+          "includeStatistics": {
+            "type": "boolean"
+          },
+          "includeAuditLog": {
+            "type": "boolean"
+          },
+          "fileName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserFilterDto": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "searchTerm": {
+            "type": "string",
+            "nullable": true
+          },
+          "searchFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "emailConfirmed": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "phoneConfirmed": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastLoginFrom": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastLoginTo": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "countries": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "cities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "ageFrom": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ageTo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "totalSpentFrom": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "totalSpentTo": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "failedLoginAttemptsFrom": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "failedLoginAttemptsTo": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "sortBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "sortDirection": {
+            "type": "string",
+            "nullable": true
+          },
+          "requiresAttention": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "isVip": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "hasProfilePicture": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "allowsMarketing": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "riskLevels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "exportMode": {
+            "type": "boolean"
+          },
+          "exportFormat": {
+            "type": "string",
+            "nullable": true
+          },
+          "exportFields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserListDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "fullName": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailConfirmed": {
+            "type": "boolean"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "primaryRole": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastLoginAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "failedLoginAttempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastFailedLogin": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "country": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalCars": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalBids": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalSpent": {
+            "type": "number",
+            "format": "double"
+          },
+          "userStatus": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "lastActivityText": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "isVip": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "riskLevel": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserListDtoAdminPagedResponseDto": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminUserListDto"
+            },
+            "nullable": true
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AdminMetadataDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/AdminPaginationDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserListDtoListAdminResponseDto": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminUserListDto"
+            },
+            "nullable": true
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AdminMetadataDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserStatsDto": {
+        "type": "object",
+        "properties": {
+          "totalCars": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activeCars": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "soldCars": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalBids": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "wonAuctions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalSpent": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalEarned": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalTransactions": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalLogins": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "averageSessionDuration": {
+            "type": "number",
+            "format": "double"
+          },
+          "favoriteCategory": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastPurchase": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastSale": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserStatsOverview": {
+        "type": "object",
+        "properties": {
+          "totalUsers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activeUsers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "newUsersToday": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "newUsersThisWeek": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "newUsersThisMonth": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "unconfirmedUsers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "blockedUsers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vipUsers": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "activeUserPercentage": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "confirmationRate": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "usersByRole": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminUsersByRoleDto"
+            },
+            "nullable": true
+          },
+          "usersByLocation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminUsersByLocationDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserStatsOverviewAdminResponseDto": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/AdminUserStatsOverview"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AdminMetadataDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUserStatusChangeDto": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUsersByLocationDto": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentage": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AdminUsersByRoleDto": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "type": "string",
+            "nullable": true
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "percentage": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AnalyzeProxyRequest": {
+        "type": "object",
+        "properties": {
+          "proposedMax": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApproveWinnerRequest": {
+        "type": "object",
+        "properties": {
+          "approvalNotes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AssignLaneRequest": {
+        "required": [
+          "scheduledTime"
+        ],
+        "type": "object",
+        "properties": {
+          "laneNumber": {
+            "maximum": 20,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "runOrder": {
+            "maximum": 1000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "scheduledTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "AuctionCancelRequest": {
         "required": [
           "reason"
@@ -5824,8 +10264,8 @@
         "required": [
           "auctionId",
           "carId",
-          "lotNumber",
-          "minPreBid"
+          "estimatedRetailValue",
+          "lotNumber"
         ],
         "type": "object",
         "properties": {
@@ -5849,18 +10289,54 @@
             "format": "int32",
             "nullable": true
           },
-          "minPreBid": {
+          "estimatedRetailValue": {
             "maximum": 1000000,
-            "minimum": 1,
+            "minimum": 100,
             "type": "number",
             "format": "double"
           },
-          "reservePrice": {
-            "maximum": 10000000,
-            "minimum": 0,
+          "laneNumber": {
+            "maximum": 20,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "runOrder": {
+            "maximum": 1000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scheduledTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "requiresSellerApproval": {
+            "type": "boolean"
+          },
+          "sellerNotes": {
+            "maxLength": 1000,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "startPrice": {
             "type": "number",
             "format": "double",
-            "nullable": true
+            "readOnly": true
+          },
+          "reservePrice": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          },
+          "minPreBid": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -5889,29 +10365,31 @@
             "format": "int32",
             "nullable": true
           },
-          "reservePrice": {
+          "startPrice": {
             "type": "number",
-            "format": "double",
-            "nullable": true
+            "format": "double"
+          },
+          "currentPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "minPreBid": {
+            "type": "number",
+            "format": "double"
           },
           "hammerPrice": {
             "type": "number",
             "format": "double",
             "nullable": true
           },
-          "currentPrice": {
+          "buyersPremium": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
-          "isReserveMet": {
-            "type": "boolean"
-          },
-          "minPreBid": {
+          "totalPrice": {
             "type": "number",
-            "format": "double"
-          },
-          "winnerStatus": {
-            "type": "string",
+            "format": "double",
             "nullable": true
           },
           "soldPrice": {
@@ -5919,16 +10397,29 @@
             "format": "double",
             "nullable": true
           },
-          "lastBidTime": {
-            "type": "string",
-            "format": "date-time",
+          "reservePrice": {
+            "type": "number",
+            "format": "double",
             "nullable": true
           },
-          "bidCount": {
-            "type": "integer",
-            "format": "int32"
+          "isReserveMet": {
+            "type": "boolean"
+          },
+          "showReservePrice": {
+            "type": "boolean"
+          },
+          "winnerStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "auctionCondition": {
+            "type": "string",
+            "nullable": true
           },
           "isActive": {
+            "type": "boolean"
+          },
+          "requiresSellerApproval": {
             "type": "boolean"
           },
           "activeStartTime": {
@@ -5936,20 +10427,27 @@
             "format": "date-time",
             "nullable": true
           },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
+          "lastBidTime": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "totalBidsCount": {
+          "remainingTimeSeconds": {
             "type": "integer",
             "format": "int32"
           },
-          "preBidsCount": {
+          "isTimeExpired": {
+            "type": "boolean"
+          },
+          "bidCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preBidCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalBidsCount": {
             "type": "integer",
             "format": "int32"
           },
@@ -5961,14 +10459,68 @@
             "type": "number",
             "format": "double"
           },
-          "remainingTimeSeconds": {
-            "type": "integer",
-            "format": "int32"
+          "nextMinimumBid": {
+            "type": "number",
+            "format": "double"
           },
-          "isTimeExpired": {
+          "laneNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "runOrder": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scheduledTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "winnerNotifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "depositPaidAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "paymentDueDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isPaymentOverdue": {
             "type": "boolean"
           },
+          "unsoldReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "sellerNotes": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "bids": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BidGetDto"
+            },
+            "nullable": true
+          },
+          "preBids": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/BidGetDto"
@@ -5994,6 +10546,59 @@
           "carVin": {
             "type": "string",
             "nullable": true
+          },
+          "carCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "primaryDamage": {
+            "type": "string",
+            "nullable": true
+          },
+          "secondaryDamage": {
+            "type": "string",
+            "nullable": true
+          },
+          "carImages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "estimatedRetailValue": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "canBid": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "canStartAuction": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasPreBids": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasValidBids": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isSold": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isUnsold": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "totalAmountDue": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -6017,6 +10622,15 @@
             "type": "string",
             "nullable": true
           },
+          "itemNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "startPrice": {
+            "type": "number",
+            "format": "double"
+          },
           "currentPrice": {
             "type": "number",
             "format": "double"
@@ -6025,7 +10639,24 @@
             "type": "number",
             "format": "double"
           },
+          "hammerPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "totalPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "isReserveMet": {
+            "type": "boolean"
+          },
           "winnerStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "auctionCondition": {
             "type": "string",
             "nullable": true
           },
@@ -6036,17 +10667,28 @@
             "type": "integer",
             "format": "int32"
           },
+          "preBidCount": {
+            "type": "integer",
+            "format": "int32"
+          },
           "lastBidTime": {
             "type": "string",
             "format": "date-time",
             "nullable": true
           },
-          "isReserveMet": {
-            "type": "boolean"
+          "laneNumber": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
           },
-          "reservePrice": {
-            "type": "number",
-            "format": "double",
+          "runOrder": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scheduledTime": {
+            "type": "string",
+            "format": "date-time",
             "nullable": true
           },
           "carMake": {
@@ -6062,7 +10704,135 @@
             "format": "int32",
             "nullable": true
           },
+          "carVin": {
+            "type": "string",
+            "nullable": true
+          },
           "carImage": {
+            "type": "string",
+            "nullable": true
+          },
+          "carCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "primaryDamage": {
+            "type": "string",
+            "nullable": true
+          },
+          "canBid": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasPreBids": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isPaymentOverdue": {
+            "type": "boolean"
+          },
+          "nextMinimumBid": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuctionCarStatsDto": {
+        "type": "object",
+        "properties": {
+          "auctionCarId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lotNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalBids": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "preBids": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "liveBids": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "proxyBids": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "uniqueBidders": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "currentPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "highestBid": {
+            "type": "number",
+            "format": "double"
+          },
+          "averageBid": {
+            "type": "number",
+            "format": "double"
+          },
+          "priceIncrease": {
+            "type": "number",
+            "format": "double"
+          },
+          "priceIncreasePercentage": {
+            "type": "number",
+            "format": "double"
+          },
+          "firstBidTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastBidTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "biddingDuration": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
+          "timeSinceLastBid": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
+          "bidsPerHour": {
+            "type": "number",
+            "format": "double"
+          },
+          "averageBidInterval": {
+            "type": "number",
+            "format": "double"
+          },
+          "isReserveMet": {
+            "type": "boolean"
+          },
+          "trendDirection": {
+            "type": "string",
+            "nullable": true
+          },
+          "winnerStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "auctionCondition": {
             "type": "string",
             "nullable": true
           }
@@ -6110,6 +10880,17 @@
             "type": "string",
             "nullable": true,
             "readOnly": true
+          },
+          "currentPrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "nextMinimumBid": {
+            "type": "number",
+            "format": "double"
+          },
+          "isReserveMet": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -6117,15 +10898,67 @@
       "AuctionCarUpdateDto": {
         "type": "object",
         "properties": {
-          "reservePrice": {
+          "estimatedRetailValue": {
+            "maximum": 1000000,
+            "minimum": 100,
             "type": "number",
             "format": "double",
             "nullable": true
           },
-          "minPreBid": {
+          "laneNumber": {
+            "maximum": 20,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "runOrder": {
+            "maximum": 1000,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "scheduledTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "requiresSellerApproval": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "sellerNotes": {
+            "maxLength": 1000,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "startPriceOverride": {
+            "maximum": 1000000,
+            "minimum": 1,
             "type": "number",
             "format": "double",
             "nullable": true
+          },
+          "reservePriceOverride": {
+            "maximum": 1000000,
+            "minimum": 1,
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "startPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "readOnly": true
+          },
+          "reservePrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false
@@ -6267,6 +11100,35 @@
             "type": "number",
             "format": "double"
           },
+          "preBidStartTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "preBidEndTimeUtc": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "autoStart": {
+            "type": "boolean"
+          },
+          "isReadyToStart": {
+            "type": "boolean"
+          },
+          "isReadyToMakeReady": {
+            "type": "boolean"
+          },
+          "timeUntilStart": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
+          "timeUntilEnd": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
           "auctionCars": {
             "type": "array",
             "items": {
@@ -6344,6 +11206,10 @@
           },
           "isLive": {
             "type": "boolean"
+          },
+          "minBidIncrement": {
+            "type": "number",
+            "format": "double"
           },
           "currentCarLotNumber": {
             "type": "string",
@@ -6423,6 +11289,19 @@
           }
         },
         "additionalProperties": false
+      },
+      "AuctionStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32"
       },
       "AuctionTimerInfo": {
         "type": "object",
@@ -6871,6 +11750,19 @@
         },
         "additionalProperties": false
       },
+      "AuctionWinnerRejectRequest": {
+        "required": [
+          "rejectionReason"
+        ],
+        "type": "object",
+        "properties": {
+          "rejectionReason": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "AuctionWinnerUpdateDto": {
         "required": [
           "paymentStatus",
@@ -6962,6 +11854,20 @@
           "isTokenExpired": {
             "type": "boolean",
             "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BatchRequest": {
+        "type": "object",
+        "properties": {
+          "carIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7149,6 +12055,64 @@
         },
         "additionalProperties": false
       },
+      "BidDetailDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/BidDetailDto"
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BidDetailDtoIEnumerableApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BidDetailDto"
+            },
+            "nullable": true
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "BidGetDto": {
         "type": "object",
         "properties": {
@@ -7261,6 +12225,37 @@
         },
         "additionalProperties": false
       },
+      "BidGetDtoIEnumerableApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BidGetDto"
+            },
+            "nullable": true
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "BidHistoryDto": {
         "type": "object",
         "properties": {
@@ -7322,6 +12317,33 @@
             "items": {
               "$ref": "#/components/schemas/BidderSummaryDto"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BidHistoryDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/BidHistoryDto"
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedBy": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -7421,6 +12443,33 @@
         },
         "additionalProperties": false
       },
+      "BidStatsDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/BidStatsDto"
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "BidSummaryDto": {
         "type": "object",
         "properties": {
@@ -7507,6 +12556,33 @@
         },
         "additionalProperties": false
       },
+      "BidSummaryDtoApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/BidSummaryDto"
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "BidTypeDto": {
         "enum": [
           1,
@@ -7558,6 +12634,33 @@
         },
         "additionalProperties": false
       },
+      "BidValidationResultApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/BidValidationResult"
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "BidderSummaryDto": {
         "type": "object",
         "properties": {
@@ -7599,6 +12702,51 @@
           "rank": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BooleanAdminResponseDto": {
+        "type": "object",
+        "properties": {
+          "isSuccess": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "type": "boolean"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AdminMetadataDto"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processingTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "requestId": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7658,17 +12806,27 @@
             "type": "string",
             "format": "uuid"
           },
-          "odometer": {
+          "mileage": {
             "type": "integer",
-            "format": "int32",
-            "nullable": true
+            "format": "int32"
           },
-          "odometerUnit": {
+          "mileageUnit": {
             "type": "string",
             "nullable": true
           },
-          "fuel": {
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "fuelType": {
             "$ref": "#/components/schemas/FuelType"
+          },
+          "damageType": {
+            "$ref": "#/components/schemas/DamageType"
           },
           "transmission": {
             "$ref": "#/components/schemas/Transmission"
@@ -7676,20 +12834,17 @@
           "driveTrain": {
             "$ref": "#/components/schemas/DriveTrain"
           },
-          "condition": {
+          "carCondition": {
             "$ref": "#/components/schemas/CarCondition"
           },
-          "hasKeys": {
-            "type": "boolean"
-          },
-          "primaryDamage": {
-            "$ref": "#/components/schemas/DamageType"
+          "titleType": {
+            "$ref": "#/components/schemas/TitleType"
           },
           "secondaryDamage": {
             "$ref": "#/components/schemas/DamageType"
           },
-          "titleType": {
-            "$ref": "#/components/schemas/TitleType"
+          "hasKeys": {
+            "type": "boolean"
           },
           "titleState": {
             "type": "string",
@@ -7704,6 +12859,17 @@
             "type": "string",
             "format": "binary",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompletePaymentRequest": {
+        "type": "object",
+        "properties": {
+          "totalAmount": {
+            "minimum": 0.01,
+            "type": "number",
+            "format": "double"
           }
         },
         "additionalProperties": false
@@ -7738,6 +12904,17 @@
         "type": "integer",
         "format": "int32"
       },
+      "DepositPaidRequest": {
+        "type": "object",
+        "properties": {
+          "depositAmount": {
+            "minimum": 0.01,
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "DriveTrain": {
         "enum": [
           0,
@@ -7748,6 +12925,16 @@
         ],
         "type": "integer",
         "format": "int32"
+      },
+      "EndAuctionRequest": {
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "ExtendPaymentRequest": {
         "required": [
@@ -8032,6 +13219,33 @@
         },
         "additionalProperties": false
       },
+      "ObjectApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "nullable": true
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ObjectCopartApiResponse": {
         "type": "object",
         "properties": {
@@ -8155,6 +13369,150 @@
         },
         "additionalProperties": { }
       },
+      "ProxyEfficiencyResult": {
+        "type": "object",
+        "properties": {
+          "isRecommended": {
+            "type": "boolean"
+          },
+          "recommendedMax": {
+            "type": "number",
+            "format": "double"
+          },
+          "winProbability": {
+            "type": "number",
+            "format": "double"
+          },
+          "strategy": {
+            "type": "string",
+            "nullable": true
+          },
+          "insights": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "estimatedFinalPrice": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProxyEfficiencyResultApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ProxyEfficiencyResult"
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProxyParticipant": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          },
+          "estimatedCapacity": {
+            "type": "number",
+            "format": "double"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastActivity": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProxyStatusResult": {
+        "type": "object",
+        "properties": {
+          "activeProxyCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "highestProxyMax": {
+            "type": "number",
+            "format": "double"
+          },
+          "currentBattlePrice": {
+            "type": "number",
+            "format": "double"
+          },
+          "isWarActive": {
+            "type": "boolean"
+          },
+          "participants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProxyParticipant"
+            },
+            "nullable": true
+          },
+          "battlePhase": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProxyStatusResultApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "data": {
+            "$ref": "#/components/schemas/ProxyStatusResult"
+          },
+          "metadata": {
+            "nullable": true
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedBy": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "RecordPaymentRequest": {
         "required": [
           "amount"
@@ -8256,7 +13614,7 @@
         "type": "object",
         "properties": {
           "rejectionReason": {
-            "minLength": 1,
+            "minLength": 3,
             "type": "string"
           }
         },
@@ -8334,17 +13692,6 @@
             "maxLength": 20,
             "minLength": 1,
             "type": "string"
-          }
-        },
-        "additionalProperties": false
-      },
-      "SetHammerPriceRequest": {
-        "type": "object",
-        "properties": {
-          "hammerPrice": {
-            "minimum": 0.01,
-            "type": "number",
-            "format": "double"
           }
         },
         "additionalProperties": false
@@ -8714,6 +14061,95 @@
           }
         },
         "additionalProperties": { }
+      },
+      "VehicleDetailsDto": {
+        "required": [
+          "make",
+          "model"
+        ],
+        "type": "object",
+        "properties": {
+          "make": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "model": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "year": {
+            "maximum": 2100,
+            "minimum": 1886,
+            "type": "integer",
+            "format": "int32"
+          },
+          "mileage": {
+            "maximum": 2147483647,
+            "minimum": 0,
+            "type": "integer",
+            "format": "int32"
+          },
+          "region": {
+            "type": "string",
+            "nullable": true
+          },
+          "damageDescription": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "conditionDescription": {
+            "maxLength": 2000,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VehicleFinderAuctionStatusDto": {
+        "type": "object",
+        "properties": {
+          "carId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isInAuction": {
+            "type": "boolean"
+          },
+          "auctionId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "auctionStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "auctionIsLive": {
+            "type": "boolean"
+          },
+          "auctionCarCondition": {
+            "type": "string",
+            "nullable": true
+          },
+          "lotNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "currentPrice": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "remainingTimeSeconds": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "WinnerIntegrityReportDto": {
         "type": "object",
