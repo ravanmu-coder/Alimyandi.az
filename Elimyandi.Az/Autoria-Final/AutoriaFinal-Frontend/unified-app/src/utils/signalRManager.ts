@@ -1,4 +1,5 @@
 import * as signalR from '@microsoft/signalr';
+import { useAuctionStore } from '../stores/auctionStore';
 
 // Connection states
 export enum ConnectionState {
@@ -562,25 +563,132 @@ class SignalRManager {
   private setupEventHandlers(): void {
     if (!this.auctionConnection || !this.bidConnection) return;
 
-    // Auction hub events
-    this.auctionConnection.on('AuctionStarted', (data) => this.eventHandlers.onAuctionStarted?.(data));
-    this.auctionConnection.on('AuctionStopped', (data) => this.eventHandlers.onAuctionStopped?.(data));
-    this.auctionConnection.on('AuctionEnded', (data) => this.eventHandlers.onAuctionEnded?.(data));
-    this.auctionConnection.on('AuctionExtended', (data) => this.eventHandlers.onAuctionExtended?.(data));
-    this.auctionConnection.on('CarMoved', (data) => this.eventHandlers.onCarMoved?.(data));
-    this.auctionConnection.on('TimerTick', (data) => this.eventHandlers.onTimerTick?.(data));
-    this.auctionConnection.on('AuctionTimerReset', (data) => this.eventHandlers.onAuctionTimerReset?.(data));
+    console.log('🔌 SignalR: Setting up centralized event handlers with store integration');
 
-    // Bid hub events
-    this.bidConnection.on('BidPlaced', (data) => this.eventHandlers.onBidPlaced?.(data));
-    this.bidConnection.on('PriceUpdated', (data) => this.eventHandlers.onPriceUpdated?.(data));
-    this.bidConnection.on('NewLiveBid', (data) => this.eventHandlers.onNewLiveBid?.(data));
-    this.bidConnection.on('PreBidPlaced', (data) => this.eventHandlers.onPreBidPlaced?.(data));
-    this.bidConnection.on('HighestBidUpdated', (data) => this.eventHandlers.onHighestBidUpdated?.(data));
-    this.bidConnection.on('BidStatsUpdated', (data) => this.eventHandlers.onBidStatsUpdated?.(data));
-    this.bidConnection.on('BidError', (error) => this.eventHandlers.onBidError?.(error));
+    // ========================================
+    // AUCTION HUB EVENTS → Store Updates
+    // ========================================
+    
+    this.auctionConnection.on('AuctionStarted', (data) => {
+      console.log('🚀 [SignalR Event] AuctionStarted:', data);
+      useAuctionStore.getState().startAuction();
+      // Also call custom handler if provided
+      this.eventHandlers.onAuctionStarted?.(data);
+    });
 
-    // Connection state events
+    this.auctionConnection.on('AuctionStopped', (data) => {
+      console.log('⏸️ [SignalR Event] AuctionStopped:', data);
+      useAuctionStore.getState().pauseAuction();
+      this.eventHandlers.onAuctionStopped?.(data);
+    });
+
+    this.auctionConnection.on('AuctionEnded', (data) => {
+      console.log('🏁 [SignalR Event] AuctionEnded:', data);
+      useAuctionStore.getState().endAuction();
+      this.eventHandlers.onAuctionEnded?.(data);
+    });
+
+    this.auctionConnection.on('AuctionExtended', (data) => {
+      console.log('⏰ [SignalR Event] AuctionExtended:', data);
+      // Extend timer if needed
+      if (data.extensionSeconds) {
+        const currentTime = useAuctionStore.getState().remainingSeconds;
+        useAuctionStore.getState().setRemainingSeconds(currentTime + data.extensionSeconds);
+      }
+      this.eventHandlers.onAuctionExtended?.(data);
+    });
+
+    this.auctionConnection.on('CarMoved', (data) => {
+      console.log('🚗 [SignalR Event] CarMoved:', data);
+      // Car change handled by page logic (needs to fetch new car data)
+      // Store will be updated when new car data arrives
+      this.eventHandlers.onCarMoved?.(data);
+    });
+
+    this.auctionConnection.on('TimerTick', (data) => {
+      console.log('⏰ [SignalR Event] TimerTick:', data.remainingSeconds);
+      // Server-authoritative timer - update store directly
+      useAuctionStore.getState().setRemainingSeconds(data.remainingSeconds);
+      this.eventHandlers.onTimerTick?.(data);
+    });
+
+    this.auctionConnection.on('AuctionTimerReset', (data) => {
+      console.log('🔄 [SignalR Event] AuctionTimerReset:', data.newTimerSeconds);
+      // Reset timer when new bid placed
+      useAuctionStore.getState().resetTimer(data.newTimerSeconds);
+      this.eventHandlers.onAuctionTimerReset?.(data);
+    });
+
+    // ========================================
+    // BID HUB EVENTS → Store Updates
+    // ========================================
+
+    this.bidConnection.on('BidPlaced', (data) => {
+      console.log('💰 [SignalR Event] BidPlaced:', data);
+      // Add to bid history
+      if (data.bid) {
+        useAuctionStore.getState().addBidToHistory(data.bid);
+      }
+      this.eventHandlers.onBidPlaced?.(data);
+    });
+
+    this.bidConnection.on('PriceUpdated', (data) => {
+      console.log('💲 [SignalR Event] PriceUpdated:', data.newPrice);
+      // Update current price
+      useAuctionStore.getState().setCurrentPrice(data.newPrice);
+      this.eventHandlers.onPriceUpdated?.(data);
+    });
+
+    this.bidConnection.on('NewLiveBid', (data) => {
+      console.log('🔴 [SignalR Event] NewLiveBid:', data);
+      // New live bid - update price and add to history
+      if (data.bid) {
+        useAuctionStore.getState().updateHighestBid(data.bid);
+        useAuctionStore.getState().addBidToHistory(data.bid);
+      }
+      this.eventHandlers.onNewLiveBid?.(data);
+    });
+
+    this.bidConnection.on('PreBidPlaced', (data) => {
+      console.log('📝 [SignalR Event] PreBidPlaced:', data);
+      // Pre-bid placed - add to history
+      if (data.bid) {
+        useAuctionStore.getState().addBidToHistory(data.bid);
+      }
+      this.eventHandlers.onPreBidPlaced?.(data);
+    });
+
+    this.bidConnection.on('HighestBidUpdated', (data) => {
+      console.log('🏆 [SignalR Event] HighestBidUpdated:', data);
+      // Highest bid changed
+      if (data.highestBid) {
+        useAuctionStore.getState().updateHighestBid(data.highestBid);
+      }
+      this.eventHandlers.onHighestBidUpdated?.(data);
+    });
+
+    this.bidConnection.on('BidStatsUpdated', (data) => {
+      console.log('📊 [SignalR Event] BidStatsUpdated:', data);
+      // Update bidding statistics
+      if (data.stats) {
+        useAuctionStore.getState().updateStats({
+          totalBids: data.stats.totalBids,
+          uniqueBidders: data.stats.uniqueBidders,
+          activeBidders: data.stats.activeBidders,
+        });
+      }
+      this.eventHandlers.onBidStatsUpdated?.(data);
+    });
+
+    this.bidConnection.on('BidError', (error) => {
+      console.error('❌ [SignalR Event] BidError:', error);
+      this.eventHandlers.onBidError?.(error);
+    });
+
+    // ========================================
+    // CONNECTION STATE EVENTS
+    // ========================================
+    
     this.auctionConnection.onclose((error) => this.handleConnectionClose('auction', error));
     this.bidConnection.onclose((error) => this.handleConnectionClose('bid', error));
   }
@@ -641,6 +749,10 @@ class SignalRManager {
     if (error) {
       this.connectionInfo.error = error;
     }
+    
+    // Update store with connection status
+    const isConnected = state === ConnectionState.Connected;
+    useAuctionStore.getState().setConnectionStatus(isConnected);
     
     this.eventHandlers.onConnectionStateChanged?.(state, error);
   }

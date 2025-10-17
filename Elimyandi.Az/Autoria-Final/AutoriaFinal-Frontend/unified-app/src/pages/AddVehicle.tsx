@@ -792,8 +792,13 @@ const Step3TechnicalSpecs: React.FC<Step3Props> = ({
             <input
               ref={priceRef}
               type="number"
-              value={formData.price}
-              onChange={(e) => handleInputChange('price', parseFloat(e.target.value) || 0)}
+              step="0.01"
+              min="0.01"
+              value={formData.price || ''}
+              onChange={(e) => {
+                const value = parseFloat(e.target.value);
+                handleInputChange('price', !isNaN(value) && value > 0 ? value : 0);
+              }}
               className={`flex-1 px-4 py-3 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:bg-slate-800/60 transition-all duration-300 ${
                 errors.price ? 'border-red-400' : ''
               }`}
@@ -860,23 +865,26 @@ const Step3TechnicalSpecs: React.FC<Step3Props> = ({
         </div>
       </div>
 
-      {/* Estimated Retail Value - Conditional rendering based on TitleType */}
-      {(formData.titleType === 1 || formData.titleType === 5) && (
-        <div className="space-y-2">
-          <label className="block text-white font-medium">
-            <DollarSign className="h-4 w-4 inline mr-2" />
-            Təxmini Satış Qiyməti
-          </label>
-          <input
-            ref={estimatedRetailValueRef}
-            type="number"
-            value={formData.estimatedRetailValue}
-            onChange={(e) => handleInputChange('estimatedRetailValue', parseFloat(e.target.value) || 0)}
-            className="w-full px-4 py-3 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:bg-slate-800/60 transition-all duration-300"
-            placeholder="Təxmini satış qiyməti"
-          />
-        </div>
-      )}
+      {/* Estimated Retail Value - Always visible */}
+      <div className="space-y-2">
+        <label className="block text-white font-medium">
+          <DollarSign className="h-4 w-4 inline mr-2" />
+          Təxmini Satış Qiyməti
+        </label>
+        <input
+          ref={estimatedRetailValueRef}
+          type="number"
+          step="0.01"
+          min="0"
+          value={formData.estimatedRetailValue || ''}
+          onChange={(e) => {
+            const value = parseFloat(e.target.value);
+            handleInputChange('estimatedRetailValue', !isNaN(value) && value >= 0 ? value : 0);
+          }}
+          className="w-full px-4 py-3 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:bg-slate-800/60 transition-all duration-300"
+          placeholder="Təxmini satış qiyməti (məsələn: 25000)"
+        />
+      </div>
     </div>
   );
 };
@@ -1720,9 +1728,9 @@ const AddVehicle: React.FC = () => {
     if (!formData.bodyStyle) newErrors.bodyStyle = 'Gövdə tipi seçilməlidir';
     if (!formData.locationId) newErrors.locationId = 'Məkan seçilməlidir';
     
-    // Price validation with reasonable limits
-    if (!formData.price || formData.price <= 0) {
-      newErrors.price = 'Qiymət 0-dan böyük olmalıdır';
+    // Price validation matching backend DTO requirements
+    if (!formData.price || formData.price < 0.01) {
+      newErrors.price = 'Qiymət tələb olunur və 0-dan böyük olmalıdır (minimum 0.01)';
     } else if (formData.price > 1000000) {
       newErrors.price = 'Qiymət çox yüksəkdir (maksimum 1,000,000)';
     }
@@ -1734,10 +1742,12 @@ const AddVehicle: React.FC = () => {
       newErrors.mileage = 'Yürüş çox yüksəkdir (maksimum 999,999)';
     }
     
-    // Estimated Retail Value validation (conditional)
-    if ((formData.titleType === 1 || formData.titleType === 5) && formData.estimatedRetailValue > 0) {
-      if (formData.estimatedRetailValue > formData.price * 2) {
+    // Estimated Retail Value validation
+    if (formData.estimatedRetailValue > 0) {
+      if (formData.estimatedRetailValue > formData.price * 3) {
         newErrors.estimatedRetailValue = 'Təxmini satış qiyməti əsas qiymətdən çox yüksəkdir';
+      } else if (formData.estimatedRetailValue < 100) {
+        newErrors.estimatedRetailValue = 'Təxmini satış qiyməti çox aşağıdır (minimum 100)';
       }
     }
     
@@ -1784,18 +1794,18 @@ const AddVehicle: React.FC = () => {
       submitData.append('CarCondition', formData.carCondition.toString());
       submitData.append('TitleType', formData.titleType.toString());
       
-      // Additional Fields
-      submitData.append('Price', formData.price.toString());
+      // Additional Fields - Price (Required, must be > 0.01 to match backend DTO)
+      if (formData.price && formData.price >= 0.01) {
+        submitData.append('Price', formData.price.toString());
+      }
       submitData.append('Currency', formData.currency);
       submitData.append('Mileage', formData.mileage.toString());
       submitData.append('MileageUnit', formData.mileageUnit);
       submitData.append('HasKeys', formData.hasKeys.toString());
       submitData.append('TitleState', formData.titleState);
       
-      // Conditional Estimated Retail Value
-      if (formData.estimatedRetailValue > 0) {
-        submitData.append('EstimatedRetailValue', formData.estimatedRetailValue.toString());
-      }
+      // Estimated Retail Value - Always append
+      submitData.append('EstimatedRetailValue', (formData.estimatedRetailValue || 0).toString());
       
       // User Authentication
       if (user?.user?.id) {

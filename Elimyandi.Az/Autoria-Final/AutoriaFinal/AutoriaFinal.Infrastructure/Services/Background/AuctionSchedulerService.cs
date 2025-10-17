@@ -79,7 +79,7 @@ namespace AutoriaFinal.Infrastructure.Services
                         StartTransitions = await ProcessReadyToRunningAsync(stoppingToken),
                         EndTransitions = await ProcessRunningToEndedAsync(stoppingToken),
                         CarTransitions = _options.EnableLotTimerProcessing ? await ProcessExpiredCarsAsync(stoppingToken) : 0,
-                        CarConditionUpdates = await ProcessCarConditionsAsync(stoppingToken) // ✅ YENİ ƏLAVƏ
+                        CarConditionUpdates = await ProcessCarConditionsAsync(stoppingToken) // ✅ YENİ ƏLAVƏen
                     };
 
                     sw.Stop();

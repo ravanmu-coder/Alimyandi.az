@@ -88,11 +88,27 @@ namespace AutoriaFinal.Contract.Services.Auctions
     public class AuctionTimerInfo
     {
         public Guid AuctionId { get; set; }
+
+        // Hal-hazırda aktiv olan lot nömrəsi
         public string? CurrentCarLotNumber { get; set; }
+
+        // Son bid vaxtı (timer bu vaxta əsasən hesablanır)
         public DateTime? LastBidTime { get; set; }
-        public int TimerSeconds { get; set; }
-        public int RemainingSeconds { get; set; }
-        public bool IsExpired { get; set; }
+
+        // Lot-un başlama vaxtı (ilk dəfə aktiv olduğu an)
         public DateTime? CarStartTime { get; set; }
+
+        // Hər lot üçün ümumi timer müddəti (məs. 30 saniyə)
+        public int TimerSeconds { get; set; }
+
+        // Hazırda qalan saniyələr (server real-time hesablayır)
+        public int RemainingSeconds { get; set; }
+
+        // Vaxt bitibsə true
+        public bool IsExpired { get; set; }
+
+        // Qalan vaxtı frontend üçün oxunaqlı formatda göstərmək üçün (məs. "00:17")
+        public string? TimeDisplay { get; set; }
     }
+
 }

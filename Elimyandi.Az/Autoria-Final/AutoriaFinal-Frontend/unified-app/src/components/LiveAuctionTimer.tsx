@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { Clock, AlertTriangle, Zap, Pause, Play } from 'lucide-react';
 
 export interface LiveAuctionTimerProps {
@@ -33,39 +33,31 @@ export const LiveAuctionTimer: React.FC<LiveAuctionTimerProps> = ({
   showWarnings = true,
   showControls = false
 }) => {
-  const [currentSeconds, setCurrentSeconds] = useState(timerSeconds);
+  // Use server-authoritative time directly - no local countdown
+  const currentSeconds = timerSeconds;
   const [isAnimating, setIsAnimating] = useState(false);
   const [lastResetTime, setLastResetTime] = useState(Date.now());
+  const prevSecondsRef = useRef(timerSeconds);
 
-  // Update internal timer when prop changes
+  // Update last reset time when timer increases (reset detected)
   useEffect(() => {
-    setCurrentSeconds(timerSeconds);
-    setLastResetTime(Date.now());
+    if (timerSeconds > prevSecondsRef.current) {
+      setLastResetTime(Date.now());
+    }
+    prevSecondsRef.current = timerSeconds;
   }, [timerSeconds]);
 
-  // Timer countdown effect
+  // Detect timer expiration and trigger animation
   useEffect(() => {
-    if (currentSeconds <= 0 || isPaused || !isLive) {
-      return;
+    if (timerSeconds === 0 && prevSecondsRef.current > 0) {
+      setIsAnimating(true);
+      const timeout = setTimeout(() => {
+        setIsAnimating(false);
+        onTimerExpired?.();
+      }, 1000);
+      return () => clearTimeout(timeout);
     }
-
-    const interval = setInterval(() => {
-      setCurrentSeconds(prev => {
-        if (prev <= 1) {
-          // Timer expired
-          setIsAnimating(true);
-          setTimeout(() => {
-            setIsAnimating(false);
-            onTimerExpired?.();
-          }, 1000);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [currentSeconds, isPaused, isLive, onTimerExpired]);
+  }, [timerSeconds, onTimerExpired]);
 
   // Format time display
   const formatTime = useCallback((seconds: number): string => {

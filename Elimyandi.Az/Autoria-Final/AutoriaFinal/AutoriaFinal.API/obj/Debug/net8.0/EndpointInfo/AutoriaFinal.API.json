@@ -2403,6 +2403,26 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -11320,6 +11340,11 @@
             "format": "date-time",
             "nullable": true
           },
+          "carStartTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
           "timerSeconds": {
             "type": "integer",
             "format": "int32"
@@ -11331,9 +11356,8 @@
           "isExpired": {
             "type": "boolean"
           },
-          "carStartTime": {
+          "timeDisplay": {
             "type": "string",
-            "format": "date-time",
             "nullable": true
           }
         },

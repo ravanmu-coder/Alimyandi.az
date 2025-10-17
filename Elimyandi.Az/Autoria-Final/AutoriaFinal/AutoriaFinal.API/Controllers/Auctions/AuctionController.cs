@@ -1,4 +1,5 @@
-﻿using AutoriaFinal.Contract.Dtos.Auctions.Auction;
+﻿using AutoriaFinal.Application.Exceptions;
+using AutoriaFinal.Contract.Dtos.Auctions.Auction;
 using AutoriaFinal.Contract.Services.Auctions;
 using AutoriaFinal.Domain.Enums.AuctionEnums;
 using AutoriaFinal.Infrastructure.Hubs;
@@ -509,17 +510,38 @@ namespace AutoriaFinal.API.Controllers.Auctions
         [HttpGet("{id:guid}/timer")]
         [AllowAnonymous]
         [ProducesResponseType(typeof(AuctionTimerInfo), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<AuctionTimerInfo>> GetAuctionTimer(Guid id)
         {
-            var currentUser = User.Identity?.IsAuthenticated == true ? GetCurrentUserName() : "Anonymous";
+            var currentUser = User.Identity?.IsAuthenticated == true
+                ? GetCurrentUserName()
+                : "Anonymous";
 
-            var timerInfo = await _auctionService.GetAuctionTimerInfoAsync(id);
+            try
+            {
+                var timerInfo = await _auctionService.GetAuctionTimerInfoAsync(id);
 
-            _logger.LogInformation("Auction timer requested by {User} for auction {AuctionId}",
-                currentUser, id);
+                _logger.LogInformation("⏱ Auction timer requested by {User} for auction {AuctionId}",
+                    currentUser, id);
 
-            return Ok(timerInfo);
+                return Ok(timerInfo);
+            }
+            catch (NotFoundException ex)
+            {
+                _logger.LogWarning("❌ Auction not found: {AuctionId}. Requested by {User}", id, currentUser);
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "⚠️ Unexpected error while getting timer for auction {AuctionId} by {User}",
+                    id, currentUser);
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = "An unexpected error occurred while retrieving auction timer."
+                });
+            }
         }
+
 
         [HttpGet("{id:guid}/current-state")]
         [AllowAnonymous]

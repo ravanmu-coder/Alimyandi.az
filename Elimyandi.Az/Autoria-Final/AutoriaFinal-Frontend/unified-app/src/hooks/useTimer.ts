@@ -1,100 +1,43 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useCallback } from 'react';
+import { useAuctionStore } from '../stores/auctionStore';
+
+/**
+ * Server-Authoritative Timer Hook
+ * 
+ * ❌ KÖHNƏ: Local interval ilə timer sayırdı
+ * ✅ YENİ: Server-dən gələn TimerTick event-lərinə arxalanır
+ * 
+ * Timer yalnız serverdə işləyir və hər saniyə TimerTick eventi göndərir.
+ * Bu hook sadəcə store-dan timer dəyərini oxuyur və UI üçün format edir.
+ */
 
 export interface UseTimerReturn {
   timerSeconds: number;
-  isPaused: boolean;
-  resetTimer: (newSeconds: number) => void;
-  togglePause: (paused: boolean) => void;
-  handleTimerExpired: () => void;
   urgencyLevel: 'low' | 'medium' | 'high' | 'critical';
   progressPercentage: number;
   formattedTime: string;
+  isRunning: boolean;
 }
 
 export const useTimer = (
-  initialSeconds: number, 
-  isLive: boolean,
-  onTimerExpired?: () => void
+  maxSeconds: number = 300 // Default 5 minutes for progress calculation
 ): UseTimerReturn => {
-  const [timerSeconds, setTimerSeconds] = useState(initialSeconds);
-  const [isPaused, setIsPaused] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  const lastResetTimeRef = useRef<number>(Date.now());
-
-  // Update timer when initial seconds change
-  useEffect(() => {
-    setTimerSeconds(initialSeconds);
-    lastResetTimeRef.current = Date.now();
-  }, [initialSeconds]);
-
-  // Timer countdown effect
-  useEffect(() => {
-    if (timerSeconds <= 0 || isPaused || !isLive) {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-      return;
-    }
-
-    intervalRef.current = setInterval(() => {
-      setTimerSeconds(prev => {
-        if (prev <= 1) {
-          // Timer expired
-          if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-          }
-          onTimerExpired?.();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-    };
-  }, [timerSeconds, isPaused, isLive, onTimerExpired]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-      }
-    };
-  }, []);
-
-  const resetTimer = useCallback((newSeconds: number) => {
-    setTimerSeconds(newSeconds);
-    setIsPaused(false);
-    lastResetTimeRef.current = Date.now();
-  }, []);
-
-  const togglePause = useCallback((paused: boolean) => {
-    setIsPaused(paused);
-  }, []);
-
-  const handleTimerExpired = useCallback(() => {
-    console.log('Timer expired - moving to next car');
-    onTimerExpired?.();
-  }, [onTimerExpired]);
+  // Read from store (server-authoritative)
+  const remainingSeconds = useAuctionStore(state => state.remainingSeconds);
+  const isLive = useAuctionStore(state => state.isLive);
 
   const urgencyLevel = useCallback((): 'low' | 'medium' | 'high' | 'critical' => {
-    if (timerSeconds <= 10) return 'critical';
-    if (timerSeconds <= 30) return 'high';
-    if (timerSeconds <= 60) return 'medium';
+    if (remainingSeconds <= 10) return 'critical';
+    if (remainingSeconds <= 30) return 'high';
+    if (remainingSeconds <= 60) return 'medium';
     return 'low';
-  }, [timerSeconds]);
+  }, [remainingSeconds]);
 
   const progressPercentage = useCallback((): number => {
-    if (initialSeconds === 0) return 100;
-    return ((initialSeconds - timerSeconds) / initialSeconds) * 100;
-  }, [initialSeconds, timerSeconds]);
+    if (maxSeconds === 0) return 100;
+    const elapsed = maxSeconds - remainingSeconds;
+    return Math.min(100, Math.max(0, (elapsed / maxSeconds) * 100));
+  }, [maxSeconds, remainingSeconds]);
 
   const formatTime = useCallback((seconds: number): string => {
     const mins = Math.floor(seconds / 60);
@@ -103,13 +46,26 @@ export const useTimer = (
   }, []);
 
   return {
-    timerSeconds,
-    isPaused,
-    resetTimer,
-    togglePause,
-    handleTimerExpired,
+    timerSeconds: remainingSeconds,
     urgencyLevel: urgencyLevel(),
     progressPercentage: progressPercentage(),
-    formattedTime: formatTime(timerSeconds)
+    formattedTime: formatTime(remainingSeconds),
+    isRunning: isLive && remainingSeconds > 0,
   };
 };
+
+/**
+ * İSTİFADƏ NÜMUNƏSİ:
+ * 
+ * const { timerSeconds, formattedTime, urgencyLevel, isRunning } = useTimer(300);
+ * 
+ * <div className={`timer ${urgencyLevel}`}>
+ *   {formattedTime}
+ * </div>
+ * 
+ * QEYD:
+ * - Timer backend-dən TimerTick event-i ilə yenilənir (hər saniyə)
+ * - AuctionTimerReset event-i timer-i sıfırlayır (yeni bid zamanı)
+ * - Heç bir local setInterval/setTimeout yoxdur
+ * - Bütün userlər eyni timer görürlər (sinxron)
+ */

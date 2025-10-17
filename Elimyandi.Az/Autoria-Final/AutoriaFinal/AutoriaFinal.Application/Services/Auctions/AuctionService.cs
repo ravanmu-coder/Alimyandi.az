@@ -451,7 +451,8 @@ namespace AutoriaFinal.Application.Services.Auctions
             if (auction == null)
                 throw new NotFoundException("Auction", auctionId);
 
-            if (string.IsNullOrEmpty(auction.CurrentCarLotNumber) || auction.Status != AuctionStatus.Running)
+            // Auction aktiv deyilsə və ya cari lot yoxdursa
+            if (auction.Status != AuctionStatus.Running || string.IsNullOrEmpty(auction.CurrentCarLotNumber))
             {
                 return new AuctionTimerInfo
                 {
@@ -466,20 +467,33 @@ namespace AutoriaFinal.Application.Services.Auctions
 
             var currentCar = auction.AuctionCars
                 .First(ac => ac.LotNumber == auction.CurrentCarLotNumber);
-            var isTimeExpired = currentCar.IsTimeExpired(auction.TimerSeconds);
+
+            // Ən son bid vaxtını əsas götürürük — yoxdursa start vaxtı
             var referenceTime = currentCar.LastBidTime ?? currentCar.ActiveStartTime ?? DateTime.UtcNow;
-            var timeSinceReference = DateTime.UtcNow - referenceTime;
-            var remainingSeconds = Math.Max(0, auction.TimerSeconds - (int)timeSinceReference.TotalSeconds);
+
+            // keçən vaxt (Timespan)
+            var elapsed = DateTime.UtcNow - referenceTime;
+
+            // qalan saniyəni hesabla (timer 30 saniyədən başlayır)
+            var timerSeconds = auction.TimerSeconds > 0 ? auction.TimerSeconds : 30;
+            var remainingSeconds = Math.Max(0, timerSeconds - (int)elapsed.TotalSeconds);
+
+            // vaxt bitibsə expired true
+            var isExpired = remainingSeconds == 0;
+
+            // Lot üçün ayrıca TimeSpan göstərmək üçün
+            var timeSpan = TimeSpan.FromSeconds(remainingSeconds);
 
             return new AuctionTimerInfo
             {
                 AuctionId = auctionId,
                 CurrentCarLotNumber = auction.CurrentCarLotNumber,
                 LastBidTime = currentCar.LastBidTime,
-                TimerSeconds = auction.TimerSeconds,
+                TimerSeconds = timerSeconds,
                 RemainingSeconds = remainingSeconds,
-                IsExpired = isTimeExpired,
-                CarStartTime = currentCar.ActiveStartTime
+                IsExpired = isExpired,
+                CarStartTime = currentCar.ActiveStartTime,
+                TimeDisplay = $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}"
             };
         }
 

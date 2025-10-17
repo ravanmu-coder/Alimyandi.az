@@ -66,14 +66,18 @@ export const useSignalR = (config: UseSignalRConfig): UseSignalRReturn => {
   // Initialize manager configuration
   useEffect(() => {
     if (!isInitialized.current) {
+      console.log(`🔧 Initializing SignalR hook for instance: ${instanceKey}`);
       manager.current.configure(config);
       
       // Set up event handlers
       const eventHandlers: SignalREvents = {
         onConnectionStateChanged: (state, error) => {
+          console.log(`🔄 useSignalR: Connection state changed to "${state}"`, error || '');
           setConnectionState(state);
           setLastError(error);
           setRetryCount(manager.current.getRetryCount());
+          
+          // Call user's event handler
           config.events?.onConnectionStateChanged?.(state, error);
         },
         ...config.events
@@ -82,27 +86,67 @@ export const useSignalR = (config: UseSignalRConfig): UseSignalRReturn => {
       manager.current.setEventHandlers(eventHandlers);
       
       // Set initial state
-      setConnectionState(manager.current.getConnectionState());
+      const initialState = manager.current.getConnectionState();
+      console.log(`🔧 Setting initial connection state: ${initialState}`);
+      setConnectionState(initialState);
       setRetryCount(manager.current.getRetryCount());
       
       isInitialized.current = true;
+    } else {
+      // Update event handlers if config changes but already initialized
+      const eventHandlers: SignalREvents = {
+        onConnectionStateChanged: (state, error) => {
+          console.log(`🔄 useSignalR: Connection state changed to "${state}"`, error || '');
+          setConnectionState(state);
+          setLastError(error);
+          setRetryCount(manager.current.getRetryCount());
+          config.events?.onConnectionStateChanged?.(state, error);
+        },
+        ...config.events
+      };
+      manager.current.setEventHandlers(eventHandlers);
     }
-  }, [config]);
+  }, [config, instanceKey]);
 
-  // Auto-connect if enabled
+  // Auto-connect if enabled - runs whenever initialization completes or config changes
   useEffect(() => {
     if (config.autoConnect && isInitialized.current) {
-      manager.current.connect().catch(error => {
-        console.error('Auto-connect failed:', error);
-      });
+      const currentState = manager.current.getConnectionState();
+      console.log(`🔌 Auto-connect check: current state = ${currentState}`);
+      
+      // Only connect if not already connected or connecting
+      if (currentState === ConnectionState.Disconnected || currentState === ConnectionState.Failed) {
+        console.log('🔌 Auto-connecting...');
+        manager.current.connect().catch(error => {
+          console.error('Auto-connect failed:', error);
+        });
+      } else {
+        console.log(`🔌 Already ${currentState}, skipping auto-connect`);
+      }
     }
-  }, [config.autoConnect]);
+  }, [config.autoConnect, isInitialized.current]);
+
+  // Periodic state sync to ensure React state matches manager state
+  useEffect(() => {
+    const syncInterval = setInterval(() => {
+      const managerState = manager.current.getConnectionState();
+      setConnectionState(prevState => {
+        if (prevState !== managerState) {
+          console.warn(`⚠️ State sync: Correcting state mismatch. Was "${prevState}", now "${managerState}"`);
+          return managerState;
+        }
+        return prevState;
+      });
+    }, 2000); // Check every 2 seconds
+
+    return () => clearInterval(syncInterval);
+  }, []);
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      // Cleanup the specific instance when component unmounts
-      if (manager.current) {
+      // Only cleanup on actual unmount, not on hot-reload
+      if (manager.current && import.meta.env.PROD) {
         console.log(`Cleaning up SignalR instance: ${instanceKey}`);
         // Disconnect but don't destroy immediately - let other components finish
         manager.current.disconnect().catch(err => {
@@ -113,6 +157,8 @@ export const useSignalR = (config: UseSignalRConfig): UseSignalRReturn => {
         setTimeout(() => {
           SignalRManager.destroyInstance(instanceKey);
         }, 1000);
+      } else if (manager.current) {
+        console.log(`🔥 Hot-reload detected, keeping SignalR connection alive`);
       }
     };
   }, [instanceKey]);

@@ -205,20 +205,13 @@ const LiveAuctionPage: React.FC = () => {
   const [showCompletedModal, setShowCompletedModal] = useState(false);
   const [viewDetailsMode, setViewDetailsMode] = useState(false);
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const hasJoinedGroupsRef = useRef(false);
 
   // ========================================
   // SIGNALR CONNECTION
   // ========================================
 
-  const {
-    isConnected,
-    isConnecting,
-    connectionState,
-    lastError,
-    joinAuction,
-    joinAuctionCar,
-    placeLiveBid
-  } = useSignalR({
+  const signalRHook = useSignalR({
     baseUrl: import.meta.env.VITE_API_BASE_URL || 'https://localhost:7249',
     token: localStorage.getItem('authToken') || '',
     autoConnect: true,
@@ -320,13 +313,58 @@ const LiveAuctionPage: React.FC = () => {
 
       // Timer tick - server authoritative timer (EVERY SECOND)
       onTimerTick: (data: any) => {
-        console.log('⏰ [REAL-TIME] Timer Tick:', data.remainingSeconds + 's');
+        console.log('⏰ [REAL-TIME] Timer Tick Event Received:', {
+          remainingSeconds: data.remainingSeconds,
+          secondsRemaining: data.secondsRemaining,
+          timerSeconds: data.timerSeconds,
+          fullData: data,
+          currentStateTimer: state.timerSeconds
+        });
+        
+        // Extract timer value - check multiple possible field names
+        const serverTimerValue = data.remainingSeconds ?? 
+                                 data.secondsRemaining ?? 
+                                 data.timerSeconds ?? 
+                                 0;
+        
+        // Track that we're receiving events (connection is working)
+        lastEventTimeRef.current = Date.now();
+        hasReceivedEventsRef.current = true;
+        
+        // If receiving events but state says disconnected, log the mismatch ONCE
+        if ((connectionState === 'Disconnected' || !isConnected) && !reconnectAttemptedRef.current) {
+          console.error('🚨 CRITICAL: Receiving timer events but state shows DISCONNECTED!');
+          console.error('🚨 This proves WebSocket is connected but React state is wrong');
+          console.error('🚨 Attempting manual state correction via reconnect...');
+          
+          reconnectAttemptedRef.current = true;
+          
+          // Try to trigger a reconnect which should fix the state
+          setTimeout(() => {
+            signalRHook.reconnect().then(() => {
+              console.log('✅ State correction reconnect successful');
+              // Reset flag after successful reconnect
+              setTimeout(() => {
+                reconnectAttemptedRef.current = false;
+              }, 5000);
+            }).catch(err => {
+              console.error('❌ State correction reconnect failed:', err);
+              // Reset flag to allow retry
+              setTimeout(() => {
+                reconnectAttemptedRef.current = false;
+              }, 10000);
+            });
+          }, 100);
+        }
         
         // Always update timer regardless of car ID - server is authoritative
-        setState(prev => ({
-          ...prev,
-          timerSeconds: data.remainingSeconds
-        }));
+        setState(prev => {
+          console.log(`⏱️ Updating timer: ${prev.timerSeconds}s → ${serverTimerValue}s`);
+          return {
+            ...prev,
+            timerSeconds: serverTimerValue
+          };
+        });
         
         // Stop any client-side timer since server sends every second
         if (timerIntervalRef.current) {
@@ -442,7 +480,7 @@ const LiveAuctionPage: React.FC = () => {
       },
       
       // Connection state
-      onConnectionStateChanged: (state, error) => {
+      onConnectionStateChanged: async (state, error) => {
         console.log('🔌 Connection State Changed:', {
           state,
           error,
@@ -454,138 +492,108 @@ const LiveAuctionPage: React.FC = () => {
           toast.error(`Connection Error: ${error}`);
         }
         
-        // If we just connected/reconnected, sync state after a short delay
-        if (state === 'Connected') {
-          console.log('🔄 Just connected - syncing state in 2 seconds...');
-          setTimeout(async () => {
-            try {
-              // Re-sync with server state after reconnection
-              if (!auctionId) return;
-              
-              const auctionStatus = await apiClient.getAuctionStatus(auctionId);
-              console.log('🔄 Post-reconnect sync:', auctionStatus);
-              
-              // Check current component state and sync if needed
-              if (auctionStatus.allFinished) {
-                setState(prev => {
-                  if (!prev.auctionCompleted) {
-                    console.log('🏁 Post-reconnect: Auction completed');
-                    setShowCompletedModal(true);
-                    return {
-                      ...prev,
-                      auctionCompleted: true,
-                      currentCar: null,
-                      activeLot: null,
-                      isLive: false
-                    };
-                  }
-                  return prev;
-                });
-              } else if (auctionStatus.activeCarId) {
-                // Check if we need to sync to a different active car
-                const needsSync = await new Promise<boolean>((resolve) => {
-                  setState(prev => {
-                    const needsUpdate = !prev.currentCar || prev.currentCar.id !== auctionStatus.activeCarId;
-                    resolve(needsUpdate);
-                    return prev;
-                  });
-                });
-                
-                if (needsSync) {
-                  console.log('🚀 Post-reconnect: Active car changed, syncing...');
-                  // Join the new active car
-                  await joinAuctionCar(auctionStatus.activeCarId);
-                  const activeCarSnapshot = await apiClient.getAuctionCar(auctionStatus.activeCarId);
-                  
-                  if (activeCarSnapshot) {
-                    // Load proper car details and images using EXACT CarDetail.tsx logic
-                    let updatedSnapshot = { ...activeCarSnapshot };
-                    
-                    const carId = activeCarSnapshot.car?.id || activeCarSnapshot.carId;
-                    if (carId) {
-                      // STEP 1: Load full car details (like CarDetail.tsx)
-                      try {
-                        console.log('🚗 CarDetail logic: Loading full car details for reconnected car:', carId);
-                        const fullCarData = await apiClient.getCar(carId);
-                        console.log('🚗 CarDetail logic: Full car details loaded for reconnected car:', fullCarData);
-                        
-                        if (updatedSnapshot.car) {
-                          updatedSnapshot.car = { ...updatedSnapshot.car, ...fullCarData };
-                        } else {
-                          updatedSnapshot.car = fullCarData;
-                        }
-                        
-                        console.log('✅ CarDetail logic: Updated reconnected car with full details');
-                      } catch (carError) {
-                        console.warn('⚠️ CarDetail logic: Failed to load full car details for reconnected car:', carError);
-                      }
-                      
-                      // STEP 2: Load car photos (like CarDetail.tsx)
-                      try {
-                        console.log('🖼️ CarDetail logic: Loading photos for reconnected car:', carId);
-                        const photos = await apiClient.getCarPhotos(carId);
-                        console.log('🖼️ CarDetail logic: Photos loaded for reconnected car:', photos?.length || 0);
-                        
-                        if (photos && photos.length > 0) {
-                          if (updatedSnapshot.car) {
-                            updatedSnapshot.car = { ...updatedSnapshot.car, photoUrls: photos } as any;
-                          } else {
-                            (updatedSnapshot as any).photoUrls = photos;
-                          }
-                          console.log('✅ CarDetail logic: Updated reconnected car photos');
-                        }
-                      } catch (photosError) {
-                        console.warn('⚠️ CarDetail logic: Photos endpoint failed for reconnected car:', photosError);
-                        if (photosError instanceof Error && photosError.message.includes('404')) {
-                          console.warn(`🖼️ CarDetail logic: Car photos 404 for reconnected carId: ${carId}`);
-                        }
-                      }
-                    }
-                    
-                    const serverTimer = (activeCarSnapshot as any).remainingTimeSeconds || 
-                                      (activeCarSnapshot as any).secondsRemaining || 0;
-                    
-                    setState(prev => ({
-                      ...prev,
-                      currentCar: updatedSnapshot, // Use updated snapshot with proper photos
-                      activeLot: prev.lotQueue.find(lot => lot.id === activeCarSnapshot.id) || null,
-                      isLive: activeCarSnapshot.isActive,
-                      timerSeconds: serverTimer,
-                      auctionCompleted: false,
-                      showCompletedModal: false,
-                      viewDetailsMode: false
-                    }));
-                    
-                    toast.success(`🔄 Reconnected to lot: #${activeCarSnapshot.lotNumber}`, {
-                      duration: 3000
-                    });
-                  }
-                }
-              }
-            } catch (syncError) {
-              console.error('❌ Post-reconnect sync failed:', syncError);
+        // When reconnected, re-sync timer state
+        if (state === 'Connected' && hasJoinedGroupsRef.current && auctionId) {
+          console.log('🔄 Reconnected - re-syncing timer state...');
+          try {
+            const timerInfo = await apiClient.getAuctionTimer(auctionId);
+            if (timerInfo) {
+              setState(prev => ({
+                ...prev,
+                timerSeconds: timerInfo.timerSeconds,
+                isLive: timerInfo.isLive
+              }));
+              console.log(`✅ Re-synced timer: ${timerInfo.timerSeconds}s, Live: ${timerInfo.isLive}`);
             }
-          }, 2000);
+          } catch (err) {
+            console.warn('⚠️ Failed to re-sync timer on reconnect:', err);
+          }
+        }
+        
+        // Note: Syncing and group joining is handled by the dedicated useEffect
+        // that watches isConnected state. No need to duplicate logic here.
+        if (state === 'Connected') {
+          console.log('✅ Connected - group joining will be handled by useEffect');
         }
       }
     }
   });
 
-  // Debug connection state
+  // Destructure hook values
+  const {
+    isConnected,
+    isConnecting,
+    connectionState,
+    lastError,
+    joinAuction,
+    joinAuctionCar,
+    placeLiveBid
+  } = signalRHook;
+
+  // Track if we're receiving events (indicates connection is actually working)
+  const lastEventTimeRef = useRef<number>(0);
+  const hasReceivedEventsRef = useRef(false);
+  const reconnectAttemptedRef = useRef(false);
+  
+  // Force connection check on mount and periodically
   useEffect(() => {
-    const token = localStorage.getItem('authToken') || 'anonymous';
-    const instanceKey = `${import.meta.env.VITE_API_BASE_URL || 'https://localhost:7249'}_${token.substring(0, 10)}`;
+    console.log('🔄 Forcing initial connection state check...');
     
-    console.log('🔍 SignalR Debug Info:', {
-      instanceKey,
+    // Check state immediately
+    const checkState = () => {
+      console.log('📊 Current SignalR State:', {
+        isConnected,
+        connectionState,
+        isConnecting,
+        lastError,
+        receivingEvents: hasReceivedEventsRef.current,
+        timeSinceLastEvent: Date.now() - lastEventTimeRef.current
+      });
+    };
+    
+    checkState();
+    
+    // Recheck after delays to catch late updates
+    const timeout1 = setTimeout(checkState, 2000);
+    const timeout2 = setTimeout(checkState, 5000);
+    
+    return () => {
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+    };
+  }, [isConnected, connectionState, isConnecting, lastError]);
+
+  // Debug connection state and force re-check
+  useEffect(() => {
+    console.log('🔍 SignalR Status Update:', {
       isConnected,
       isConnecting,
       connectionState,
       lastError,
-      timestamp: new Date().toISOString(),
-      userToken: token.substring(0, 20) + '...'
+      timestamp: new Date().toISOString()
     });
-  }, [isConnected, isConnecting, connectionState, lastError]);
+    
+    // Log the actual state values for debugging
+    console.log('🔍 Detailed State:', {
+      'isConnected (boolean)': isConnected,
+      'isConnecting (boolean)': isConnecting,
+      'connectionState (string)': connectionState,
+      'hasJoinedGroups': hasJoinedGroupsRef.current,
+      'auctionId': auctionId,
+      'currentCarId': state.currentCar?.id
+    });
+    
+    // Alert if there's a mismatch between connectionState string and isConnected boolean
+    if (connectionState === 'Connected' && !isConnected) {
+      console.error('⚠️ STATE MISMATCH: connectionState is "Connected" but isConnected is false!');
+      console.error('⚠️ This indicates a problem with the useSignalR hook state management');
+    }
+    
+    if (connectionState !== 'Connected' && isConnected) {
+      console.error('⚠️ STATE MISMATCH: isConnected is true but connectionState is not "Connected"!');
+      console.error('⚠️ Current connectionState:', connectionState);
+    }
+  }, [isConnected, isConnecting, connectionState, lastError, auctionId, state.currentCar?.id]);
 
   // Real-time auction state notification (like Copart) - moved here for dependency order
   const showAuctionStateNotification = useCallback((message: string, type: 'live' | 'paused' | 'completed') => {
@@ -727,173 +735,9 @@ const LiveAuctionPage: React.FC = () => {
     }
   }, [isConnected, joinAuctionCar]);
 
-  // Periodic health check - check auction status regardless of connection
-  useEffect(() => {
-    if (!auctionId) return;
-
-    const healthCheck = setInterval(async () => {
-      try {
-        const auctionStatus = await apiClient.getAuctionStatus(auctionId);
-        console.log('✅ Health Check Success:', auctionStatus);
-        
-        // Check if auction completed - KEEP CONNECTION ALIVE
-        if (auctionStatus.allFinished) {
-          console.log('🏁 Auction completed detected via health check - MAINTAINING CONNECTION');
-          setState(prev => ({
-            ...prev,
-            auctionCompleted: true,
-            currentCar: null,
-            activeLot: null,
-            isLive: false
-          }));
-          setShowCompletedModal(true);
-          
-          // CRITICAL: Do NOT disconnect SignalR - keep listening for new auctions
-          console.log('✅ Health Check: SignalR connection preserved for future auctions');
-          return;
-        }
-        
-        // Check if auction became active (has activeCarId now)
-        if (auctionStatus.activeCarId && !state.currentCar && !state.auctionCompleted) {
-          console.log('🚀 [REAL-TIME] Auction became active - syncing without reload');
-          
-          try {
-              // Get server snapshot and sync without page reload
-              const newActiveSnapshot = await apiClient.getAuctionCar(auctionStatus.activeCarId);
-              if (newActiveSnapshot) {
-                // Load proper car details and images using EXACT CarDetail.tsx logic
-                let updatedSnapshot = { ...newActiveSnapshot };
-                
-                const carId = newActiveSnapshot.car?.id || newActiveSnapshot.carId;
-                if (carId) {
-                  // STEP 1: Load full car details (like CarDetail.tsx)
-                  try {
-                    console.log('🚗 CarDetail logic: Loading full car details for active car:', carId);
-                    const fullCarData = await apiClient.getCar(carId);
-                    console.log('🚗 CarDetail logic: Full car details loaded for active car:', fullCarData);
-                    
-                    if (updatedSnapshot.car) {
-                      updatedSnapshot.car = { ...updatedSnapshot.car, ...fullCarData };
-                    } else {
-                      updatedSnapshot.car = fullCarData;
-                    }
-                    
-                    console.log('✅ CarDetail logic: Updated active car with full details');
-                  } catch (carError) {
-                    console.warn('⚠️ CarDetail logic: Failed to load full car details for active car:', carError);
-                  }
-                  
-                  // STEP 2: Load car photos (like CarDetail.tsx)
-                  try {
-                    console.log('🖼️ CarDetail logic: Loading photos for active car:', carId);
-                    const photos = await apiClient.getCarPhotos(carId);
-                    console.log('🖼️ CarDetail logic: Photos loaded for active car:', photos?.length || 0);
-                    
-                    if (photos && photos.length > 0) {
-                      if (updatedSnapshot.car) {
-                        updatedSnapshot.car = { ...updatedSnapshot.car, photoUrls: photos } as any;
-                      } else {
-                        (updatedSnapshot as any).photoUrls = photos;
-                      }
-                      console.log('✅ CarDetail logic: Updated active car photos');
-                    }
-                  } catch (photosError) {
-                    console.warn('⚠️ CarDetail logic: Photos endpoint failed for active car:', photosError);
-                    if (photosError instanceof Error && photosError.message.includes('404')) {
-                      console.warn(`🖼️ CarDetail logic: Car photos 404 for active carId: ${carId}`);
-                    }
-                  }
-                }
-                
-                const serverTimer = (newActiveSnapshot as any).remainingTimeSeconds || 
-                                  (newActiveSnapshot as any).secondsRemaining || 0;
-                
-                setState(prev => ({
-                  ...prev,
-                  currentCar: updatedSnapshot, // Use updated snapshot with proper photos
-                  activeLot: prev.lotQueue.find(lot => lot.id === newActiveSnapshot.id) || null,
-                  isLive: newActiveSnapshot.isActive,
-                  timerSeconds: serverTimer, // Use server timer exactly
-                  auctionCompleted: false,
-                  showCompletedModal: false,
-                  viewDetailsMode: false
-                }));
-              
-              // Join the new active car group
-              await joinAuctionCar(auctionStatus.activeCarId);
-              
-              toast(`🔴 LIVE: Lot #${newActiveSnapshot.lotNumber} started!`, {
-                icon: '🚀',
-                duration: 6000
-              });
-            }
-          } catch (err) {
-            console.error('❌ Failed to sync to new active auction:', err);
-            // Fallback to reload if sync fails
-            window.location.reload();
-          }
-          return;
-        }
-        
-        // Check if we're out of sync with active car
-        if (auctionStatus.activeCarId && 
-            state.currentCar && 
-            auctionStatus.activeCarId !== state.currentCar.id) {
-          
-          console.log(`⚠️ Out of sync - server active car: ${auctionStatus.activeCarId}, local: ${state.currentCar.id}`);
-          
-          // Re-join the correct car group to get snapshot
-          if (isConnected) {
-            try {
-              await joinAuctionCar(auctionStatus.activeCarId);
-              console.log('🔄 Re-joined correct car group for sync');
-            } catch (err) {
-              console.error('Error re-joining car group:', err);
-            }
-          }
-        }
-        
-        // If no active car but we have one, auction might have ended
-        if (!auctionStatus.activeCarId && state.currentCar && state.lotQueue.length > 0) {
-          console.log('🏁 No active car detected, auction may have completed');
-          setState(prev => ({
-            ...prev,
-            auctionCompleted: true,
-            currentCar: null,
-            activeLot: null,
-            isLive: false
-          }));
-          setShowCompletedModal(true);
-        }
-        
-      } catch (err: any) {
-        console.warn('❌ Health check failed:', err);
-        
-        // Handle specific 404 errors gracefully
-        if (err?.message?.includes('404') || err?.status === 404) {
-          console.log('📊 Health Check: 404 - Auction may be inactive or completed');
-          
-          // If we have cars in queue but getting 404, auction might be completed
-          if (state.lotQueue && state.lotQueue.length > 0) {
-            console.log('🏁 Health Check: Assuming auction completed based on 404 + existing queue');
-            setState(prev => ({
-              ...prev,
-              auctionCompleted: true,
-              currentCar: null,
-              activeLot: null,
-              isLive: false
-            }));
-            setShowCompletedModal(true);
-          }
-        } else {
-          // For other errors, just log and continue
-          console.log('🔄 Health Check: Non-404 error, continuing...');
-        }
-      }
-    }, 15000); // Check every 15 seconds
-
-    return () => clearInterval(healthCheck);
-  }, [auctionId, state.currentCar, state.auctionCompleted, state.lotQueue.length, isConnected, joinAuctionCar]);
+  // Note: Removed periodic health check - rely purely on SignalR events for real-time updates.
+  // All state changes (auction started, car moved, timer updates, auction ended) come through
+  // SignalR events (onAuctionStarted, onCarMoved, onTimerTick, onAuctionEnded, etc.)
 
   // ========================================
   // DATA LOADING FUNCTIONS
@@ -1123,166 +967,10 @@ const LiveAuctionPage: React.FC = () => {
         }
       }
 
-      // Step 6: Join SignalR groups
-      if (isConnected) {
-        try {
-          console.log('🔌 Attempting to join SignalR groups...');
-          await joinAuction(auctionId);
-          console.log('✅ Joined auction group:', auctionId);
-          
-          // Check auction status with proper error handling
-          try {
-            const auctionStatus = await apiClient.getAuctionStatus(auctionId);
-            console.log('📊 Auction Status:', auctionStatus);
-            
-            if (auctionStatus.allFinished) {
-              // All auctions completed - KEEP CONNECTION ALIVE
-              console.log('🏁 Initial Load: All auctions completed - MAINTAINING CONNECTION');
-              setState(prev => ({
-                ...prev,
-                currentCar: null,
-                activeLot: null,
-                isLive: false,
-                auctionCompleted: true
-              }));
-              
-              setShowCompletedModal(true);
-              
-              // IMPORTANT: Connection stays alive for future auction starts
-              console.log('✅ Initial Load: SignalR connection preserved for new auctions');
-              
-              showAuctionStateNotification(
-                'All auctions completed - Connection active for new auctions',
-                'completed'
-              );
-              
-              setLoading(false);
-              return;
-            }
-            
-            if (auctionStatus.activeCarId) {
-              // Join the active car and get complete snapshot
-              await joinAuctionCar(auctionStatus.activeCarId);
-              console.log('✅ Joined active car group:', auctionStatus.activeCarId);
-              
-              // Get current state from AuctionCarService
-              try {
-                const activeCarSnapshot = await apiClient.getAuctionCar(auctionStatus.activeCarId);
-                console.log('📸 Active car snapshot:', activeCarSnapshot);
-                
-                // Process server-authoritative snapshot (NO TIMER RESTART)
-                if (activeCarSnapshot) {
-                  const serverTimer = (activeCarSnapshot as any).remainingTimeSeconds || 
-                                    (activeCarSnapshot as any).secondsRemaining || 0;
-                  
-                  setState(prev => ({
-                    ...prev,
-                    currentCar: activeCarSnapshot,
-                    activeLot: prev.lotQueue.find(lot => lot.id === activeCarSnapshot.id) || null,
-                    isLive: activeCarSnapshot.isActive,
-                    // Use server's EXACT timer - don't restart
-                    timerSeconds: serverTimer,
-                    // Reset modal states if auction is active
-                    auctionCompleted: !activeCarSnapshot.isActive,
-                    showCompletedModal: false,
-                    viewDetailsMode: false
-                  }));
-                  
-                  console.log(`🔄 Synced to server state - Timer: ${serverTimer}s, Live: ${activeCarSnapshot.isActive}`);
-                  
-                  toast.success(`🔄 Synced to ${activeCarSnapshot.isActive ? 'LIVE' : 'inactive'} lot: #${activeCarSnapshot.lotNumber}`, {
-                    duration: 3000
-                  });
-                }
-              } catch (snapshotErr) {
-                console.error('❌ Failed to get active car snapshot:', snapshotErr);
-                toast.error('Failed to load active auction car');
-              }
-              
-            } else {
-              // No active car - auction is not live or completed
-              console.log('⚠️ No active car in auction - checking if completed');
-              
-              // Check if auction has any cars at all
-              const hasAnyCars = lotQueue && lotQueue.length > 0;
-              const isAuctionCompleted = hasAnyCars && !auctionStatus.activeCarId;
-              
-              setState(prev => ({
-                ...prev,
-                currentCar: null,
-                activeLot: null,
-                isLive: false,
-                auctionCompleted: isAuctionCompleted
-              }));
-              
-              if (isAuctionCompleted) {
-                // Show modal for completed auction
-                setShowCompletedModal(true);
-                toast('🏁 Auction has completed - All lots have been sold', {
-                  icon: '🏁',
-                  duration: 8000
-                });
-              } else {
-                toast('⏸️ Auction is not currently active', {
-                  icon: '⏸️',
-                  duration: 5000
-                });
-              }
-              
-              // Still join auction group for updates
-              await joinAuction(auctionId);
-            }
-            
-          } catch (statusErr: any) {
-            console.error('❌ Failed to get auction status:', statusErr);
-            
-            // Handle specific 404 case - no active car
-            if (statusErr.message?.includes('No active car found')) {
-              // Check if we have cars in queue to determine if auction is completed
-              const hasAnyCars = state.lotQueue && state.lotQueue.length > 0;
-              const isAuctionCompleted = hasAnyCars; // If we have cars but no active car, auction is likely completed
-              
-              setState(prev => ({
-                ...prev,
-                currentCar: null,
-                activeLot: null,
-                isLive: false,
-                auctionCompleted: isAuctionCompleted
-              }));
-              
-              if (isAuctionCompleted) {
-                // Show modal for completed auction
-                setShowCompletedModal(true);
-                toast('🏁 Auction has completed - All lots have been processed', {
-                  icon: '🏁',
-                  duration: 8000
-                });
-              } else {
-                toast('⏸️ Auction is not currently active', {
-                  icon: '⏸️',
-                  duration: 5000
-                });
-              }
-              
-              // Still join auction group for future updates
-              try {
-                await joinAuction(auctionId);
-                console.log('✅ Joined auction group for updates');
-              } catch (joinErr) {
-                console.error('❌ Failed to join auction group:', joinErr);
-              }
-            } else {
-              toast.error('Failed to check auction status');
-            }
-          }
-          
-        } catch (signalRErr: any) {
-          console.warn('⚠️ SignalR group join failed:', signalRErr?.message);
-          // Not critical - user can still view auction
-        }
-      } else {
-        console.log('⚠️ SignalR not connected, skipping group join');
-      }
+      // Note: SignalR group joining is now handled by a separate useEffect
+      // that waits for the connection to be established before joining groups.
+      // This ensures signals connect properly even if the page loads before
+      // the connection is ready.
 
       setLoading(false);
       console.log('🎉 Initial data loading complete', {
@@ -1297,7 +985,7 @@ const LiveAuctionPage: React.FC = () => {
       setError(err?.message || 'Failed to load auction data');
       setLoading(false);
     }
-  }, [auctionId, isConnected, joinAuction, joinAuctionCar]);
+  }, [auctionId]);
 
   // ========================================
   // SOUND EFFECTS (defined early for use in callbacks)
@@ -1907,9 +1595,8 @@ const LiveAuctionPage: React.FC = () => {
   // CLIENT-SIDE TIMER DISABLED - Server sends timer ticks every second via SignalR
   useEffect(() => {
     // No client-side timer needed - server is authoritative and sends onTimerTick every second
-    if (state.timerSeconds > 0) {
-      console.log(`⏰ [REAL-TIME] Server Timer: ${state.timerSeconds}s (Client timer disabled)`);
-    }
+    console.log(`⏰ [REAL-TIME] Server Timer State: ${state.timerSeconds}s (Client timer disabled)`);
+    console.log(`🎨 UI should display: ${formatTime(state.timerSeconds)}`);
     
     // Only handle timer expiry logic when server timer reaches 0
     if (state.timerSeconds === 0 && state.isLive && state.currentCar) {
@@ -2123,6 +1810,154 @@ const LiveAuctionPage: React.FC = () => {
   useEffect(() => {
     loadInitialData();
   }, [loadInitialData]);
+
+  // Reset hasJoinedGroups when disconnected
+  useEffect(() => {
+    if (!isConnected && hasJoinedGroupsRef.current) {
+      console.log('🔄 Disconnected - resetting hasJoinedGroups flag');
+      hasJoinedGroupsRef.current = false;
+    }
+  }, [isConnected]);
+
+  // Join SignalR groups when connection is established (runs once per connection)
+  useEffect(() => {
+    const joinSignalRGroups = async () => {
+      // Only proceed if we have auction ID and connection is ready
+      if (!auctionId || !isConnected) {
+        console.log('⏸️ Not ready to join groups:', { auctionId, isConnected });
+        return;
+      }
+
+      // Prevent multiple joins - only join once per page load
+      if (hasJoinedGroupsRef.current) {
+        console.log('✅ Already joined groups, skipping...');
+        return;
+      }
+
+      try {
+        console.log('🔌 Connection ready, joining SignalR groups...');
+        hasJoinedGroupsRef.current = true;
+        
+        // Join auction group
+        await joinAuction(auctionId);
+        console.log('✅ Joined auction group:', auctionId);
+        
+        // Check auction status and join active car if needed
+        try {
+          // Get both auction status and timer info for perfect sync
+          const [auctionStatus, timerInfo] = await Promise.all([
+            apiClient.getAuctionStatus(auctionId),
+            apiClient.getAuctionTimer(auctionId).catch(() => null)
+          ]);
+          
+          console.log('📊 Auction Status:', auctionStatus);
+          console.log('⏱️ Timer Info:', timerInfo);
+          
+          if (auctionStatus.activeCarId) {
+            // Join the active car group
+            await joinAuctionCar(auctionStatus.activeCarId);
+            console.log('✅ Joined active car group:', auctionStatus.activeCarId);
+            
+            // Get fresh snapshot to sync state
+            try {
+              const activeCarSnapshot = await apiClient.getAuctionCar(auctionStatus.activeCarId);
+              if (activeCarSnapshot) {
+                // Load proper car details and images
+                let updatedSnapshot = { ...activeCarSnapshot };
+                
+                const carId = activeCarSnapshot.car?.id || activeCarSnapshot.carId;
+                if (carId) {
+                  // Load full car details
+                  try {
+                    const fullCarData = await apiClient.getCar(carId);
+                    if (updatedSnapshot.car) {
+                      updatedSnapshot.car = { ...updatedSnapshot.car, ...fullCarData };
+                    } else {
+                      updatedSnapshot.car = fullCarData;
+                    }
+                  } catch (carError) {
+                    console.warn('⚠️ Failed to load full car details:', carError);
+                  }
+                  
+                  // Load car photos
+                  try {
+                    const photos = await apiClient.getCarPhotos(carId);
+                    if (photos && photos.length > 0) {
+                      if (updatedSnapshot.car) {
+                        updatedSnapshot.car = { ...updatedSnapshot.car, photoUrls: photos } as any;
+                      } else {
+                        (updatedSnapshot as any).photoUrls = photos;
+                      }
+                    }
+                  } catch (photosError) {
+                    console.warn('⚠️ Photos endpoint failed:', photosError);
+                  }
+                }
+                
+                // Use timer info from dedicated endpoint for most accurate sync
+                // Backend returns both 'timerSeconds' (duration) and 'remainingSeconds' (current)
+                const serverTimer = timerInfo?.remainingSeconds ??  // Prefer actual remaining time
+                                  timerInfo?.timerSeconds ?? 
+                                  (activeCarSnapshot as any).remainingTimeSeconds ?? 
+                                  (activeCarSnapshot as any).secondsRemaining ?? 0;
+                
+                // Only consider live if we have an active car and timer > 0
+                const hasActiveCar = timerInfo?.currentCarLotNumber != null || activeCarSnapshot.isActive;
+                const timerNotExpired = serverTimer > 0 && !(timerInfo?.isExpired);
+                const isAuctionLive = hasActiveCar && timerNotExpired && (timerInfo?.isLive ?? activeCarSnapshot.isActive);
+                
+                console.log('⏱️ Timer Sync Details:', {
+                  remainingSeconds: timerInfo?.remainingSeconds,
+                  timerSeconds: timerInfo?.timerSeconds,
+                  isExpired: timerInfo?.isExpired,
+                  currentCarLotNumber: timerInfo?.currentCarLotNumber,
+                  timeDisplay: timerInfo?.timeDisplay,
+                  hasActiveCar,
+                  calculatedTimer: serverTimer,
+                  isLive: isAuctionLive
+                });
+                
+                setState(prev => ({
+                  ...prev,
+                  currentCar: updatedSnapshot,
+                  activeLot: prev.lotQueue.find(lot => lot.id === activeCarSnapshot.id) || null,
+                  isLive: isAuctionLive,
+                  timerSeconds: serverTimer,
+                  auctionCompleted: false,
+                  showCompletedModal: false,
+                  viewDetailsMode: false
+                }));
+                
+                console.log(`✅ Synced - Timer: ${serverTimer}s, Live: ${isAuctionLive}`);
+              }
+            } catch (snapshotErr) {
+              console.error('❌ Failed to get active car snapshot:', snapshotErr);
+            }
+          } else if (auctionStatus.allFinished) {
+            // Auction completed
+            setState(prev => ({
+              ...prev,
+              auctionCompleted: true,
+              currentCar: null,
+              activeLot: null,
+              isLive: false
+            }));
+            setShowCompletedModal(true);
+          }
+        } catch (statusErr: any) {
+          console.warn('⚠️ Failed to get auction status:', statusErr);
+          // Even if status check fails, we've joined the auction group
+          // and will receive events
+        }
+        
+      } catch (error) {
+        console.error('❌ Failed to join SignalR groups:', error);
+        hasJoinedGroupsRef.current = false; // Allow retry on next connection
+      }
+    };
+    
+    joinSignalRGroups();
+  }, [auctionId, isConnected, joinAuction, joinAuctionCar]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -2417,29 +2252,31 @@ const LiveAuctionPage: React.FC = () => {
             <div className="flex items-center space-x-3">
               {/* Connection Status */}
               <div className="flex items-center space-x-2 bg-slate-700/50 border border-white/10 px-3 py-2 rounded-xl">
-                {isConnected ? (
+                {/* Connection Icon based on ACTUAL connectionState string */}
+                {connectionState === 'Connected' ? (
                   <Wifi className="h-4 w-4 text-green-400" />
-                ) : isConnecting ? (
+                ) : connectionState === 'Connecting' || connectionState === 'Reconnecting' ? (
                   <RefreshCw className="h-4 w-4 text-yellow-400 animate-spin" />
                 ) : (
                   <WifiOff className="h-4 w-4 text-red-400" />
                 )}
                 <span className="text-sm text-white">
-                  {state.auctionCompleted ? 'Auction Completed - Connected' : 
-                   viewDetailsMode ? 'Details View - Connected' :
-                   isConnected ? 'Connected & Synced' : isConnecting ? 'Connecting...' : 'Disconnected'}
+                  {state.auctionCompleted ? 'Auction Completed' : 
+                   viewDetailsMode ? 'Details View' :
+                   connectionState === 'Connected' ? 'Connected & Synced' : 
+                   connectionState === 'Connecting' ? 'Connecting...' : 
+                   connectionState === 'Reconnecting' ? 'Reconnecting...' :
+                   'Disconnected'}
                 </span>
-                {/* Debug info */}
+                {/* Debug info - show actual state */}
                 <span className="text-xs text-slate-400">
-                  {state.auctionCompleted ? '(Completed - SignalR Active)' : 
-                   viewDetailsMode ? '(Read-Only - SignalR Active)' :
-                   `(${connectionState})`}
+                  ({connectionState})
                   {state.currentCar && ` - Lot #${state.currentCar.lotNumber}`}
-                  {!state.isLive && !state.auctionCompleted && ' - Not Live'}
+                  {hasJoinedGroupsRef.current ? ' - Joined' : ' - Not Joined'}
                 </span>
                 {process.env.NODE_ENV === 'development' && (
                   <span className="text-xs text-slate-500 ml-2">
-                    ID: {localStorage.getItem('authToken')?.substring(0, 8) || 'anon'}
+                    [{isConnected ? '✓' : '✗'}/{isConnecting ? '⟳' : '○'}]
                   </span>
                 )}
               </div>
@@ -2886,17 +2723,48 @@ const LiveAuctionPage: React.FC = () => {
                   <p className="text-xs text-orange-300 mt-1">Waiting for auctioneer to start</p>
                 </div>
               )}
-              {!isConnected && !isConnecting && (
+              {/* Connection Status - Use connectionState string for accuracy */}
+              {connectionState !== 'Connected' && connectionState !== 'Connecting' && connectionState !== 'Reconnecting' && (
                 <div className="mt-4 bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-center">
                   <WifiOff className="h-5 w-5 text-red-400 mx-auto mb-1" />
-                  <p className="text-sm text-red-400 font-medium">SignalR disconnected ({connectionState})</p>
-                  <p className="text-xs text-red-300 mt-1">Bidding available via REST API fallback</p>
+                  <p className="text-sm text-red-400 font-medium">Connection Issue: {connectionState}</p>
+                  <p className="text-xs text-red-300 mt-1">
+                    {lastError || 'Bidding available via REST API fallback'}
+                  </p>
+                  <div className="flex gap-2 justify-center mt-2">
+                    <button
+                      onClick={() => {
+                        console.log('🔄 Manual reconnect triggered');
+                        signalRHook.reconnect().then(() => {
+                          console.log('✅ Reconnect complete');
+                        }).catch(err => {
+                          console.error('❌ Reconnect failed:', err);
+                        });
+                      }}
+                      className="text-xs text-red-400 hover:text-red-300 underline"
+                    >
+                      Try Reconnect
+                    </button>
+                    <button
+                      onClick={() => window.location.reload()}
+                      className="text-xs text-red-400 hover:text-red-300 underline"
+                    >
+                      Refresh Page
+                    </button>
+                  </div>
+                  {process.env.NODE_ENV === 'development' && (
+                    <div className="mt-2 text-xs text-red-300 font-mono">
+                      Debug: {JSON.stringify({ isConnected, isConnecting, connectionState })}
+                    </div>
+                  )}
                 </div>
               )}
-              {isConnecting && (
+              {(connectionState === 'Connecting' || connectionState === 'Reconnecting') && (
                 <div className="mt-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 text-center">
                   <RefreshCw className="h-5 w-5 text-yellow-400 mx-auto mb-1 animate-spin" />
-                  <p className="text-sm text-yellow-400 font-medium">Connecting to server...</p>
+                  <p className="text-sm text-yellow-400 font-medium">
+                    {connectionState === 'Reconnecting' ? 'Reconnecting to server...' : 'Connecting to server...'}
+                  </p>
                   <p className="text-xs text-yellow-300 mt-1">Establishing real-time connection</p>
         </div>
               )}
