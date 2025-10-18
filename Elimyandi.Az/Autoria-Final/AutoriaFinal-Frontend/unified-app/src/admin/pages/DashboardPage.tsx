@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { 
   BarChart, 
   Bar, 
@@ -87,6 +88,7 @@ interface RevenueData {
 }
 
 export function DashboardPage() {
+  const navigate = useNavigate()
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [userStats, setUserStats] = useState<UserStatistics | null>(null)
   const [systemHealth, setSystemHealth] = useState<SystemHealth | null>(null)
@@ -106,12 +108,14 @@ export function DashboardPage() {
         dashboardResponse,
         userStatsResponse,
         systemHealthResponse,
-        activitiesResponse
+        activitiesResponse,
+        allAuctionsResponse
       ] = await Promise.all([
         apiClient.getAdminDashboard(),
         apiClient.getAdminUserStatistics(),
         apiClient.getAdminSystemHealth(),
-        apiClient.getAdminRecentActivities()
+        apiClient.getAdminRecentActivities(),
+        apiClient.getAuctions() // Fetch all auctions for dynamic counting
       ])
 
       // Extract data from API responses (API returns objects with 'data' property)
@@ -119,17 +123,45 @@ export function DashboardPage() {
       const userStatsData = userStatsResponse.data || userStatsResponse
       const systemHealthData = systemHealthResponse.data || systemHealthResponse
       const activitiesData = activitiesResponse.data || activitiesResponse
+      const allAuctions = Array.isArray(allAuctionsResponse) ? allAuctionsResponse : []
+      
+      // Extract auction stats from backend (AdminDashboardDto.AuctionStats)
+      const auctionStats = dashboardData.auctionStats || dashboardData.AuctionStats || {}
+      const financialStats = dashboardData.financialStats || dashboardData.FinancialStats || {}
+      
+      // Use backend-calculated stats (dynamic and real-time)
+      const totalAuctions = auctionStats.totalAuctions || 0
+      const liveAuctions = auctionStats.activeAuctions || 0
+      const completedAuctions = auctionStats.completedAuctions || 0
+      const cancelledAuctions = auctionStats.cancelledAuctions || 0
+      
+      // Calculate additional stats from raw auctions data for comparison
+      const draftAuctions = allAuctions.filter(a => a.status?.toLowerCase() === 'draft').length
+      const scheduledAuctions = allAuctions.filter(a => {
+        const status = a.status?.toLowerCase()
+        return status === 'scheduled' || status === 'upcoming'
+      }).length
 
-      // Process dashboard data
+      console.log('📊 Backend Dynamic Dashboard Stats (from AdminService):')
+      console.log(`   Total Auctions: ${totalAuctions}`)
+      console.log(`   Active/Live Auctions: ${liveAuctions}`)
+      console.log(`   Completed: ${completedAuctions}`)
+      console.log(`   Cancelled: ${cancelledAuctions}`)
+      console.log(`   Draft (from raw data): ${draftAuctions}`)
+      console.log(`   Scheduled (from raw data): ${scheduledAuctions}`)
+      console.log(`   Total Cars: ${auctionStats.totalCars || 0}`)
+      console.log(`   Total Bids: ${auctionStats.totalBids || 0}`)
+
+      // Process dashboard data with backend dynamic counts
       setDashboardData({
-        draft: dashboardData.draft || 0,
-        scheduled: dashboardData.scheduled || 0,
-        running: dashboardData.running || 0,
-        ended: dashboardData.ended || 0,
-        cancelled: dashboardData.cancelled || 0,
-        totalAuctions: dashboardData.totalAuctions || 0,
-        totalRevenue: dashboardData.totalRevenue || 0,
-        activeAuctions: dashboardData.activeAuctions || 0
+        draft: draftAuctions,
+        scheduled: scheduledAuctions,
+        running: liveAuctions,
+        ended: completedAuctions,
+        cancelled: cancelledAuctions,
+        totalAuctions: totalAuctions,
+        totalRevenue: financialStats.totalRevenue || 0,
+        activeAuctions: liveAuctions
       })
 
       // Process user statistics
@@ -333,6 +365,7 @@ export function DashboardPage() {
               </Button>
               <Button 
                 icon={Plus}
+                onClick={() => navigate('/admin/auctions')}
                 className="bg-blue-600 hover:bg-blue-700 text-white"
               >
                 New Auction

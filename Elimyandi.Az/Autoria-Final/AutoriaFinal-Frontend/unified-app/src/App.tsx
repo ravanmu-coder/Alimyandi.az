@@ -141,8 +141,8 @@ function App() {
                   </ProtectedRoute>
                 } />
                 
-                {/* Legacy route for old join page */}
-                <Route path="/auctions/:auctionId/join-legacy" element={
+                {/* Alternative route for AuctionJoinPage (React-based join interface) */}
+                <Route path="/auction-join/:auctionId" element={
                   <ProtectedRoute>
                     <AuctionJoinPage />
                   </ProtectedRoute>

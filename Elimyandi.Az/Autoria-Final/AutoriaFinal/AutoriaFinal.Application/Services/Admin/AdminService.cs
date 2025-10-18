@@ -4,6 +4,7 @@ using AutoriaFinal.Contract.Dtos.Identity;
 using AutoriaFinal.Contract.Services.Admin;
 using AutoriaFinal.Contract.Services.Identity;
 using AutoriaFinal.Domain.Entities.Identity;
+using AutoriaFinal.Domain.Enums.AuctionEnums;
 using AutoriaFinal.Persistence.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -785,8 +786,98 @@ namespace AutoriaFinal.Application.Services.Admin
 
         private async Task<AdminAuctionStatsOverview> GetAuctionStatisticsForDashboard()
         {
-            // TODO: Implement auction statistics
-            return new AdminAuctionStatsOverview();
+            _logger.LogInformation("📊 Calculating dynamic auction statistics for dashboard...");
+
+            // Get all auctions
+            var allAuctions = await _context.Auctions
+                .Include(a => a.Location)
+                .ToListAsync();
+
+            // Get all cars
+            var allCars = await _context.Cars.ToListAsync();
+
+            // Get all bids
+            var allBids = await _context.Bids.ToListAsync();
+
+            var now = DateTime.UtcNow;
+            var today = now.Date;
+
+            // Calculate auction counts by status
+            var totalAuctions = allAuctions.Count;
+            
+            // Active (Live/Running) auctions - Status must be Running AND within time range
+            var activeAuctions = allAuctions.Count(a => 
+                a.Status == AuctionStatus.Running &&
+                a.StartTimeUtc <= now &&
+                a.EndTimeUtc >= now
+            );
+
+            // Completed auctions
+            var completedAuctions = allAuctions.Count(a => 
+                a.Status == AuctionStatus.Ended || 
+                a.Status == AuctionStatus.Settled ||
+                (a.Status != AuctionStatus.Cancelled && a.EndTimeUtc < now)
+            );
+
+            // Cancelled auctions
+            var cancelledAuctions = allAuctions.Count(a => 
+                a.Status == AuctionStatus.Cancelled
+            );
+
+            // Car statistics
+            var totalCars = allCars.Count;
+            
+            // Cars currently in active auctions
+            var activeAuctionIds = allAuctions
+                .Where(a => a.Status == AuctionStatus.Running)
+                .Select(a => a.Id)
+                .ToList();
+            
+            var carsInAuction = await _context.AuctionCars
+                .Where(ac => activeAuctionIds.Contains(ac.AuctionId))
+                .CountAsync();
+
+            // Sold cars (with hammer price set)
+            var soldCars = await _context.AuctionCars
+                .Where(ac => ac.HammerPrice != null && ac.HammerPrice > 0)
+                .CountAsync();
+
+            // Unsold cars
+            var unsoldCars = totalCars - soldCars;
+
+            // Average car price (from sold cars)
+            var averageCarPrice = await _context.AuctionCars
+                .Where(ac => ac.HammerPrice != null && ac.HammerPrice > 0)
+                .AverageAsync(ac => (decimal?)ac.HammerPrice) ?? 0;
+
+            // Bid statistics
+            var totalBids = allBids.Count;
+            var bidsToday = allBids.Count(b => b.CreatedAt.Date == today);
+
+            _logger.LogInformation("📊 Dashboard Auction Stats Calculated:");
+            _logger.LogInformation("   Total Auctions: {Total}", totalAuctions);
+            _logger.LogInformation("   Active Auctions: {Active}", activeAuctions);
+            _logger.LogInformation("   Completed: {Completed}", completedAuctions);
+            _logger.LogInformation("   Cancelled: {Cancelled}", cancelledAuctions);
+            _logger.LogInformation("   Total Cars: {TotalCars}", totalCars);
+            _logger.LogInformation("   Cars in Auction: {CarsInAuction}", carsInAuction);
+            _logger.LogInformation("   Sold: {Sold}, Unsold: {Unsold}", soldCars, unsoldCars);
+            _logger.LogInformation("   Total Bids: {TotalBids}, Today: {Today}", totalBids, bidsToday);
+
+            return new AdminAuctionStatsOverview
+            {
+                TotalAuctions = totalAuctions,
+                ActiveAuctions = activeAuctions,
+                CompletedAuctions = completedAuctions,
+                CancelledAuctions = cancelledAuctions,
+                TotalCars = totalCars,
+                CarsInAuction = carsInAuction,
+                SoldCars = soldCars,
+                UnsoldCars = unsoldCars,
+                AverageCarPrice = averageCarPrice,
+                TotalBids = totalBids,
+                BidsToday = bidsToday
+            };
         }
 
         private async Task<AdminFinancialStatsOverview> GetFinancialStatisticsForDashboard()

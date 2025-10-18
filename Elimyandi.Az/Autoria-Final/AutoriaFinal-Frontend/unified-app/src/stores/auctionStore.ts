@@ -1,264 +1,261 @@
-import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
-import { AuctionDetailDto, AuctionCarDetailDto, BidGetDto } from '../types/api';
+"use client"
 
-// ========================================
-// TYPES
-// ========================================
+import { create } from "zustand"
+import type { AuctionDetailDto, AuctionCarDetailDto, BidGetDto } from "../types/api"
 
-export type AuctionStatus = 'Idle' | 'Running' | 'Paused' | 'Ended';
+/**
+ * AuctionStore - Zustand Store
+ *
+ * Single source of truth for live auction state
+ * All SignalR events update this store
+ * All components read from this store
+ */
 
-export interface AuctionState {
-  // Auction info
-  auctionId: string | null;
-  auction: AuctionDetailDto | null;
-  status: AuctionStatus;
-  
-  // Current car
-  currentCar: AuctionCarDetailDto | null;
-  currentCarId: string | null;
-  
+interface AuctionState {
+  // Auction Info
+  auctionId: string | null
+  auction: AuctionDetailDto | null
+  status: "Idle" | "Running" | "Paused" | "Ended"
+  isLive: boolean
+
+  // Current Car
+  currentCarId: string | null
+  currentCar: AuctionCarDetailDto | null
+
   // Bidding
-  currentPrice: number;
-  highestBid: BidGetDto | null;
-  bidHistory: BidGetDto[];
-  
-  // Timer (server-authoritative)
-  remainingSeconds: number;
-  
+  currentPrice: number
+  highestBid: BidGetDto | null
+  bidHistory: BidGetDto[]
+
+  // Timer (Server-Authoritative)
+  remainingSeconds: number
+
   // Stats
-  totalBids: number;
-  uniqueBidders: number;
-  activeBidders: number;
-  
+  totalBids: number
+  uniqueBidders: number
+  activeBidders: number
+
   // Connection
-  isConnected: boolean;
-  isLive: boolean;
+  isConnected: boolean
+
+  // Actions
+  setAuctionId: (id: string) => void
+  setAuction: (auction: AuctionDetailDto) => void
+  setCurrentCar: (car: AuctionCarDetailDto | null) => void
+  setBidHistory: (bids: BidGetDto[]) => void
+  setConnectionStatus: (connected: boolean) => void
+  reset: () => void
+
+  // Timer Actions
+  setRemainingSeconds: (seconds: number) => void
+  resetTimer: (seconds: number) => void
+
+  // Auction Lifecycle Actions
+  startAuction: () => void
+  pauseAuction: () => void
+  endAuction: () => void
+
+  // Bid Actions
+  updateHighestBid: (bid: BidGetDto) => void
+  addBidToHistory: (bid: BidGetDto) => void
+
+  // Stats Actions
+  updateStats: (stats: { totalBids?: number; uniqueBidders?: number; activeBidders?: number }) => void
 }
 
-export interface AuctionActions {
-  // Initialize
-  setAuctionId: (auctionId: string) => void;
-  setAuction: (auction: AuctionDetailDto) => void;
-  
-  // Auction status
-  setAuctionStatus: (status: AuctionStatus) => void;
-  startAuction: () => void;
-  pauseAuction: () => void;
-  endAuction: () => void;
-  
-  // Current car
-  setCurrentCar: (car: AuctionCarDetailDto | null) => void;
-  setCurrentCarId: (carId: string | null) => void;
-  
-  // Bidding
-  setCurrentPrice: (price: number) => void;
-  updateHighestBid: (bid: BidGetDto) => void;
-  addBidToHistory: (bid: BidGetDto) => void;
-  setBidHistory: (bids: BidGetDto[]) => void;
-  
-  // Timer (server-driven)
-  setRemainingSeconds: (seconds: number) => void;
-  tickTimer: () => void; // Only for display smoothing
-  resetTimer: (seconds: number) => void;
-  
-  // Stats
-  updateStats: (stats: { totalBids?: number; uniqueBidders?: number; activeBidders?: number }) => void;
-  
-  // Connection
-  setConnectionStatus: (isConnected: boolean) => void;
-  setLiveStatus: (isLive: boolean) => void;
-  
-  // Reset
-  reset: () => void;
-}
-
-export type AuctionStore = AuctionState & AuctionActions;
-
-// ========================================
-// INITIAL STATE
-// ========================================
-
-const initialState: AuctionState = {
+const initialState = {
+  // Auction Info
   auctionId: null,
   auction: null,
-  status: 'Idle',
-  
-  currentCar: null,
+  status: "Idle" as const,
+  isLive: false,
+
+  // Current Car
   currentCarId: null,
-  
+  currentCar: null,
+
+  // Bidding
   currentPrice: 0,
   highestBid: null,
   bidHistory: [],
-  
+
+  // Timer
   remainingSeconds: 0,
-  
+
+  // Stats
   totalBids: 0,
   uniqueBidders: 0,
   activeBidders: 0,
-  
+
+  // Connection
   isConnected: false,
-  isLive: false,
-};
+}
 
-// ========================================
-// STORE
-// ========================================
+export const useAuctionStore = create<AuctionState>((set, get) => ({
+  ...initialState,
 
-export const useAuctionStore = create<AuctionStore>()(
-  devtools(
-    (set, get) => ({
-      ...initialState,
-      
-      // Initialize
-      setAuctionId: (auctionId) => set({ auctionId }),
-      
-      setAuction: (auction) => set({ auction }),
-      
-      // Auction status
-      setAuctionStatus: (status) => {
-        console.log('📊 Store: Auction status changed:', status);
-        set({ status, isLive: status === 'Running' });
-      },
-      
-      startAuction: () => {
-        console.log('🚀 Store: Auction started');
-        set({ status: 'Running', isLive: true });
-      },
-      
-      pauseAuction: () => {
-        console.log('⏸️ Store: Auction paused');
-        set({ status: 'Paused', isLive: false });
-      },
-      
-      endAuction: () => {
-        console.log('🏁 Store: Auction ended');
-        set({ status: 'Ended', isLive: false, remainingSeconds: 0 });
-      },
-      
-      // Current car
-      setCurrentCar: (car) => {
-        console.log('🚗 Store: Current car changed:', car?.lotNumber);
-        set({ 
-          currentCar: car,
-          currentCarId: car?.id || null,
-          currentPrice: car?.currentPrice || car?.minPreBid || 0,
-          highestBid: null,
-          bidHistory: [],
-        });
-      },
-      
-      setCurrentCarId: (carId) => set({ currentCarId: carId }),
-      
-      // Bidding
-      setCurrentPrice: (price) => {
-        console.log('💰 Store: Price updated:', price);
-        set({ currentPrice: price });
-      },
-      
-      updateHighestBid: (bid) => {
-        console.log('🏆 Store: Highest bid updated:', bid.amount);
-        set({ 
-          highestBid: bid,
-          currentPrice: bid.amount,
-        });
-      },
-      
-      addBidToHistory: (bid) => {
-        const { bidHistory } = get();
-        // Add to beginning and keep last 50
-        const newHistory = [bid, ...bidHistory].slice(0, 50);
-        set({ bidHistory: newHistory });
-      },
-      
-      setBidHistory: (bids) => set({ bidHistory: bids }),
-      
-      // Timer (server-driven)
-      setRemainingSeconds: (seconds) => {
-        console.log('⏰ Store: Timer set to:', seconds);
-        set({ remainingSeconds: seconds });
-      },
-      
-      tickTimer: () => {
-        // Only for smooth display between server ticks
-        const { remainingSeconds } = get();
-        if (remainingSeconds > 0) {
-          set({ remainingSeconds: remainingSeconds - 1 });
-        }
-      },
-      
-      resetTimer: (seconds) => {
-        console.log('🔄 Store: Timer reset to:', seconds);
-        set({ remainingSeconds: seconds });
-      },
-      
-      // Stats
-      updateStats: (stats) => {
-        set((state) => ({
-          totalBids: stats.totalBids ?? state.totalBids,
-          uniqueBidders: stats.uniqueBidders ?? state.uniqueBidders,
-          activeBidders: stats.activeBidders ?? state.activeBidders,
-        }));
-      },
-      
-      // Connection
-      setConnectionStatus: (isConnected) => {
-        console.log('🔌 Store: Connection status:', isConnected);
-        set({ isConnected });
-      },
-      
-      setLiveStatus: (isLive) => {
-        console.log('🔴 Store: Live status:', isLive);
-        set({ isLive });
-      },
-      
-      // Reset
-      reset: () => {
-        console.log('🔄 Store: Reset to initial state');
-        set(initialState);
-      },
-    }),
-    {
-      name: 'auction-store',
-      enabled: process.env.NODE_ENV === 'development',
+  // ========================================
+  // BASIC SETTERS
+  // ========================================
+
+  setAuctionId: (id: string) => {
+    console.log("📝 [Store] Setting auction ID:", id)
+    set({ auctionId: id })
+  },
+
+  setAuction: (auction: AuctionDetailDto) => {
+    console.log("📝 [Store] Setting auction:", auction.name)
+    set({
+      auction,
+      isLive: auction.status === "Running",
+      status: auction.status as "Idle" | "Running" | "Paused" | "Ended",
+    })
+  },
+
+  setCurrentCar: (car: AuctionCarDetailDto | null) => {
+    if (car) {
+      console.log("📝 [Store] Setting current car:", car.lotNumber, car.id)
+      set({
+        currentCar: car,
+        currentCarId: car.id,
+        currentPrice: car.currentPrice || car.minPreBid || 0,
+      })
+    } else {
+      console.log("📝 [Store] Clearing current car")
+      set({
+        currentCar: null,
+        currentCarId: null,
+        currentPrice: 0,
+        highestBid: null,
+        bidHistory: [],
+      })
     }
-  )
-);
+  },
 
-// ========================================
-// SELECTORS (for optimized re-renders)
-// ========================================
+  setBidHistory: (bids: BidGetDto[]) => {
+    console.log("📝 [Store] Setting bid history:", bids.length, "bids")
+    // Sort by timestamp descending (newest first)
+    const sortedBids = [...bids].sort((a, b) => {
+      const timeA = new Date(a.timestamp || 0).getTime()
+      const timeB = new Date(b.timestamp || 0).getTime()
+      return timeB - timeA
+    })
 
-export const selectAuctionInfo = (state: AuctionStore) => ({
-  auctionId: state.auctionId,
-  auction: state.auction,
-  status: state.status,
-  isLive: state.isLive,
-});
+    set({
+      bidHistory: sortedBids,
+      highestBid: sortedBids[0] || null,
+      currentPrice: sortedBids[0]?.amount || get().currentCar?.currentPrice || 0,
+    })
+  },
 
-export const selectCurrentCar = (state: AuctionStore) => ({
-  currentCar: state.currentCar,
-  currentCarId: state.currentCarId,
-});
+  setConnectionStatus: (connected: boolean) => {
+    console.log("📝 [Store] Connection status:", connected ? "Connected" : "Disconnected")
+    set({ isConnected: connected })
+  },
 
-export const selectBidding = (state: AuctionStore) => ({
-  currentPrice: state.currentPrice,
-  highestBid: state.highestBid,
-  bidHistory: state.bidHistory,
-});
+  reset: () => {
+    console.log("📝 [Store] Resetting store to initial state")
+    set(initialState)
+  },
 
-export const selectTimer = (state: AuctionStore) => ({
-  remainingSeconds: state.remainingSeconds,
-});
+  // ========================================
+  // TIMER ACTIONS
+  // ========================================
 
-export const selectStats = (state: AuctionStore) => ({
-  totalBids: state.totalBids,
-  uniqueBidders: state.uniqueBidders,
-  activeBidders: state.activeBidders,
-});
+  setRemainingSeconds: (seconds: number) => {
+    // Only log every 5 seconds to reduce noise
+    if (seconds % 5 === 0 || seconds <= 10) {
+      console.log("⏰ [Store] Timer update:", seconds, "seconds")
+    }
+    set({ remainingSeconds: seconds })
+  },
 
-export const selectConnection = (state: AuctionStore) => ({
-  isConnected: state.isConnected,
-  isLive: state.isLive,
-});
+  resetTimer: (seconds: number) => {
+    console.log("🔄 [Store] Timer reset to:", seconds, "seconds")
+    set({ remainingSeconds: seconds })
+  },
 
+  // ========================================
+  // AUCTION LIFECYCLE ACTIONS
+  // ========================================
+
+  startAuction: () => {
+    console.log("🚀 [Store] Auction started")
+    set({ status: "Running", isLive: true })
+  },
+
+  pauseAuction: () => {
+    console.log("⏸️ [Store] Auction paused")
+    set({ status: "Paused", isLive: false })
+  },
+
+  endAuction: () => {
+    console.log("🏁 [Store] Auction ended")
+    set({ status: "Ended", isLive: false })
+  },
+
+  // ========================================
+  // BID ACTIONS
+  // ========================================
+
+  updateHighestBid: (bid: BidGetDto) => {
+    console.log("🏆 [Store] Updating highest bid:", {
+      amount: bid.amount,
+      user: bid.user?.firstName,
+      carId: bid.auctionCarId,
+    })
+
+    const currentHighest = get().highestBid
+
+    // Only update if this bid is higher than current highest
+    if (!currentHighest || bid.amount > currentHighest.amount) {
+      set({
+        highestBid: bid,
+        currentPrice: bid.amount,
+      })
+    }
+  },
+
+  addBidToHistory: (bid: BidGetDto) => {
+    console.log("💰 [Store] Adding bid to history:", {
+      amount: bid.amount,
+      user: bid.user?.firstName,
+      carId: bid.auctionCarId,
+    })
+
+    const currentHistory = get().bidHistory
+
+    // Check if bid already exists (prevent duplicates)
+    const exists = currentHistory.some((b) => b.id === bid.id || (b.amount === bid.amount && b.userId === bid.userId))
+
+    if (!exists) {
+      // Add to beginning of array (newest first)
+      const newHistory = [bid, ...currentHistory]
+
+      // Keep only last 50 bids to prevent memory issues
+      const trimmedHistory = newHistory.slice(0, 50)
+
+      set({
+        bidHistory: trimmedHistory,
+        totalBids: get().totalBids + 1,
+      })
+    } else {
+      console.log("⚠️ [Store] Bid already exists in history, skipping")
+    }
+  },
+
+  // ========================================
+  // STATS ACTIONS
+  // ========================================
+
+  updateStats: (stats: { totalBids?: number; uniqueBidders?: number; activeBidders?: number }) => {
+    console.log("📊 [Store] Updating stats:", stats)
+    set((state) => ({
+      totalBids: stats.totalBids ?? state.totalBids,
+      uniqueBidders: stats.uniqueBidders ?? state.uniqueBidders,
+      activeBidders: stats.activeBidders ?? state.activeBidders,
+    }))
+  },
+}))
+
+export default useAuctionStore

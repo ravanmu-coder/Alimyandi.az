@@ -8,56 +8,48 @@ namespace AutoriaFinal.Domain.Entities.Auctions
 {
     public class AuctionCar : BaseEntity
     {
-        // ✅ Basic Info
         public Guid AuctionId { get; set; }
         public Guid CarId { get; set; }
         public string LotNumber { get; set; } = default!;
         public int? ItemNumber { get; set; }
-
-        // ✅ REAL COPART PRICING LOGIC
-        public decimal StartPrice { get; set; } = 0; // 80% of ERV
-        public decimal? ReservePrice { get; set; }   // 90% of ERV (gizli)
+        public decimal StartPrice { get; set; } = 0; 
+        public decimal? ReservePrice { get; set; }  
         public decimal CurrentPrice { get; set; } = 0;
-        public decimal? HammerPrice { get; set; }    // Final winning bid
-        public decimal? BuyersPremium { get; set; }  // 10-12% of hammer
-        public decimal? TotalPrice { get; set; }     // Hammer + Premium + Fees
-        public decimal? SoldPrice { get; set; }      // Final amount buyer pays
-
-        // ✅ Bid Management
-        public decimal MinPreBid { get; set; }       // Minimum pre-bid (usually StartPrice)
+        public decimal? HammerPrice { get; set; } 
+        public decimal? BuyersPremium { get; set; }  
+        public decimal? TotalPrice { get; set; }     
+        public decimal? SoldPrice { get; set; }      
+        public decimal MinPreBid { get; set; }      
         public bool IsReserveMet { get; set; }
         public DateTime? LastBidTime { get; set; }
         public int BidCount { get; set; } = 0;
         public int PreBidCount { get; set; } = 0;
 
-        // ✅ Live Auction Status
         public bool IsActive { get; set; } = false;
         public DateTime? ActiveStartTime { get; set; }
-        public int? LaneNumber { get; set; }         // Physical lane assignment
-        public int? RunOrder { get; set; }           // Order in lane
-        public DateTime? ScheduledTime { get; set; }  // Approximate auction time
+        public int? LaneNumber { get; set; }        
+        public int? RunOrder { get; set; }          
+        public DateTime? ScheduledTime { get; set; }  
 
-        // ✅ Business Logic Status
         public AuctionWinnerStatus WinnerStatus { get; set; } = AuctionWinnerStatus.Pending;
         public AuctionCarCondition AuctionCondition { get; set; } = AuctionCarCondition.PreAuction;
         public bool RequiresSellerApproval { get; set; } = true; // Seller must approve winner
 
-        // ✅ Post-Auction Process
         public DateTime? WinnerNotifiedAt { get; set; }
         public DateTime? DepositPaidAt { get; set; }
         public DateTime? PaymentDueDate { get; set; }
         public string? UnsoldReason { get; set; }
         public string? SellerNotes { get; set; }
 
-        // ✅ Navigation Properties
         public Car Car { get; set; } = default!;
         public Auction Auction { get; set; } = default!;
         public AuctionWinner? AuctionWinner { get; set; }
         public ICollection<Bid> Bids { get; set; } = new List<Bid>();
 
-        public AuctionCar() { } // EF Core
+        public AuctionCar() { }
 
-        // ✅ ENHANCED FACTORY METHOD
+        #region Rich Data Model
+
         public static AuctionCar Create(
             Guid auctionId,
             Guid carId,
@@ -73,10 +65,9 @@ namespace AutoriaFinal.Domain.Entities.Auctions
             if (estimatedRetailValue <= 0)
                 throw new ArgumentException("ERV sıfırdan böyük olmalıdır", nameof(estimatedRetailValue));
 
-            // ✅ REAL PRICING CALCULATION
             var startPrice = Math.Round(estimatedRetailValue * 0.80m, 2); // 80% of ERV
             var reservePrice = Math.Round(estimatedRetailValue * 0.90m, 2); // 90% of ERV
-            var minPreBid = startPrice; // Pre-bid StartPrice-dan başlayır
+            var minPreBid = startPrice; 
 
             return new AuctionCar
             {
@@ -96,8 +87,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
                 CreatedAt = DateTime.UtcNow
             };
         }
-
-        // ✅ BUSINESS LOGIC METHODS
 
         public void SetPricing(decimal estimatedRetailValue)
         {
@@ -254,5 +243,8 @@ namespace AutoriaFinal.Domain.Entities.Auctions
         public bool CanStartAuction() => HasPreBids() || StartPrice > 0;
         public bool IsPaymentOverdue() => PaymentDueDate.HasValue && DateTime.UtcNow > PaymentDueDate.Value;
         public decimal GetTotalAmountDue() => TotalPrice ?? HammerPrice ?? CurrentPrice;
+        #endregion
+
     }
+
 }

@@ -107,6 +107,9 @@ namespace AutoriaFinal.Contract.Services.Auctions
         // Vaxt bitibsə true
         public bool IsExpired { get; set; }
 
+        // ✅ COPART LOGIC: Auction live status
+        public bool IsLive { get; set; }
+
         // Qalan vaxtı frontend üçün oxunaqlı formatda göstərmək üçün (məs. "00:17")
         public string? TimeDisplay { get; set; }
     }

@@ -17,8 +17,6 @@ namespace AutoriaFinal.Domain.Entities.Billing
         public string ProviderRef { get; private set; } = default!;
         public PaymentStatus Status { get; private set; } = PaymentStatus.Pending;
         public DateTime? PaidAtUtc { get; private set; }
-        //public void MarkSucceeded() { Status = PaymentStatus.Succeeded; PaidAtUtc = DateTime.UtcNow; MarkUpdated(); }
-        //public void MarkFailed() { Status = PaymentStatus.Failed; MarkUpdated(); }
-        //public void MarkRefunded() { Status = PaymentStatus.Refunded; MarkUpdated(); }
+       
     }
 }

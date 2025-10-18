@@ -170,13 +170,23 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
       setLoading(true);
       setError('');
 
+      console.log(`🖼️ Loading photos for car ID: ${carId}`);
       const carDetails = await apiClient.getCar(carId);
+      console.log('📦 Car details received:', {
+        id: carDetails.id,
+        make: carDetails.make,
+        model: carDetails.model,
+        photoUrls: carDetails.photoUrls?.length || 0
+      });
+      
       const processedUrls = processImageUrls(carDetails);
+      console.log(`✅ Processed ${processedUrls.length} photo URLs`);
       
       // If no images found, try to create a default image URL
       if (processedUrls.length === 0) {
         const defaultImageUrl = `${imageConfig.baseUrl}/images/cars/${carId}.jpg`;
         processedUrls.push(defaultImageUrl);
+        console.log('⚠️ No photos found, using default image URL');
       }
       
       setPhotoData({ photoUrls: processedUrls });
@@ -185,6 +195,7 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
         preloadImages(processedUrls).catch(() => {});
       }
     } catch (error) {
+      console.error(`❌ Error loading photos for car ${carId}:`, error);
       setError('Failed to load car photos');
       setPhotoData({ photoUrls: [], error: 'Failed to load car photos' });
     } finally {
@@ -269,12 +280,12 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
         }`;
     
     const loadingClasses = useDynamicSizing
-      ? 'absolute inset-0 bg-gray-200 flex items-center justify-center'
-      : 'absolute inset-0 h-12 w-16 bg-gray-600 rounded-md flex items-center justify-center border border-white/20 shadow-sm';
+      ? 'absolute inset-0 bg-slate-800/60 flex items-center justify-center'
+      : 'absolute inset-0 h-12 w-16 bg-slate-800/60 rounded-md flex items-center justify-center border border-slate-600/50 shadow-sm';
     
     const fallbackClasses = useDynamicSizing
-      ? 'w-full h-full bg-gray-200 flex items-center justify-center'
-      : 'h-12 w-16 bg-gray-600 rounded-md flex items-center justify-center border border-white/20 shadow-sm';
+      ? 'w-full h-full bg-slate-800/60 flex items-center justify-center'
+      : 'h-12 w-16 bg-slate-800/60 rounded-md flex items-center justify-center border border-slate-600/50 shadow-sm';
     
     const iconSize = useDynamicSizing ? 'h-8 w-8' : 'h-5 w-5';
     const spinnerSize = useDynamicSizing ? 'h-6 w-6' : 'h-4 w-4';
@@ -283,7 +294,7 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
       return (
         <div className={containerClasses}>
           <div className={loadingClasses}>
-            <Loader2 className={`${spinnerSize} text-gray-400 animate-spin`} />
+            <Loader2 className={`${spinnerSize} text-slate-400 animate-spin`} />
           </div>
         </div>
       );
@@ -293,7 +304,7 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
       return (
         <div className={containerClasses}>
           <div className={fallbackClasses}>
-            <Car className={`${iconSize} text-gray-400`} />
+            <Car className={`${iconSize} text-slate-400`} />
           </div>
         </div>
       );
@@ -304,7 +315,7 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
         {/* Loading state */}
         {imageLoadingStates[0] && (
           <div className={loadingClasses}>
-            <Loader2 className={`${spinnerSize} text-gray-400 animate-spin`} />
+            <Loader2 className={`${spinnerSize} text-slate-400 animate-spin`} />
           </div>
         )}
         
@@ -321,7 +332,7 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
         
         {/* Zoom indicator for gallery mode */}
         {enableGallery && photoData.photoUrls.length > 0 && (
-          <div className="absolute top-1 right-1 bg-black bg-opacity-50 text-white rounded-full p-1 opacity-0 hover:opacity-100 transition-opacity">
+          <div className="absolute top-1 right-1 bg-slate-900/70 text-white rounded-full p-1 opacity-0 hover:opacity-100 transition-opacity">
             <ZoomIn className="h-3 w-3" />
           </div>
         )}
@@ -331,7 +342,7 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
           className={fallbackClasses}
           style={{ display: imageLoadingStates[0] ? 'flex' : 'none' }}
         >
-          <Car className={`${iconSize} text-gray-400`} />
+          <Car className={`${iconSize} text-slate-400`} />
         </div>
       </div>
     );
@@ -342,10 +353,10 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center p-8 ${className}`}>
+      <div className={`flex items-center justify-center p-8 bg-slate-800/60 rounded-lg ${className}`}>
         <div className="text-center">
-          <Loader2 className="h-8 w-8 text-gray-400 animate-spin mx-auto mb-2" />
-          <p className="text-sm text-gray-500">Loading photos...</p>
+          <Loader2 className="h-8 w-8 text-slate-400 animate-spin mx-auto mb-2" />
+          <p className="text-sm text-slate-400">Şəkillər yüklənir...</p>
         </div>
       </div>
     );
@@ -353,10 +364,10 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
 
   if (error || photoData.photoUrls.length === 0) {
     return (
-      <div className={`flex items-center justify-center p-8 ${className}`}>
+      <div className={`flex items-center justify-center p-8 bg-slate-800/60 rounded-lg ${className}`}>
         <div className="text-center">
-          <AlertCircle className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-          <p className="text-sm text-gray-500">No photos available</p>
+          <Car className="h-8 w-8 text-slate-400 mx-auto mb-2" />
+          <p className="text-sm text-slate-400">Şəkil mövcud deyil</p>
         </div>
       </div>
     );
@@ -368,15 +379,15 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
         {/* Main image */}
         <div className="relative group">
           {imageLoadingStates[0] && (
-            <div className="absolute inset-0 bg-gray-200 rounded-lg flex items-center justify-center">
-              <Loader2 className="h-6 w-6 text-gray-400 animate-spin" />
+            <div className="absolute inset-0 bg-slate-800/60 rounded-lg flex items-center justify-center">
+              <Loader2 className="h-6 w-6 text-slate-400 animate-spin" />
             </div>
           )}
           
           <ImageComponent
             src={photoData.photoUrls[0]}
             alt={`Car ${carId} - Main`}
-            className={`w-full h-64 object-cover rounded-lg border border-gray-200 shadow-sm transition-all duration-200 cursor-pointer hover:shadow-lg ${
+            className={`w-full h-64 object-cover rounded-lg border border-slate-600/50 shadow-sm transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-blue-500/10 ${
               imageLoadingStates[0] ? 'opacity-0' : 'opacity-100'
             } ${enableGallery ? 'hover:scale-105' : ''}`}
             onLoadStart={() => handleImageLoadStart(0)}
@@ -387,19 +398,19 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
           
           {/* Gallery overlay */}
           {enableGallery && (
-            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 rounded-lg flex items-center justify-center">
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white bg-opacity-90 rounded-full p-2">
-                <ZoomIn className="h-6 w-6 text-gray-700" />
+            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 rounded-lg flex items-center justify-center">
+              <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-blue-500/90 rounded-full p-2">
+                <ZoomIn className="h-6 w-6 text-white" />
               </div>
             </div>
           )}
           
           {/* Fallback for main image */}
           <div 
-            className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center border border-gray-200"
+            className="w-full h-64 bg-slate-800/60 rounded-lg flex items-center justify-center border border-slate-600/50"
             style={{ display: imageLoadingStates[0] ? 'flex' : 'none' }}
           >
-            <ImageIcon className="h-12 w-12 text-gray-400" />
+            <Car className="h-12 w-12 text-slate-400" />
           </div>
         </div>
 
@@ -409,15 +420,15 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
             {displayImages.slice(1).map((url, index) => (
               <div key={index} className="relative group">
                 {imageLoadingStates[index + 1] && (
-                  <div className="absolute inset-0 bg-gray-200 rounded-md flex items-center justify-center">
-                    <Loader2 className="h-4 w-4 text-gray-400 animate-spin" />
+                  <div className="absolute inset-0 bg-slate-800/60 rounded-md flex items-center justify-center">
+                    <Loader2 className="h-4 w-4 text-slate-400 animate-spin" />
                   </div>
                 )}
                 
                 <ImageComponent
                   src={url}
                   alt={`Car ${carId} - ${index + 2}`}
-                  className={`w-full h-20 object-cover rounded-md border border-gray-200 shadow-sm transition-all duration-200 cursor-pointer hover:shadow-md ${
+                  className={`w-full h-20 object-cover rounded-md border border-slate-600/50 shadow-sm transition-all duration-200 cursor-pointer hover:shadow-md hover:shadow-blue-500/10 ${
                     imageLoadingStates[index + 1] ? 'opacity-0' : 'opacity-100'
                   } ${enableGallery ? 'hover:scale-105' : ''}`}
                   onLoadStart={() => handleImageLoadStart(index + 1)}
@@ -428,19 +439,19 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
                 
                 {/* Gallery overlay for thumbnails */}
                 {enableGallery && (
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-200 rounded-md flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-white bg-opacity-90 rounded-full p-1">
-                      <ZoomIn className="h-4 w-4 text-gray-700" />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200 rounded-md flex items-center justify-center">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-blue-500/90 rounded-full p-1">
+                      <ZoomIn className="h-4 w-4 text-white" />
                     </div>
                   </div>
                 )}
                 
                 {/* Fallback for thumbnails */}
                 <div 
-                  className="w-full h-20 bg-gray-200 rounded-md flex items-center justify-center border border-gray-200"
+                  className="w-full h-20 bg-slate-800/60 rounded-md flex items-center justify-center border border-slate-600/50"
                   style={{ display: imageLoadingStates[index + 1] ? 'flex' : 'none' }}
                 >
-                  <ImageIcon className="h-6 w-6 text-gray-400" />
+                  <Car className="h-6 w-6 text-slate-400" />
                 </div>
               </div>
             ))}
@@ -450,15 +461,15 @@ const CarPhotos: React.FC<CarPhotosProps> = ({
         {/* Show count if there are more images */}
         {photoData.photoUrls.length > maxImages && (
           <div className="text-center">
-            <p className="text-sm text-gray-500">
-              +{photoData.photoUrls.length - maxImages} more photos
+            <p className="text-sm text-slate-400">
+              +{photoData.photoUrls.length - maxImages} daha çox şəkil
             </p>
             {enableGallery && (
               <button
                 onClick={() => openModal(0)}
-                className="mt-2 text-sm text-blue-600 hover:text-blue-800 underline"
+                className="mt-2 text-sm text-blue-400 hover:text-blue-300 underline transition-colors"
               >
-                View all photos
+                Bütün şəkilləri gör
               </button>
             )}
           </div>

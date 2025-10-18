@@ -62,6 +62,7 @@ export const auctionCarApi = {
       let response;
       try {
         response = await apiClient.getAuctionCarFullDetails(auctionCarId);
+        console.log('📦 Raw API Response:', response);
       } catch (error) {
         console.warn(`⚠️ Full details endpoint failed for ${auctionCarId}, trying fallback`);
         
@@ -111,28 +112,28 @@ export const auctionCarApi = {
         reservePrice: Number(response.reservePrice) || 0,
         lotStatus: response.lotStatus || response.winnerStatus || 'Active',
         
-        car: response.car ? {
-          id: response.car.id || '',
-          make: response.car.make || response.carMake || 'Unknown',
-          model: response.car.model || response.carModel || 'Unknown',
-          year: Number(response.car.year || response.carYear) || 0,
-          vin: response.car.vin || response.carVin || '',
-          color: response.car.color || '',
-          odometer: Number(response.car.odometer || response.carOdometer) || 0,
-          condition: response.car.condition || response.carCondition || '',
-          type: response.car.type || response.carType || '',
-          damageType: response.car.damageType || response.carDamageType || '',
-          imageUrls: response.car.imageUrls || (response.carImage ? [response.carImage] : []),
-          thumbnailUrl: response.car.imageUrls?.[0] || response.carImage || '/placeholder-car.jpg'
+        car: (response.car || response.carMake || response.carModel) ? {
+          id: response.car?.id || response.carId || '',
+          make: response.car?.make || response.carMake || 'Unknown',
+          model: response.car?.model || response.carModel || 'Unknown',
+          year: Number(response.car?.year || response.carYear) || 0,
+          vin: response.car?.vin || response.carVin || '',
+          color: response.car?.color || '',
+          odometer: Number(response.car?.odometer || response.carOdometer || response.car?.mileage) || 0,
+          condition: response.car?.condition || response.carCondition || '',
+          type: response.car?.type || response.carType || '',
+          damageType: response.car?.damageType || response.carDamageType || response.primaryDamage || '',
+          imageUrls: response.car?.imageUrls || response.carImages || (response.carImage ? [response.carImage] : []),
+          thumbnailUrl: response.car?.imageUrls?.[0] || response.carImages?.[0] || response.carImage || '/placeholder-car.jpg'
         } : undefined,
         
-        auction: response.auction ? {
-          id: response.auction.id || '',
-          name: response.auction.name || response.auctionName || 'Unknown Auction',
-          startTimeUtc: response.auction.startTimeUtc || response.auctionStartTime || '',
-          endTimeUtc: response.auction.endTimeUtc || response.auctionEndTime || '',
-          status: response.auction.status || 'Unknown',
-          isLive: Boolean(response.auction.isLive)
+        auction: (response.auction || response.auctionName || response.auctionId) ? {
+          id: response.auction?.id || response.auctionId || '',
+          name: response.auction?.name || response.auctionName || 'Unknown Auction',
+          startTimeUtc: response.auction?.startTimeUtc || response.auctionStartTime || '',
+          endTimeUtc: response.auction?.endTimeUtc || response.auctionEndTime || '',
+          status: response.auction?.status || 'Unknown',
+          isLive: Boolean(response.auction?.isLive)
         } : undefined
       };
       
@@ -143,6 +144,8 @@ export const auctionCarApi = {
       });
       
       console.log(`✅ Successfully fetched and cached auction car details for ${auctionCarId}`);
+      console.log('🚗 Car Details:', mappedData.car);
+      console.log('🏛️ Auction Details:', mappedData.auction);
       return mappedData;
       
     } catch (error) {

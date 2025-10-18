@@ -15,23 +15,20 @@ namespace AutoriaFinal.Domain.Entities.Auctions
         public decimal? PaidAmount { get; set; }
         public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
         public DateTime AssignedAt { get; set; } = DateTime.UtcNow;
-        public DateTime? WinnerConfirmedAt { get; set; }        // Seller tərəfindən təsdiq tarixi
-        public DateTime? PaymentDueDate { get; set; }           // Ödəniş son tarixi
-        public string? Notes { get; set; }                      // Audit trail üçün qeydlər
-        public string? PaymentReference { get; set; }           // Bank reference, transaction ID
-        public Guid? ConfirmedByUserId { get; set; }            // Seller user ID (kim təsdiqləyib)
-        public string? RejectionReason { get; set; }            // Rədd edilmə səbəbi
-        public DateTime? LastPaymentReminderSent { get; set; }  // Son reminder tarixi
-        public int PaymentReminderCount { get; set; } = 0;      // Neçə reminder göndərilib
-        public bool IsSecondChanceWinner { get; set; } = false; // İkinci şans winner-idir
-        public Guid? OriginalWinnerId { get; set; }             // Əgər ikinci şansırsa, əvvəlki winner ID
-
-        // Navigation Properties
+        public DateTime? WinnerConfirmedAt { get; set; }      
+        public DateTime? PaymentDueDate { get; set; }          
+        public string? Notes { get; set; }                      
+        public string? PaymentReference { get; set; }         
+        public Guid? ConfirmedByUserId { get; set; }            
+        public string? RejectionReason { get; set; }          
+        public DateTime? LastPaymentReminderSent { get; set; }  
+        public int PaymentReminderCount { get; set; } = 0;      
+        public bool IsSecondChanceWinner { get; set; } = false; 
+        public Guid? OriginalWinnerId { get; set; }            
         public AuctionCar AuctionCar { get; set; } = default!;
         public Bid WinningBid { get; set; } = default!;
         public AuctionWinner() { }
-
-        //Regular winner yaratmaq üçün
+        #region Rich Data Model
         public static AuctionWinner Create(
             Guid auctionCarId,
             Guid userId,
@@ -60,15 +57,13 @@ namespace AutoriaFinal.Domain.Entities.Auctions
 
             return winner;
         }
-
-        //Factory method - Second chance winner yaratmaq üçün
         public static AuctionWinner CreateSecondChance(
             Guid auctionCarId,
             Guid userId,
             Guid winningBidId,
             decimal amount,
             Guid originalWinnerId,
-            int paymentDueDays = 5) // Second chance üçün daha qısa müddət
+            int paymentDueDays = 5) 
         {
             var winner = Create(auctionCarId, userId, winningBidId, amount, paymentDueDays);
             winner.IsSecondChanceWinner = true;
@@ -78,9 +73,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
             return winner;
         }
 
-        // ========== BUSINESS MƏNTİQİ METODLARI ==========
-
-        /// Ödənişi qeyd edir
         public void MarkPaid(decimal amount, string? paymentReference = null, string? notes = null)
         {
             if (amount <= 0)
@@ -98,7 +90,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
             PaidAmount = newTotalPaid;
             PaymentReference = paymentReference;
 
-            // Payment status təyin et
             if (newTotalPaid >= Amount)
             {
                 PaymentStatus = PaymentStatus.Paid;
@@ -112,8 +103,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
 
             MarkUpdated();
         }
-
-        /// Winner-i ləğv edir
         public void Cancel(string? reason = null, Guid? cancelledByUserId = null)
         {
             if (PaymentStatus == PaymentStatus.Paid)
@@ -135,7 +124,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
             MarkUpdated();
         }
 
-        /// Winner-i təsdiq edir (seller tərəfindən)
         public void Confirm(Guid confirmedByUserId, string? confirmationNotes = null)
         {
             if (PaymentStatus == PaymentStatus.Cancelled)
@@ -154,8 +142,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
             Notes = AppendNote(confirmNote);
             MarkUpdated();
         }
-
-        /// Winner-i rədd edir (seller tərəfindən)
         public void Reject(Guid rejectedByUserId, string rejectionReason)
         {
             if (string.IsNullOrWhiteSpace(rejectionReason))
@@ -175,8 +161,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
             Notes = AppendNote(rejectNote);
             MarkUpdated();
         }
-
-        /// Payment reminder göndərmə qeydiyyatı
         public void RecordPaymentReminderSent()
         {
             LastPaymentReminderSent = DateTime.UtcNow;
@@ -184,8 +168,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
             Notes = AppendNote($"Payment reminder #{PaymentReminderCount} sent at {DateTime.UtcNow}");
             MarkUpdated();
         }
-
-        /// Payment due date uzatma
         public void ExtendPaymentDueDate(int additionalDays, string reason, Guid extendedByUserId)
         {
             if (additionalDays <= 0)
@@ -203,8 +185,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
             Notes = AppendNote(extendNote);
             MarkUpdated();
         }
-
-        // ========== SORĞU METODLArI ==========
 
         /// Ödəniş vaxtının keçib-keçmədiyini yoxlayır
         public bool IsPaymentOverdue()
@@ -246,15 +226,10 @@ namespace AutoriaFinal.Domain.Entities.Auctions
         /// Payment reminder göndərmək olarmı yoxlayır
         public bool CanSendPaymentReminder()
         {
-            // Pending və ya partial paid olmalıdır
             if (PaymentStatus != PaymentStatus.Pending && PaymentStatus != PaymentStatus.PartiallyPaid)
                 return false;
-
-            // Əgər heç reminder göndərilməyibsə, göndər
             if (!LastPaymentReminderSent.HasValue)
                 return true;
-
-            // Son reminder 24 saatdan çox əvvəl göndərilib
             return DateTime.UtcNow - LastPaymentReminderSent.Value > TimeSpan.FromHours(24);
         }
 
@@ -266,8 +241,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
                    (IsPaymentOverdue() && GetOverdueDays() > 7); // 7 gün overdüə-dan sonra
         }
 
-        // ========== HELPER METODLARI ==========
-
         /// Note-lara əlavə mətn əlavə edir
         private string AppendNote(string newNote)
         {
@@ -277,5 +250,6 @@ namespace AutoriaFinal.Domain.Entities.Auctions
                 ? newNote
                 : $"{Notes}\n{newNote}";
         }
+        #endregion
     }
 }

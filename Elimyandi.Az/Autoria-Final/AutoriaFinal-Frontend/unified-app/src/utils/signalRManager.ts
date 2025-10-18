@@ -31,6 +31,8 @@ export interface SignalRConfig {
 // Event handlers
 export interface SignalREvents {
   onConnectionStateChanged?: (state: ConnectionState, error?: string) => void;
+  onJoinedAuction?: (data: any) => void;
+  onJoinedAuctionCar?: (data: any) => void;
   onAuctionStarted?: (data: { auctionId: string }) => void;
   onAuctionStopped?: (data: { auctionId: string }) => void;
   onAuctionEnded?: (data: { auctionId: string; winner: any; finalPrice: number }) => void;
@@ -77,7 +79,6 @@ class SignalRManager {
   private retryTimeout: NodeJS.Timeout | null = null;
   private keepAliveInterval: NodeJS.Timeout | null = null;
   private isConnecting: boolean = false;
-  private isDestroyed: boolean = false;
 
   // Exponential backoff configuration
   private readonly retryIntervals = [2000, 5000, 10000, 30000, 60000]; // milliseconds
@@ -135,7 +136,14 @@ class SignalRManager {
   }
 
   public setEventHandlers(events: SignalREvents): void {
+    console.log('🔧 Setting event handlers:', Object.keys(events).filter(k => k.startsWith('on')));
     this.eventHandlers = { ...this.eventHandlers, ...events };
+    
+    // ✅ CRITICAL FIX: If connections already exist, re-setup event handlers
+    if (this.auctionConnection && this.bidConnection) {
+      console.log('🔄 Re-setting up event handlers for existing connections...');
+      this.setupEventHandlers();
+    }
   }
 
   // Connection management
@@ -198,7 +206,6 @@ class SignalRManager {
 
   public destroy(): void {
     console.log(`SignalR: Destroying instance ${this.instanceKey}...`);
-    this.isDestroyed = true;
     
     // Disconnect and cleanup
     this.disconnect().catch(err => {
@@ -420,19 +427,6 @@ class SignalRManager {
     return this.connectionInfo.retryCount;
   }
 
-  // Cleanup
-  public destroy(): void {
-    console.log('SignalR: Destroying manager...');
-    this.isDestroyed = true;
-    this.disconnect();
-    
-    // Remove event listeners
-    window.removeEventListener('online', this.handleOnline.bind(this));
-    window.removeEventListener('offline', this.handleOffline.bind(this));
-    document.removeEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
-    
-    SignalRManager.instance = null as any;
-  }
 
   // Private methods
   private async createConnections(): Promise<void> {
@@ -509,16 +503,16 @@ class SignalRManager {
 
   // Re-subscribe to all groups after reconnection
   private async resubscribeToGroups(): Promise<void> {
-    console.log(`🔄 Re-subscribing to groups for ${this.instanceKey}:`, Object.keys(this.groupSubscriptions));
+    console.log(`🔄 Re-subscribing to groups for ${this.instanceKey}:`, this.groupSubscriptions.size);
     
-    for (const [groupName, subscription] of Object.entries(this.groupSubscriptions)) {
+    for (const [groupName, subscription] of this.groupSubscriptions.entries()) {
       try {
-        if (subscription.type === 'auction') {
-          await this.joinAuction(groupName);
+        if (subscription.hubType === 'auction') {
+          await this.joinGroup(groupName, 'auction');
           console.log(`✅ Re-joined auction group: ${groupName}`);
-        } else if (subscription.type === 'auctionCar') {
-          await this.joinAuctionCar(groupName);
-          console.log(`✅ Re-joined auction car group: ${groupName}`);
+        } else if (subscription.hubType === 'bid') {
+          await this.joinGroup(groupName, 'bid');
+          console.log(`✅ Re-joined bid group: ${groupName}`);
         }
       } catch (error) {
         console.error(`❌ Failed to re-join group ${groupName}:`, error);
@@ -561,13 +555,64 @@ class SignalRManager {
   }
 
   private setupEventHandlers(): void {
-    if (!this.auctionConnection || !this.bidConnection) return;
+    if (!this.auctionConnection || !this.bidConnection) {
+      console.warn('⚠️ setupEventHandlers: Connections not ready');
+      return;
+    }
 
-    console.log('🔌 SignalR: Setting up centralized event handlers with store integration');
+    console.log('🔌 SignalR: Setting up event handlers...');
+    console.log('🔌 Event handlers available:', Object.keys(this.eventHandlers).filter(k => k.startsWith('on')));
+    
+    // ✅ CLEAR existing handlers to prevent duplicates
+    this.auctionConnection.off('TimerTick');
+    this.auctionConnection.off('AuctionTimerReset');
+    this.auctionConnection.off('AuctionStarted');
+    this.auctionConnection.off('AuctionStopped');
+    this.auctionConnection.off('AuctionEnded');
+    this.auctionConnection.off('CarMoved');
+    
+    this.bidConnection.off('NewLiveBid');
+    this.bidConnection.off('HighestBidUpdated');
+    this.bidConnection.off('PreBidPlaced');
+    this.bidConnection.off('BidStatsUpdated');
 
     // ========================================
     // AUCTION HUB EVENTS → Store Updates
     // ========================================
+    
+    // JoinedAuction - Initial sync when user joins auction
+    this.auctionConnection.on('JoinedAuction', (data) => {
+      console.log('✅ [SignalR Event] JoinedAuction:', {
+        auctionId: data.auctionId || data.AuctionId,
+        isLive: data.isLive || data.IsLive,
+        currentCarLotNumber: data.currentCarLotNumber || data.CurrentCarLotNumber,
+        timerRemaining: data.currentTimer?.remainingSeconds,
+        fullData: data
+      });
+      
+      // Set initial timer from server if provided
+      if (data.currentTimer && data.currentTimer.remainingSeconds !== undefined) {
+        console.log(`⏰ Initial timer sync on join: ${data.currentTimer.remainingSeconds}s`);
+        useAuctionStore.getState().setRemainingSeconds(data.currentTimer.remainingSeconds);
+      }
+      
+      // Call custom handler
+      this.eventHandlers.onJoinedAuction?.(data);
+    });
+    
+    // JoinedAuctionCar - Initial sync when user joins specific car
+    this.bidConnection.on('JoinedAuctionCar', (data) => {
+      console.log('✅ [SignalR Event] JoinedAuctionCar:', {
+        auctionCarId: data.auctionCarId || data.AuctionCarId,
+        highestBid: data.highestBid?.amount,
+        bidHistoryCount: data.recentBids?.length || data.bidHistory?.length,
+        minimumBid: data.minimumBid || data.MinimumBid,
+        fullData: data
+      });
+      
+      // Call custom handler with normalized data
+      this.eventHandlers.onJoinedAuctionCar?.(data);
+    });
     
     this.auctionConnection.on('AuctionStarted', (data) => {
       console.log('🚀 [SignalR Event] AuctionStarted:', data);
@@ -606,16 +651,36 @@ class SignalRManager {
     });
 
     this.auctionConnection.on('TimerTick', (data) => {
-      console.log('⏰ [SignalR Event] TimerTick:', data.remainingSeconds);
+      console.log('⏰ [SignalR Event] TimerTick received:', {
+        remainingSeconds: data.remainingSeconds,
+        timerSeconds: data.timerSeconds,
+        currentCarLotNumber: data.currentCarLotNumber,
+        isExpired: data.isExpired,
+        fullData: data
+      });
+      
       // Server-authoritative timer - update store directly
-      useAuctionStore.getState().setRemainingSeconds(data.remainingSeconds);
+      if (data.remainingSeconds !== undefined) {
+        useAuctionStore.getState().setRemainingSeconds(data.remainingSeconds);
+      }
+      
+      // Call user's custom event handler
       this.eventHandlers.onTimerTick?.(data);
     });
 
     this.auctionConnection.on('AuctionTimerReset', (data) => {
-      console.log('🔄 [SignalR Event] AuctionTimerReset:', data.newTimerSeconds);
+      console.log('🔄 [SignalR Event] AuctionTimerReset received:', {
+        newTimerSeconds: data.newTimerSeconds,
+        secondsRemaining: data.secondsRemaining,
+        resetBy: data.resetBy,
+        fullData: data
+      });
+      
       // Reset timer when new bid placed
-      useAuctionStore.getState().resetTimer(data.newTimerSeconds);
+      const resetValue = data.newTimerSeconds ?? data.secondsRemaining ?? 30;
+      useAuctionStore.getState().resetTimer(resetValue);
+      
+      // Call user's custom event handler
       this.eventHandlers.onAuctionTimerReset?.(data);
     });
 
@@ -634,18 +699,25 @@ class SignalRManager {
 
     this.bidConnection.on('PriceUpdated', (data) => {
       console.log('💲 [SignalR Event] PriceUpdated:', data.newPrice);
-      // Update current price
-      useAuctionStore.getState().setCurrentPrice(data.newPrice);
+      // Update current price in store if method exists
+      const store = useAuctionStore.getState();
+      if ('setCurrentPrice' in store && typeof (store as any).setCurrentPrice === 'function') {
+        (store as any).setCurrentPrice(data.newPrice);
+      }
       this.eventHandlers.onPriceUpdated?.(data);
     });
 
     this.bidConnection.on('NewLiveBid', (data) => {
-      console.log('🔴 [SignalR Event] NewLiveBid:', data);
-      // New live bid - update price and add to history
-      if (data.bid) {
-        useAuctionStore.getState().updateHighestBid(data.bid);
-        useAuctionStore.getState().addBidToHistory(data.bid);
-      }
+      console.log('🔴 [SignalR Event] NewLiveBid received:', {
+        id: data.id || data.Id,
+        auctionCarId: data.auctionCarId || data.AuctionCarId,
+        userId: data.userId || data.UserId,
+        amount: data.amount || data.Amount,
+        userName: data.userName || data.UserName,
+        fullData: data
+      });
+      
+      // Call user's custom event handler with raw data (page will handle normalization)
       this.eventHandlers.onNewLiveBid?.(data);
     });
 

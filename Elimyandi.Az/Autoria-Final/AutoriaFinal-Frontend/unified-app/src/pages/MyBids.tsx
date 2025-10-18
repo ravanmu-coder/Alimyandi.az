@@ -101,31 +101,6 @@ const BidRow: React.FC<BidRowProps> = ({ bid, onRefreshVehicle }) => {
     });
   };
 
-  const getStatusBadge = (bid: BidDto) => {
-    if (bid.status === 'Won' || (bid.isHighestBid && bid.status === 'Winning')) {
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-          <Trophy className="w-3 h-3 mr-1" />
-          {bid.status === 'Won' ? 'Won' : 'Winning'}
-        </span>
-      );
-    } else if (bid.status === 'Outbid' || bid.hasBeenOutbid) {
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-500/20 text-red-300 border border-red-500/30">
-          <X className="w-3 h-3 mr-1" />
-          Outbid
-        </span>
-      );
-    } else {
-      return (
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300 border border-blue-500/30">
-          <Clock className="w-3 h-3 mr-1" />
-          Active
-        </span>
-      );
-    }
-  };
-
   const vehicleDetails = bid.vehicleDetails;
   const car = vehicleDetails?.car;
   const auction = vehicleDetails?.auction;
@@ -133,33 +108,17 @@ const BidRow: React.FC<BidRowProps> = ({ bid, onRefreshVehicle }) => {
   return (
     <div className="group bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 rounded-lg p-5 hover:bg-slate-700/50 hover:border-slate-500 transition-all duration-200">
       <div className="flex items-center gap-5">
-        {/* Vehicle Thumbnail & Lot Number */}
+        {/* Lot Number Badge */}
         <div className="flex-shrink-0">
-          <div className="w-24 h-20 bg-slate-600/50 rounded-lg overflow-hidden mb-2 relative">
-            {bid.isLoading ? (
-              <div className="w-full h-full flex items-center justify-center">
-                <Loader2 className="w-6 h-6 text-slate-400 animate-spin" />
+          <div className="flex flex-col items-center">
+            <div className="px-4 py-3 bg-slate-600/50 rounded-lg border border-slate-500/50">
+              <div className="text-center">
+                <div className="text-xs text-slate-400 font-medium mb-1">LOT</div>
+                <div className="text-lg font-bold text-white">
+                  {vehicleDetails?.lotNumber || 'N/A'}
+                </div>
               </div>
-            ) : bid.error ? (
-              <div className="w-full h-full flex items-center justify-center bg-red-500/20">
-                <AlertCircle className="w-6 h-6 text-red-400" />
-              </div>
-            ) : (
-              <img
-                src={car?.thumbnailUrl || '/placeholder-car.jpg'}
-                alt={carApi.getCarDisplayTitle(car || {} as CarDetailsDto)}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = '/placeholder-car.jpg';
-                }}
-              />
-            )}
-          </div>
-          <div className="text-center">
-            <span className="text-xs text-slate-400 font-medium">
-              Lot #{vehicleDetails?.lotNumber || 'N/A'}
-            </span>
+            </div>
           </div>
         </div>
 
@@ -191,21 +150,27 @@ const BidRow: React.FC<BidRowProps> = ({ bid, onRefreshVehicle }) => {
                 </div>
               ) : (
                 <div>
-                  <h4 className="text-white font-semibold text-lg truncate mb-1">
-                    {car ? carApi.getCarDisplayTitle(car) : 'Unknown Vehicle'}
-                  </h4>
-                  <p className="text-slate-400 text-sm mb-2">
-                    {auction?.name || 'Unknown Auction'}
-                  </p>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Car className="w-5 h-5 text-blue-400" />
+                    <h4 className="text-white font-semibold text-xl">
+                      {car ? `${car.year} ${car.make} ${car.model}` : 'Unknown Vehicle'}
+                    </h4>
+                  </div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Gavel className="w-4 h-4 text-purple-400" />
+                    <p className="text-slate-300 text-sm font-medium">
+                      {auction?.name || 'Unknown Auction'}
+                    </p>
+                  </div>
                   <div className="flex items-center text-slate-500 text-xs space-x-4">
                     <span className="flex items-center">
                       <Calendar className="w-3 h-3 mr-1" />
-                      {formatDate(bid.placedAtUtc)}
+                      Bid Placed: {formatDate(bid.placedAtUtc)}
                     </span>
                     {auction && auctionApi.isAuctionRunning(auction) && (
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs bg-green-500/20 text-green-300">
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-500/20 text-green-300 border border-green-500/30">
                         <div className="w-2 h-2 bg-green-400 rounded-full mr-1 animate-pulse"></div>
-                        Live
+                        Live Auction
                       </span>
                     )}
                   </div>
@@ -213,13 +178,10 @@ const BidRow: React.FC<BidRowProps> = ({ bid, onRefreshVehicle }) => {
               )}
             </div>
             
-            {/* Status & Amounts */}
+            {/* Bid Amounts */}
             <div className="text-right flex-shrink-0 ml-6">
-              <div className="mb-3">
-                {getStatusBadge(bid)}
-              </div>
               <div className="space-y-1">
-                <div className="text-white font-semibold">
+                <div className="text-white font-semibold text-lg">
                   Your Bid: {formatCurrency(bid.amount)}
                 </div>
                 {vehicleDetails && vehicleDetails.currentPrice !== bid.amount && (

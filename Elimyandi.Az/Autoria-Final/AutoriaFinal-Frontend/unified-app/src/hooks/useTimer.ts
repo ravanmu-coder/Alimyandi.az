@@ -1,71 +1,97 @@
-import { useCallback } from 'react';
+import { useEffect } from 'react';
 import { useAuctionStore } from '../stores/auctionStore';
+import * as signalR from '@microsoft/signalr';
 
 /**
- * Server-Authoritative Timer Hook
+ * useTimer
  * 
- * ❌ KÖHNƏ: Local interval ilə timer sayırdı
- * ✅ YENİ: Server-dən gələn TimerTick event-lərinə arxalanır
+ * Server-Driven Timer Hook
  * 
- * Timer yalnız serverdə işləyir və hər saniyə TimerTick eventi göndərir.
- * Bu hook sadəcə store-dan timer dəyərini oxuyur və UI üçün format edir.
+ * ❌ CLIENT-SIDE setInterval YOX!
+ * ✅ Yalnız backend-dən gələn TimerTick event-lərini dinləyir
+ * 
+ * Backend hər saniyə AuctionHub vasitəsilə TimerTick göndərir:
+ * - RemainingSeconds
+ * - IsExpired
+ * - CurrentCarLotNumber
  */
 
-export interface UseTimerReturn {
-  timerSeconds: number;
-  urgencyLevel: 'low' | 'medium' | 'high' | 'critical';
-  progressPercentage: number;
-  formattedTime: string;
-  isRunning: boolean;
+interface UseTimerProps {
+  connection: signalR.HubConnection | null;
+  isConnected: boolean;
 }
 
-export const useTimer = (
-  maxSeconds: number = 300 // Default 5 minutes for progress calculation
-): UseTimerReturn => {
-  // Read from store (server-authoritative)
+export const useTimer = ({ connection, isConnected }: UseTimerProps) => {
+  const setRemainingSeconds = useAuctionStore(state => state.setRemainingSeconds);
+  const resetTimer = useAuctionStore(state => state.resetTimer);
   const remainingSeconds = useAuctionStore(state => state.remainingSeconds);
-  const isLive = useAuctionStore(state => state.isLive);
 
-  const urgencyLevel = useCallback((): 'low' | 'medium' | 'high' | 'critical' => {
-    if (remainingSeconds <= 10) return 'critical';
-    if (remainingSeconds <= 30) return 'high';
-    if (remainingSeconds <= 60) return 'medium';
-    return 'low';
-  }, [remainingSeconds]);
+  useEffect(() => {
+    if (!connection || !isConnected) return;
 
-  const progressPercentage = useCallback((): number => {
-    if (maxSeconds === 0) return 100;
-    const elapsed = maxSeconds - remainingSeconds;
-    return Math.min(100, Math.max(0, (elapsed / maxSeconds) * 100));
-  }, [maxSeconds, remainingSeconds]);
+    console.log('⏰ [useTimer] Setting up server-driven timer listeners');
 
-  const formatTime = useCallback((seconds: number): string => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  }, []);
+    // ========================================
+    // TIMER TICK (Backend sends every second)
+    // ========================================
+    
+    const handleTimerTick = (data: {
+      auctionId?: string;
+      auctionCarId?: string;
+      remainingSeconds: number;
+      isExpired?: boolean;
+      currentCarLotNumber?: string;
+    }) => {
+      console.log('⏰ [TimerTick]', {
+        remaining: data.remainingSeconds,
+        expired: data.isExpired,
+        lot: data.currentCarLotNumber
+      });
+
+      // Update store
+      setRemainingSeconds(data.remainingSeconds);
+
+      // Check if expired
+      if (data.isExpired && data.remainingSeconds === 0) {
+        console.log('⏱️ Timer expired - waiting for next car...');
+      }
+    };
+
+    // ========================================
+    // TIMER RESET (New bid arrives)
+    // ========================================
+    
+    const handleTimerReset = (data: {
+      auctionCarId: string;
+      newTimerSeconds: number;
+      lotNumber?: string;
+    }) => {
+      console.log('🔄 [AuctionTimerReset]', {
+        newTime: data.newTimerSeconds,
+        lot: data.lotNumber
+      });
+
+      // Reset timer in store
+      resetTimer(data.newTimerSeconds);
+    };
+
+    // Register event listeners (Case-Sensitive!)
+    connection.on('TimerTick', handleTimerTick);
+    connection.on('AuctionTimerReset', handleTimerReset);
+
+    console.log('✅ [useTimer] Server-driven timer listeners registered');
+
+    // Cleanup
+    return () => {
+      console.log('🧹 [useTimer] Removing timer listeners');
+      connection.off('TimerTick', handleTimerTick);
+      connection.off('AuctionTimerReset', handleTimerReset);
+    };
+  }, [connection, isConnected, setRemainingSeconds, resetTimer]);
 
   return {
-    timerSeconds: remainingSeconds,
-    urgencyLevel: urgencyLevel(),
-    progressPercentage: progressPercentage(),
-    formattedTime: formatTime(remainingSeconds),
-    isRunning: isLive && remainingSeconds > 0,
+    remainingSeconds
   };
 };
 
-/**
- * İSTİFADƏ NÜMUNƏSİ:
- * 
- * const { timerSeconds, formattedTime, urgencyLevel, isRunning } = useTimer(300);
- * 
- * <div className={`timer ${urgencyLevel}`}>
- *   {formattedTime}
- * </div>
- * 
- * QEYD:
- * - Timer backend-dən TimerTick event-i ilə yenilənir (hər saniyə)
- * - AuctionTimerReset event-i timer-i sıfırlayır (yeni bid zamanı)
- * - Heç bir local setInterval/setTimeout yoxdur
- * - Bütün userlər eyni timer görürlər (sinxron)
- */
+export default useTimer;

@@ -638,10 +638,16 @@ const Step3TechnicalSpecs: React.FC<Step3Props> = ({
                 <input
                   ref={mileageRef}
                   type="number"
-                  value={formData.mileage}
-                  onChange={(e) => handleInputChange('mileage', parseInt(e.target.value) || 0)}
+                  value={formData.mileage === 0 ? '' : formData.mileage}
+                  onChange={(e) => {
+                    const value = e.target.value === '' ? 0 : parseInt(e.target.value);
+                    handleInputChange('mileage', isNaN(value) ? 0 : value);
+                  }}
+                  min="0"
+                  step="1"
+                  required
                   className="flex-1 px-4 py-3 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-blue-400 focus:bg-slate-800/60 transition-all duration-300"
-                  placeholder="Yürüş məsafəsi"
+                  placeholder="Yürüş məsafəsi (km)"
                 />
                 <select
                   ref={mileageUnitRef}
@@ -656,6 +662,9 @@ const Step3TechnicalSpecs: React.FC<Step3Props> = ({
                   ))}
                 </select>
               </div>
+              {errors.mileage && (
+                <p className="text-red-400 text-sm mt-1">{errors.mileage}</p>
+              )}
             </div>
           </div>
         </div>
@@ -1669,8 +1678,8 @@ const AddVehicle: React.FC = () => {
         }
         
         // Mileage validation
-        if (formData.mileage < 0) {
-          newErrors.mileage = 'Yürüş mənfi ola bilməz';
+        if (!formData.mileage || formData.mileage <= 0) {
+          newErrors.mileage = 'Yürüş məsafəsi daxil edilməlidir və 0-dan böyük olmalıdır';
         } else if (formData.mileage > 999999) {
           newErrors.mileage = 'Yürüş çox yüksəkdir (maksimum 999,999)';
         }
@@ -1736,8 +1745,8 @@ const AddVehicle: React.FC = () => {
     }
     
     // Mileage validation
-    if (formData.mileage < 0) {
-      newErrors.mileage = 'Yürüş mənfi ola bilməz';
+    if (!formData.mileage || formData.mileage <= 0) {
+      newErrors.mileage = 'Yürüş məsafəsi daxil edilməlidir və 0-dan böyük olmalıdır';
     } else if (formData.mileage > 999999) {
       newErrors.mileage = 'Yürüş çox yüksəkdir (maksimum 999,999)';
     }
@@ -1799,10 +1808,21 @@ const AddVehicle: React.FC = () => {
         submitData.append('Price', formData.price.toString());
       }
       submitData.append('Currency', formData.currency);
+      
+      // DEBUG: Log mileage before appending
+      console.log('🔍 MILEAGE DEBUG - formData.mileage:', formData.mileage, 'type:', typeof formData.mileage);
+      console.log('🔍 MILEAGE DEBUG - formData.mileageUnit:', formData.mileageUnit);
+      
       submitData.append('Mileage', formData.mileage.toString());
       submitData.append('MileageUnit', formData.mileageUnit);
       submitData.append('HasKeys', formData.hasKeys.toString());
       submitData.append('TitleState', formData.titleState);
+      
+      // DEBUG: Log what's in FormData
+      console.log('📤 FormData contents:');
+      for (let pair of submitData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+      }
       
       // Estimated Retail Value - Always append
       submitData.append('EstimatedRetailValue', (formData.estimatedRetailValue || 0).toString());

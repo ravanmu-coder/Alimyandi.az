@@ -45,6 +45,8 @@ namespace AutoriaFinal.API.Controllers.Auctions
             var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             _logger.LogInformation("HTTP POST /api/car Create. TraceId={TraceId}, Owner={OwnerId}, VIN={Vin}", traceId, ownerId, dto?.Vin);
+            _logger.LogInformation("RECEIVED DATA - Mileage={Mileage}, MileageUnit={MileageUnit}, Make={Make}, Model={Model}, Year={Year}, FuelType={FuelType}, DamageType={DamageType}, Price={Price}", 
+                dto?.Mileage, dto?.MileageUnit, dto?.Make, dto?.Model, dto?.Year, dto?.FuelType, dto?.DamageType, dto?.Price);
 
             if (string.IsNullOrEmpty(ownerId))
             {
@@ -137,5 +139,7 @@ namespace AutoriaFinal.API.Controllers.Auctions
             var result = await _carService.UploadVideoAsync(id, dto.File);
             return Ok(result);
         }
+        
+        
     }
 }

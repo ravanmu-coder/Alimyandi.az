@@ -76,25 +76,48 @@ export default function AllAuctions() {
       });
 
       // Filter auctions: only show active and future auctions (exclude ended/completed)
+      // STATUS-BASED FILTERING: Only 'live' and 'upcoming' auctions
+      const now = new Date();
       const filteredAuctions = allAuctions.filter(auction => {
         const status = auction.status?.toLowerCase();
         const startTime = new Date(auction.startTimeUtc);
         const endTime = new Date(auction.endTimeUtc);
-        const now = new Date();
         
-        // More comprehensive filtering logic:
-        // 1. Include if auction is currently live (isLive = true)
-        // 2. Include if status is "Running" or "Active"
-        // 3. Include if start time is in the future (not started yet)
-        // 4. Exclude if auction has ended (current time > end time)
-        const isCurrentlyLive = auction.isLive || status === 'running' || status === 'active';
-        const isFutureAuction = startTime > now;
+        // Primary filter: Check status field first
+        // Accept only 'live', 'upcoming', 'running', 'active', 'scheduled' status
+        const validStatuses = ['live', 'upcoming', 'running', 'active', 'scheduled'];
+        const hasValidStatus = status && validStatuses.includes(status);
+        
+        // Secondary filters for additional validation:
+        // 1. Include if auction is currently live (isLive = true OR status = 'live'/'running'/'active')
+        const isCurrentlyLive = auction.isLive || status === 'live' || status === 'running' || status === 'active';
+        
+        // 2. Include if auction is upcoming (status = 'upcoming'/'scheduled' OR start time in future)
+        const isUpcoming = status === 'upcoming' || status === 'scheduled' || startTime > now;
+        
+        // 3. Exclude if auction has ended (current time > end time)
         const hasNotEnded = now <= endTime;
         
-        return (isCurrentlyLive || isFutureAuction) && hasNotEnded;
+        // Final decision: Must have valid status AND (be live OR upcoming) AND not ended
+        return hasValidStatus && (isCurrentlyLive || isUpcoming) && hasNotEnded;
       });
 
-      console.log(`✅ Filtered to ${filteredAuctions.length} active/future auctions`);
+      // Log filtering results for debugging
+      const liveCount = filteredAuctions.filter(a => a.isLive || a.status?.toLowerCase() === 'live' || a.status?.toLowerCase() === 'running' || a.status?.toLowerCase() === 'active').length;
+      const upcomingCount = filteredAuctions.filter(a => {
+        const status = a.status?.toLowerCase();
+        return (status === 'upcoming' || status === 'scheduled') && !a.isLive;
+      }).length;
+      
+      console.log(`✅ Filtered to ${filteredAuctions.length} active/future auctions:`);
+      console.log(`   📍 Live/Running: ${liveCount}`);
+      console.log(`   📅 Upcoming/Scheduled: ${upcomingCount}`);
+      console.log(`   🔍 Status breakdown:`, filteredAuctions.map(a => ({
+        name: a.name,
+        status: a.status,
+        isLive: a.isLive,
+        startTime: a.startTimeUtc
+      })));
 
       // Sort by start time (ascending) - nearest auction first
       const sortedAuctions = filteredAuctions.sort((a, b) => {
@@ -443,7 +466,7 @@ export default function AllAuctions() {
                                     ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white shadow-md hover:shadow-[0_4px_12px_rgba(34,197,94,0.3)] animate-pulse'
                                     : 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-md hover:shadow-[0_4px_12px_rgba(59,130,246,0.3)]'
                                 }`}
-                                title={auction.isLive ? "Join Live Auction - Real-time bidding" : "Join Auction - Will start soon"}
+                                title={auction.isLive ? "Join Live Auction" : "Join Auction"}
                               >
                                 <div className="flex items-center space-x-1">
                                   <Play className="h-3 w-3" />

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AutoriaFinal.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf189ee6892045f291404bfe44645db51c0ed55c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b65484c69b54edecfebfcb2919336e53418ceac8")]
 [assembly: System.Reflection.AssemblyProductAttribute("AutoriaFinal.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AutoriaFinal.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

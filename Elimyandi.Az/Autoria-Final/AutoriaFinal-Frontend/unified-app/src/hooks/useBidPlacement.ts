@@ -1,234 +1,161 @@
-import { useState, useCallback, useRef } from 'react';
-import { apiClient } from '../lib/api';
+import { useState, useCallback } from 'react';
+import { toast } from 'react-hot-toast';
+import { useAuctionStore } from '../stores/auctionStore';
+import { BidGetDto } from '../types/api';
 
-export interface UseBidPlacementReturn {
-  placeLiveBid: (amount: number) => Promise<boolean>;
-  placePreBid: (amount: number) => Promise<boolean>;
-  placeProxyBid: (startAmount: number, maxAmount: number) => Promise<boolean>;
-  cancelProxyBid: () => Promise<boolean>;
-  isPlacingBid: boolean;
-  lastBidSuccess: boolean;
-  lastBidError: string | null;
-  validateBid: (amount: number, currentPrice: number, minimumBid: number) => string | null;
-  calculateNextMinimumBid: (currentPrice: number) => number;
+/**
+ * useBidPlacement
+ * 
+ * Bid placement məntiqini idarə edir
+ * Optimistic UI update + server validation
+ */
+
+interface UseBidPlacementProps {
+  placeLiveBid: (auctionCarId: string, amount: number) => Promise<void>;
 }
 
-export const useBidPlacement = (
-  auctionCarId: string, 
-  isConnected: boolean
-): UseBidPlacementReturn => {
-  const [isPlacingBid, setIsPlacingBid] = useState(false);
-  const [lastBidSuccess, setLastBidSuccess] = useState(false);
-  const [lastBidError, setLastBidError] = useState<string | null>(null);
-  const successTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const errorTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+interface UseBidPlacementReturn {
+  isPlacing: boolean;
+  placeBid: (auctionCarId: string, amount: number) => Promise<boolean>;
+}
 
-  const clearTimeouts = useCallback(() => {
-    if (successTimeoutRef.current) {
-      clearTimeout(successTimeoutRef.current);
-      successTimeoutRef.current = null;
+export const useBidPlacement = ({
+  placeLiveBid
+}: UseBidPlacementProps): UseBidPlacementReturn => {
+  const [isPlacing, setIsPlacing] = useState(false);
+  
+  // Store actions
+  const updateHighestBid = useAuctionStore(state => state.updateHighestBid);
+  const addBidToHistory = useAuctionStore(state => state.addBidToHistory);
+  const currentCar = useAuctionStore(state => state.currentCar);
+  const highestBid = useAuctionStore(state => state.highestBid);
+  const auction = useAuctionStore(state => state.auction);
+
+  const placeBid = useCallback(async (
+    auctionCarId: string, 
+    amount: number
+  ): Promise<boolean> => {
+    console.log('🎯 [useBidPlacement] Placing bid:', { auctionCarId, amount });
+
+    if (!currentCar) {
+      toast.error('No active vehicle');
+      return false;
     }
-    if (errorTimeoutRef.current) {
-      clearTimeout(errorTimeoutRef.current);
-      errorTimeoutRef.current = null;
-    }
-  }, []);
 
-  const showSuccess = useCallback(() => {
-    setLastBidSuccess(true);
-    setLastBidError(null);
-    clearTimeouts();
+    // ========================================
+    // VALIDATION
+    // ========================================
     
-    successTimeoutRef.current = setTimeout(() => {
-      setLastBidSuccess(false);
-    }, 3000);
-  }, [clearTimeouts]);
+    const currentHigh = highestBid?.amount || currentCar.currentPrice || 0;
+    const increment = auction?.minBidIncrement || 100;
+    const minimumBid = currentHigh + increment;
 
-  const showError = useCallback((error: string) => {
-    setLastBidError(error);
-    setLastBidSuccess(false);
-    clearTimeouts();
-    
-    errorTimeoutRef.current = setTimeout(() => {
-      setLastBidError(null);
-    }, 5000);
-  }, [clearTimeouts]);
-
-  const validateBid = useCallback((
-    amount: number, 
-    currentPrice: number, 
-    minimumBid: number
-  ): string | null => {
     if (amount < minimumBid) {
-      return `Minimum bid is $${minimumBid.toLocaleString()}`;
-    }
-    if (amount <= currentPrice) {
-      return `Bid must be higher than current price of $${currentPrice.toLocaleString()}`;
-    }
-    if (amount > 1000000) {
-      return 'Bid amount seems unusually high. Please verify.';
-    }
-    if (amount % 25 !== 0) {
-      return 'Bid amount must be in increments of $25';
-    }
-    return null;
-  }, []);
-
-  const calculateNextMinimumBid = useCallback((currentPrice: number): number => {
-    // Copart-style bid increments
-    if (currentPrice < 100) return currentPrice + 25;
-    if (currentPrice < 500) return currentPrice + 50;
-    if (currentPrice < 1000) return currentPrice + 100;
-    if (currentPrice < 5000) return currentPrice + 250;
-    if (currentPrice < 10000) return currentPrice + 500;
-    return currentPrice + 1000;
-  }, []);
-
-  const placeLiveBid = useCallback(async (amount: number): Promise<boolean> => {
-    if (!isConnected) {
-      showError('Not connected to auction. Please refresh the page.');
+      toast.error(`Minimum bid: $${minimumBid.toLocaleString()}`);
       return false;
     }
 
-    if (!auctionCarId) {
-      showError('No auction car selected.');
+    if (amount <= currentHigh) {
+      toast.error(`Bid must be higher than $${currentHigh.toLocaleString()}`);
       return false;
     }
+
+    // ========================================
+    // OPTIMISTIC UI UPDATE
+    // ========================================
     
-    setIsPlacingBid(true);
-    setLastBidError(null);
-    
-    try {
-      const result = await apiClient.placeLiveBid({ auctionCarId, amount });
-      
-      if (result) {
-        showSuccess();
-        return true;
-      } else {
-        showError('Failed to place bid. Please try again.');
-        return false;
+    setIsPlacing(true);
+
+    const optimisticBid: BidGetDto = {
+      id: `temp-${Date.now()}`,
+      auctionCarId: auctionCarId,
+      userId: 'current-user',
+      amount: amount,
+      bidType: 'Live',
+      timestamp: new Date().toISOString(),
+      isWinning: true,
+      isOutbid: false,
+      user: {
+        id: 'current-user',
+        email: '',
+        firstName: 'You',
+        lastName: ''
       }
-    } catch (error: any) {
-      const errorMessage = error.message || 'Failed to place bid. Please try again.';
-      showError(errorMessage);
-      return false;
-    } finally {
-      setIsPlacingBid(false);
-    }
-  }, [auctionCarId, isConnected, showSuccess, showError]);
+    };
 
-  const placePreBid = useCallback(async (amount: number): Promise<boolean> => {
-    if (!isConnected) {
-      showError('Not connected to auction. Please refresh the page.');
-      return false;
-    }
+    // Update store optimistically
+    updateHighestBid(optimisticBid);
+    addBidToHistory(optimisticBid);
 
-    if (!auctionCarId) {
-      showError('No auction car selected.');
-      return false;
-    }
-    
-    setIsPlacingBid(true);
-    setLastBidError(null);
+    console.log('⚡ Optimistic update applied');
+
+    // ========================================
+    // SERVER REQUEST
+    // ========================================
     
     try {
-      const result = await apiClient.placePreBid({ auctionCarId, amount });
+      await placeLiveBid(auctionCarId, amount);
       
-      if (result) {
-        showSuccess();
-        return true;
-      } else {
-        showError('Failed to place pre-bid. Please try again.');
-        return false;
-      }
-    } catch (error: any) {
-      const errorMessage = error.message || 'Failed to place pre-bid. Please try again.';
-      showError(errorMessage);
-      return false;
-    } finally {
-      setIsPlacingBid(false);
-    }
-  }, [auctionCarId, isConnected, showSuccess, showError]);
-
-  const placeProxyBid = useCallback(async (startAmount: number, maxAmount: number): Promise<boolean> => {
-    if (!isConnected) {
-      showError('Not connected to auction. Please refresh the page.');
-      return false;
-    }
-
-    if (!auctionCarId) {
-      showError('No auction car selected.');
-      return false;
-    }
-
-    if (startAmount >= maxAmount) {
-      showError('Start amount must be less than maximum amount.');
-      return false;
-    }
-    
-    setIsPlacingBid(true);
-    setLastBidError(null);
-    
-    try {
-      const result = await apiClient.placeProxyBid({ 
-        auctionCarId, 
-        maxAmount, 
-        incrementAmount: 25 
+      console.log('✅ [useBidPlacement] Bid successful');
+      toast.success('You are now the highest bidder!', {
+        icon: '🏆',
+        duration: 4000
       });
       
-      if (result) {
-        showSuccess();
-        return true;
-      } else {
-        showError('Failed to place proxy bid. Please try again.');
-        return false;
-      }
-    } catch (error: any) {
-      const errorMessage = error.message || 'Failed to place proxy bid. Please try again.';
-      showError(errorMessage);
-      return false;
-    } finally {
-      setIsPlacingBid(false);
-    }
-  }, [auctionCarId, isConnected, showSuccess, showError]);
-
-  const cancelProxyBid = useCallback(async (): Promise<boolean> => {
-    if (!isConnected) {
-      showError('Not connected to auction. Please refresh the page.');
-      return false;
-    }
-
-    if (!auctionCarId) {
-      showError('No auction car selected.');
-      return false;
-    }
-    
-    setIsPlacingBid(true);
-    setLastBidError(null);
-    
-    try {
-      // Note: This endpoint would need to be implemented in the backend
-      // For now, we'll simulate success
-      showSuccess();
       return true;
-    } catch (error: any) {
-      const errorMessage = error.message || 'Failed to cancel proxy bid. Please try again.';
-      showError(errorMessage);
+    } catch (err: any) {
+      console.error('❌ [useBidPlacement] Bid failed:', err);
+      
+      // ========================================
+      // ERROR HANDLING (Revert optimistic update)
+      // ========================================
+      
+      // Backend error messages
+      const errorMessage = err?.response?.data?.message || err?.message || err?.toString() || '';
+      
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Error details:', { errorMessage, err });
+      }
+      
+      // Specific error messages
+      if (errorMessage.includes('Auction is not active') || errorMessage.includes('not active')) {
+        toast.error('❌ Auction is not active', { id: 'bid-error', duration: 4000 });
+      } else if (errorMessage.includes('Seller cannot bid') || errorMessage.includes('seller')) {
+        toast.error('❌ Seller cannot bid on own vehicle', { id: 'bid-error', duration: 4000 });
+      } else if (errorMessage.includes('minimum bid') || errorMessage.includes('increment')) {
+        toast.error(`❌ Bid too low - minimum: $${minimumBid.toLocaleString()}`, { 
+          id: 'bid-error', 
+          duration: 4000 
+        });
+      } else if (errorMessage.includes('Proxy bid conflict') || errorMessage.includes('proxy')) {
+        toast.error('❌ Proxy bid conflict - higher proxy bid exists', { 
+          id: 'bid-error', 
+          duration: 4000 
+        });
+      } else if (errorMessage.includes('AuctionBusinessException') || errorMessage.includes('business')) {
+        toast.error('❌ Business rule violation', { id: 'bid-error', duration: 4000 });
+      } else if (errorMessage.includes('unauthorized') || errorMessage.includes('not authorized')) {
+        toast.error('❌ You are not authorized to bid', { id: 'bid-error', duration: 4000 });
+      } else {
+        toast.error(`❌ ${errorMessage || 'Failed to place bid'}`, { 
+          id: 'bid-error', 
+          duration: 4000 
+        });
+      }
+      
+      // Note: Store will be updated by real-time events from backend
+      // No need to manually revert - NewLiveBid event will sync correct state
+      
       return false;
     } finally {
-      setIsPlacingBid(false);
+      setIsPlacing(false);
     }
-  }, [auctionCarId, isConnected, showSuccess, showError]);
+  }, [placeLiveBid, currentCar, highestBid, auction, updateHighestBid, addBidToHistory]);
 
   return {
-    placeLiveBid,
-    placePreBid,
-    placeProxyBid,
-    cancelProxyBid,
-    isPlacingBid,
-    lastBidSuccess,
-    lastBidError,
-    validateBid,
-    calculateNextMinimumBid
+    isPlacing,
+    placeBid
   };
 };
+
+export default useBidPlacement;

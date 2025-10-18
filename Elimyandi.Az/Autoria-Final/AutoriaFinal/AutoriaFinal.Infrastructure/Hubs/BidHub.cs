@@ -36,10 +36,13 @@ namespace AutoriaFinal.Infrastructure.Hubs
                 return;
             }
 
-            await Groups.AddToGroupAsync(Context.ConnectionId, $"{AuctionCarGroupPrefix}{auctionCarId}");
+            var groupName = $"{AuctionCarGroupPrefix}{auctionCarId}";
+            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
             await Groups.AddToGroupAsync(Context.ConnectionId, $"{UserGroupPrefix}{userId}");
 
+            // ✅ Get complete snapshot: bids, stats, minimum bid
             var highestBid = await _bidService.GetHighestBidAsync(auctionCarId);
+            var recentBids = await _bidService.GetRecentBidsAsync(auctionCarId, 20);
             var stats = await _bidService.GetBidStatsAsync(auctionCarId);
             var lastBidTime = await _bidService.GetLastBidTimeAsync(auctionCarId);
             var minimumBid = await _bidService.GetMinimumBidAmountAsync(auctionCarId);
@@ -47,14 +50,19 @@ namespace AutoriaFinal.Infrastructure.Hubs
             await Clients.Caller.SendAsync("JoinedAuctionCar", new
             {
                 AuctionCarId = auctionCarId,
+                GroupName = groupName,
                 HighestBid = highestBid,
+                RecentBids = recentBids,
+                BidHistory = recentBids, // Alias for compatibility
                 Stats = stats,
                 LastBidTime = lastBidTime,
                 MinimumBid = minimumBid,
-                JoinedAt = DateTime.UtcNow
+                JoinedAt = DateTime.UtcNow,
+                Message = "Successfully joined auction car - complete snapshot loaded"
             });
 
-            _logger.LogInformation("User {UserId} joined AuctionCar {AuctionCarId} group", userId, auctionCarId);
+            _logger.LogInformation("✅ User {UserId} joined AuctionCar {AuctionCarId} group: {GroupName}, HighestBid: ${HighestBid}, RecentBids: {BidCount}, MinBid: ${MinBid}", 
+                userId, auctionCarId, groupName, highestBid?.Amount ?? 0, recentBids?.Count() ?? 0, minimumBid);
         }
 
         public async Task LeaveAuctionCar(Guid auctionCarId)
@@ -98,21 +106,13 @@ namespace AutoriaFinal.Infrastructure.Hubs
                 return;
             }
 
+            // ✅ BidService artıq PreBidPlaced event göndərir
+            // Dublikat göndərməməliyik
             var result = await _bidService.PlaceBidAsync(dto);
 
-            await Clients.Group($"{AuctionCarGroupPrefix}{auctionCarId}").SendAsync("PreBidPlaced", new
-            {
-                result.Id,
-                result.AuctionCarId,
-                result.UserId,
-                result.Amount,
-                result.PlacedAtUtc,
-                result.UserName,
-                BidType = "PreBid"
-            });
-
+            // ✅ Yalnız caller-ə uğur mesajı göndər
             await Clients.Caller.SendAsync("PreBidSuccess", result);
-            _logger.LogInformation("Pre-bid placed: User {UserId}, Amount {Amount}", userId, amount);
+            _logger.LogInformation("Pre-bid placed via BidHub: User {UserId}, Amount {Amount}", userId, amount);
         }
 
         public async Task PlaceLiveBid(Guid auctionCarId, decimal amount)
@@ -147,42 +147,13 @@ namespace AutoriaFinal.Infrastructure.Hubs
                 return;
             }
 
+            // ✅ BidService artıq bütün real-time event-ləri göndərir (NewLiveBid, HighestBidUpdated, AuctionTimerReset)
+            // Dublikat event göndərməməliyik - BidService handle edir
             var result = await _bidService.PlaceBidAsync(dto);
-            var groupName = $"{AuctionCarGroupPrefix}{auctionCarId}";
 
-            await Clients.Group(groupName).SendAsync("NewLiveBid", new
-            {
-                result.Id,
-                result.AuctionCarId,
-                result.UserId,
-                result.Amount,
-                result.PlacedAtUtc,
-                result.UserName,
-                result.IsHighestBid,
-                BidType = "Live"
-            });
-
-            await Clients.Group(groupName).SendAsync("HighestBidUpdated", new
-            {
-                AuctionCarId = auctionCarId,
-                Amount = result.Amount,
-                BidderId = result.UserId,
-                BidderName = result.UserName,
-                UpdatedAt = DateTime.UtcNow
-            });
-
-            await Clients.Group(groupName).SendAsync("AuctionTimerReset", new
-            {
-                AuctionCarId = auctionCarId,
-                SecondsRemaining = BidTimer,
-                ResetAt = DateTime.UtcNow
-            });
-
-            var stats = await _bidService.GetBidStatsAsync(auctionCarId);
-            await Clients.Group(groupName).SendAsync("BidStatsUpdated", stats);
-
+            // ✅ Yalnız caller-ə uğur mesajı göndər
             await Clients.Caller.SendAsync("LiveBidSuccess", result);
-            _logger.LogInformation("Live bid placed: User {UserId}, Amount {Amount}, Highest: {IsHighest}",
+            _logger.LogInformation("Live bid placed via BidHub: User {UserId}, Amount {Amount}, Highest: {IsHighest}",
                 userId, amount, result.IsHighestBid);
         }
 

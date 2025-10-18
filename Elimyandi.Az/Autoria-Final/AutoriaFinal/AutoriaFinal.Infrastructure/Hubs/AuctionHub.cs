@@ -32,18 +32,28 @@ namespace AutoriaFinal.Infrastructure.Hubs
                 return;
             }
 
-            await Groups.AddToGroupAsync(Context.ConnectionId, $"auction-{auctionId}");
+            var groupName = $"auction-{auctionId}";
+            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
 
-            // ✅ FİX: PascalCase method name
+            // ✅ Get current auction state and timer to send to client
+            var auctionState = await _auctionService.GetAuctionCurrentStateAsync(auctionId);
+            var timerInfo = await _auctionService.GetAuctionTimerInfoAsync(auctionId);
+
             await Clients.Caller.SendAsync("JoinedAuction", new
             {
                 AuctionId = auctionId,
                 UserId = userId,
+                GroupName = groupName,
+                CurrentTimer = timerInfo,
+                AuctionState = auctionState,
+                IsLive = auctionState.IsLive,
+                CurrentCarLotNumber = auctionState.CurrentCarLotNumber,
                 JoinedAt = DateTime.UtcNow,
-                Message = "Successfully joined auction"
+                Message = "Successfully joined auction - timer and state synced"
             });
 
-            _logger.LogInformation("User {UserId} joined auction {AuctionId} group", userId, auctionId);
+            _logger.LogInformation("✅ User {UserId} joined auction {AuctionId} group: {GroupName}, Timer: {RemainingSeconds}s, IsLive: {IsLive}, CurrentLot: {CurrentLot}", 
+                userId, auctionId, groupName, timerInfo.RemainingSeconds, auctionState.IsLive, auctionState.CurrentCarLotNumber);
         }
 
         public async Task LeaveAuction(Guid auctionId)

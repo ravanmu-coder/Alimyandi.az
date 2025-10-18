@@ -48,11 +48,17 @@ export default function Profile() {
       setIsLoading(true);
       setError(null);
       try {
+        console.log('🔄 Loading user profile from /api/Auth/profile...');
         const profile = await apiClient.getProfile();
+        console.log('✅ Profile loaded successfully:', profile);
+        console.log('📧 Email:', profile.email);
+        console.log('👤 Name:', profile.firstName, profile.lastName);
+        console.log('🎭 Roles:', profile.roles);
+        console.log('✓ Email Confirmed:', profile.emailConfirmed);
         setProfileData(profile);
-        console.log('Profile loaded:', profile);
+        toast.success('Profil məlumatları yükləndi');
       } catch (e: any) {
-        console.error('Error loading profile:', e);
+        console.error('❌ Error loading profile:', e);
         setError(e?.message || 'Profil məlumatları yüklənə bilmədi');
         toast.error(e?.message || 'Profil məlumatları yüklənə bilmədi');
       } finally {

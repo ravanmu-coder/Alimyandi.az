@@ -239,8 +239,9 @@ namespace AutoriaFinal.Application.Services.Auctions
             bid.SequenceNumber = await GetNextSequenceNumberAsync(dto.AuctionCarId);
             var createdBid = await _bidRepository.AddAsync(bid);
 
-            // Update AuctionCar
+            // ✅ Update AuctionCar - həm price həm də LastBidTime
             auctionCar.UpdateCurrentPrice(dto.Amount);
+            auctionCar.LastBidTime = DateTime.UtcNow; // Timer reset üçün kritik!
             await _auctionCarRepository.UpdateAsync(auctionCar);
             await _unitOfWork.SaveChangesAsync();
 
@@ -269,10 +270,13 @@ namespace AutoriaFinal.Application.Services.Auctions
                 NextMinimum = await CalculateMinimumBidAsync(dto.AuctionCarId)
             });
 
+            // ✅ Timer reset - 30 saniyə (auction.TimerSeconds)
+            var timerSeconds = auctionCar.Auction?.TimerSeconds ?? 30;
             await _bidHubContext.Clients.Group(groupName).SendAsync("AuctionTimerReset", new
             {
                 AuctionCarId = dto.AuctionCarId,
-                SecondsRemaining = 10,
+                SecondsRemaining = timerSeconds, // Full timer duration reset
+                NewTimerSeconds = timerSeconds,
                 ResetAt = DateTime.UtcNow,
                 ResetBy = "LiveBid"
             });

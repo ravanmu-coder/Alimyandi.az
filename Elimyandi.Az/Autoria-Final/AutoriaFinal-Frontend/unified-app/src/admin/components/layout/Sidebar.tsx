@@ -5,10 +5,6 @@ import {
   Car, 
   Gavel, 
   Users, 
-  Shield, 
-  FileText, 
-  BarChart3, 
-  Settings,
   MapPin,
   ChevronLeft,
   ChevronRight
@@ -25,11 +21,7 @@ const navigation: NavItem[] = [
   { name: 'Inventory', href: '/admin/inventory', icon: Car },
   { name: 'Auctions', href: '/admin/auctions', icon: Gavel },
   { name: 'Users', href: '/admin/users', icon: Users },
-  { name: 'Roles', href: '/admin/roles', icon: Shield },
   { name: 'Locations', href: '/admin/locations', icon: MapPin },
-  { name: 'Audit Logs', href: '/admin/audit', icon: FileText },
-  { name: 'Reports', href: '/admin/reports', icon: BarChart3 },
-  { name: 'Settings', href: '/admin/settings', icon: Settings },
 ]
 
 export function Sidebar() {

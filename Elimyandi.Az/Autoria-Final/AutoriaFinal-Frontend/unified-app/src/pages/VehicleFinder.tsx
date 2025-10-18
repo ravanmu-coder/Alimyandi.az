@@ -529,9 +529,11 @@ const VehicleFinder: React.FC = () => {
   }, []);
 
   const handleWatchlistToggle = (vehicle: Vehicle) => {
+    console.log('🔔 Watchlist toggle clicked for vehicle:', vehicle.id, vehicle.make, vehicle.model);
     const newWatchlist = new Set(watchlist);
     if (watchlist.has(vehicle.id)) {
       // Remove from watchlist
+      console.log('❌ Removing from watchlist:', vehicle.id);
       newWatchlist.delete(vehicle.id);
       setWatchlist(newWatchlist);
       
@@ -554,9 +556,11 @@ const VehicleFinder: React.FC = () => {
         localStorage.setItem('vehicleWatchlist', JSON.stringify(filteredIds));
       }
       
+      console.log('✅ Vehicle removed from all localStorage keys');
       showAlert('Removed from Watchlist', 'removed');
     } else {
       // Add to watchlist
+      console.log('✅ Adding to watchlist:', vehicle.id);
       newWatchlist.add(vehicle.id);
       setWatchlist(newWatchlist);
       
@@ -608,6 +612,10 @@ const VehicleFinder: React.FC = () => {
       if (existingIndex === -1) {
         watchlistData.push(detailedVehicleData);
         localStorage.setItem('vehicleWatchlistData', JSON.stringify(watchlistData));
+        console.log('💾 Saved to vehicleWatchlistData. Total vehicles in watchlist:', watchlistData.length);
+        console.log('📦 Detailed vehicle data:', detailedVehicleData);
+      } else {
+        console.log('⚠️ Vehicle already exists in watchlist data');
       }
       
       // Also save to vehicleWatchlist (for compatibility)
@@ -616,8 +624,10 @@ const VehicleFinder: React.FC = () => {
       if (!vehicleWatchlistArray.includes(vehicle.id)) {
         vehicleWatchlistArray.push(vehicle.id);
         localStorage.setItem('vehicleWatchlist', JSON.stringify(vehicleWatchlistArray));
+        console.log('💾 Also saved to vehicleWatchlist (compatibility)');
       }
       
+      console.log('🎉 Vehicle successfully added to watchlist! Check Dashboard to see it.');
       showAlert('Added to Watchlist', 'success');
     }
   };
@@ -651,14 +661,14 @@ const VehicleFinder: React.FC = () => {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-white mb-2">Vehicle Finder</h1>
-            <p className="text-blue-200">Search and filter vehicles from live auctions</p>
+            <h1 className="text-4xl font-bold text-white mb-2">Vehicle Finder</h1>
+            <p className="text-blue-200 text-lg">Search and filter vehicles from live auctions</p>
           </div>
           <div className="flex gap-3">
             <button
               onClick={loadVehicles}
               disabled={loading}
-              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-blue-500/25 font-semibold"
             >
               <RefreshCw className={`h-5 w-5 ${loading ? 'animate-spin' : ''}`} />
               Refresh
@@ -666,31 +676,96 @@ const VehicleFinder: React.FC = () => {
           </div>
         </div>
 
+        {/* Active Filters Indicator */}
+        {(searchTerm || Object.values(filters).some(f => 
+          typeof f === 'string' ? f !== '' : 
+          typeof f === 'object' ? Object.values(f).some(v => v !== '') : false
+        )) && (
+          <div className="mb-6 p-4 bg-blue-500/20 border border-blue-500/30 rounded-xl backdrop-blur-sm">
+            <div className="flex items-center gap-2 mb-2">
+              <Filter className="h-4 w-4 text-blue-400" />
+              <span className="text-blue-200 font-semibold">Active Filters:</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {searchTerm && (
+                <span className="px-3 py-1 bg-blue-600/30 text-blue-200 rounded-full text-sm border border-blue-500/30">
+                  Search: "{searchTerm}"
+                </span>
+              )}
+              {filters.fuelType && (
+                <span className="px-3 py-1 bg-blue-600/30 text-blue-200 rounded-full text-sm border border-blue-500/30">
+                  Fuel: {getEnumLabel('FuelType', Number(filters.fuelType))}
+                </span>
+              )}
+              {filters.carCondition && (
+                <span className="px-3 py-1 bg-green-600/30 text-green-200 rounded-full text-sm border border-green-500/30">
+                  Condition: {getEnumLabel('CarCondition', Number(filters.carCondition))}
+                </span>
+              )}
+              {filters.damageType && (
+                <span className="px-3 py-1 bg-red-600/30 text-red-200 rounded-full text-sm border border-red-500/30">
+                  Damage: {getEnumLabel('DamageType', Number(filters.damageType))}
+                </span>
+              )}
+              {filters.hasKeys !== '' && (
+                <span className="px-3 py-1 bg-yellow-600/30 text-yellow-200 rounded-full text-sm border border-yellow-500/30">
+                  Keys: {filters.hasKeys === 'true' ? 'Has Keys' : 'No Keys'}
+                </span>
+              )}
+              {(filters.priceRange.min || filters.priceRange.max) && (
+                <span className="px-3 py-1 bg-green-600/30 text-green-200 rounded-full text-sm border border-green-500/30">
+                  Price: {filters.priceRange.min || '0'} - {filters.priceRange.max || '∞'}
+                </span>
+              )}
+              {(filters.yearRange.min || filters.yearRange.max) && (
+                <span className="px-3 py-1 bg-purple-600/30 text-purple-200 rounded-full text-sm border border-purple-500/30">
+                  Year: {filters.yearRange.min || '1900'} - {filters.yearRange.max || '2024'}
+                </span>
+              )}
+              {(filters.mileageRange.min || filters.mileageRange.max) && (
+                <span className="px-3 py-1 bg-orange-600/30 text-orange-200 rounded-full text-sm border border-orange-500/30">
+                  Mileage: {filters.mileageRange.min || '0'} - {filters.mileageRange.max || '∞'} km
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Search and Filter Bar */}
-        <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 mb-6">
+        <div className="bg-slate-800/60 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6 mb-8 shadow-2xl">
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Search Input */}
             <div className="flex-1">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-blue-400" />
                 <input
                   type="text"
                   placeholder="Search by make, model, year, VIN, or color..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={`w-full pl-12 pr-4 py-4 bg-slate-900/80 border-2 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${
+                    searchTerm ? 'border-blue-500 bg-blue-500/10' : 'border-slate-600 hover:border-slate-500'
+                  }`}
                 />
+                {searchTerm && (
+                  <button
+                    onClick={() => setSearchTerm('')}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                  >
+                    ✕
+                  </button>
+                )}
               </div>
             </div>
             
             {/* Filter Toggle */}
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className={`flex items-center gap-2 px-4 py-3 rounded-lg transition-colors duration-300 ${
+                className={`flex items-center gap-2 px-6 py-4 rounded-xl transition-all duration-300 font-semibold ${
                   showFilters 
-                    ? 'bg-blue-600 text-white' 
-                    : 'bg-white/20 text-white hover:bg-white/30'
+                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' 
+                    : 'bg-slate-700/80 text-white hover:bg-slate-600/80 border border-slate-600'
                 }`}
               >
                 <Filter className="h-5 w-5" />
@@ -704,7 +779,7 @@ const VehicleFinder: React.FC = () => {
               )) && (
                 <button
                   onClick={clearFilters}
-                  className="flex items-center gap-2 px-4 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors duration-300"
+                  className="flex items-center gap-2 px-6 py-4 bg-red-600 hover:bg-red-700 text-white rounded-xl transition-all duration-300 font-semibold shadow-lg shadow-red-500/25"
                 >
                   Clear Filters
                 </button>
@@ -714,84 +789,107 @@ const VehicleFinder: React.FC = () => {
 
           {/* Advanced Filters */}
           {showFilters && (
-            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
               {/* Fuel Type Filter */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Fuel Type</label>
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-white mb-2 flex items-center gap-2">
+                  <Fuel className="h-4 w-4 text-blue-400" />
+                  Fuel Type
+                </label>
                 <select
                   value={filters.fuelType}
                   onChange={(e) => setFilters(prev => ({ ...prev, fuelType: e.target.value }))}
-                  className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`w-full px-4 py-3 bg-slate-800/80 border-2 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ${
+                    filters.fuelType ? 'border-blue-500 bg-blue-500/20' : 'border-slate-600 hover:border-slate-500'
+                  }`}
                 >
-                  <option value="">All Fuel Types</option>
-                  <option value="1">Benzin</option>
-                  <option value="2">Dizel</option>
-                  <option value="3">Hibrid</option>
-                  <option value="4">Elektrik</option>
-                  <option value="5">LPG</option>
-                  <option value="6">CNG</option>
-                  <option value="7">Digər</option>
+                  <option value="" className="bg-slate-800 text-white">All Fuel Types</option>
+                  <option value="1" className="bg-slate-800 text-white">Benzin</option>
+                  <option value="2" className="bg-slate-800 text-white">Dizel</option>
+                  <option value="3" className="bg-slate-800 text-white">Hibrid</option>
+                  <option value="4" className="bg-slate-800 text-white">Elektrik</option>
+                  <option value="5" className="bg-slate-800 text-white">LPG</option>
+                  <option value="6" className="bg-slate-800 text-white">CNG</option>
+                  <option value="7" className="bg-slate-800 text-white">Digər</option>
                 </select>
               </div>
 
               {/* Condition Filter */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Condition</label>
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-white mb-2 flex items-center gap-2">
+                  <Car className="h-4 w-4 text-green-400" />
+                  Condition
+                </label>
                 <select
                   value={filters.carCondition}
                   onChange={(e) => setFilters(prev => ({ ...prev, carCondition: e.target.value }))}
-                  className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`w-full px-4 py-3 bg-slate-800/80 border-2 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 ${
+                    filters.carCondition ? 'border-green-500 bg-green-500/20' : 'border-slate-600 hover:border-slate-500'
+                  }`}
                 >
-                  <option value="">All Conditions</option>
-                  <option value="1">İşləyir və Sürülür</option>
-                  <option value="2">Mühərrik Başlatma Proqramı</option>
-                  <option value="3">Təkmilləşdirilmiş</option>
-                  <option value="4">Stasionar</option>
+                  <option value="" className="bg-slate-800 text-white">All Conditions</option>
+                  <option value="1" className="bg-slate-800 text-white">İşləyir və Sürülür</option>
+                  <option value="2" className="bg-slate-800 text-white">Mühərrik Başlatma Proqramı</option>
+                  <option value="3" className="bg-slate-800 text-white">Təkmilləşdirilmiş</option>
+                  <option value="4" className="bg-slate-800 text-white">Stasionar</option>
                 </select>
               </div>
 
               {/* Damage Type Filter */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Damage Type</label>
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-white mb-2 flex items-center gap-2">
+                  <Wrench className="h-4 w-4 text-red-400" />
+                  Damage Type
+                </label>
                 <select
                   value={filters.damageType}
                   onChange={(e) => setFilters(prev => ({ ...prev, damageType: e.target.value }))}
-                  className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`w-full px-4 py-3 bg-slate-800/80 border-2 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 ${
+                    filters.damageType ? 'border-red-500 bg-red-500/20' : 'border-slate-600 hover:border-slate-500'
+                  }`}
                 >
-                  <option value="">All Damage Types</option>
-                  <option value="1">Ön Hissə</option>
-                  <option value="2">Arxa Hissə</option>
-                  <option value="3">Yan Tərəf</option>
-                  <option value="4">Kiçik Batıq/Cızıqlar</option>
-                  <option value="5">Normal Aşınma</option>
-                  <option value="6">Hər Tərəfli</option>
-                  <option value="7">Dolu</option>
-                  <option value="8">Vandalizm</option>
-                  <option value="9">Su/Sel</option>
-                  <option value="10">Yanma</option>
-                  <option value="11">Mexaniki</option>
-                  <option value="12">Dam</option>
-                  <option value="13">Alt Hissə</option>
+                  <option value="" className="bg-slate-800 text-white">All Damage Types</option>
+                  <option value="1" className="bg-slate-800 text-white">Ön Hissə</option>
+                  <option value="2" className="bg-slate-800 text-white">Arxa Hissə</option>
+                  <option value="3" className="bg-slate-800 text-white">Yan Tərəf</option>
+                  <option value="4" className="bg-slate-800 text-white">Kiçik Batıq/Cızıqlar</option>
+                  <option value="5" className="bg-slate-800 text-white">Normal Aşınma</option>
+                  <option value="6" className="bg-slate-800 text-white">Hər Tərəfli</option>
+                  <option value="7" className="bg-slate-800 text-white">Dolu</option>
+                  <option value="8" className="bg-slate-800 text-white">Vandalizm</option>
+                  <option value="9" className="bg-slate-800 text-white">Su/Sel</option>
+                  <option value="10" className="bg-slate-800 text-white">Yanma</option>
+                  <option value="11" className="bg-slate-800 text-white">Mexaniki</option>
+                  <option value="12" className="bg-slate-800 text-white">Dam</option>
+                  <option value="13" className="bg-slate-800 text-white">Alt Hissə</option>
                 </select>
               </div>
 
               {/* Has Keys Filter */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Has Keys</label>
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-white mb-2 flex items-center gap-2">
+                  <Hash className="h-4 w-4 text-yellow-400" />
+                  Has Keys
+                </label>
                 <select
                   value={filters.hasKeys}
                   onChange={(e) => setFilters(prev => ({ ...prev, hasKeys: e.target.value }))}
-                  className="w-full px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`w-full px-4 py-3 bg-slate-800/80 border-2 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300 ${
+                    filters.hasKeys ? 'border-yellow-500 bg-yellow-500/20' : 'border-slate-600 hover:border-slate-500'
+                  }`}
                 >
-                  <option value="">All</option>
-                  <option value="true">Has Keys</option>
-                  <option value="false">No Keys</option>
+                  <option value="" className="bg-slate-800 text-white">All</option>
+                  <option value="true" className="bg-slate-800 text-white">Has Keys</option>
+                  <option value="false" className="bg-slate-800 text-white">No Keys</option>
                 </select>
               </div>
 
               {/* Price Range */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Price Range</label>
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-white mb-2 flex items-center gap-2">
+                  <Hash className="h-4 w-4 text-green-400" />
+                  Price Range
+                </label>
                 <div className="flex gap-2">
                   <input
                     type="number"
@@ -801,7 +899,9 @@ const VehicleFinder: React.FC = () => {
                       ...prev, 
                       priceRange: { ...prev.priceRange, min: e.target.value }
                     }))}
-                    className="flex-1 px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`flex-1 px-4 py-3 bg-slate-800/80 border-2 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 ${
+                      filters.priceRange.min ? 'border-green-500 bg-green-500/20' : 'border-slate-600 hover:border-slate-500'
+                    }`}
                   />
                   <input
                     type="number"
@@ -811,14 +911,19 @@ const VehicleFinder: React.FC = () => {
                       ...prev, 
                       priceRange: { ...prev.priceRange, max: e.target.value }
                     }))}
-                    className="flex-1 px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`flex-1 px-4 py-3 bg-slate-800/80 border-2 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 ${
+                      filters.priceRange.max ? 'border-green-500 bg-green-500/20' : 'border-slate-600 hover:border-slate-500'
+                    }`}
                   />
                 </div>
               </div>
 
               {/* Year Range */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Year Range</label>
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-white mb-2 flex items-center gap-2">
+                  <Calendar className="h-4 w-4 text-purple-400" />
+                  Year Range
+                </label>
                 <div className="flex gap-2">
                   <input
                     type="number"
@@ -828,7 +933,9 @@ const VehicleFinder: React.FC = () => {
                       ...prev, 
                       yearRange: { ...prev.yearRange, min: e.target.value }
                     }))}
-                    className="flex-1 px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`flex-1 px-4 py-3 bg-slate-800/80 border-2 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 ${
+                      filters.yearRange.min ? 'border-purple-500 bg-purple-500/20' : 'border-slate-600 hover:border-slate-500'
+                    }`}
                   />
                   <input
                     type="number"
@@ -838,14 +945,19 @@ const VehicleFinder: React.FC = () => {
                       ...prev, 
                       yearRange: { ...prev.yearRange, max: e.target.value }
                     }))}
-                    className="flex-1 px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`flex-1 px-4 py-3 bg-slate-800/80 border-2 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300 ${
+                      filters.yearRange.max ? 'border-purple-500 bg-purple-500/20' : 'border-slate-600 hover:border-slate-500'
+                    }`}
                   />
                 </div>
               </div>
 
               {/* Mileage Range */}
-              <div>
-                <label className="block text-sm font-medium text-white mb-2">Mileage Range</label>
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-white mb-2 flex items-center gap-2">
+                  <Gauge className="h-4 w-4 text-orange-400" />
+                  Mileage Range
+                </label>
                 <div className="flex gap-2">
                   <input
                     type="number"
@@ -855,7 +967,9 @@ const VehicleFinder: React.FC = () => {
                       ...prev, 
                       mileageRange: { ...prev.mileageRange, min: e.target.value }
                     }))}
-                    className="flex-1 px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`flex-1 px-4 py-3 bg-slate-800/80 border-2 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 ${
+                      filters.mileageRange.min ? 'border-orange-500 bg-orange-500/20' : 'border-slate-600 hover:border-slate-500'
+                    }`}
                   />
                   <input
                     type="number"
@@ -865,7 +979,9 @@ const VehicleFinder: React.FC = () => {
                       ...prev, 
                       mileageRange: { ...prev.mileageRange, max: e.target.value }
                     }))}
-                    className="flex-1 px-3 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`flex-1 px-4 py-3 bg-slate-800/80 border-2 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all duration-300 ${
+                      filters.mileageRange.max ? 'border-orange-500 bg-orange-500/20' : 'border-slate-600 hover:border-slate-500'
+                    }`}
                   />
                 </div>
               </div>

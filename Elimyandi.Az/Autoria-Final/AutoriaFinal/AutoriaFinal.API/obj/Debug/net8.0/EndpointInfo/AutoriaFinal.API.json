@@ -11356,6 +11356,9 @@
           "isExpired": {
             "type": "boolean"
           },
+          "isLive": {
+            "type": "boolean"
+          },
           "timeDisplay": {
             "type": "string",
             "nullable": true

@@ -2,41 +2,33 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.tsx';
 import { apiClient } from '../lib/api';
-import { AuctionGetDto, BidGetDto, CarData } from '../types/api';
+import { AuctionGetDto, CarData } from '../types/api';
 import CarPhotos from '../components/CarPhotos';
 import { 
   Calendar, 
   Clock, 
   Car,
-  DollarSign,
   ArrowRight,
   Sparkles,
-  Eye,
-  Heart,
   Plus,
-  Trophy,
-  X,
-  Gavel,
-  List,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Eye,
+  MapPin
 } from 'lucide-react';
 
-// Types for enhanced bid data
-interface EnrichedBidDto extends BidGetDto {
-  vehicleDetails?: any;
-  isLoading?: boolean;
-  error?: string;
+// Location interface
+interface LocationDetails {
+  id: string;
+  name: string;
+  city: string;
+  address: string;
 }
 
-interface BidStatistics {
-  totalBids: number;
-  activeBids: number;
-  winningBids: number;
-  totalBidAmount: number;
+// Auction with location details
+interface AuctionWithLocation extends AuctionGetDto {
+  locationDetails?: LocationDetails;
 }
-
-type TabFilter = 'all' | 'active' | 'winning' | 'outbid';
 
 // Enhanced Presentation Slider Component
 function PresentationSlider() {
@@ -196,89 +188,132 @@ function PresentationSlider() {
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const [liveAuctions, setLiveAuctions] = useState<AuctionGetDto[]>([]);
-  const [bids, setBids] = useState<EnrichedBidDto[]>([]);
-  const [bidStatistics, setBidStatistics] = useState<BidStatistics>({
-    totalBids: 0,
-    activeBids: 0,
-    winningBids: 0,
-    totalBidAmount: 0
-  });
+  const [liveAuctions, setLiveAuctions] = useState<AuctionWithLocation[]>([]);
   const [recentlyViewedVehicles, setRecentlyViewedVehicles] = useState<CarData[]>([]);
-  const [watchlistVehicles, setWatchlistVehicles] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<TabFilter>('all');
 
   useEffect(() => {
     loadDashboardData();
   }, []);
 
+  // Auto-refresh every 30 seconds to keep data current - same as AllAuctions
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isLoading) {
+        console.log('🔄 Auto-refreshing dashboard data...');
+        loadDashboardData();
+      }
+    }, 30000); // 30 seconds
+
+    return () => clearInterval(interval);
+  }, [isLoading]);
+
   const loadDashboardData = async () => {
     try {
-      console.log('Loading dashboard data...');
-      const [live, userBids, cars] = await Promise.all([
-        apiClient.getLiveAuctions(),
-        apiClient.getMyBids(),
+      console.log('🔄 Loading dashboard data...');
+      setIsLoading(true);
+      
+      // Load all data including locations - same as AllAuctions
+      const [allAuctions, allLocations, cars] = await Promise.all([
+        apiClient.getAuctions(),
+        apiClient.getLocations(),
         apiClient.getCars()
       ]);
       
-      console.log('Live auctions:', live);
-      console.log('User bids:', userBids);
+      console.log(`📊 Loaded ${allAuctions.length} auctions and ${allLocations.length} locations`);
       console.log('Cars:', cars);
       
-      setLiveAuctions(live || []);
+      // Create location lookup map for efficient access
+      const locationMap = new Map();
+      allLocations.forEach((location: any) => {
+        locationMap.set(location.id, location);
+      });
       
-      // Process bids
-      const enrichedBids: EnrichedBidDto[] = userBids.map(bid => ({
-        ...bid,
-        isLoading: true
-      }));
-      setBids(enrichedBids);
+      // Filter for active and upcoming auctions only
+      // STATUS-BASED FILTERING: Only 'live' and 'upcoming' auctions
+      const now = new Date();
+      const filteredAuctions = allAuctions.filter(auction => {
+        const status = auction.status?.toLowerCase();
+        const startTime = new Date(auction.startTimeUtc);
+        const endTime = new Date(auction.endTimeUtc);
+        
+        // Primary filter: Check status field first
+        // Accept only 'live', 'upcoming', 'running', 'active', 'scheduled' status
+        const validStatuses = ['live', 'upcoming', 'running', 'active', 'scheduled'];
+        const hasValidStatus = status && validStatuses.includes(status);
+        
+        // Secondary filters for additional validation:
+        // 1. Include if auction is currently live (isLive = true OR status = 'live'/'running'/'active')
+        const isCurrentlyLive = auction.isLive || status === 'live' || status === 'running' || status === 'active';
+        
+        // 2. Include if auction is upcoming (status = 'upcoming'/'scheduled' OR start time in future)
+        const isUpcoming = status === 'upcoming' || status === 'scheduled' || startTime > now;
+        
+        // 3. Exclude if auction has ended (current time > end time)
+        const hasNotEnded = now <= endTime;
+        
+        // Final decision: Must have valid status AND (be live OR upcoming) AND not ended
+        return hasValidStatus && (isCurrentlyLive || isUpcoming) && hasNotEnded;
+      });
       
-      // Calculate bid statistics
-      const stats = calculateBidStatistics(userBids);
-      setBidStatistics(stats);
+      // Log filtering results for debugging
+      const liveCount = filteredAuctions.filter(a => a.isLive || a.status?.toLowerCase() === 'live' || a.status?.toLowerCase() === 'running' || a.status?.toLowerCase() === 'active').length;
+      const upcomingCount = filteredAuctions.filter(a => {
+        const status = a.status?.toLowerCase();
+        return (status === 'upcoming' || status === 'scheduled') && !a.isLive;
+      }).length;
+      
+      console.log(`✅ Filtered to ${filteredAuctions.length} active/future auctions:`);
+      console.log(`   📍 Live/Running: ${liveCount}`);
+      console.log(`   📅 Upcoming/Scheduled: ${upcomingCount}`);
+      console.log(`   🔍 Status breakdown:`, filteredAuctions.map(a => ({
+        name: a.name,
+        status: a.status,
+        isLive: a.isLive,
+        startTime: a.startTimeUtc
+      })));
+      
+      // Sort by start time (ascending) - nearest auction first
+      const sortedAuctions = filteredAuctions.sort((a, b) => {
+        const timeA = new Date(a.startTimeUtc).getTime();
+        const timeB = new Date(b.startTimeUtc).getTime();
+        return timeA - timeB;
+      });
+      
+      // Enrich auctions with location details using the lookup map
+      const auctionsWithLocations: AuctionWithLocation[] = sortedAuctions.map(auction => {
+        const locationDetails = locationMap.get(auction.locationId);
+        
+        return {
+          ...auction,
+          locationDetails: locationDetails ? {
+            id: locationDetails.id,
+            name: locationDetails.name || '',
+            city: locationDetails.city || '',
+            address: locationDetails.address || ''
+          } : {
+            id: auction.locationId,
+            name: auction.locationName || 'Unknown Location',
+            city: '',
+            address: ''
+          }
+        };
+      });
+      
+      console.log(`🎯 Final result: ${auctionsWithLocations.length} auctions ready for display`);
+      setLiveAuctions(auctionsWithLocations);
       
       // Set recently viewed vehicles (first 8 cars from upcoming auctions)
       setRecentlyViewedVehicles(cars.slice(0, 8));
       
-      // Load watchlist from localStorage
-      loadWatchlistData();
-      
     } catch (error) {
-      console.error('Error loading dashboard data:', error);
+      console.error('❌ Error loading dashboard data:', error);
       setLiveAuctions([]);
-      setBids([]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const calculateBidStatistics = (userBids: BidGetDto[]): BidStatistics => {
-    const totalBids = userBids.length;
-    const activeBids = userBids.filter(bid => bid.isWinning && !bid.isOutbid).length;
-    const winningBids = userBids.filter(bid => bid.isWinning).length;
-    const totalBidAmount = userBids.reduce((sum, bid) => sum + bid.amount, 0);
-    
-    return {
-      totalBids,
-      activeBids,
-      winningBids,
-      totalBidAmount
-    };
-  };
-
-  const loadWatchlistData = () => {
-    try {
-      const savedWatchlistData = localStorage.getItem('vehicleWatchlistData');
-      if (savedWatchlistData) {
-        const watchlistData = JSON.parse(savedWatchlistData);
-        setWatchlistVehicles(watchlistData);
-      }
-    } catch (error) {
-      console.error('Error loading watchlist:', error);
-    }
-  };
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -289,66 +324,19 @@ export default function Dashboard() {
     }).format(amount);
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-  };
-
-  const getStatusBadge = (bid: BidGetDto) => {
-    if (bid.isWinning && !bid.isOutbid) {
-      return (
-        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-          <Trophy className="w-3 h-3 mr-1" />
-          Winning
-        </span>
-      );
-    } else if (bid.isOutbid) {
-      return (
-        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-500/20 text-red-300 border border-red-500/30">
-          <X className="w-3 h-3 mr-1" />
-          Outbid
-        </span>
-      );
-    } else {
-      return (
-        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-500/20 text-blue-300 border border-blue-500/30">
-          <Clock className="w-3 h-3 mr-1" />
-          Active
-        </span>
-      );
-    }
-  };
-
-  const filteredBids = bids.filter(bid => {
-    switch (activeTab) {
-      case 'active':
-        return bid.isWinning && !bid.isOutbid;
-      case 'winning':
-        return bid.isWinning;
-      case 'outbid':
-        return bid.isOutbid;
-      default:
-        return true;
-    }
-  });
-
-  const getTabCount = (filter: TabFilter) => {
-    return bids.filter(bid => {
-      switch (filter) {
-        case 'active':
-          return bid.isWinning && !bid.isOutbid;
-        case 'winning':
-          return bid.isWinning;
-        case 'outbid':
-          return bid.isOutbid;
-        default:
-          return true;
+  // Format location display - same as AllAuctions
+  const formatLocation = (auction: AuctionWithLocation) => {
+    if (auction.locationDetails) {
+      const { address, city, name } = auction.locationDetails;
+      if (city) {
+        return city;
+      } else if (address) {
+        return address;
+      } else if (name) {
+        return name;
       }
-    }).length;
+    }
+    return auction.locationName || 'TBD';
   };
 
   if (isLoading) {
@@ -405,11 +393,10 @@ export default function Dashboard() {
           <PresentationSlider />
         </div>
 
-        {/* Active Auctions and Finances Panel */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Active Auctions */}
-          <div className="bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-6">
+        {/* Active Auctions Table - Full Width */}
+        <div className="bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl overflow-hidden mb-12">
+          <div className="border-b border-slate-700 p-6">
+            <div className="flex items-center justify-between mb-2">
               <h2 className="text-xl font-semibold text-white flex items-center">
                 <div className="w-3 h-3 bg-red-500 rounded-full mr-3 animate-pulse"></div>
                 Aktiv Hərraclar
@@ -422,289 +409,126 @@ export default function Dashboard() {
                 <ArrowRight className="h-4 w-4 ml-1" />
               </Link>
             </div>
+            <p className="text-slate-400 text-sm">Canlı və yaxınlaşan avtomobil hərraclarını kəşf edin</p>
+          </div>
 
-            <div className="space-y-4">
-              {liveAuctions.slice(0, 4).map(auction => (
-                <div key={auction.id} className="bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 rounded-lg p-4 hover:bg-slate-700/50 transition-all duration-200">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="text-white font-semibold">{auction.name}</h3>
-                      <p className="text-slate-400 text-sm">{formatDate(auction.startTimeUtc)}</p>
-                    </div>
-                    <Link
-                      to={`/auctions/${auction.id}`}
-                      className="px-3 py-1 bg-blue-600/80 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors"
+          <div className="p-6">
+            {liveAuctions.length > 0 ? (
+              <>
+                {/* Table Header - Compact */}
+                <div className="flex items-center gap-4 px-3 py-2 mb-2 bg-slate-700/20 rounded-lg border border-slate-600/30">
+                  <div className="w-16 flex-shrink-0">
+                    <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">Vaxt</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">Hərrac</span>
+                  </div>
+                  <div className="w-24 flex-shrink-0 text-center">
+                    <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">Status</span>
+                  </div>
+                  <div className="w-24 flex-shrink-0 text-right">
+                    <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">Əməliyyat</span>
+                  </div>
+                </div>
+
+                {/* Table Rows - Compact */}
+                <div className="space-y-2">
+                  {liveAuctions.slice(0, 8).map((auction) => (
+                    <div
+                      key={auction.id}
+                      className="bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 rounded-lg p-3 hover:bg-slate-700/50 hover:border-blue-400/30 transition-all duration-200"
                     >
-                      Bax
-                    </Link>
-                  </div>
-                </div>
-              ))}
-              {liveAuctions.length === 0 && (
-                <div className="text-center py-8">
-                  <Calendar className="h-12 w-12 text-slate-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-white mb-2">Aktiv hərrac yoxdur</h3>
-                  <p className="text-slate-400 mb-4">Hal-hazırda aktiv hərrac yoxdur.</p>
-                  <Link 
-                    to="/all-auctions" 
-                    className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    Bütün hərracları gör
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Finances */}
-          <div className="bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-white flex items-center">
-                <DollarSign className="h-5 w-5 mr-3 text-green-400" />
-                Maliyyə
-              </h2>
-            </div>
-
-            <div className="space-y-6">
-              <div className="bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 rounded-lg p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-slate-400 text-sm">Aylıq Xərc</span>
-                  <span className="text-2xl font-bold text-green-400">
-                    {formatCurrency(bidStatistics.totalBidAmount / 12)}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-400 text-sm">Ümumi Xərc</span>
-                  <span className="text-xl font-semibold text-white">
-                    {formatCurrency(bidStatistics.totalBidAmount)}
-                  </span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-blue-400 mb-1">
-                    {bidStatistics.totalBids}
-                  </div>
-                  <div className="text-slate-400 text-sm">Ümumi Bid</div>
-                </div>
-                <div className="bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 rounded-lg p-4 text-center">
-                  <div className="text-2xl font-bold text-emerald-400 mb-1">
-                    {bidStatistics.winningBids}
-                  </div>
-                  <div className="text-slate-400 text-sm">Qazanan Bid</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bids Section */}
-        <div className="bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl overflow-hidden mb-12">
-          <div className="border-b border-slate-700 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-white">Bid-lər</h2>
-              <Link
-                to="/my-bids"
-                className="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center"
-              >
-                Hamısını gör
-                <ArrowRight className="h-4 w-4 ml-1" />
-              </Link>
-            </div>
-            
-            {/* Tab System */}
-            <div className="flex">
-              {[
-                { key: 'all', label: 'Açıq Məhsullar', icon: List },
-                { key: 'outbid', label: 'Outbid', icon: X },
-                { key: 'winning', label: 'Qazanan', icon: Trophy },
-                { key: 'active', label: 'Aktiv', icon: Clock }
-              ].map((tab) => {
-                const Icon = tab.icon;
-                const count = getTabCount(tab.key as TabFilter);
-                const isActive = activeTab === tab.key;
-
-                return (
-                  <button
-                    key={tab.key}
-                    onClick={() => setActiveTab(tab.key as TabFilter)}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 relative ${
-                      isActive
-                        ? 'text-blue-400 bg-slate-700/50'
-                        : 'text-slate-400 hover:text-slate-300 hover:bg-slate-700/30'
-                    }`}
-                  >
-                    <Icon className="h-4 w-4 mr-2" />
-                    {tab.label}
-                    <span className={`ml-2 px-2 py-0.5 rounded-full text-xs ${
-                      isActive 
-                        ? 'bg-blue-500/20 text-blue-300' 
-                        : 'bg-slate-600/50 text-slate-400'
-                    }`}>
-                      {count}
-                    </span>
-                    {isActive && (
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500"></div>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Bid List Content */}
-          <div className="p-6">
-            {filteredBids.length === 0 ? (
-              <div className="text-center py-16">
-                <Gavel className="h-16 w-16 text-slate-400 mx-auto mb-4" />
-                <h3 className="text-xl font-medium text-white mb-3">
-                  {activeTab === 'all' ? 'Hələ bid yoxdur' : `Bu kateqoriyada bid yoxdur`}
-                </h3>
-                <p className="text-slate-400 mb-8">
-                  Bid verməyə başlayın ki, fəaliyyətinizi burada görəsiniz.
-                </p>
-                <Link
-                  to="/all-auctions"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                >
-                  Hərracları gör
-                </Link>
-              </div>
-            ) : (
-              <div className="space-y-4">
-                {filteredBids.slice(0, 5).map((bid) => (
-                  <div key={bid.id} className="bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 rounded-lg p-4 hover:bg-slate-700/50 transition-all duration-200">
-                    <div className="flex items-center gap-4">
-                      <div className="w-16 h-12 bg-slate-600/50 rounded-lg overflow-hidden">
-                        <div className="w-full h-full bg-slate-600/50 flex items-center justify-center">
-                          <Car className="h-6 w-6 text-slate-400" />
-                        </div>
-                      </div>
-                      <div className="flex-grow min-w-0">
-                        <div className="flex items-start justify-between">
-                          <div className="min-w-0 flex-1">
-                            <h4 className="text-white font-semibold text-lg truncate mb-1">
-                              Avtomobil #{bid.auctionCarId.slice(-4)}
-                            </h4>
-                            <p className="text-slate-400 text-sm mb-2">
-                              {formatDate(bid.timestamp)}
-                            </p>
+                      <div className="flex items-center gap-4">
+                        {/* Time Column - Compact */}
+                        <div className="w-16 flex-shrink-0">
+                          <div className="text-center">
+                            <div className="text-sm font-bold text-white">
+                              {new Date(auction.startTimeUtc).toLocaleTimeString('en-US', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: false
+                              })}
+                            </div>
+                            <div className="text-xs text-slate-400">
+                              {new Date(auction.startTimeUtc).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric'
+                              })}
+                            </div>
                           </div>
-                          <div className="text-right flex-shrink-0 ml-6">
-                            <div className="mb-2">
-                              {getStatusBadge(bid)}
+                        </div>
+
+                        {/* Auction Info Column - Flexible */}
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-sm font-semibold text-white truncate mb-1">
+                            {auction.name || 'Hərrac'}
+                          </h3>
+                          <div className="flex items-center space-x-3 text-xs text-slate-400">
+                            <div className="flex items-center space-x-1">
+                            
+                              <span className="truncate">{formatLocation(auction)}</span>
                             </div>
-                            <div className="text-white font-semibold">
-                              Bid: {formatCurrency(bid.amount)}
+                            <div className="flex items-center space-x-1">
+                              <Car className="h-3 w-3 text-purple-400" />
+                              <span>{auction.totalCarsCount || 0} maşın</span>
                             </div>
+                          </div>
+                        </div>
+
+                        {/* Status Column - Compact */}
+                        <div className="w-24 flex-shrink-0">
+                          <div className="flex justify-center">
+                            {auction.isLive ? (
+                              <div className="inline-flex items-center space-x-1 bg-red-500/20 border border-red-500/30 rounded-full px-2 py-1">
+                                <div className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse"></div>
+                                <span className="text-red-300 font-medium text-xs">Live</span>
+                              </div>
+                            ) : (
+                              <div className="inline-flex items-center space-x-1 bg-blue-500/20 border border-blue-500/30 rounded-full px-2 py-1">
+                                <Clock className="h-3 w-3 text-blue-400" />
+                                <span className="text-blue-300 text-xs">Gələcək</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Actions Column - Compact */}
+                        <div className="w-24 flex-shrink-0">
+                          <div className="flex items-center justify-end space-x-1">
+                            <Link
+                              to={`/auctions/${auction.id}`}
+                              className="w-7 h-7 bg-transparent hover:bg-slate-600/30 border border-slate-500/30 rounded-lg flex items-center justify-center transition-all duration-200 hover:border-blue-400/50"
+                              title="Bax"
+                            >
+                              <Eye className="h-3.5 w-3.5 text-blue-400" />
+                            </Link>
+                            <Link
+                              to={`/auctions/${auction.id}/join`}
+                              className={`px-2 py-1 rounded-lg transition-all duration-200 text-xs font-semibold ${
+                                auction.isLive
+                                  ? 'bg-green-500/80 hover:bg-green-500 text-white'
+                                  : 'bg-blue-500/80 hover:bg-blue-500 text-white'
+                              }`}
+                              title={auction.isLive ? 'Canlıya qoşul' : 'Qoşul'}
+                            >
+                              {auction.isLive ? 'Qoşul' : 'Gir'}
+                            </Link>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Watchlist Section */}
-        <div className="bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 rounded-2xl overflow-hidden mb-12">
-          <div className="border-b border-slate-700 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-white flex items-center">
-                <Eye className="h-5 w-5 mr-3 text-blue-400" />
-                İzləmə Siyahısı
-              </h2>
-              <Link
-                to="/watchlist"
-                className="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center"
-              >
-                Hamısını gör
-                <ArrowRight className="h-4 w-4 ml-1" />
-              </Link>
-            </div>
-            
-            {/* Time-based Tabs */}
-            <div className="flex">
-              {[
-                { key: 'today', label: 'Bu gün' },
-                { key: 'tomorrow', label: 'Sabah' },
-                { key: 'week', label: 'Bu həftə' },
-                { key: 'later', label: 'Sonra' }
-              ].map((tab) => {
-                const isActive = tab.key === 'today'; // Default to today
-                return (
-                  <button
-                    key={tab.key}
-                    className={`px-4 py-2 text-sm font-medium transition-all duration-200 relative ${
-                      isActive
-                        ? 'text-blue-400 bg-slate-700/50'
-                        : 'text-slate-400 hover:text-slate-300 hover:bg-slate-700/30'
-                    }`}
-                  >
-                    {tab.label}
-                    {isActive && (
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500"></div>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="p-6">
-            {watchlistVehicles.length === 0 ? (
-              <div className="text-center py-16">
-                <Eye className="h-16 w-16 text-slate-400 mx-auto mb-4" />
-                <h3 className="text-xl font-medium text-white mb-3">İzləmə siyahısı boşdur</h3>
-                <p className="text-slate-400 mb-8">
-                  Avtomobil tapıcısından avtomobilləri izləmə siyahısına əlavə edin.
-                </p>
-                <Link
-                  to="/vehicle-finder"
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                >
-                  Avtomobil tapıcısı
-                </Link>
-              </div>
+                  ))}
+                </div>
+              </>
             ) : (
-              <div className="space-y-4">
-                {watchlistVehicles.slice(0, 5).map((vehicle) => (
-                  <div key={vehicle.id} className="bg-slate-700/30 backdrop-blur-sm border border-slate-600/50 rounded-lg p-4 hover:bg-slate-700/50 transition-all duration-200">
-                    <div className="flex items-center gap-4">
-                      <div className="w-16 h-12 bg-slate-600/50 rounded-lg overflow-hidden">
-                        <CarPhotos 
-                          carId={vehicle.carId} 
-                          showMultiple={false}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="flex-grow min-w-0">
-                        <div className="flex items-start justify-between">
-                          <div className="min-w-0 flex-1">
-                            <h4 className="text-white font-semibold text-lg truncate mb-1">
-                              {vehicle.year} {vehicle.make} {vehicle.model}
-                            </h4>
-                            <p className="text-slate-400 text-sm mb-2">
-                              Lot #{vehicle.lotNumber || 'N/A'}
-                            </p>
-                          </div>
-                          <div className="text-right flex-shrink-0 ml-6">
-                            <div className="text-white font-semibold mb-1">
-                              {formatCurrency(vehicle.currentBid || vehicle.estimatedRetailValue || 0)}
-                            </div>
-                            <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-300 border border-green-500/30">
-                              <Heart className="w-3 h-3 mr-1 fill-current" />
-                              İzlənir
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div className="text-center py-12">
+                <Calendar className="h-12 w-12 text-slate-400 mx-auto mb-4" />
+                <Link 
+                  to="/all-auctions" 
+                  className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  Bütün hərracları gör
+                </Link>
               </div>
             )}
           </div>

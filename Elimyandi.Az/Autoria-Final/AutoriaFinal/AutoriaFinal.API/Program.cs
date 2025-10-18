@@ -22,6 +22,7 @@ using AutoriaFinal.Infrastructure.Services;
 using AutoriaFinal.Infrastructure.Services.AiServices.InitialEstimate;
 using System;
 using Microsoft.AspNetCore.Authentication.Google;
+using AutoriaFinal.Infrastructure.Services.Background;
 
 namespace AutoriaFinal.API
 {
@@ -117,6 +118,8 @@ namespace AutoriaFinal.API
 
             // Register the background scheduler service (it will start with the app)
             builder.Services.AddHostedService<AuctionSchedulerService>();
+            builder.Services.AddHostedService<AuctionTimerBackgroundService>();
+
             builder.Services.AddLogging(logging =>
             {
                 if (builder.Environment.IsDevelopment())

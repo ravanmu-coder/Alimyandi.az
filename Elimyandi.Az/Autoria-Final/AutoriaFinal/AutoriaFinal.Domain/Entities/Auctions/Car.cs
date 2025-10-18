@@ -20,30 +20,20 @@ namespace AutoriaFinal.Domain.Entities.Auctions
         public string Model { get; set; } = default!;
         public string? BodyStyle { get; set; }
         public string? Color { get; set; }
-
-        // ✅ Frontend ilə uyğun field names
-        public int Mileage { get; set; }  // Əvvəlki Odometer-dən dəyişdirildi
-        public string MileageUnit { get; set; } = "km"; // Əvvəlki OdometerUnit-dən dəyişdirildi
-
-        // ✅ Price məlumatları əlavə edildi
+        public int Mileage { get; set; }  
+        public string MileageUnit { get; set; } = "km"; 
         public decimal Price { get; set; }
         public string Currency { get; set; } = "AZN";
-
-        // ✅ Frontend ilə uyğun enum field names
-        public FuelType FuelType { get; set; } = FuelType.Unknown; // Əvvəlki Fuel-dən dəyişdirildi
+        public FuelType FuelType { get; set; } = FuelType.Unknown; 
         public Transmission Transmission { get; set; } = Transmission.Unknown;
         public DriveTrain DriveTrain { get; set; } = DriveTrain.Unknown;
-        public CarCondition CarCondition { get; set; } = CarCondition.Unknown; // Əvvəlki Condition-dən dəyişdirildi
+        public CarCondition CarCondition { get; set; } = CarCondition.Unknown; 
         public bool HasKeys { get; set; }
-
-        // ✅ Damage field names dəyişdirildi
-        public DamageType DamageType { get; set; } = DamageType.Unknown; // Əvvəlki PrimaryDamage-dən dəyişdirildi
+        public DamageType DamageType { get; set; } = DamageType.Unknown; 
         public DamageType? SecondaryDamage { get; set; } = DamageType.Unknown;
 
         public TitleType TitleType { get; set; } = TitleType.Unknown;
         public string? TitleState { get; set; }
-
-        // ✅ EstimatedRetailValue saxlanılır
         public decimal? EstimatedRetailValue { get; set; }
 
         public string PhotoUrls { get; set; } = new string("");
@@ -53,7 +43,7 @@ namespace AutoriaFinal.Domain.Entities.Auctions
 
         public ICollection<Support.Document> Documents { get; set; } = new List<Support.Document>();
 
-        #region Helper Methods
+        #region Rich Data Model
         public void SetMileage(int value, string unit)
         {
             Mileage = value;

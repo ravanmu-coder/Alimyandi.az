@@ -16,7 +16,8 @@ import {
   Linkedin,
   MessageCircle,
   LogOut as LogOutIcon,
-  Check
+  Check,
+  BrainCircuit
 } from 'lucide-react';
 import { useState, useRef } from 'react';
 import Flag from 'react-world-flags';
@@ -625,6 +626,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <span className="relative z-10">{t('menu.dashboard')}</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600/50 to-blue-500/30 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out ring-1 ring-white/20"></div>
               </Link>
+
+              {/* AI Valuation */}
+              <Link 
+                to="/ai-valuation" 
+                className="relative text-slate-300 hover:text-white transition-all duration-300 ease-in-out text-sm font-medium px-4 py-2 rounded-full group flex items-center"
+              >
+                <BrainCircuit className="h-4 w-4 mr-1.5 relative z-10" />
+                <span className="relative z-10">AI</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600/50 to-blue-500/30 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out ring-1 ring-white/20"></div>
+              </Link>
               
               {/* Inventory Dropdown */}
               <div className="relative group z-40">
@@ -685,15 +696,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   </div>
                 </div>
               </div>
-
-              {/* Payment */}
-              <Link 
-                to="/payment" 
-                className="relative text-slate-300 hover:text-white transition-all duration-300 ease-in-out text-sm font-medium px-4 py-2 rounded-full group"
-              >
-                <span className="relative z-10">{t('menu.payment')}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600/50 to-blue-500/30 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out ring-1 ring-white/20"></div>
-              </Link>
 
               {/* Vehicle Dropdown (Only for Sellers) */}
               {(() => {

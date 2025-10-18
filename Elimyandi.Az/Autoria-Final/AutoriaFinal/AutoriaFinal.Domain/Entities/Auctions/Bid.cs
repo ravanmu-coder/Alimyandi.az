@@ -14,27 +14,25 @@ namespace AutoriaFinal.Domain.Entities.Auctions
         public bool IsProxy { get; set; }
         public decimal? ProxyMax { get; set; }
 
-        public bool IsPreBid { get; set; } = false; // Auction başlamamışdan əvvəl qoyulubsa
+        public bool IsPreBid { get; set; } = false;
 
         public BidStatus Status { get; set; } = BidStatus.Placed;
         public DateTime PlacedAtUtc { get; set; } = DateTime.UtcNow;
-        public BidType BidType { get; set; } // Bid növü
-        public string? Notes { get; set; }                       // Bid haqqında qeydlər
-        public DateTime? ValidUntil { get; set; }               // Proxy bid-lər üçün etibarlılıq müddəti
-        public DateTime? ProcessedAt { get; set; }              // Bid-in işləndiyi vaxt
-        public string? IPAddress { get; set; }                  // Bid verənin IP ünvanı
-        public string? UserAgent { get; set; }                  // Browser məlumatları
-        public int SequenceNumber { get; set; }                // Bu maşın üçün bid sıra nömrəsi
-        public bool IsAutoBid { get; set; } = false;           // Avtomatik bid olub-olmadığı
-        public Guid? ParentBidId { get; set; }                 // Proxy bid-in əsas bid-i
-
-        // Navigation Properties
+        public BidType BidType { get; set; } 
+        public string? Notes { get; set; }                       
+        public DateTime? ValidUntil { get; set; }               
+        public DateTime? ProcessedAt { get; set; }              
+        public string? IPAddress { get; set; }                  
+        public string? UserAgent { get; set; }               
+        public int SequenceNumber { get; set; }                
+        public bool IsAutoBid { get; set; } = false;           
+        public Guid? ParentBidId { get; set; }                 
         public AuctionCar AuctionCar { get; set; } = default!;
         public Bid? ParentBid { get; set; }                    // Proxy bid-in əsas bid-i
-        public ICollection<Bid> ChildBids { get; set; } = new List<Bid>(); // Proxy bid-in törəmələri
+        public ICollection<Bid> ChildBids { get; set; } = new List<Bid>(); 
 
-        public Bid() { } // EF Core üçün
-
+        public Bid() { }
+        #region Rich Data Model
         #region Factory Methods
 
         public static Bid CreateRegularBid(
@@ -321,9 +319,9 @@ namespace AutoriaFinal.Domain.Entities.Auctions
         }
 
         #endregion
+        #endregion
     }
 
-    // ✅ ƏLAVƏ: Proxy Strategy Enum
     public enum ProxyStrategy
     {
         None,

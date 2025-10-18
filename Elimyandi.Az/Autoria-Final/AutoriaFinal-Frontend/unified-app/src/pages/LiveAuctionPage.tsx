@@ -4,7 +4,6 @@ import {
   ChevronLeft, 
   ChevronRight,
   Clock,
-  DollarSign,
   Users,
   TrendingUp,
   AlertCircle,
@@ -13,17 +12,17 @@ import {
   VolumeX,
   Maximize2,
   Minimize2,
-  Timer,
   Car,
-  Gavel,
   Wifi,
   WifiOff,
   CheckCircle
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useSignalR } from '../hooks/useSignalR';
+import { SignalREvents } from '../utils/signalRManager';
 import { apiClient } from '../lib/api';
 import { getEnumLabel } from '../services/enumService';
+import DynamicBidButton from '../components/DynamicBidButton';
 import { 
   AuctionDetailDto, 
   AuctionCarDetailDto, 
@@ -198,7 +197,6 @@ const LiveAuctionPage: React.FC = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [bidAmount, setBidAmount] = useState('');
   const [isPlacingBid, setIsPlacingBid] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [transitionMessage, setTransitionMessage] = useState('');
@@ -206,30 +204,97 @@ const LiveAuctionPage: React.FC = () => {
   const [viewDetailsMode, setViewDetailsMode] = useState(false);
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const hasJoinedGroupsRef = useRef(false);
+  
+  // ✅ Refs for SignalR methods to break circular dependencies
+  const joinAuctionCarRef = useRef<((auctionCarId: string) => Promise<void>) | null>(null);
+  const signalRHookRef = useRef<any>(null);
 
   // ========================================
   // SIGNALR CONNECTION
   // ========================================
 
-  const signalRHook = useSignalR({
-    baseUrl: import.meta.env.VITE_API_BASE_URL || 'https://localhost:7249',
-    token: localStorage.getItem('authToken') || '',
-    autoConnect: true,
-    events: {
-
+  // ✅ CRITICAL FIX: Memoize events to prevent re-registration on every render
+  const signalREvents = useMemo<SignalREvents>(() => ({
+      // JoinedAuction - Handle initial auction join
+      onJoinedAuction: (data: any) => {
+        console.log('✅ [PAGE] JoinedAuction event received:', data);
+        
+        // ✅ CRITICAL FIX: Use server's authoritative isLive status
+        const serverIsLive = data.isLive === true;
+        console.log(`🔴 [PAGE] Server says auction isLive: ${serverIsLive}`);
+        console.log(`🔴 [PAGE] Full JoinedAuction data:`, JSON.stringify(data, null, 2));
+        
+        // Set initial timer and state
+        if (data.currentTimer && data.currentTimer.remainingSeconds !== undefined) {
+          console.log(`⏰ [PAGE] Initial auction timer: ${data.currentTimer.remainingSeconds}s`);
+          setState(prev => ({
+            ...prev,
+            timerSeconds: data.currentTimer.remainingSeconds,
+            isLive: serverIsLive, // ✅ Use server's authoritative status
+            auctionState: data.auctionState || prev.auctionState
+          }));
+        } else {
+          // Even without timer, set live status from server
+          setState(prev => ({
+            ...prev,
+            isLive: serverIsLive // ✅ Use server's authoritative status
+          }));
+        }
+        
+        // ✅ DEBUG: Log current state after update
+        setTimeout(() => {
+          console.log(`🔍 [DEBUG] State after JoinedAuction:`, {
+            isLive: serverIsLive,
+            timerSeconds: data.currentTimer?.remainingSeconds,
+            auctionStatus: data.auctionState?.status,
+            currentCarLotNumber: data.currentCarLotNumber
+          });
+        }, 100);
+      },
+      
+      // JoinedAuctionCar - Handle initial car join with bid history
+      onJoinedAuctionCar: (data: any) => {
+        console.log('✅ [PAGE] JoinedAuctionCar event received:', {
+          carId: data.auctionCarId,
+          highestBid: data.highestBid?.amount,
+          bidCount: data.recentBids?.length || data.bidHistory?.length,
+          minimumBid: data.minimumBid
+        });
+        
+        // Update bid history with initial data
+        if (data.recentBids || data.bidHistory) {
+          const bids = data.recentBids || data.bidHistory;
+          console.log(`📊 [PAGE] Loading initial bid history: ${bids.length} bids`);
+          
+          setState(prev => ({
+            ...prev,
+            bidHistory: bids,
+            highestBid: data.highestBid || null
+          }));
+        }
+      },
+      
       // Car moved to next lot (from AuctionService.AdvanceToNextCarAsync)
       onCarMoved: (data: any) => {
         console.log('🚗 Car Moved (AuctionService):', data);
-        if (data.nextCarId) {
+        
+        // ✅ COPART LOGIC: Use server's authoritative state
+        const serverIsLive = data.newState?.isLive === true;
+        const nextLotNumber = data.nextLotNumber;
+        const nextCarId = data.nextCarId;
+        
+        console.log(`🔄 Car Move: ${data.previousLotNumber} → ${nextLotNumber}, Live: ${serverIsLive}`);
+        
+        if (nextCarId && joinAuctionCarRef.current) {
           // Re-join the new car group to get server-authoritative snapshot
-          joinAuctionCar(data.nextCarId).then(async () => {
+          joinAuctionCarRef.current(nextCarId).then(async () => {
             console.log('✅ Joined new car group after move');
             
             // Get fresh snapshot from AuctionCarService
             try {
-              const newCarSnapshot = await apiClient.getAuctionCar(data.nextCarId);
+              const newCarSnapshot = await apiClient.getAuctionCar(nextCarId);
               if (newCarSnapshot) {
-                // Use server's exact timer state - no restart
+                // ✅ Use server's exact timer state and live status
                 const serverTimer = (newCarSnapshot as any).remainingTimeSeconds || 
                                   (newCarSnapshot as any).secondsRemaining || 0;
                 
@@ -237,11 +302,11 @@ const LiveAuctionPage: React.FC = () => {
                   ...prev,
                   currentCar: newCarSnapshot,
                   activeLot: prev.lotQueue.find(lot => lot.id === newCarSnapshot.id) || null,
-                  isLive: newCarSnapshot.isActive,
+                  isLive: serverIsLive, // ✅ Use server's authoritative live status
                   timerSeconds: serverTimer // Server-authoritative timer
                 }));
                 
-                toast.success(`🔄 Moved to Lot #${newCarSnapshot.lotNumber}`, {
+                toast.success(`🔄 Moved to Lot #${nextLotNumber}`, {
                   duration: 4000
                 });
               }
@@ -251,6 +316,16 @@ const LiveAuctionPage: React.FC = () => {
           }).catch(err => {
             console.error('❌ Failed to join new car group:', err);
           });
+        } else {
+          // ✅ Even without car data, update live status from server
+          setState(prev => ({
+            ...prev,
+            isLive: serverIsLive // ✅ Use server's authoritative live status
+          }));
+          
+          toast.success(`🔄 Moved to Lot #${nextLotNumber}`, {
+            duration: 4000
+          });
         }
       },
 
@@ -258,14 +333,18 @@ const LiveAuctionPage: React.FC = () => {
       onAuctionStarted: (data: any) => {
         console.log('🚀 [REAL-TIME] Auction Started (Server-Authoritative):', data);
         
+        // ✅ COPART LOGIC: Use server's authoritative state
+        const serverIsLive = data.isLive === true || data.newState?.isLive === true;
+        console.log(`🚀 Auction Started: Live=${serverIsLive}`);
+        
         // Server started auction - all users should see this immediately
         if (data.auctionCarId || data.snapshot) {
           const carId = data.auctionCarId || data.snapshot?.auctionCarId;
           const snapshot = data.snapshot;
           
-          if (carId) {
+          if (carId && joinAuctionCarRef.current) {
             // Join the started car group immediately
-            joinAuctionCar(carId).then(async () => {
+            joinAuctionCarRef.current(carId).then(async () => {
               console.log('✅ Joined live auction car group:', carId);
               
               try {
@@ -278,7 +357,7 @@ const LiveAuctionPage: React.FC = () => {
                     ...prev,
                     currentCar: serverSnapshot,
                     activeLot: prev.lotQueue.find(lot => lot.id === serverSnapshot.id) || null,
-                    isLive: true,
+                    isLive: serverIsLive, // ✅ Use server's authoritative live status
                     // Use server's current timer - don't restart
                     timerSeconds: (serverSnapshot as any).remainingTimeSeconds || 
                                  (serverSnapshot as any).secondsRemaining || 
@@ -313,56 +392,31 @@ const LiveAuctionPage: React.FC = () => {
 
       // Timer tick - server authoritative timer (EVERY SECOND)
       onTimerTick: (data: any) => {
-        console.log('⏰ [REAL-TIME] Timer Tick Event Received:', {
+        console.log('⏰ [REAL-TIME] Timer Tick:', {
+          auctionId: data.auctionId,
           remainingSeconds: data.remainingSeconds,
-          secondsRemaining: data.secondsRemaining,
           timerSeconds: data.timerSeconds,
-          fullData: data,
-          currentStateTimer: state.timerSeconds
+          currentCarLotNumber: data.currentCarLotNumber,
+          isExpired: data.isExpired,
+          isLive: data.isLive,
+          timeDisplay: data.timeDisplay
         });
         
-        // Extract timer value - check multiple possible field names
-        const serverTimerValue = data.remainingSeconds ?? 
-                                 data.secondsRemaining ?? 
-                                 data.timerSeconds ?? 
-                                 0;
+        // ✅ COPART LOGIC: Server sends exact timer value
+        const serverTimerValue = data.remainingSeconds ?? 0;
+        const serverIsLive = data.isLive === true;
         
         // Track that we're receiving events (connection is working)
         lastEventTimeRef.current = Date.now();
         hasReceivedEventsRef.current = true;
         
-        // If receiving events but state says disconnected, log the mismatch ONCE
-        if ((connectionState === 'Disconnected' || !isConnected) && !reconnectAttemptedRef.current) {
-          console.error('🚨 CRITICAL: Receiving timer events but state shows DISCONNECTED!');
-          console.error('🚨 This proves WebSocket is connected but React state is wrong');
-          console.error('🚨 Attempting manual state correction via reconnect...');
-          
-          reconnectAttemptedRef.current = true;
-          
-          // Try to trigger a reconnect which should fix the state
-          setTimeout(() => {
-            signalRHook.reconnect().then(() => {
-              console.log('✅ State correction reconnect successful');
-              // Reset flag after successful reconnect
-              setTimeout(() => {
-                reconnectAttemptedRef.current = false;
-              }, 5000);
-            }).catch(err => {
-              console.error('❌ State correction reconnect failed:', err);
-              // Reset flag to allow retry
-              setTimeout(() => {
-                reconnectAttemptedRef.current = false;
-              }, 10000);
-            });
-          }, 100);
-        }
-        
-        // Always update timer regardless of car ID - server is authoritative
+        // ✅ Always update timer and live status from server
         setState(prev => {
-          console.log(`⏱️ Updating timer: ${prev.timerSeconds}s → ${serverTimerValue}s`);
+          console.log(`⏱️ Updating timer: ${prev.timerSeconds}s → ${serverTimerValue}s, Live: ${prev.isLive} → ${serverIsLive}`);
           return {
             ...prev,
-            timerSeconds: serverTimerValue
+            timerSeconds: serverTimerValue,
+            isLive: serverIsLive // ✅ Update live status from timer tick
           };
         });
         
@@ -371,16 +425,28 @@ const LiveAuctionPage: React.FC = () => {
           clearInterval(timerIntervalRef.current);
           timerIntervalRef.current = null;
         }
+        
+        // ✅ Handle timer expiry
+        if (serverTimerValue === 0 && serverIsLive) {
+          console.log('⏰ [SERVER] Timer expired - will auto-move to next car');
+        }
       },
 
       // Timer reset - when new bid placed
       onAuctionTimerReset: (data: any) => {
-        console.log('🔄 [REAL-TIME] Timer Reset:', data.newTimerSeconds + 's');
+        console.log('🔄 [REAL-TIME] Timer Reset:', {
+          newTimerSeconds: data.newTimerSeconds,
+          secondsRemaining: data.secondsRemaining,
+          resetBy: data.resetBy,
+          fullData: data
+        });
         
-        // Always update timer - server is authoritative
+        // ✅ Always update timer to FULL duration (30 seconds) - server is authoritative
+        const resetTimerValue = data.newTimerSeconds ?? data.secondsRemaining ?? 30;
+        
         setState(prev => ({
           ...prev,
-          timerSeconds: data.newTimerSeconds || 10
+          timerSeconds: resetTimerValue
         }));
         
         // Stop any client-side timer since server will send ticks
@@ -389,14 +455,79 @@ const LiveAuctionPage: React.FC = () => {
           timerIntervalRef.current = null;
         }
         
-        toast('Timer reset!', { icon: '⏰', duration: 2000 });
+        console.log(`✅ Timer reset to ${resetTimerValue}s by ${data.resetBy || 'server'}`);
+        toast(`🔄 Timer reset to ${resetTimerValue}s`, { icon: '⏰', duration: 2000 });
       },
 
-      // New live bid
+      // New live bid - Real-time sync for all users
       onNewLiveBid: (data: any) => {
-        console.log('💰 New Live Bid:', data);
-        if (data.bid) {
-          handleNewBid(data.bid, true); // Assume new live bid is highest
+        console.log('💰 [REAL-TIME] New Live Bid Received:', {
+          bidId: data.id || data.Id,
+          auctionCarId: data.auctionCarId || data.AuctionCarId,
+          userId: data.userId || data.UserId,
+          amount: data.amount || data.Amount,
+          userName: data.userName || data.UserName,
+          placedAt: data.placedAtUtc || data.PlacedAtUtc,
+          isHighest: data.isHighestBid || data.IsHighestBid,
+          fullData: data
+        });
+        
+        // ✅ Extract bid data - support multiple formats
+        const bidData = {
+          id: data.id || data.Id || data.bidId,
+          auctionCarId: data.auctionCarId || data.AuctionCarId,
+          userId: data.userId || data.UserId,
+          amount: data.amount || data.Amount,
+          userName: data.userName || data.UserName || 'Bidder',
+          placedAtUtc: data.placedAtUtc || data.PlacedAtUtc || new Date().toISOString(),
+          isHighestBid: data.isHighestBid ?? data.IsHighestBid ?? true
+        };
+        
+        // ✅ Only update if this bid is for current car
+        if (bidData.auctionCarId === state.currentCar?.id) {
+          console.log('✅ Bid is for current car - updating state');
+          
+          // Create bid object for history
+          const bidForHistory: BidGetDto = {
+            id: bidData.id,
+            auctionCarId: bidData.auctionCarId,
+            userId: bidData.userId,
+            amount: bidData.amount,
+            bidType: 'Live',
+            timestamp: bidData.placedAtUtc,
+            isWinning: bidData.isHighestBid,
+            isOutbid: false,
+            user: {
+              id: bidData.userId,
+              email: '',
+              firstName: bidData.userName,
+              lastName: ''
+            }
+          };
+          
+          setState(prev => ({
+            ...prev,
+            // Update bid history
+            bidHistory: [bidForHistory, ...prev.bidHistory.slice(0, 19)],
+            // Update highest bid if this is highest
+            highestBid: bidData.isHighestBid ? bidForHistory : prev.highestBid,
+            // Update current price
+            currentCar: prev.currentCar ? {
+              ...prev.currentCar,
+              currentPrice: bidData.amount,
+              bidCount: (prev.currentCar.bidCount || 0) + 1
+            } : null
+          }));
+          
+          // Show toast notification
+          toast.success(`💰 New bid: $${bidData.amount.toLocaleString()} by ${bidData.userName}`, {
+            icon: '🎯',
+            duration: 3000
+          });
+          
+          console.log(`✅ State updated - New price: $${bidData.amount}`);
+        } else {
+          console.log('⚠️ Bid is for different car, ignoring');
         }
       },
 
@@ -408,18 +539,42 @@ const LiveAuctionPage: React.FC = () => {
         }
       },
       
-      // Highest bid updated
+      // Highest bid updated - Real-time sync
       onHighestBidUpdated: (data: any) => {
-        console.log('🏆 Highest Bid Updated:', data);
-        if (data.auctionCarId === state.currentCar?.id && data.highestBid) {
+        console.log('🏆 [REAL-TIME] Highest Bid Updated:', {
+          auctionCarId: data.auctionCarId || data.AuctionCarId,
+          amount: data.amount || data.Amount,
+          bidderId: data.bidderId || data.BidderId,
+          bidderName: data.bidderName || data.BidderName,
+          nextMinimum: data.nextMinimum,
+          fullData: data
+        });
+        
+        const carId = data.auctionCarId || data.AuctionCarId;
+        const amount = data.amount || data.Amount;
+        const bidderName = data.bidderName || data.BidderName || 'Bidder';
+        
+        // ✅ Only update if for current car
+        if (carId === state.currentCar?.id) {
+          console.log(`✅ Updating highest bid to $${amount} by ${bidderName}`);
+          
           setState(prev => ({
             ...prev,
-            highestBid: data.highestBid,
             currentCar: prev.currentCar ? {
               ...prev.currentCar,
-              currentPrice: data.highestBid.amount
+              currentPrice: amount
+            } : null,
+            highestBid: prev.highestBid ? {
+              ...prev.highestBid,
+              amount: amount,
+              user: {
+                ...prev.highestBid.user,
+                firstName: bidderName
+              }
             } : null
           }));
+        } else {
+          console.log('⚠️ Highest bid update for different car, ignoring');
         }
       },
 
@@ -510,13 +665,18 @@ const LiveAuctionPage: React.FC = () => {
           }
         }
         
-        // Note: Syncing and group joining is handled by the dedicated useEffect
-        // that watches isConnected state. No need to duplicate logic here.
         if (state === 'Connected') {
           console.log('✅ Connected - group joining will be handled by useEffect');
         }
       }
-    }
+    }), []); // ✅ Empty dependency array - events are stable
+
+  // ✅ Create SignalR hook with memoized events
+  const signalRHook = useSignalR({
+    baseUrl: import.meta.env.VITE_API_BASE_URL || 'https://localhost:7249',
+    token: localStorage.getItem('authToken') || '',
+    autoConnect: true,
+    events: signalREvents
   });
 
   // Destructure hook values
@@ -529,6 +689,10 @@ const LiveAuctionPage: React.FC = () => {
     joinAuctionCar,
     placeLiveBid
   } = signalRHook;
+  
+  // ✅ Update refs after hook is created
+  joinAuctionCarRef.current = joinAuctionCar;
+  signalRHookRef.current = signalRHook;
 
   // Track if we're receiving events (indicates connection is actually working)
   const lastEventTimeRef = useRef<number>(0);
@@ -685,13 +849,23 @@ const LiveAuctionPage: React.FC = () => {
             finalCarDetails.photoUrls = photos;
           }
           console.log('✅ CarDetail logic: Updated car photos from dedicated endpoint');
+        } else {
+          console.log('ℹ️ No photos available from endpoint, using fallback sources');
         }
       } catch (photosError) {
-        console.warn('⚠️ CarDetail logic: Photos endpoint failed, using car.photoUrls fallback:', photosError);
-        if (photosError instanceof Error && photosError.message.includes('404')) {
-          console.warn(`🖼️ CarDetail logic: Car photos 404 for carId: ${carId}`);
+        // ✅ Silently handle photo errors - don't break auction functionality
+        console.log('ℹ️ Photos endpoint unavailable, using fallback (this is OK)');
+        
+        if (photosError instanceof Error) {
+          if (photosError.message.includes('404')) {
+            console.log(`📷 Photo endpoint not found for carId: ${carId} - using default images`);
+          } else {
+            console.log(`📷 Photo load failed (${photosError.message}) - using default images`);
+          }
         }
-        // Fallback to car.photoUrls (already loaded from getCar or existing data)
+        
+        // ✅ Fallback to car.photoUrls (already loaded from getCar or existing data)
+        // No need to do anything else - UI will use existing photos or show placeholder
       }
     }
     
@@ -727,7 +901,6 @@ const LiveAuctionPage: React.FC = () => {
     }));
 
     setCurrentImageIndex(0);
-    setBidAmount('');
 
     // Join car group
     if (isConnected) {
@@ -1340,7 +1513,6 @@ const LiveAuctionPage: React.FC = () => {
           }
 
           setCurrentImageIndex(0);
-          setBidAmount(''); // Clear bid input
           
           setTransitionMessage(`Now Live: Lot #${newLotNumber}`);
           await new Promise(resolve => setTimeout(resolve, 1500));
@@ -1439,30 +1611,47 @@ const LiveAuctionPage: React.FC = () => {
   // ========================================
 
   const handlePlaceBid = useCallback(async (amount: number) => {
-    console.log('🎯 Attempting to place bid (BidService logic):', {
+    console.log('🎯 ========== BID ATTEMPT ==========');
+    console.log('🎯 Attempting to place bid:', amount);
+    console.log('📊 Current State:', {
       amount,
       hasCurrentCar: !!state.currentCar,
+      currentCarId: state.currentCar?.id,
       isLive: state.isLive,
       isActive: state.currentCar?.isActive,
+      auctionCompleted: state.auctionCompleted,
+      viewDetailsMode: viewDetailsMode,
       isConnected,
-      connectionState
+      connectionState,
+      timerSeconds: state.timerSeconds
     });
 
     if (!state.currentCar) {
+      console.error('❌ No current car');
       toast.error('No active vehicle to bid on');
       return;
     }
 
-    // Business logic validation (from BidService.ValidateBidAsync)
-    if (!state.isLive || !state.currentCar.isActive || state.auctionCompleted || viewDetailsMode) {
+    // Business logic validation - Only check critical conditions
+    if (state.auctionCompleted || viewDetailsMode) {
+      console.error('❌ Bid validation failed:', {
+        isLive: state.isLive,
+        isActive: state.currentCar.isActive,
+        auctionCompleted: state.auctionCompleted,
+        viewDetailsMode
+      });
+      
       if (state.auctionCompleted) {
         toast.error('Auction has completed - bidding is closed');
       } else if (viewDetailsMode) {
         toast.error('You are in details view mode - bidding is disabled');
-      } else {
-        toast.error('Auction is not currently live');
       }
       return;
+    }
+    
+    // Allow bidding even if isLive is false (backend will validate)
+    if (!state.isLive) {
+      console.warn('⚠️ State shows not live, but attempting bid anyway (backend will validate)');
     }
 
     // Calculate minimum bid (BidService logic)
@@ -1470,66 +1659,179 @@ const LiveAuctionPage: React.FC = () => {
     const increment = state.auction?.minBidIncrement || 50;
     const minimumBid = Math.max(currentHigh + increment, (state.currentCar as any).minimumBid || 0);
 
+    console.log('💰 Bid Validation:', {
+      yourBid: amount,
+      currentHigh: currentHigh,
+      increment: increment,
+      minimumRequired: minimumBid,
+      isValid: amount >= minimumBid
+    });
+
     if (amount < minimumBid) {
-      toast.error(`Minimum bid is $${minimumBid.toLocaleString()}`);
+      toast.error(`❌ Minimum bid: $${minimumBid.toLocaleString()}. Your bid ($${amount.toLocaleString()}) is too low!`, {
+        duration: 4000
+      });
+      console.error(`❌ Bid rejected: $${amount} < minimum $${minimumBid}`);
       return;
     }
+    
+    // Also check if bid is less than or equal to current high
+    if (amount <= currentHigh) {
+      toast.error(`❌ Your bid must be higher than current bid: $${currentHigh.toLocaleString()}`, {
+        duration: 4000
+      });
+      console.error(`❌ Bid rejected: $${amount} <= current high $${currentHigh}`);
+      return;
+    }
+
+    // ========================================
+    // OPTIMISTIC UI UPDATE
+    // ========================================
+    // Dərhal UI-ı yenilə (server cavabı gözləmədən)
+    console.log('⚡ Applying optimistic UI update...');
+    
+    const optimisticBid: BidGetDto = {
+      id: `temp-${Date.now()}`, // Müvəqqəti ID
+      auctionCarId: state.currentCar.id,
+      userId: 'current-user', // Cari istifadəçi
+      amount: amount,
+      bidType: 'Live',
+      timestamp: new Date().toISOString(),
+      isWinning: true,
+      isOutbid: false,
+      user: {
+        id: 'current-user',
+        email: '',
+        firstName: 'You',
+        lastName: ''
+      }
+    };
+
+    // UI-ı dərhal yenilə
+    setState(prev => ({
+      ...prev,
+      highestBid: optimisticBid,
+      currentCar: prev.currentCar ? {
+        ...prev.currentCar,
+        currentPrice: amount
+      } : null,
+      bidHistory: [optimisticBid, ...prev.bidHistory]
+    }));
+
+    console.log('✅ Optimistic update applied - UI updated instantly');
 
     setIsPlacingBid(true);
 
     try {
-      if (isConnected) {
+      const bidRequest = {
+        auctionCarId: state.currentCar.id,
+        amount: amount
+      };
+
+      if (isConnected && connectionState === 'Connected') {
         // Primary: Use SignalR BidHub.PlaceLiveBid
         console.log('📡 Using SignalR BidHub (calls BidService)');
         
         try {
           await placeLiveBid(state.currentCar.id, amount);
           
-          toast.success(`Live bid placed: $${amount.toLocaleString()}`, {
-            icon: '🔥',
+          toast.success(`✅ Bid placed: $${amount.toLocaleString()}`, {
+            icon: '🎯',
             duration: 3000
           });
-          setBidAmount('');
           
         } catch (signalRErr: any) {
           console.warn('⚠️ SignalR bid failed, trying REST API:', signalRErr);
-          throw signalRErr; // Will be caught by outer catch
+          // Try REST API as fallback
+          const response = await apiClient.placeLiveBid(bidRequest);
+          console.log('✅ REST bid placed successfully:', response);
+          
+          toast.success(`✅ Bid placed via REST: $${amount.toLocaleString()}`, {
+            icon: '🌐',
+            duration: 3000
+          });
+          
+          // Refresh data after REST bid
+          setTimeout(() => {
+            refreshBidHistory();
+          }, 1000);
         }
         
       } else {
         // Fallback: Use REST API (BidController → BidService)
-        console.log('🌐 Using REST API fallback (BidController → BidService)');
+        console.log('🌐 Using REST API (not connected to SignalR)');
         
-      const bidRequest = {
-        auctionCarId: state.currentCar.id,
-        amount: amount
-      };
-
-      const response = await apiClient.placeLiveBid(bidRequest);
+        const response = await apiClient.placeLiveBid(bidRequest);
         console.log('✅ REST bid placed successfully:', response);
 
-        toast.success(`Bid placed via REST: $${amount.toLocaleString()}`, {
-          icon: '⚠️',
-          duration: 4000
+        toast.success(`✅ Bid placed via REST: $${amount.toLocaleString()}`, {
+          icon: '🌐',
+          duration: 3000
         });
-      setBidAmount('');
       
         // Refresh data after REST bid
-      setTimeout(() => {
-        refreshBidHistory();
+        setTimeout(() => {
+          refreshBidHistory();
         }, 1000);
       }
 
     } catch (err: any) {
       console.error('❌ Bid placement failed:', err);
       
+      // ========================================
+      // REVERT OPTIMISTIC UPDATE
+      // ========================================
+      // Xəta baş verdiyindən optimistic update-i geri qaytarırıq
+      console.log('🔄 Reverting optimistic update due to error...');
+      
+      // Serverdən real məlumatları yüklə (async, bloklamır)
+      setTimeout(async () => {
+        if (state.currentCar) {
+          try {
+            const bidHistoryResp = await apiClient.getRecentBids(state.currentCar.id, 20).catch(() => ({ data: [] }));
+            const highestBidResp = await apiClient.getHighestBid(state.currentCar.id).catch(() => ({ data: null }));
+
+            let bidHistory: BidGetDto[] = [];
+            if (Array.isArray(bidHistoryResp)) {
+              bidHistory = bidHistoryResp;
+            } else if (bidHistoryResp && typeof bidHistoryResp === 'object' && 'data' in bidHistoryResp) {
+              const respData = (bidHistoryResp as any).data;
+              bidHistory = Array.isArray(respData) ? respData : (respData?.bids || []);
+            }
+
+            let highestBid: BidGetDto | null = null;
+            if (highestBidResp && typeof highestBidResp === 'object') {
+              if ('data' in highestBidResp) {
+                highestBid = (highestBidResp as any).data;
+              } else {
+                highestBid = highestBidResp as any;
+              }
+            }
+
+            setState(prev => ({
+              ...prev,
+              bidHistory,
+              highestBid: highestBid || prev.highestBid,
+              currentCar: prev.currentCar ? {
+                ...prev.currentCar,
+                currentPrice: highestBid?.amount || prev.currentCar.currentPrice
+              } : null
+            }));
+
+            console.log('✅ State reverted to server data');
+          } catch (refreshErr) {
+            console.error('⚠️ Failed to refresh bid data:', refreshErr);
+          }
+        }
+      }, 100);
+      
       // Handle specific BidService validation errors
       if (err.message?.includes('minimum') || err.message?.includes('increment')) {
-        toast.error(`Bid too low - minimum: $${minimumBid.toLocaleString()}`);
+        toast.error(`❌ Bid rejected - minimum: $${minimumBid.toLocaleString()}`);
       } else if (err.message?.includes('unauthorized') || err.message?.includes('pre-bid')) {
-        toast.error('You must place a pre-bid first to participate in live bidding');
+        toast.error('❌ You must place a pre-bid first to participate');
       } else if (err.message?.includes('stale') || err.message?.includes('moved')) {
-        toast.error('Bid rejected - auction has moved on');
+        toast.error('❌ Bid rejected - auction has moved on');
       } else if (err.message?.includes('not connected') && !isConnected) {
         // Try REST API as final fallback
         try {
@@ -1540,19 +1842,23 @@ const LiveAuctionPage: React.FC = () => {
           };
           
           await apiClient.placeLiveBid(bidRequest);
-          toast.success(`Bid placed via REST fallback: $${amount.toLocaleString()}`);
-          setBidAmount('');
+          toast.success(`✅ Bid placed via REST: $${amount.toLocaleString()}`);
+          
+          // Uğurlu olduğu üçün refresh et
+          setTimeout(() => {
+            refreshBidHistory();
+          }, 500);
           
         } catch (restErr) {
-          toast.error('Both SignalR and REST API failed - please refresh page');
+          toast.error('❌ Connection failed - please refresh page');
         }
       } else {
-        toast.error(err.message || 'Failed to place bid');
+        toast.error(err.message || '❌ Failed to place bid');
       }
     } finally {
       setIsPlacingBid(false);
     }
-  }, [state.currentCar, state.highestBid, state.auction, state.isLive, isConnected, connectionState, placeLiveBid]);
+  }, [state.currentCar, state.highestBid, state.auction, state.isLive, isConnected, connectionState, placeLiveBid, state.auctionCompleted, viewDetailsMode]);
 
   const refreshBidHistory = useCallback(async () => {
     if (!state.currentCar) return;
@@ -1592,33 +1898,36 @@ const LiveAuctionPage: React.FC = () => {
   // TIMER MANAGEMENT
   // ========================================
 
-  // CLIENT-SIDE TIMER DISABLED - Server sends timer ticks every second via SignalR
+  // ========================================
+  // CLIENT-SIDE TIMER COMPLETELY DISABLED
+  // Server is 100% authoritative - sends TimerTick every second
+  // ========================================
   useEffect(() => {
-    // No client-side timer needed - server is authoritative and sends onTimerTick every second
-    console.log(`⏰ [REAL-TIME] Server Timer State: ${state.timerSeconds}s (Client timer disabled)`);
-    console.log(`🎨 UI should display: ${formatTime(state.timerSeconds)}`);
+    console.log(`⏰ [SERVER-AUTHORITATIVE] Timer State: ${state.timerSeconds}s`);
+    console.log(`🎨 UI Display: ${formatTime(state.timerSeconds)}`);
     
-    // Only handle timer expiry logic when server timer reaches 0
+    // ✅ Only handle timer expiry and warnings - NO client-side countdown
     if (state.timerSeconds === 0 && state.isLive && state.currentCar) {
-      console.log('⏰ [REAL-TIME] Server timer expired - handling expiry');
+      console.log('⏰ [SERVER] Timer expired - handling expiry');
       setTimeout(() => {
-            handleTimerExpired();
+        handleTimerExpired();
       }, 1000);
     }
     
     // Warning sounds based on server timer
     if (state.timerSeconds === 10 || state.timerSeconds === 5) {
-      console.log(`⚠️ [REAL-TIME] Timer warning: ${state.timerSeconds}s remaining`);
+      console.log(`⚠️ [SERVER] Timer warning: ${state.timerSeconds}s remaining`);
       playWarningSound();
     }
     
-    // Cleanup any existing client timer
-      return () => {
-        if (timerIntervalRef.current) {
-          clearInterval(timerIntervalRef.current);
+    // ✅ Cleanup any client timer (should never exist but safety check)
+    return () => {
+      if (timerIntervalRef.current) {
+        console.warn('🚨 Client timer found and cleared - should not exist!');
+        clearInterval(timerIntervalRef.current);
         timerIntervalRef.current = null;
-        }
-      };
+      }
+    };
   }, [state.timerSeconds, state.isLive, state.currentCar]);
 
 
@@ -1780,25 +2089,22 @@ const LiveAuctionPage: React.FC = () => {
   }, [carImages.length]);
 
   // ========================================
-  // QUICK BID CALCULATIONS
+  // NEXT BID CALCULATION
   // ========================================
 
-  const { minimumBid, quickBidAmounts } = useMemo(() => {
+  const minimumBid = useMemo(() => {
     const currentHigh = state.highestBid?.amount || state.currentCar?.currentPrice || state.currentCar?.minPreBid || 0;
     const increment = state.auction?.minBidIncrement || 100;
     const minimum = currentHigh + increment;
 
-    const amounts = [
-      minimum,
-      minimum + increment,
-      minimum + increment * 2,
-      minimum + increment * 5,
-      minimum + increment * 10,
-      minimum + increment * 25
-    ];
+    console.log('💰 Next Bid Calculation:', {
+      currentHigh,
+      increment,
+      minimumBid: minimum
+    });
 
-    return { minimumBid: minimum, quickBidAmounts: amounts };
-  }, [state.highestBid, state.currentCar, state.auction]);
+    return minimum;
+  }, [state.highestBid?.amount, state.currentCar?.currentPrice, state.currentCar?.minPreBid, state.auction?.minBidIncrement]);
 
 
 
@@ -1896,22 +2202,28 @@ const LiveAuctionPage: React.FC = () => {
                 
                 // Use timer info from dedicated endpoint for most accurate sync
                 // Backend returns both 'timerSeconds' (duration) and 'remainingSeconds' (current)
-                const serverTimer = timerInfo?.remainingSeconds ??  // Prefer actual remaining time
+                const timerData = timerInfo as any;
+                const serverTimer = timerData?.remainingSeconds ??  // Prefer actual remaining time
                                   timerInfo?.timerSeconds ?? 
                                   (activeCarSnapshot as any).remainingTimeSeconds ?? 
                                   (activeCarSnapshot as any).secondsRemaining ?? 0;
                 
-                // Only consider live if we have an active car and timer > 0
+                // ✅ CRITICAL FIX: Use server's authoritative isLive status
+                // Don't override server's decision with complex client-side logic
+                const serverIsLive = timerInfo?.isLive === true || activeCarSnapshot.isActive === true;
+                console.log(`🔴 [PAGE] Server authoritative isLive: ${serverIsLive} (timerInfo.isLive: ${timerInfo?.isLive}, activeCarSnapshot.isActive: ${activeCarSnapshot.isActive})`);
+                
+                // Only consider live if server says so AND we have valid timer data
                 const hasActiveCar = timerInfo?.currentCarLotNumber != null || activeCarSnapshot.isActive;
-                const timerNotExpired = serverTimer > 0 && !(timerInfo?.isExpired);
-                const isAuctionLive = hasActiveCar && timerNotExpired && (timerInfo?.isLive ?? activeCarSnapshot.isActive);
+                const timerNotExpired = serverTimer > 0 && !(timerData?.isExpired);
+                const isAuctionLive = serverIsLive && hasActiveCar && timerNotExpired;
                 
                 console.log('⏱️ Timer Sync Details:', {
-                  remainingSeconds: timerInfo?.remainingSeconds,
+                  remainingSeconds: timerData?.remainingSeconds,
                   timerSeconds: timerInfo?.timerSeconds,
-                  isExpired: timerInfo?.isExpired,
+                  isExpired: timerData?.isExpired,
                   currentCarLotNumber: timerInfo?.currentCarLotNumber,
-                  timeDisplay: timerInfo?.timeDisplay,
+                  timeDisplay: timerData?.timeDisplay,
                   hasActiveCar,
                   calculatedTimer: serverTimer,
                   isLive: isAuctionLive
@@ -1976,33 +2288,6 @@ const LiveAuctionPage: React.FC = () => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  const getTimerUrgency = () => {
-    if (state.timerSeconds <= 5) return 'critical';
-    if (state.timerSeconds <= 10) return 'warning';
-    if (state.timerSeconds <= 30) return 'caution';
-    return 'normal';
-  };
-
-  const getTimerColor = () => {
-    const urgency = getTimerUrgency();
-    switch (urgency) {
-      case 'critical': return 'text-red-500';
-      case 'warning': return 'text-orange-500';
-      case 'caution': return 'text-yellow-500';
-      default: return 'text-green-500';
-    }
-  };
-
-  const getTimerBgColor = () => {
-    const urgency = getTimerUrgency();
-    switch (urgency) {
-      case 'critical': return 'from-red-600/30 to-red-700/30';
-      case 'warning': return 'from-orange-600/30 to-orange-700/30';
-      case 'caution': return 'from-yellow-600/30 to-yellow-700/30';
-      default: return 'from-green-600/30 to-green-700/30';
-    }
   };
 
   // Get car display name
@@ -2208,7 +2493,6 @@ const LiveAuctionPage: React.FC = () => {
   // MAIN RENDER
   // ========================================
 
-  const urgency = getTimerUrgency();
   const currentHigh = state.highestBid?.amount || state.currentCar?.currentPrice || state.currentCar?.minPreBid || 0;
   const carDisplayName = getCarDisplayName();
 
@@ -2558,45 +2842,6 @@ const LiveAuctionPage: React.FC = () => {
               ======================================== */}
           <div className="lg:col-span-4 space-y-6">
             
-            {/* Timer Card */}
-            <div className="bg-slate-800/50 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
-              <div className={`bg-gradient-to-r ${getTimerBgColor()} backdrop-blur-sm border-b border-white/10 px-6 py-4`}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <Timer className={`h-5 w-5 ${getTimerColor()}`} />
-                    <span className="text-sm font-bold text-white uppercase tracking-wide">Time Remaining</span>
-            </div>
-                  {urgency === 'critical' && (
-                    <span className="text-xs font-bold text-red-400 animate-pulse">FINAL CALL!</span>
-                  )}
-            </div>
-          </div>
-              <div className="p-8">
-                <div className={`text-7xl font-black text-center ${getTimerColor()} tabular-nums`}>
-                  {state.timerSeconds === 0 ? "TIME'S UP!" : formatTime(state.timerSeconds)}
-        </div>
-                {/* Real-time indicator */}
-                <div className="text-center mt-2 text-xs text-slate-400">
-                  🔴 LIVE SERVER TIMER
-                </div>
-                {urgency === 'critical' && state.timerSeconds === 0 && (
-                  <div className="text-center mt-3 text-red-400 text-lg font-bold animate-bounce">
-                    🚨 NO BIDS RECEIVED 🚨
-                  </div>
-                )}
-                {urgency === 'warning' && state.timerSeconds > 0 && (
-                  <div className="text-center mt-3 text-orange-400 text-sm font-semibold animate-pulse">
-                    ⚠️ Hurry! Time running out
-      </div>
-                )}
-                {urgency === 'critical' && state.timerSeconds > 0 && state.timerSeconds <= 5 && (
-                  <div className="text-center mt-3 text-red-400 text-base font-bold animate-pulse">
-                    🔥 FINAL SECONDS! 🔥
-                  </div>
-                )}
-            </div>
-            </div>
-
             {/* Current Price Card */}
             <div className="bg-gradient-to-br from-slate-800/50 to-indigo-900/30 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
               <div className="text-sm text-slate-400 mb-2 uppercase tracking-wide">Current High Bid</div>
@@ -2623,152 +2868,91 @@ const LiveAuctionPage: React.FC = () => {
               )}
           </div>
 
-            {/* Bid Placement Card */}
-            <div className="bg-slate-800/50 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl">
-              <h3 className="text-lg font-bold text-white mb-4 flex items-center">
-                <Gavel className="h-5 w-5 mr-2 text-blue-400" />
-                Place Your Bid
-              </h3>
+            {/* Dynamic Bid Button */}
+            <div className="bg-slate-800/50 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl">
+              <DynamicBidButton
+                nextBidAmount={minimumBid}
+                remainingSeconds={state.timerSeconds}
+                timerDuration={state.auction?.timerSeconds || 60}
+                isDisabled={!state.currentCar || !state.isLive || state.auctionCompleted || viewDetailsMode}
+                isPlacing={isPlacingBid}
+                onBid={handlePlaceBid}
+                currencySymbol="$"
+              />
               
-              {/* Bid Input */}
-              <div className="mb-4">
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                Bid Amount
-              </label>
-              <div className="relative">
-                  <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
-                <input
-                  type="number"
-                  value={bidAmount}
-                  onChange={(e) => setBidAmount(e.target.value)}
-                  placeholder={minimumBid.toLocaleString()}
-                    disabled={!state.currentCar || !isConnected || !state.isLive || state.auctionCompleted || viewDetailsMode}
-                    className="w-full pl-12 pr-4 py-4 bg-slate-700/50 border border-white/20 rounded-xl text-white text-xl font-bold placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
-                />
-              </div>
-                <p className="text-xs text-slate-400 mt-2">
-                  Minimum bid: ${minimumBid.toLocaleString()}
-              </p>
-            </div>
-
-            {/* Quick Bid Buttons */}
-              <div className="mb-4">
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                Quick Bid
-              </label>
-              <div className="grid grid-cols-2 gap-2">
-                  {quickBidAmounts.slice(0, 6).map((amount) => (
-                  <button
-                    key={amount}
-                      onClick={() => handlePlaceBid(amount)}
-                      disabled={isPlacingBid || !state.currentCar || !state.isLive || !state.currentCar?.isActive || state.auctionCompleted || viewDetailsMode}
-                      className="py-3 bg-slate-700/50 hover:bg-slate-600/50 border border-white/20 hover:border-blue-400/30 rounded-lg text-white font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    ${amount.toLocaleString()}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Place Bid Button */}
-            <button
-                onClick={() => {
-                  const amount = parseFloat(bidAmount);
-                  if (!isNaN(amount)) {
-                    handlePlaceBid(amount);
-                  }
-                }}
-                disabled={isPlacingBid || !bidAmount || !state.currentCar || !state.isLive || !state.currentCar?.isActive || state.auctionCompleted || viewDetailsMode}
-                className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2 text-lg shadow-lg hover:shadow-xl"
-            >
-              {isPlacingBid ? (
-                  <>
-                    <RefreshCw className="h-5 w-5 animate-spin" />
-                    <span>Placing Bid...</span>
-                  </>
-              ) : (
-                  <>
-                    <Gavel className="h-5 w-5" />
-                    <span>Place Bid</span>
-                  </>
-              )}
-            </button>
-
               {/* Status Messages */}
-              {!state.isLive && (
-                <div className="mt-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 text-center">
-                  <AlertCircle className="h-5 w-5 text-yellow-400 mx-auto mb-1" />
-                  <p className="text-sm text-yellow-400 font-medium">Auction not live yet</p>
-          </div>
-              )}
-              {/* Auction Status Messages */}
               {!state.isLive && state.currentCar && (
-                <div className="mt-4 bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 text-center">
-                  <div className="h-5 w-5 text-orange-400 mx-auto mb-1">⏸️</div>
-                  <p className="text-sm text-orange-400 font-medium">Auction Not Live</p>
-                  <p className="text-xs text-orange-300 mt-1">Waiting for auctioneer to start this lot</p>
+                <div className="px-6 pb-4">
+                  <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 text-center">
+                    <AlertCircle className="h-5 w-5 text-orange-400 mx-auto mb-1" />
+                    <p className="text-sm text-orange-400 font-medium">Auction Not Live</p>
+                    <p className="text-xs text-orange-300 mt-1">Waiting for auctioneer to start this lot</p>
+                  </div>
                 </div>
               )}
               {!state.currentCar && state.auction && state.auctionCompleted && (
-                <div className="mt-4 bg-green-500/10 border border-green-500/30 rounded-lg p-3 text-center">
-                  <div className="h-5 w-5 text-green-400 mx-auto mb-1">🏁</div>
-                  <p className="text-sm text-green-400 font-medium">Auction Completed</p>
-                  <p className="text-xs text-green-300 mt-1">All lots have been processed</p>
+                <div className="px-6 pb-4">
+                  <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3 text-center">
+                    <CheckCircle className="h-5 w-5 text-green-400 mx-auto mb-1" />
+                    <p className="text-sm text-green-400 font-medium">Auction Completed</p>
+                    <p className="text-xs text-green-300 mt-1">All lots have been processed</p>
+                  </div>
                 </div>
               )}
               {!state.currentCar && state.auction && !state.auctionCompleted && (
-                <div className="mt-4 bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 text-center">
-                  <div className="h-5 w-5 text-orange-400 mx-auto mb-1">⏸️</div>
-                  <p className="text-sm text-orange-400 font-medium">Auction Not Active</p>
-                  <p className="text-xs text-orange-300 mt-1">Waiting for auctioneer to start</p>
+                <div className="px-6 pb-4">
+                  <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 text-center">
+                    <AlertCircle className="h-5 w-5 text-orange-400 mx-auto mb-1" />
+                    <p className="text-sm text-orange-400 font-medium">Auction Not Active</p>
+                    <p className="text-xs text-orange-300 mt-1">Waiting for auctioneer to start</p>
+                  </div>
                 </div>
               )}
-              {/* Connection Status - Use connectionState string for accuracy */}
+              {/* Connection Status */}
               {connectionState !== 'Connected' && connectionState !== 'Connecting' && connectionState !== 'Reconnecting' && (
-                <div className="mt-4 bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-center">
-                  <WifiOff className="h-5 w-5 text-red-400 mx-auto mb-1" />
-                  <p className="text-sm text-red-400 font-medium">Connection Issue: {connectionState}</p>
-                  <p className="text-xs text-red-300 mt-1">
-                    {lastError || 'Bidding available via REST API fallback'}
-                  </p>
-                  <div className="flex gap-2 justify-center mt-2">
-                    <button
-                      onClick={() => {
-                        console.log('🔄 Manual reconnect triggered');
-                        signalRHook.reconnect().then(() => {
-                          console.log('✅ Reconnect complete');
-                        }).catch(err => {
-                          console.error('❌ Reconnect failed:', err);
-                        });
-                      }}
-                      className="text-xs text-red-400 hover:text-red-300 underline"
-                    >
-                      Try Reconnect
-                    </button>
-                    <button
-                      onClick={() => window.location.reload()}
-                      className="text-xs text-red-400 hover:text-red-300 underline"
-                    >
-                      Refresh Page
-                    </button>
-                  </div>
-                  {process.env.NODE_ENV === 'development' && (
-                    <div className="mt-2 text-xs text-red-300 font-mono">
-                      Debug: {JSON.stringify({ isConnected, isConnecting, connectionState })}
+                <div className="px-6 pb-4">
+                  <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 text-center">
+                    <WifiOff className="h-5 w-5 text-red-400 mx-auto mb-1" />
+                    <p className="text-sm text-red-400 font-medium">Connection Issue: {connectionState}</p>
+                    <p className="text-xs text-red-300 mt-1">
+                      {lastError || 'Bidding available via REST API fallback'}
+                    </p>
+                    <div className="flex gap-2 justify-center mt-2">
+                      <button
+                        onClick={() => {
+                          console.log('🔄 Manual reconnect triggered');
+                          signalRHook.reconnect().then(() => {
+                            console.log('✅ Reconnect complete');
+                          }).catch(err => {
+                            console.error('❌ Reconnect failed:', err);
+                          });
+                        }}
+                        className="text-xs text-red-400 hover:text-red-300 underline"
+                      >
+                        Try Reconnect
+                      </button>
+                      <button
+                        onClick={() => window.location.reload()}
+                        className="text-xs text-red-400 hover:text-red-300 underline"
+                      >
+                        Refresh Page
+                      </button>
                     </div>
-                  )}
+                  </div>
                 </div>
               )}
               {(connectionState === 'Connecting' || connectionState === 'Reconnecting') && (
-                <div className="mt-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 text-center">
-                  <RefreshCw className="h-5 w-5 text-yellow-400 mx-auto mb-1 animate-spin" />
-                  <p className="text-sm text-yellow-400 font-medium">
-                    {connectionState === 'Reconnecting' ? 'Reconnecting to server...' : 'Connecting to server...'}
-                  </p>
-                  <p className="text-xs text-yellow-300 mt-1">Establishing real-time connection</p>
-        </div>
+                <div className="px-6 pb-4">
+                  <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 text-center">
+                    <RefreshCw className="h-5 w-5 text-yellow-400 mx-auto mb-1 animate-spin" />
+                    <p className="text-sm text-yellow-400 font-medium">
+                      {connectionState === 'Reconnecting' ? 'Reconnecting to server...' : 'Connecting to server...'}
+                    </p>
+                    <p className="text-xs text-yellow-300 mt-1">Establishing real-time connection</p>
+                  </div>
+                </div>
               )}
-      </div>
+            </div>
 
       {/* ========================================
           AUCTION COMPLETED MODAL

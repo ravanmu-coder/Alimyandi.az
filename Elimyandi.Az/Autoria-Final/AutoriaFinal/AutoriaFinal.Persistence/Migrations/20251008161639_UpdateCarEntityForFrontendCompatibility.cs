@@ -22,7 +22,7 @@ namespace AutoriaFinal.Persistence.Migrations
             migrationBuilder.RenameColumn(
                 name: "PrimaryDamage",
                 table: "Cars",
-                newName: "Mileage");
+                newName: "DamageType");
 
             migrationBuilder.RenameColumn(
                 name: "Fuel",
@@ -32,7 +32,14 @@ namespace AutoriaFinal.Persistence.Migrations
             migrationBuilder.RenameColumn(
                 name: "Condition",
                 table: "Cars",
-                newName: "DamageType");
+                newName: "CarCondition");
+            
+            migrationBuilder.AddColumn<int>(
+                name: "Mileage",
+                table: "Cars",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.AlterColumn<string>(
                 name: "VideoUrls",

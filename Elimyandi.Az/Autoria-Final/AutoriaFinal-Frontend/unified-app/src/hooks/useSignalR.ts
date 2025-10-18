@@ -63,27 +63,31 @@ export const useSignalR = (config: UseSignalRConfig): UseSignalRReturn => {
   const [retryCount, setRetryCount] = useState(0);
   const isInitialized = useRef(false);
 
-  // Initialize manager configuration
+  // Initialize manager configuration - ALWAYS set event handlers FIRST
   useEffect(() => {
+    console.log(`🔧 Initializing/Updating SignalR hook for instance: ${instanceKey}`);
+    
+    // CRITICAL: Set event handlers BEFORE connecting
+    const eventHandlers: SignalREvents = {
+      onConnectionStateChanged: (state, error) => {
+        console.log(`🔄 useSignalR: Connection state changed to "${state}"`, error || '');
+        setConnectionState(state);
+        setLastError(error);
+        setRetryCount(manager.current.getRetryCount());
+        
+        // Call user's event handler
+        config.events?.onConnectionStateChanged?.(state, error);
+      },
+      ...config.events
+    };
+    
+    // Set event handlers FIRST (before any connection attempt)
+    manager.current.setEventHandlers(eventHandlers);
+    console.log('✅ Event handlers set:', Object.keys(eventHandlers).filter(k => k.startsWith('on')));
+    
     if (!isInitialized.current) {
-      console.log(`🔧 Initializing SignalR hook for instance: ${instanceKey}`);
+      // First time initialization
       manager.current.configure(config);
-      
-      // Set up event handlers
-      const eventHandlers: SignalREvents = {
-        onConnectionStateChanged: (state, error) => {
-          console.log(`🔄 useSignalR: Connection state changed to "${state}"`, error || '');
-          setConnectionState(state);
-          setLastError(error);
-          setRetryCount(manager.current.getRetryCount());
-          
-          // Call user's event handler
-          config.events?.onConnectionStateChanged?.(state, error);
-        },
-        ...config.events
-      };
-      
-      manager.current.setEventHandlers(eventHandlers);
       
       // Set initial state
       const initialState = manager.current.getConnectionState();
@@ -92,19 +96,6 @@ export const useSignalR = (config: UseSignalRConfig): UseSignalRReturn => {
       setRetryCount(manager.current.getRetryCount());
       
       isInitialized.current = true;
-    } else {
-      // Update event handlers if config changes but already initialized
-      const eventHandlers: SignalREvents = {
-        onConnectionStateChanged: (state, error) => {
-          console.log(`🔄 useSignalR: Connection state changed to "${state}"`, error || '');
-          setConnectionState(state);
-          setLastError(error);
-          setRetryCount(manager.current.getRetryCount());
-          config.events?.onConnectionStateChanged?.(state, error);
-        },
-        ...config.events
-      };
-      manager.current.setEventHandlers(eventHandlers);
     }
   }, [config, instanceKey]);
 

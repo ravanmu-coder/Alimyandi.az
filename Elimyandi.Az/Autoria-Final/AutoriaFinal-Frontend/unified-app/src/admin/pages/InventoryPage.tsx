@@ -2,13 +2,10 @@ import { useState, useEffect, useCallback } from 'react'
 import { 
   Grid3X3, 
   List, 
-  Plus,
   Eye,
   Car,
   AlertCircle,
-  RefreshCw,
-  Settings,
-  Loader2
+  RefreshCw
 } from 'lucide-react'
 import { Button } from '../components/common/Button'
 import { Pagination } from '../components/common/Pagination'
@@ -285,23 +282,6 @@ export function InventoryPage() {
     setShowDetailModal(true)
   }
 
-  // Login handler for testing
-  const handleLogin = async () => {
-    try {
-      const email = 'admin@example.com'
-      const password = 'admin123'
-      
-      console.log('Attempting login...')
-      const result = await apiClient.login(email, password)
-      console.log('Login successful:', result)
-      
-      // Reload vehicles after successful login
-      setTimeout(() => handleRefresh(), 1000)
-    } catch (error) {
-      console.error('Login failed:', error)
-      alert('Login failed. Please check your credentials.')
-    }
-  }
 
   const getStatusBadgeColor = (status: string) => {
     const badgeClasses = getEnumBadgeClasses('CarCondition', status)
@@ -367,10 +347,7 @@ export function InventoryPage() {
         <Car className="w-16 h-16 mx-auto" />
       </div>
       <h3 className="text-h3 font-heading text-dark-text-primary mb-2">No vehicles found</h3>
-      <p className="text-body-md text-dark-text-secondary mb-6">Try adjusting your filters or add a new vehicle to get started.</p>
-      <Button icon={Plus}>
-        Add Vehicle
-      </Button>
+      <p className="text-body-md text-dark-text-secondary mb-6">Try adjusting your filters to see available vehicles.</p>
     </div>
   )
 
@@ -389,25 +366,11 @@ export function InventoryPage() {
           <div className="flex items-center gap-3">
             <Button 
               variant="secondary" 
-              icon={Settings} 
-              onClick={handleLogin}
-                className="text-gray-600 hover:text-gray-900 dark:text-dark-text-muted dark:hover:text-dark-text-primary"
-            >
-              Login
-            </Button>
-            <Button 
-              variant="secondary" 
               icon={RefreshCw} 
               onClick={handleRefresh}
                 className="text-gray-600 hover:text-gray-900 dark:text-dark-text-muted dark:hover:text-dark-text-primary"
             >
               Refresh
-            </Button>
-              <Button 
-                icon={Plus}
-                className="bg-blue-600 hover:bg-blue-700 text-white"
-              >
-              Add Vehicle
             </Button>
             </div>
           </div>
